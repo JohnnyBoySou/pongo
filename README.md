@@ -27,7 +27,7 @@ Scripts Disponíveis
 No diretório do projeto, você pode executar:
 
  ```expo start ```
-Inicia o servidor de desenvolvimento do Expo. Abra http://localhost:19002 para ver o projeto no navegador.
+Inicia o servidor de desenvolvimento do Expo. Abra http://localhost:(porta) para ver o projeto no navegador.
 
  ```npm run android ```
 Compile e inicie o aplicativo em um emulador Android ou dispositivo físico conectado.
@@ -43,5 +43,8 @@ Se você deseja contribuir com este projeto, por favor, abra uma issue ou envie 
 
 ## Licença
 Este projeto está licenciado sob a Licença MIT. Veja o arquivo LICENSE para mais detalhes.
+
+## Emulação
+Estou utizando o [WSA](https://github.com/MustardChef/WSABuilds/releases/tag/Windows_11_2311.40000.5.0_LTS_3) para emulação direto no Windows com o APP do [Expo Go](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pt_BR&pli=1). 
 
 Feito com ❤️ por JohnnyBoySou
