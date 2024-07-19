@@ -16,12 +16,9 @@ Antes de começar, você precisará ter o [Node.js](https://nodejs.org/en/) e o 
 
 ## Instalação
 
-1. Clone o repositório:  ```bash git clone https://github.com/JohnnyBoySou/AppBlank.git cd AppBlank
-2. Instale as dependências: npm install
-3. Inicie o servidor de desenvolvimento:
-
-npx expo start
-
+1. Clone o repositório:  ```bash git clone https://github.com/JohnnyBoySou/AppBlank.git cd AppBlank ```
+2. Instale as dependências:  ``` npm install ```
+3. Inicie o servidor de desenvolvimento:  ```npx expo start ```
 
 ## Navegação
 Este projeto utiliza React Navigation para gerenciar a navegação entre telas. A configuração da navegação está localizada na pasta src/router. Nesse projeto já existe a configuração inicial de Stack e Tabs navigation.
@@ -29,16 +26,16 @@ Este projeto utiliza React Navigation para gerenciar a navegação entre telas. 
 Scripts Disponíveis
 No diretório do projeto, você pode executar:
 
-expo start
+ ```expo start ```
 Inicia o servidor de desenvolvimento do Expo. Abra http://localhost:19002 para ver o projeto no navegador.
 
-npm run android
+ ```npm run android ```
 Compile e inicie o aplicativo em um emulador Android ou dispositivo físico conectado.
 
-npm run ios
+ ```npm run ios ```
 Compile e inicie o aplicativo no simulador iOS (necessário macOS e Xcode).
 
-npm run web
+ ```npm run web ```
 Inicia o aplicativo em um navegador da web usando Expo for Web.
 
 Contribuição
