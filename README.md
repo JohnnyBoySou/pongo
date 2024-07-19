@@ -26,16 +26,16 @@ Este projeto utiliza React Navigation para gerenciar a navegação entre telas. 
 Scripts Disponíveis
 No diretório do projeto, você pode executar:
 
- ```expo start ```
+ ```npx expo start ```
 Inicia o servidor de desenvolvimento do Expo. Abra http://localhost:(porta) para ver o projeto no navegador.
 
- ```npm run android ```
+ ```npx expo run android ```
 Compile e inicie o aplicativo em um emulador Android ou dispositivo físico conectado.
 
- ```npm run ios ```
+ ```npx expo run ios ```
 Compile e inicie o aplicativo no simulador iOS (necessário macOS e Xcode).
 
- ```npm run web ```
+ ```npx expo run web ```
 Inicia o aplicativo em um navegador da web usando Expo for Web.
 
 ## Emulação
