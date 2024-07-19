@@ -38,10 +38,10 @@ Compile e inicie o aplicativo no simulador iOS (necessário macOS e Xcode).
  ```npm run web ```
 Inicia o aplicativo em um navegador da web usando Expo for Web.
 
-Contribuição
+## Contribuição
 Se você deseja contribuir com este projeto, por favor, abra uma issue ou envie um pull request.
 
-Licença
+## Licença
 Este projeto está licenciado sob a Licença MIT. Veja o arquivo LICENSE para mais detalhes.
 
 Feito com ❤️ por JohnnyBoySou
