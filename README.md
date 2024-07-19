@@ -16,7 +16,7 @@ Antes de começar, você precisará ter o [Node.js](https://nodejs.org/en/) e o 
 
 ## Instalação
 
-1. Clone o repositório:  ```bash git clone https://github.com/JohnnyBoySou/AppBlank.git cd AppBlank ```
+1. Clone o repositório:  ```git clone https://github.com/JohnnyBoySou/AppBlank.git ```,  ```cd AppBlank```
 2. Instale as dependências:  ``` npm install ```
 3. Inicie o servidor de desenvolvimento:  ```npx expo start ```
 
