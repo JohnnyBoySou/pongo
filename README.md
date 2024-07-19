@@ -38,13 +38,13 @@ Compile e inicie o aplicativo no simulador iOS (necessário macOS e Xcode).
  ```npm run web ```
 Inicia o aplicativo em um navegador da web usando Expo for Web.
 
+## Emulação
+Estou utizando o [WSA](https://github.com/MustardChef/WSABuilds/releases/tag/Windows_11_2311.40000.5.0_LTS_3) para emulação direto no Windows com o APP do [Expo Go](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pt_BR&pli=1). 
+
 ## Contribuição
 Se você deseja contribuir com este projeto, por favor, abra uma issue ou envie um pull request.
 
 ## Licença
 Este projeto está licenciado sob a Licença MIT. Veja o arquivo LICENSE para mais detalhes.
-
-## Emulação
-Estou utizando o [WSA](https://github.com/MustardChef/WSABuilds/releases/tag/Windows_11_2311.40000.5.0_LTS_3) para emulação direto no Windows com o APP do [Expo Go](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=pt_BR&pli=1). 
 
 Feito com ❤️ por JohnnyBoySou
