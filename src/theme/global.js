@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import { TouchableRipple } from 'react-native-paper';
 
 //COMPONENTES DE LAYOUT
 export const Main = styled.SafeAreaView`
@@ -20,10 +19,7 @@ export const Column = styled.View`
 
 
 //COMPONENTES DE UTILIDADE
-export const Button = styled(TouchableRipple).attrs(props => ({
-  borderless: true,
-  rippleColor: props.rippleColor || "#FFFFFF90",
-}))`
+export const Button =  styled.Pressable`
   padding: 12px 20px;
 `
 export const Spacer = ({ height = 16, width = 16, }) => <Column style={{ height, width }} />
