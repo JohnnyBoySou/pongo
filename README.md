@@ -1,4 +1,4 @@
-<h1>Projeto em branco para estudo</h1>
+<h1>Projeto em branco para estudo com React Native + Expo Go</h1>
 
 
 Este é um projeto React Native criado com Expo, utilizando React Navigation para navegação e caminhos absolutos para importar módulos.
