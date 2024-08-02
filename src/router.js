@@ -15,8 +15,8 @@ import AuthLoginScreen from '@screens/auth/login';
 import AuthRegisterScreen from '@screens/auth/register';
 
 //INSTITUCIONAL
-import InstitucionalScreen from '@screens/institucional';
-
+import InstitucionalScreen from '@screens/institucional/visita';
+  
 //TABS SCREEN
 import HomeScreen from '@screens/tabs/home';
 import SearchScreen from '@screens/tabs/search';
@@ -30,22 +30,11 @@ export default function Router() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Institucional'>
-
-<<<<<<< HEAD
-            <Stack.Screen name="AuthLogin" component={AuthLoginScreen} options={{...TransitionPresets.SlideFromRightIOS , }}/>
-            <Stack.Screen name="AuthRegister" component={AuthRegisterScreen} options={{...TransitionPresets.SlideFromRightIOS , }}/>
-          
-            <Stack.Screen name="Async" component={AsyncStaticScreen} options={{...TransitionPresets.FadeFromBottomAndroid , }}/>
-            <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{...TransitionPresets.SlideFromRightIOS , }}/>
-=======
         <Stack.Screen name="Institucional" component={InstitucionalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
->>>>>>> 04b105560e57cd01967489ea1dce951b27c5ca42
-
         <Stack.Screen name="AuthLogin" component={AuthLoginScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="AuthRegister" component={AuthRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
-
-        <Stack.Screen name="Async" component={AsyncStaticScreen} options={{ ...TransitionPresets.RevealFromBottomAndroid, }} />
+        <Stack.Screen name="Async" component={AsyncStaticScreen} options={{ ...TransitionPresets.FadeFromBottomAndroid, }} />
         <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Tabs" component={Tabs} options={{ ...TransitionPresets.SlideFromRightIOS, backBehavior: 'none', }} />
@@ -81,17 +70,7 @@ function Tabs() {
         tabBarIcon: ({ color, size }) => (<Octicons name="home" size={routeName === 'Home' ? size + 3 : size} color={color} />),
       }} />
 
-<<<<<<< HEAD
-  /*
-   Transitions só substituir 
-      ModalSlideFromBottomIOS
-      SlideFromRightIOS
-      FadeFromBottomAndroid 
-      RevealFromBottomAndroid
-      ScaleFromCenterAndroid 
-      DefaultTransition 
-      ModalTransition
-=======
+
       <Tab.Screen name="Search" component={SearchScreen} options={{
         tabBarLabel: 'Buscar',
         tabBarLabelStyle: { fontFamily: routeName === 'Search' ? 'Font_Bold' : 'Font_Book', },
@@ -117,7 +96,6 @@ function Tabs() {
     ScaleFromCenterAndroid 
     DefaultTransition 
     ModalTransition
->>>>>>> 04b105560e57cd01967489ea1dce951b27c5ca42
 
 
 */
