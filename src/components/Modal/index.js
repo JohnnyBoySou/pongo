@@ -8,8 +8,8 @@ const Modal = forwardRef(({ children, snapPoints = [0.1, 300], onClose, ...props
             ref={ref}
             snapPoints={snapPoints}
             onClose={onClose}
-            backgroundStyle={{ backgroundColor: '#202020' }}
-            handleIndicatorStyle={{ backgroundColor: '#606060', width: 70, height: 8, }}
+            backgroundStyle={{ backgroundColor: '#fbfbfb' }}
+            handleIndicatorStyle={{ backgroundColor: '#30303030', width: 70, height: 8, }}
         >
             <BottomSheetScrollView>
                 {children}

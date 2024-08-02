@@ -114,19 +114,19 @@ export default function AuthRegisterPage({ navigation, route, }) {
                     <SubLabel style={{ color: color.secundary, fontSize: 18, }}>Requisitos para a senha</SubLabel>
                     <Row style={{ marginTop: 8, }}>
                         {passwordCriteria?.length ? <CircleCheck size={18} color={color.green} /> : <CircleX size={18} color={color.red} />}
-                        <Label style={{ fontSize: 16, marginLeft: 12, fontFamily: 'Font_Medium', color: '#111', }}>Mínimo de 8 caracteres</Label>
+                        <Label style={{ fontSize: 16, marginLeft: 12,  }}>Mínimo de 8 caracteres</Label>
                     </Row>
                     <Row style={{ marginTop: 8, }}>
                         {passwordCriteria?.upperCase ? <CircleCheck size={18} color={color.green} /> : <CircleX size={18} color={color.red} />}
-                        <Label style={{ fontSize: 16, marginLeft: 12, fontFamily: 'Font_Medium', color: '#111', }}>Uma letra MAIÚSCULA.</Label>
+                        <Label style={{ fontSize: 16, marginLeft: 12,  }}>Uma letra MAIÚSCULA.</Label>
                     </Row>
                     <Row style={{ marginTop: 8, }}>
                         {passwordCriteria?.lowerCase ? <CircleCheck size={18} color={color.green} /> : <CircleX size={18} color={color.red} />}
-                        <Label style={{ fontSize: 16, marginLeft: 12, fontFamily: 'Font_Medium', color: '#111', }}>Uma letra minúscula.</Label>
+                        <Label style={{ fontSize: 16, marginLeft: 12,  }}>Uma letra minúscula.</Label>
                     </Row>
                     <Row style={{ marginTop: 8, }}>
                         {passwordCriteria?.number ? <CircleCheck size={18} color={color.green} /> : <CircleX size={18} color={color.red} />}
-                        <Label style={{ fontSize: 16, marginLeft: 12, fontFamily: 'Font_Medium', color: '#111', }}>Um número.</Label>
+                        <Label style={{ fontSize: 16, marginLeft: 12, }}>Um número.</Label>
                     </Row>
                 </Column>
             </Modal>
