@@ -8,7 +8,7 @@ import Modal from '@components/Modal/index';
 
 const { width, height } = Dimensions.get('window');
 
-export default function AuthRegisterPage({ navigation, route, }) {
+export default function AuthRegisterScreen({ navigation, route, }) {
     const { color, font, margin, } = useContext(ThemeContext)
 
     const [name, setname] = useState();

@@ -31,10 +31,10 @@ export default function Router() {
         <Stack.Navigator screenOptions={{headerShown: false,}} initialRouteName='AuthRegister'>
 
             <Stack.Screen name="AuthLogin" component={AuthLoginScreen} options={{...TransitionPresets.SlideFromRightIOS , }}/>
-            <Stack.Screen name="AuthRegister" component={AuthRegisterScreen} options={{...TransitionPresets.SlideFromRightIOS   , }}/>
+            <Stack.Screen name="AuthRegister" component={AuthRegisterScreen} options={{...TransitionPresets.SlideFromRightIOS , }}/>
           
-            <Stack.Screen name="Async" component={AsyncStaticScreen} options={{...TransitionPresets.RevealFromBottomAndroid   , }}/>
-            <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{...TransitionPresets.SlideFromRightIOS  , }}/>
+            <Stack.Screen name="Async" component={AsyncStaticScreen} options={{...TransitionPresets.FadeFromBottomAndroid , }}/>
+            <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{...TransitionPresets.SlideFromRightIOS , }}/>
 
             <Stack.Screen name="Tabs" component={Tabs} options={{...TransitionPresets.SlideFromRightIOS , backBehavior: 'none',}}/>
         </Stack.Navigator>
@@ -87,7 +87,6 @@ function Tabs (){
   /*
    Transitions só substituir 
       ModalSlideFromBottomIOS
-      SlideFromRightIOS
       SlideFromRightIOS
       FadeFromBottomAndroid 
       RevealFromBottomAndroid

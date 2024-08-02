@@ -5,7 +5,7 @@ import { Main, Scroll } from '@theme/global';
 
 const { width, height } = Dimensions.get('window');
 
-export default function AuthLoginPage({ navigation, route, }) {
+export default function AuthLoginScreen({ navigation, route, }) {
     const { color, font } = useContext(ThemeContext)
 
     return (
