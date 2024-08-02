@@ -30,7 +30,6 @@ export default function AuthRegisterPage({ navigation, route, }) {
         return criteria;
     };
 
-    
 
     const passwordCriteria = checkPasswordStrength(password);
     const porcentagePassword = Object.values(passwordCriteria).filter((e) => e).length / Object.values(passwordCriteria).length * 100;
