@@ -13,7 +13,7 @@ export default function HomeScreen({ navigation, }) {
         <Main style={{  }}>
             <Scroll>
                
-               <Title align="center">Home</Title>
+               <Title align="center">Home </Title>
             </Scroll>
         </Main>
     )
