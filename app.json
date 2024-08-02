@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "AppBlank",
-    "slug": "AppBlank",
+    "name": "Villa Pongo",
+    "slug": "villapongo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -19,7 +19,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.engd.AppBlank"
+      "package": "com.engd.villapongo"
     },
     "web": {
       "favicon": "./assets/favicon.png"

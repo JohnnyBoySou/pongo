@@ -10,6 +10,12 @@ const Tab = createBottomTabNavigator();
 import OnboardingScreen from '@screens/auth/onboarding';
 import AsyncStaticScreen from '@screens/auth/async';
 
+//AUTH
+import AuthLoginScreen from '@screens/auth/login';
+import AuthRegisterScreen from '@screens/auth/register';
+
+
+
 //TABS SCREEN
 import HomeScreen from '@screens/tabs/home';
 import SearchScreen from '@screens/tabs/search';
@@ -22,7 +28,10 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 export default function Router() {
   return (
     <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false,}} initialRouteName='Tabs'>
+        <Stack.Navigator screenOptions={{headerShown: false,}} initialRouteName='AuthRegister'>
+
+            <Stack.Screen name="AuthLogin" component={AuthLoginScreen} options={{...TransitionPresets.SlideFromRightIOS , }}/>
+            <Stack.Screen name="AuthRegister" component={AuthRegisterScreen} options={{...TransitionPresets.SlideFromRightIOS   , }}/>
           
             <Stack.Screen name="Async" component={AsyncStaticScreen} options={{...TransitionPresets.RevealFromBottomAndroid   , }}/>
             <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{...TransitionPresets.SlideFromRightIOS  , }}/>

@@ -1,19 +1,32 @@
 export default{
-  background: "#f7f7f7",
+  background: "#FFFFFF",
   color: {
-    primary: "#FE25BD",
+    primary: "#918C8B",
     secundary: "#5C0D45",
 
     light: '#FFFFFF',
 
-    blue: "#00A3FF",
-    red: "#D90000",
-    green: "#37CB84",
-    gray: "#5E5E5E",
-
-    title: "#111111",
-    label: "#5E5E5E",
+    blue: "#91A6C4",
+    red: "#E5C8C9",
+    green: "#778428",
+  
+    title: "#434343",
+    label: "#918C8B",
+    sublabel: "#A1A1A1",  
+    pr: {
+      pr1: '#918C8B',
+      pr2: '#ECEBEB',
+      pr3: '#434343',
+      pr4: '#FFFFFF',
+    },
+    sc: {
+      sc1: '#778428',
+      sc2: '#E5C8C9',
+      sc3: '#91A6C4',
+      sc4: '#FDE579',
+    }
   },
+
   font: {
     black: "Font_Black",
     bold: "Font_Bold",

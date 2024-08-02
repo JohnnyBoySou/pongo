@@ -17,7 +17,6 @@ export default function App() {
 
   const theme = useColorScheme();
   const selectTheme = theme === 'light' ? light : dark;
-  console.log(theme)
   useEffect(() => {
     LogBox.ignoreAllLogs(true);
 
@@ -29,6 +28,8 @@ export default function App() {
           Font_Medium: require('./assets/fonts/Inter_Medium.ttf'),
           Font_Bold: require('./assets/fonts/Inter_Bold.ttf'),
           Font_Black: require('./assets/fonts/Inter_Black.ttf'),
+          Voyage_Medium: require('./assets/fonts/Voyage_Medium.otf'),
+          Voyage_Book: require('./assets/fonts/Voyage_Book.otf'),
         });
         setAppIsReady(true);
       } catch (e) {
