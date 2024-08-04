@@ -10,7 +10,7 @@ import PagerView from 'react-native-pager-view';
 
 import Animated, { FadeInDown, useAnimatedStyle, withSpring, withTiming } from 'react-native-reanimated';
 
-export default function OnboardingPage({ navigation, route, }) {
+export default function OnboardingScreen({ navigation, route, }) {
     const { color, font } = useContext(ThemeContext)
 
     const pagerRef = useRef();

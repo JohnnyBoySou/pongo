@@ -47,15 +47,18 @@ export const Button =  styled(TouchableRipple).attrs(() => ({
   borderless: true, 
   rippleColor: "#FFFFFF90",
 }))`
-  flex-grow: 1;
   background-color: ${props => props.bg || 'transparent'};
-  border-radius: ${props => props.radius || 100}px;
-  padding-vertical: ${props => props.pv || 12}px;
-  padding-horizontal: ${props => props.ph || 20}px;
-  margin-top: ${props => props.mtop || 0}px;
-  margin-bottom: ${props => props.mbottom || 0}px;
-  margin-left: ${props => props.mleft || 0}px;
-  margin-right: ${props => props.mright || 0}px;
+  border-radius: ${props => props.radius  || 100}px; 
+  ${props => props.ph ? 'padding-horizontal: ' + props.ph + 'px;' : 'padding-horizontal: 20px;'}
+  ${props => props.pv ? 'padding-vertical: ' + props.pv + 'px;' : 'padding-vertical: 12px;'}
+
+  ${props => props.mh ? 'margin-horizontal: ' + props.mh + 'px;' : ''}
+  ${props => props.mv ? 'margin-vertical: ' + props.mv + 'px;' : ''}
+  ${props => props.mtop ? 'margin-top: ' + props.mtop + 'px;' : ''}
+  ${props => props.mbottom ? 'margin-bottom: ' + props.mbottom + 'px;' : ''}
+  ${props => props.mleft ? 'margin-left: ' + props.mleft + 'px;' : ''}
+  ${props => props.mright ? 'margin-right: ' + props.mright + 'px;' : ''}
+
 `
 export const Spacer = ({ height = 16, width = 16, }) => <Column style={{ height, width }} />
 
@@ -64,9 +67,10 @@ export const Spacer = ({ height = 16, width = 16, }) => <Column style={{ height,
 //COMPONENTES DE TEXTO
 export const Label = styled.Text`
   font-size: ${props => props.size || '16px'};
-  color: ${props => props.theme.color.label};
+  color: ${props => props.color || props.theme.color.label};
   font-family: ${props => props.theme.font.book};
   text-align: ${props => props.align || 'left'};
+  letter-spacing: -0.6px;
 `;
 export const LabelBT = styled.Text`
   font-size: ${props => props.size || '18px'};
@@ -77,15 +81,16 @@ export const LabelBT = styled.Text`
 `;
 export const SubLabel = styled.Text`
   font-size: ${props => props.size || '14px'};
-  color: ${props => props.theme.color.sublabel};
+  color: ${props => props.color || props.theme.color.sublabel};
   font-family: ${props => props.theme.font.bold};
   text-align: ${props => props.align || 'left'};
 `;
 export const Title = styled.Text`
   font-size: ${props => props.size || '20px'};
-  color: ${props => props.theme.color.title};
+  color: ${props => props.color || props.theme.color.title};
   font-family: ${props => props.theme.font.bold};
   text-align: ${props => props.align || 'left'};
+  letter-spacing: -0.6px;
 `;
 
 
