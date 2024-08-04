@@ -1,5 +1,19 @@
-import styled from 'styled-components/native';
+import { useContext } from "react";
+import styled, { ThemeContext } from 'styled-components/native';
 import { TouchableRipple } from 'react-native-paper';
+import { Dimensions } from 'react-native';
+
+//UTILS
+export const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+export const useTheme = () => {
+    const { color, font, margin } = useContext(ThemeContext);
+    return { color, font, margin };
+}
+
+
+
+
+
 
 //COMPONENTES DE LAYOUT
 export const Main = styled.SafeAreaView`
