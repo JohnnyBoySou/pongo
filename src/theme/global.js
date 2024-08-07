@@ -1,16 +1,24 @@
 import { useContext } from "react";
 import styled, { ThemeContext } from 'styled-components/native';
 import { TouchableRipple } from 'react-native-paper';
-import { Dimensions } from 'react-native';
+import { Dimensions, ScrollView, Image as RNImage } from 'react-native';
+import { Image as ExpoImage } from 'expo-image'
+import { useNavigation } from "@react-navigation/native";
+
+
 
 //UTILS
 export const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 export const useTheme = () => {
-    const { color, font, margin } = useContext(ThemeContext);
-    return { color, font, margin };
+  const { color, font, margin } = useContext(ThemeContext);
+  return { color, font, margin };
 }
 
 
+export const useNavigate= () => {
+  const navigation = useNavigation();
+  return navigation
+}
 
 
 
@@ -20,9 +28,13 @@ export const Main = styled.SafeAreaView`
   flex: 1;
   background-color: ${props => props.bg || props.theme.background};
 `
-export const Scroll = styled.ScrollView`
-  padding-top: 50px;
+export const Scroll = styled(ScrollView).attrs(() => ({
+  showVerticalScrollIndicator: false,
+  showHorizontalScrollIndicator: false,
+}))`
 `
+
+
 export const Row = styled.View`
   flex-direction: row;
   display: flex;
@@ -43,15 +55,20 @@ export const Column = styled.View`
 
 
 //COMPONENTES DE UTILIDADE
-export const Button =  styled(TouchableRipple).attrs(() => ({
-  borderless: true, 
+
+export const Image = styled(RNImage).attrs(() => ({
+  transition: 300,
+}))`
+`
+
+export const Button = styled(TouchableRipple).attrs(() => ({
+  borderless: true,
   rippleColor: "#FFFFFF90",
 }))`
   background-color: ${props => props.bg || 'transparent'};
-  border-radius: ${props => props.radius  || 100}px; 
+  border-radius: ${props => props.radius || 100}px; 
   ${props => props.ph ? 'padding-horizontal: ' + props.ph + 'px;' : 'padding-horizontal: 20px;'}
   ${props => props.pv ? 'padding-vertical: ' + props.pv + 'px;' : 'padding-vertical: 12px;'}
-
   ${props => props.mh ? 'margin-horizontal: ' + props.mh + 'px;' : ''}
   ${props => props.mv ? 'margin-vertical: ' + props.mv + 'px;' : ''}
   ${props => props.mtop ? 'margin-top: ' + props.mtop + 'px;' : ''}
@@ -71,6 +88,7 @@ export const Label = styled.Text`
   font-family: ${props => props.theme.font.book};
   text-align: ${props => props.align || 'left'};
   letter-spacing: -0.6px;
+  line-height: ${props => props.lineHeight || props.size || '16px'};
 `;
 export const LabelBT = styled.Text`
   font-size: ${props => props.size || '18px'};
@@ -88,9 +106,10 @@ export const SubLabel = styled.Text`
 export const Title = styled.Text`
   font-size: ${props => props.size || '20px'};
   color: ${props => props.color || props.theme.color.title};
-  font-family: ${props => props.theme.font.bold};
+  font-family: ${props => props.font || props.theme.font.bold};
   text-align: ${props => props.align || 'left'};
   letter-spacing: -0.6px;
+  line-height: ${props => props.lineHeight || props.size + 3 || '20px'};
 `;
 
 

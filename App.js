@@ -50,9 +50,9 @@ export default function App() {
   }
 
   return (
-    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+    <View style={{ flex: 1, paddingTop: 36, }} onLayout={onLayoutRootView}>
       <ThemeProvider theme={selectTheme}> 
-          <StatusBar translucent animated={true} />
+          <StatusBar translucent />
           <Router />
       </ThemeProvider>
     </View>

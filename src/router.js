@@ -18,6 +18,12 @@ import AuthRegisterScreen from '@screens/auth/register';
 //INSTITUCIONAL
 import InstitucionalScreen from '@screens/institucional/visita';
   
+
+//CHAT
+import ChatScreen from '@screens/chat';
+import ChatListScreen from '@screens/chat/list';
+import ChatDetailsScreen from '@screens/chat/details';
+
 //TABS SCREEN
 import HomeScreen from '@screens/tabs/home';
 import AccountScreen from '@screens/tabs/account';
@@ -28,14 +34,22 @@ import Octicons from '@expo/vector-icons/Octicons';
 import { CircleUserRound, ShoppingCart } from 'lucide-react-native';
 import { useTheme, Button } from '@theme/global';
 
+
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='AddPet'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Onboarding'>
+
+        <Stack.Screen name="Chat" component={ChatScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="ChatList" component={ChatListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="ChatDetails" component={ChatDetailsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+
+
         <Stack.Screen name="Institucional" component={InstitucionalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+
+
         <Stack.Screen name="AuthLogin" component={AuthLoginScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="AuthRegister" component={AuthRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-        
         <Stack.Screen name="AddPet" component={AddPetScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Async" component={AsyncStaticScreen} options={{ ...TransitionPresets.FadeFromBottomAndroid, }} />

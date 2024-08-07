@@ -31,7 +31,7 @@ export default function OnboardingScreen({ navigation, route, }) {
 
     return (
         <Main style={{}}>
-            <Row style={{ position: 'absolute', top: 50, left: 30, right: 30, zIndex: 99, justifyContent: 'space-between', alignItems: 'center', }}>
+            <Row style={{ position: 'absolute', top: 10, left: 30, right: 30, zIndex: 99, justifyContent: 'space-between', alignItems: 'center', }}>
 
                 <Button onPress={() => { navigation.goBack() }} pv={0} ph={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3}>
                     <ArrowLeft size={20} color="#fff" />
@@ -45,7 +45,7 @@ export default function OnboardingScreen({ navigation, route, }) {
                 <Screen1 color={color} />
                 <Screen2 color={color} navigation={navigation} />
             </PagerView>
-            <Row style={{ marginBottom: 30, width: width, zIndex: 99, paddingHorizontal: 30, justifyContent: 'space-between', }}>
+            <Row style={{ marginBottom: 20, width: width, zIndex: 99, paddingHorizontal: 30, justifyContent: 'space-between', zIndex: -4,}}>
                 <PaginationDots
                     index={currentIndex}
                     numberOfDots={numberOfDots}
@@ -58,7 +58,7 @@ export default function OnboardingScreen({ navigation, route, }) {
                 <AnimatePresence>
                     {currentIndex != 2 &&
                         <MotiView from={{ opacity: 0, scale: 0, }} animate={{ opacity: 1, scale: 1, }} exit={{ opacity: 0, scale: 0, }} transition={{ type: 'timing' }}>
-                            <Button onPress={goToNext} style={{ width: 54, height: 54, borderRadius: 100, backgroundColor: color.sc.sc1, justifyContent: 'center', alignItems: 'center', }}>
+                            <Button onPress={goToNext} style={{ width: 54, height: 54, borderRadius: 100, backgroundColor: color.sc.sc3, justifyContent: 'center', alignItems: 'center', }}>
                                 <ArrowRight size={28} color="#fff" />
                             </Button>
                         </MotiView>
@@ -72,7 +72,7 @@ const Screen0 = ({ color }) => {
     return (
         <Column style={{ flex: 1, marginHorizontal: 30, justifyContent: 'center', }}>
             <MotiImage from={{ opacity: 0, scale: 0, rotate: '12deg' }} animate={{ opacity: 1, scale: 1, rotate: '0deg' }} source={require('@imgs/onboarding_1.png')} style={{ width: '100%', height: 400, objectFit: 'contain', }} />
-            <Title style={{ letterSpacing: -1, fontSize: 32, lineHeight: 34, textAlign: 'center', }}>A primeira rede {'\n'}social <C color={color.green}>para Pets</C> {'\n'}do Brasil!</Title>
+            <Title style={{ letterSpacing: -1, fontSize: 32, lineHeight: 34, textAlign: 'center', }}>A primeira rede {'\n'}social <C color={color.sc.sc1}>para Pets</C> {'\n'}do Brasil!</Title>
         </Column>
 
     )
@@ -90,10 +90,10 @@ const Screen1 = ({ color }) => {
 const Screen2 = ({ color, navigation }) => {
     return (
         <Column style={{ flex: 1, marginHorizontal: 30, justifyContent: 'center', }}>
-            <Animated.Image entering={FadeInDown} source={require('@imgs/onboarding_3.png')} style={{ width: '100%', height: 400, objectFit: 'contain', }} />
+            <Animated.Image entering={FadeInDown} source={require('@imgs/onboarding_3.png')} style={{ width: '100%', height: 300, objectFit: 'contain', }} />
             <Title style={{ letterSpacing: -1, fontSize: 28, lineHeight: 32, textAlign: 'center', }}>Monitore a <C color="#E5C8C9">agenda e {'\n'}boletim</C> do seu Pet a qualquer momento!</Title>
             <Label style={{ letterSpacing: -0.5, fontSize: 18, lineHeight: 22, textAlign: 'center', marginTop: 10, }}>Seja bem vindo ao app da Villa Pongo, utilize seu acesso para fazer login</Label>
-            <Column style={{ justifyContent: 'center', alignItems: 'center', columnGap: 20, }}>
+            <Column style={{ justifyContent: 'center', alignItems: 'center', columnGap: 20, zIndex: 99, }}>
                 <Button onPress={() => { navigation.navigate('AuthLogin') }} mtop={20} ph={50} bg={color.sc.sc3}>
                     <LabelBT color="#fff" align="center">Entrar</LabelBT>
                 </Button>

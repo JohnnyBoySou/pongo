@@ -53,7 +53,7 @@ export default function AuthRegisterScreen({ navigation, route, }) {
                             </Column>
                         </Button>
                     </Row>
-                    <Title style={{ fontSize: 26, marginTop: 20, }}>Crie sua conta 😎 </Title>
+                    <Title size={26} style={{  marginTop: 20, marginBottom: 4, }}>Crie sua conta 😎 </Title>
                     <Label size={18}>Crie sua conta na Villa Pongo para aproveitar de beneficios exclusivos.</Label>
                     
                     <Column style={{ height: 16, }} />

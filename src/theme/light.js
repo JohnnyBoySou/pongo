@@ -6,9 +6,10 @@ export default{
 
     light: '#FFFFFF',
 
-    blue: "#91A6C4",
-    red: "#E5C8C9",
-    green: "#778428",
+    blue: "#00A3FF",
+    red: "#D90000",
+    green: "#37CB84",
+    gray: "#5E5E5E",
   
     title: "#434343",
     label: "#918C8B",
