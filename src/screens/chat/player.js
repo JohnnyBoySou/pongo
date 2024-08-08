@@ -6,7 +6,7 @@ import { Send, Trash } from 'lucide-react-native';
 import Animated, { SlideInDown, SlideOutDown } from 'react-native-reanimated';
 import { analyzeAudio, scale } from 'react-native-audio-analyzer';
 import { FontAwesome6 } from '@expo/vector-icons';
-import { Buffer } from 'react-native-buffer';
+//import { Buffer } from 'react-native-buffer';
 
 import * as Haptics from 'expo-haptics';
 
@@ -79,15 +79,15 @@ const AudioPlayer = ({ audioUri }) => {
         const hour = new Date().getHours() < 10 ? `0${new Date().getHours()}` : `${new Date().getHours()}`;
         const mins = new Date().getMinutes() < 10 ? `0${new Date().getMinutes()}` : `${new Date().getMinutes()}`;
 
-        const audio64 = Buffer.from(uri).toString('base64');
+        const audio64 = 1//Buffer.from(uri).toString('base64');
 
-        socket.emit("upload", {
+      /*  socket.emit("upload", {
             audio: audio64,
             chat_id: id,
             user_id: user.id,
             timestamp: { hour, mins },
-        });
-        setmessage('');
+        });*/
+        seturi(null);
     };
 
     if (!uri) return null;
