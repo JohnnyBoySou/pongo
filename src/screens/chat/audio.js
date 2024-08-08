@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Audio } from 'expo-av';
 import * as Haptics from 'expo-haptics';
 import Animated, { withSpring, ZoomIn, ZoomOut, SlideInRight, SlideOutRight } from 'react-native-reanimated';
-import { Mic, MicOff, Trash } from 'lucide-react-native';
+import { Check, Mic, MicOff, Trash } from 'lucide-react-native';
 import * as FileSystem from 'expo-file-system';
 import { Column, Button, useTheme } from '@theme/global';
 
@@ -57,7 +57,7 @@ const AudioRecord = ({ onAudioRecord }) => {
             <Animated.View style={{ width: 46, height: 46, backgroundColor: color.sc.sc3, borderRadius: 100, }}>
                 <Button onPress={isRecording ? stopRecording : startRecording} ph={0} pv={0} style={{ justifyContent: 'center', alignItems: 'center', width: 46, height: 46 }}>
                     <Animated.View entering={ZoomIn} exiting={ZoomOut}>
-                        {isRecording ? <MicOff size={22} color="#fff" /> : <Mic size={22} color="#fff" />}
+                        {isRecording ? <Check size={22} color="#fff" /> : <Mic size={22} color="#fff" />}
                     </Animated.View>
                 </Button>
             </Animated.View>
