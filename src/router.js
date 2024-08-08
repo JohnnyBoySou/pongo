@@ -19,8 +19,12 @@ import AuthRegisterScreen from '@screens/auth/register';
 import InstitucionalScreen from '@screens/institucional/visita';
   
 
+//PETS
+import PetsListScreen from '@screens/pets/list';
+import PetsProfileScreen from '@screens/pets/profile';
+import PetsDiarioScreen from '@screens/pets/diario';
+
 //CHAT
-import ChatScreen from '@screens/chat';
 import ChatListScreen from '@screens/chat/list';
 import ChatDetailsScreen from '@screens/chat/details';
 
@@ -38,13 +42,16 @@ import { useTheme, Button } from '@theme/global';
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Onboarding'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='ChatList'>
 
-        <Stack.Screen name="Chat" component={ChatScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatList" component={ChatListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatDetails" component={ChatDetailsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
 
+        <Stack.Screen name="PetsList" component={PetsListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="PetsProfile" component={PetsProfileScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="PetsDiario" component={PetsDiarioScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        
         <Stack.Screen name="Institucional" component={InstitucionalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
 
@@ -67,7 +74,7 @@ function Tabs() {
   const { color, font} = useTheme();
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home'
   return (
-    <Tab.Navigator initialRouteName="Cart"
+    <Tab.Navigator initialRouteName="Account"
       screenOptions={{
         tabBarButton: (props) => <Button {...props} ph={0} pv={0} radius={6} 	/>,
         headerShown: false,

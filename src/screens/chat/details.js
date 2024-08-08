@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { Main, Column, Label, Title, Row, Button, useTheme, SCREEN_HEIGHT, Image } from '@theme/global';
 
 //icons
@@ -7,7 +7,7 @@ import { ArrowDown, Camera, Send, X, } from 'lucide-react-native';
 
 //components
 import { FlatList, TextInput } from 'react-native-gesture-handler';
-import Animated, {ZoomIn, ZoomOut, } from 'react-native-reanimated';
+import Animated, { ZoomIn, ZoomOut, } from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
 import Modal from '@components/Modal/index';
 
@@ -16,8 +16,14 @@ import CameraChat from './image';
 import AudioRecord from './audio';
 import AudioPlayer from './player';
 
-export default function ChatDetailsScreen({ navigation, }) {
+
+import Connect from '@api/request/socket/connect';
+import { socket } from '@api/request/socket/socket';
+
+export default function ChatDetailsScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
+
+    const { user, id } = route.params;
 
     const flatMsg = useRef();
     const modalCamera = useRef();
@@ -26,20 +32,21 @@ export default function ChatDetailsScreen({ navigation, }) {
     const [openCamera, setopenCamera] = useState(false);
 
     const [audioUri, setAudioUri] = useState(null);
-    console.log(audioUri)
     const [showBottom, setshowBottom] = useState();
-
-
+    const [status, setstatus] = useState('Offline');
 
     return (
         <Main style={{ backgroundColor: '#f7f7f7', }}>
             <Row ph={margin.h} pv={12} style={{ justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#fff', }}>
 
                 <Row>
-                    <Image style={{ width: 52, height: 52, borderRadius: 100, backgroundColor: color.sc.sc3, }} />
+                    <Column style={{ justifyContent: 'center', alignItems: 'flex-end', }}>
+                        <Image style={{ width: 52, height: 52, borderRadius: 100, backgroundColor: color.sc.sc3, marginBottom: -12, }} source={{ uri: user?.avatar }} />
+                        <Connect />
+                    </Column>
                     <Column style={{ justifyContent: 'center', marginLeft: 12, }}>
-                        <Title>Carol</Title>
-                        <Label>Digitando...</Label>
+                        <Title>{user.name}</Title>
+                        <Label style={{ marginTop: 2, }}>{status}</Label>
                     </Column>
                 </Row>
                 <Button onPress={() => { navigation.goBack() }} ph={0} pv={0} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
@@ -49,7 +56,9 @@ export default function ChatDetailsScreen({ navigation, }) {
             <FlatList
                 ref={flatMsg}
                 data={messages}
-                ListHeaderComponent={<Column style={{ height: 12, }} />}
+                ListHeaderComponent={<Column style={{ alignSelf: 'center', marginTop: 25, backgroundColor: color.sc.sc3, borderRadius: 12, paddingVertical: 12, paddingHorizontal: 20, marginBottom: 20, }}>
+                    <Label color="#fff">Inicio do chat em 12 de Jun, 2024</Label>
+                    </Column>}
                 renderItem={({ item }) => <Message item={item} />}
                 keyExtractor={item => item.id}
                 style={{ paddingHorizontal: margin.h, }}
@@ -70,7 +79,7 @@ export default function ChatDetailsScreen({ navigation, }) {
 
             {audioUri && <AudioPlayer audioUri={audioUri} />}
 
-            <Row style={{ backgroundColor: '#fff', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 12, }}>
+            <Row style={{ backgroundColor: '#fff', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 12, zIndex: 99, }}>
                 <Button onPress={() => { modalCamera.current.expand(); setopenCamera(true) }} ph={0} pv={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 20}>
                     <Camera size={22} color={color.sc.sc3} />
                 </Button>
@@ -89,7 +98,7 @@ export default function ChatDetailsScreen({ navigation, }) {
                     {msg?.length > 0 ?
                         <SendButton message={msg} setmessage={setmsg} />
                         :
-                        <AudioRecord  onAudioRecord={(uri) => setAudioUri(uri)} />
+                        <AudioRecord onAudioRecord={(uri) => setAudioUri(uri)} />
                     }
                 </Column>
             </Row>
@@ -102,12 +111,24 @@ export default function ChatDetailsScreen({ navigation, }) {
 }
 const SendButton = ({ message, setmessage }) => {
     const { color } = useTheme();
-    const sendMessage = () => {
+    const handleNewMessage = () => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-        setmessage('')
-    }
+
+        const hour = new Date().getHours() < 10 ? `0${new Date().getHours()}` : `${new Date().getHours()}`;
+        const mins = new Date().getMinutes() < 10 ? `0${new Date().getMinutes()}` : `${new Date().getMinutes()}`;
+
+        socket.emit("message", {
+            message: message,
+            chat_id: id,
+            user_id: user.id,
+            timestamp: { hour, mins },
+        });
+        setmessage('');
+    };
+
+
     return (
-        <Button onPressIn={sendMessage} bg={color.sc.sc3} ph={0} pv={0} style={{ justifyContent: 'center', alignItems: 'center', width: 46, height: 46, }}>
+        <Button onPressIn={handleNewMessage} bg={color.sc.sc3} ph={0} pv={0} style={{ justifyContent: 'center', alignItems: 'center', width: 46, height: 46, }}>
             <Animated.View entering={ZoomIn} exiting={ZoomOut} >
                 <Send size={22} color="#fff" />
             </Animated.View>
@@ -118,13 +139,13 @@ const SendButton = ({ message, setmessage }) => {
 const Message = ({ item }) => {
     const { author, time, message, name, } = item;
     return (
-        <Column style={{ alignSelf: author ? 'flex-end' : 'flex-start', marginBottom: 30, }}>
-            <Column style={{ alignSelf: author ? 'flex-end' : 'flex-start', }}>
-                <Title size={16} >{name}</Title>
-                <Label size={14} lineHeight={16}>{time}</Label>
-            </Column>
-            <Column style={{ backgroundColor: author ? '#fff' : '#DFDFDF', marginTop: 8, borderRadius: 12, borderTopLeftRadius: author ? 12 : 0, borderTopRightRadius: author ? 0 : 12 }} ph={12} pv={12}>
+        <Column style={{ alignSelf: author ? 'flex-end' : 'flex-start', marginBottom: 20, }}>
+          
+            <Column style={{ backgroundColor: author ? '#fff' : '#DFDFDF', marginBottom: 6, borderRadius: 12, borderTopLeftRadius: author ? 12 : 0, borderTopRightRadius: author ? 0 : 12 }} ph={12} pv={12}>
                 <Label>{message}</Label>
+            </Column>
+            <Column style={{ alignSelf: author ? 'flex-end' : 'flex-start', }}>
+                <Label size={14} lineHeight={16}>{time}</Label>
             </Column>
         </Column>
     )

@@ -15,16 +15,15 @@ export const useTheme = () => {
 }
 
 
-export const useNavigate= () => {
+export const useNavigate = () => {
   const navigation = useNavigation();
   return navigation
 }
 
 
 
-
 //COMPONENTES DE LAYOUT
-export const Main = styled.SafeAreaView`
+export const Main = styled.View`
   flex: 1;
   background-color: ${props => props.bg || props.theme.background};
 `

@@ -10,7 +10,8 @@ export default{
     red: "#D90000",
     green: "#37CB84",
     gray: "#5E5E5E",
-  
+    yellow: "#FFA107",
+    border: "#D7D7D7",
     title: "#434343",
     label: "#918C8B",
     sublabel: "#A1A1A1",  

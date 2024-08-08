@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { socket } from './socket';
 import { useEffect, useState } from 'react';
+import { Row, Column, Title, useTheme } from '@theme/global';
 
 export default function Connect() {
   const [isConnected, setIsConnected] = useState(false);
   const [transport, setTransport] = useState('N/A');
+  const { color, font, margin } = useTheme();
 
   useEffect(() => {
     if (socket.connected) {
@@ -35,18 +37,8 @@ export default function Connect() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text>Status: { isConnected ? 'connected' : 'disconnected' }</Text>
-      <Text>Transport: { transport }</Text>
-    </View>
+    <Column>
+        <Column style={{ width: 18, height: 18, borderWidth: 2, borderColor: '#fff', borderRadius: 100, backgroundColor: isConnected ? color.blue : color.yellow,  marginRight: 4, }} />
+    </Column>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
