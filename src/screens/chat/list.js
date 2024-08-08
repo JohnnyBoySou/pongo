@@ -15,7 +15,7 @@ export default function ChatListScreen({ navigation, }) {
                 data={chats}
                 renderItem={({ item }) => <Chat item={item} />}
                 keyExtractor={item => item.id}
-                ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: '#30303020', marginVertical: 4, borderRadius: 6, }} />}
+                ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: color.border, marginVertical: 4, borderRadius: 6, }} />}
             />
             <Button bg={color.blue} style={{ justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: 30, right: 30, width: 56, height: 56, }}>
                 <Plus size={32} color="#fff" strokeWidth={3} />
@@ -29,7 +29,7 @@ const Chat = ({ item }) => {
     const { avatar, lastMsg, time, name, unread, id } = item
     const navigation = useNavigate()
     return (
-        <Button onPress={() => { navigation.navigate('ChatDetails', { id: id, user: item }) }} >
+        <Button onPress={() => { navigation.navigate('ChatDetails', { id: id, user: item }) }} radius={4}>
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
                 <Image style={{ width: 56, height: 56, borderRadius: 100, backgroundColor: '#f7f7f7', }} source={{ uri: avatar }} />
                 <Column style={{ flexGrow: 1, marginLeft: 12, }}>

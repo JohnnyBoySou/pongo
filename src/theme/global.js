@@ -23,7 +23,7 @@ export const useNavigate = () => {
 
 
 //COMPONENTES DE LAYOUT
-export const Main = styled.View`
+export const Main = styled.SafeAreaView`
   flex: 1;
   background-color: ${props => props.bg || props.theme.background};
 `

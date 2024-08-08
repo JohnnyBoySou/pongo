@@ -22,7 +22,6 @@ import { socket } from '@api/request/socket/socket';
 
 export default function ChatDetailsScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
-
     const { user, id } = route.params;
 
     const flatMsg = useRef();
@@ -36,9 +35,8 @@ export default function ChatDetailsScreen({ navigation, route }) {
     const [status, setstatus] = useState('Offline');
 
     return (
-        <Main style={{ backgroundColor: '#f7f7f7', }}>
-            <Row ph={margin.h} pv={12} style={{ justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#fff', }}>
-
+        <Main style={{ backgroundColor: color.background, }}>
+            <Row ph={margin.h} pv={12} style={{ justifyContent: 'space-between', alignItems: 'center', backgroundColor: color.off, }}>
                 <Row>
                     <Column style={{ justifyContent: 'center', alignItems: 'flex-end', }}>
                         <Image style={{ width: 52, height: 52, borderRadius: 100, backgroundColor: color.sc.sc3, marginBottom: -12, }} source={{ uri: user?.avatar }} />
@@ -70,8 +68,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
                     }
                 }}
             />
-
-            {showBottom && <Animated.View entering={ZoomIn} exiting={ZoomOut} style={{ position: 'absolute', bottom: 80, alignSelf: 'center', }}>
+            {showBottom && <Animated.View entering={ZoomIn} exiting={ZoomOut} style={{ position: 'absolute', bottom: 80, alignSelf: 'center',  }}>
                 <Button onPress={() => { flatMsg.current.scrollToEnd({ animated: true }); }} radius={100} ph={0} pv={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', backgroundColor: color.sc.sc3, }}>
                     <ArrowDown size={22} color="#fff" />
                 </Button>
@@ -79,7 +76,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
 
             {audioUri && <AudioPlayer audioUri={audioUri} />}
 
-            <Row style={{ backgroundColor: '#fff', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 12, zIndex: 99, }}>
+            <Row style={{ backgroundColor: color.off2, justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 12, zIndex: 99, }}>
                 <Button onPress={() => { modalCamera.current.expand(); setopenCamera(true) }} ph={0} pv={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 20}>
                     <Camera size={22} color={color.sc.sc3} />
                 </Button>
@@ -137,11 +134,12 @@ const SendButton = ({ message, setmessage }) => {
 }
 
 const Message = ({ item }) => {
+    const { color, font } = useTheme();
     const { author, time, message, name, } = item;
     return (
         <Column style={{ alignSelf: author ? 'flex-end' : 'flex-start', marginBottom: 20, }}>
           
-            <Column style={{ backgroundColor: author ? '#fff' : '#DFDFDF', marginBottom: 6, borderRadius: 12, borderTopLeftRadius: author ? 12 : 0, borderTopRightRadius: author ? 0 : 12 }} ph={12} pv={12}>
+            <Column style={{ backgroundColor: author ? color.off2 : color.sc.sc3+30, marginBottom: 6, borderRadius: 12, borderTopLeftRadius: author ? 12 : 0, borderTopRightRadius: author ? 0 : 12 }} ph={12} pv={12}>
                 <Label>{message}</Label>
             </Column>
             <Column style={{ alignSelf: author ? 'flex-end' : 'flex-start', }}>

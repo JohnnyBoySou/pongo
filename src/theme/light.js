@@ -15,6 +15,12 @@ export default{
     title: "#434343",
     label: "#918C8B",
     sublabel: "#A1A1A1",  
+
+    off: "#F7F7F7",
+    off2: "#FFFFFF",
+    waves: '#91A6C4',
+
+
     pr: {
       pr1: '#918C8B',
       pr2: '#ECEBEB',
@@ -34,6 +40,8 @@ export default{
     bold: "Font_Bold",
     medium: "Font_Medium",
     book: "Font_Book",
+    v_medium: "Voyage_Medium",
+    v_book: "Voyage_Book",
   },
   padding: {
     h: 18,
