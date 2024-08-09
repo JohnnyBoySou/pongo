@@ -17,7 +17,9 @@ import AuthRegisterScreen from '@screens/auth/register';
 
 //INSTITUCIONAL
 import InstitucionalScreen from '@screens/institucional/visita';
-  
+
+//SERVIÇOS
+import HistoricoServicosScreen from '@screens/servicos/historico';
 
 //CHAT
 import ChatScreen from '@screens/chat';
@@ -38,7 +40,7 @@ import { useTheme, Button } from '@theme/global';
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Onboarding'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='HistoricoServicos'>
 
         <Stack.Screen name="Chat" component={ChatScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatList" component={ChatListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -46,6 +48,8 @@ export default function Router() {
 
 
         <Stack.Screen name="Institucional" component={InstitucionalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+
+        <Stack.Screen name="HistoricoServicos" component={HistoricoServicosScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
 
         <Stack.Screen name="AuthLogin" component={AuthLoginScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -64,12 +68,12 @@ export default function Router() {
 
 function Tabs() {
   const route = useRoute();
-  const { color, font} = useTheme();
+  const { color, font } = useTheme();
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home'
   return (
     <Tab.Navigator initialRouteName="Cart"
       screenOptions={{
-        tabBarButton: (props) => <Button {...props} ph={0} pv={0} radius={6} 	/>,
+        tabBarButton: (props) => <Button {...props} ph={0} pv={0} radius={6} />,
         headerShown: false,
         tabBarShowLabel: false,
         backBehavior: 'none',
@@ -88,12 +92,12 @@ function Tabs() {
 
       <Tab.Screen name="Cart" component={CartScreen} options={{
         tabBarBadge: 3,
-        tabBarBadgeStyle: { backgroundColor: '#fff', fontFamily: font.bold, fontSize: 12,  },
+        tabBarBadgeStyle: { backgroundColor: '#fff', fontFamily: font.bold, fontSize: 12, },
         tabBarIcon: ({ color, size }) => (<ShoppingCart name="search" size={routeName === 'Seach' ? size + 3 : size} color={color} />),
       }} />
 
       <Tab.Screen name="Account" component={AccountScreen} options={{
-        tabBarIcon: ({ color, size }) => (<CircleUserRound  name="user" size={routeName === 'Account' ? size + 3 : size} color={color} />),
+        tabBarIcon: ({ color, size }) => (<CircleUserRound name="user" size={routeName === 'Account' ? size + 3 : size} color={color} />),
       }} />
     </Tab.Navigator>
   )
