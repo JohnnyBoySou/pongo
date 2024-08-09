@@ -80,7 +80,6 @@ export default function HistoricoServicosScreen({ navigation, }) {
                 <Column mh={margin.h} mv={margin.v} >
                     <FlatList
                         data={data}
-                        horizontal
                         keyExtractor={item => item.id}
                         renderItem={({item}) => <Item item={item}  />}
                     />
