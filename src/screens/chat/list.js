@@ -15,9 +15,9 @@ export default function ChatListScreen({ navigation, }) {
                 data={chats}
                 renderItem={({ item }) => <Chat item={item} />}
                 keyExtractor={item => item.id}
-                ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: '#30303020', marginVertical: 4, borderRadius: 6, }} />}
+                ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: color.border, marginVertical: 4, borderRadius: 6, }} />}
             />
-            <Button bg={color.blue} style={{ justifyContent: 'center', alignItems: 'center',  position: 'absolute', bottom: 30, right: 30, width: 56, height: 56, }}>
+            <Button bg={color.blue} style={{ justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: 30, right: 30, width: 56, height: 56, }}>
                 <Plus size={32} color="#fff" strokeWidth={3} />
             </Button>
         </Main>
@@ -29,18 +29,18 @@ const Chat = ({ item }) => {
     const { avatar, lastMsg, time, name, unread, id } = item
     const navigation = useNavigate()
     return (
-        <Button onPress={() => {navigation.navigate('ChatDetails', {id: id})}} >
-        <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-            <Image style={{ width: 56, height: 56, borderRadius: 100, backgroundColor: '#f7f7f7', }} soure={{ uri: avatar }} />
-            <Column style={{ flexGrow: 1, marginLeft: 12, }}>
-                <Title size={18}>{name}</Title>
-                <Label size={14} style={{ marginTop: 4, }}>{lastMsg} </Label>
-            </Column>
-            <Column style={{ alignItems: 'flex-end' }}>
-                <Label size={14}>{time}</Label>
-                {unread > 0 && <Column style={{ backgroundColor: color.blue, marginTop: 4, width: 26, height: 26, justifyContent: 'center', borderRadius: 100, alignItems: 'center', }}><Label style={{ color: '#fff', fontFamily: 'Font_Bold', marginTop: 2, fontSize: 14 }}>{unread}</Label></Column>}
-            </Column>
-        </Row>
+        <Button onPress={() => { navigation.navigate('ChatDetails', { id: id, user: item }) }} radius={4}>
+            <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                <Image style={{ width: 56, height: 56, borderRadius: 100, backgroundColor: '#f7f7f7', }} source={{ uri: avatar }} />
+                <Column style={{ flexGrow: 1, marginLeft: 12, }}>
+                    <Title size={18}>{name}</Title>
+                    <Label size={14} style={{ marginTop: 4, }}>{lastMsg} </Label>
+                </Column>
+                <Column style={{ alignItems: 'flex-end' }}>
+                    <Label size={14}>{time}</Label>
+                    {unread > 0 && <Column style={{ backgroundColor: color.blue, marginTop: 4, width: 26, height: 26, justifyContent: 'center', borderRadius: 100, alignItems: 'center', }}><Label style={{ color: '#fff', fontFamily: 'Font_Bold', marginTop: 2, fontSize: 14 }}>{unread}</Label></Column>}
+                </Column>
+            </Row>
         </Button>
     )
 }
@@ -70,14 +70,6 @@ const chats = [
         time: '08:20',
         unread: 1,
         id: 3,
-    },
-    {
-        name: 'Pedro',
-        avatar: 'https://i.pravatar.cc/303',
-        lastMsg: 'Você viu o jogo ontem?',
-        time: '12:45',
-        unread: 4,
-        id: 4,
     },
     {
         name: 'Mariana',

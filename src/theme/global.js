@@ -15,11 +15,10 @@ export const useTheme = () => {
 }
 
 
-export const useNavigate= () => {
+export const useNavigate = () => {
   const navigation = useNavigation();
   return navigation
 }
-
 
 
 

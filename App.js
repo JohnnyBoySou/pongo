@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { ThemeProvider } from 'styled-components/native';
 import { preventAutoHideAsync, hideAsync } from 'expo-splash-screen';
 import * as Font from 'expo-font';
-import { View, LogBox, useColorScheme,} from 'react-native';
+import { View, LogBox, useColorScheme, } from 'react-native';
 import Router from './src/router';
 import { StatusBar } from 'expo-status-bar';
 import light from '@theme/light';
@@ -46,14 +46,14 @@ export default function App() {
   }, [appIsReady]);
 
   if (!appIsReady) {
-    return null; 
+    return null;
   }
 
   return (
-    <View style={{ flex: 1, paddingTop: 36, }} onLayout={onLayoutRootView}>
-      <ThemeProvider theme={selectTheme}> 
-          <StatusBar translucent />
-          <Router />
+    <View style={{ flex: 1, paddingTop: 36, backgroundColor: selectTheme.background }} onLayout={onLayoutRootView}>
+      <ThemeProvider theme={selectTheme}>
+        <StatusBar translucent />
+        <Router />
       </ThemeProvider>
     </View>
   );
