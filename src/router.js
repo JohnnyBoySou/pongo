@@ -35,6 +35,9 @@ import HomeScreen from '@screens/tabs/home';
 import AccountScreen from '@screens/tabs/account';
 import CartScreen from '@screens/tabs/cart';
 
+//TEST
+import TestScreen from '@screens/test';
+
 //ICONS
 import Octicons from '@expo/vector-icons/Octicons';
 import { CircleUserRound, ShoppingCart } from 'lucide-react-native';
@@ -44,11 +47,11 @@ import { useTheme, Button } from '@theme/global';
 export default function Router() {
   return (
     <NavigationContainer>
-  <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='HistoricoServicos'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Test'>
 
       <Stack.Screen name="ChatList" component={ChatListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
       <Stack.Screen name="ChatDetails" component={ChatDetailsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-
+      <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
       <Stack.Screen name="PetsList" component={PetsListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
       <Stack.Screen name="PetsProfile" component={PetsProfileScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
