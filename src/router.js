@@ -18,6 +18,9 @@ import AuthRegisterScreen from '@screens/auth/register';
 //INSTITUCIONAL
 import InstitucionalScreen from '@screens/institucional/visita';
 
+//SERVICOS
+import HistoricoServicosScreen from '@screens/servicos/historico';
+
 //PETS
 import PetsListScreen from '@screens/pets/list';
 import PetsProfileScreen from '@screens/pets/profile';
@@ -41,11 +44,7 @@ import { useTheme, Button } from '@theme/global';
 export default function Router() {
   return (
     <NavigationContainer>
-<<<<<<< HEAD
   <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='HistoricoServicos'>
-=======
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='ChatList'>
->>>>>>> 796c55f8d9ffed92a7b0de75061e188f447647f0
 
       <Stack.Screen name="ChatList" component={ChatListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
       <Stack.Screen name="ChatDetails" component={ChatDetailsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />

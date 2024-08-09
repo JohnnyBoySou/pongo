@@ -1,8 +1,6 @@
-import React, { useContext, useState } from 'react';
-import { Pressable, TextInput, ScrollView, Image, Text } from 'react-native';
-import { Main, View, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT } from '@theme/global';
-
-import { ThemeContext } from 'styled-components/native';
+import React, { useState } from 'react';
+import { Pressable, TextInput, ScrollView, Image, } from 'react-native';
+import { Main, View, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT, useTheme, } from '@theme/global';
 
 import { ArrowLeft } from 'lucide-react-native';
 import { Search } from 'lucide-react-native';
@@ -12,10 +10,12 @@ import HeaderInternal from '@components/HeaderInternal';
 
 import Input from '@components/Forms/input';
 import { Card } from 'react-native-paper';
+import TopMenu from '@components/Header/topmenu';
+import { FlatList } from 'react-native-gesture-handler';
 
 export default function HistoricoServicosScreen({ navigation, }) {
 
-    const { color, font, margin } = useContext(ThemeContext);
+    const { color, font, margin } = useTheme();
 
     const [name, setname] = useState();
     const [tel, settel] = useState();
@@ -28,10 +28,14 @@ export default function HistoricoServicosScreen({ navigation, }) {
     }
 
 
+    const types = ['Processando', 'Concluído', 'Cancelado', 'Reembolso'];
+    const [filter, setfilter] = useState('Processando');
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
                 <HeaderInternal />
+
+                <TopMenu search={false} />
 
                 <Row style={{ paddingHorizontal: margin.h, justifyContent: 'space-between', alignItems: 'center', paddingVertical: 16, }}>
                     <Pressable onPress={() => { navigation.goBack() }} style={{ backgroundColor: '#fff', width: 70, height: 36, borderRadius: 100, justifyContent: 'center', alignItems: 'center', }}>
@@ -63,72 +67,90 @@ export default function HistoricoServicosScreen({ navigation, }) {
                 <Column style={{ width: '100vw', height: 1, backgroundColor: '#D9D9D9', marginBottom: 16 }}>
                 </Column>
 
-                <Column mh={margin.h} >
-                    <Row style={{ alignItems: 'center', justifyContent: 'space-between' }}>
-                        <Title style={{ textAlign: 'center', fontSize: 12, lineHeight: 26, }}>Processando</Title>
-
-                        <Title style={{ textAlign: 'center', fontSize: 12, lineHeight: 26, }}>Concluído</Title>
-
-                        <Title style={{ textAlign: 'center', fontSize: 12, lineHeight: 26, }}>Cancelado</Title>
-
-                        <Title style={{ textAlign: 'center', fontSize: 12, lineHeight: 26, }}>Reembolso</Title>
-                    </Row>
-                </Column>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 0 }}>
+                    <Column style={{ width: margin.h, }} />
+                    {types.map((item, index) => (
+                        <Button onPress={() => { setfilter(item) }} style={{ opacity: filter == item ? 1 : 0.5, }} ph={12} pv={4}>
+                            <Title style={{ textAlign: 'center', fontSize: 12, lineHeight: 26, textDecorationLine: filter == item ? 'underline' : 'none', textDecorationStyle: 'solid', }}>{item}</Title>
+                        </Button>
+                    ))}
+                    <Column style={{ width: margin.h, }} />
+                </ScrollView>
 
                 <Column mh={margin.h} mv={margin.v} >
-                    <Card style={{ padding: 15, display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', boxShadow: 'none' }}>
-
-                        <Column style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between' }}>
-                            <Image
-                                source={{ uri: 'https://img.freepik.com/free-photo/top-view-pet-accessories_23-2150930406.jpg?size=626&ext=jpg&ga=GA1.1.2113030492.1720483200&semt=ais_hybrid' }}
-                                style={{ width: 62, height: 80, borderRadius: 12 }} />
-
-                            <Column mh={12} >
-                                <Text style={{ fontSize: 14, color: '#434343', fontWeight: 700, marginBottom: 4 }}>Nome do Produto</Text>
-
-                                <Text style={{ fontSize: 10, color: '#858585', fontWeight: 500, marginBottom: 8 }}>Pedido #987654323456</Text>
-
-                                <Text style={{ fontSize: 14, color: '#858585', fontWeight: 500 }}>R$150,00</Text>
-                            </Column>
-
-
-                            <Column style={{ backgroundColor: color.sc.sc3, borderRadius: 12 }}>
-                                <Text style={{ fontSize: 10, paddingHorizontal: 8, color: '#fff', fontWeight: 500, textAlign: 'center' }}>
-                                    Informações
-                                </Text>
-                            </Column>
-
-                        </Column>
-
-                        <Column style={{ marginTop: 12 }}>
-                            <Text style={{ fontSize: 14, color: '#858585', fontWeight: 500 }}>Data da compra: 12/06/2024 as 14:23:00</Text>
-
-                            <Text style={{ fontSize: 14, color: '#858585', fontWeight: 500 }}>Previsão de entrega: 14/06/2024</Text>
-
-                            <Text style={{ fontSize: 14, color: '#858585', fontWeight: 500 }}>Pagamento: Crédito 3x</Text>
-                        </Column>
-
-                        <Column style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 16 }} >
-                            <Column style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'flex-start' }}>
-                                <Pressable onPress={() => { navigation.goBack() }} style={{ backgroundColor: color.pr.pr2, paddingHorizontal: 12, marginRight: 13, height: 20, borderRadius: 100, justifyContent: 'center', alignItems: 'center', }}>
-                                    <Text style={{ fontSize: 12, color: color.title, fontWeight: 500 }}>Cancelar</Text>
-                                </Pressable>
-
-                                <Pressable onPress={() => { navigation.goBack() }} style={{ backgroundColor: color.pr.pr2, paddingHorizontal: 12, height: 20, borderRadius: 100, justifyContent: 'center', alignItems: 'center', }}>
-                                    <Text style={{ fontSize: 12, color: color.title, fontWeight: 500 }}>Rastrear</Text>
-                                </Pressable>
-                            </Column>
-
-                            <Text style={{ fontSize: 12, color: '#858585', fontWeight: 500 }}>1 item: R$150,00</Text>
-                        </Column>
-
-                    </Card>
+                    <FlatList
+                        data={data}
+                        horizontal
+                        keyExtractor={item => item.id}
+                        renderItem={({item}) => <Item item={item}  />}
+                    />
                 </Column>
-
-
 
             </Scroll>
         </Main>
     )
 }
 
+
+const Item = ({ item }) => {
+    const { color, font, margin } = useTheme()
+    const { name } = item
+    return (
+        <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
+            <Row style={{ alignItems: 'flex-start', }}>
+                <Image
+                    source={{ uri: 'https://img.freepik.com/free-photo/top-view-pet-accessories_23-2150930406.jpg?size=626&ext=jpg&ga=GA1.1.2113030492.1720483200&semt=ais_hybrid' }}
+                    style={{ width: 62, height: 80, borderRadius: 12 }} />
+                <Column mh={12} >
+                    <Title style={{ fontSize: 14, color: '#434343', fontWeight: 700, marginBottom: 4 }}>{name}</Title>
+                    <Title style={{ fontSize: 10, color: '#858585', fontWeight: 500, marginBottom: 8 }}>Pedido #987654323456</Title>
+                    <Title style={{ fontSize: 14, color: '#858585', fontWeight: 500 }}>R$150,00</Title>
+                </Column>
+                <Column style={{ backgroundColor: color.sc.sc3, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
+                    <Title style={{ fontSize: 10, paddingHorizontal: 8, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
+                        Informações
+                    </Title>
+                </Column>
+            </Row>
+            <Column style={{ marginTop: 12 }}>
+                <Label size={14}>Data da compra: 12/06/2024 as 14:23:00</Label>
+                <Label size={14}>Previsão de entrega: 14/06/2024</Label>
+                <Label size={14}>Pagamento: Crédito 3x</Label>
+            </Column>
+            <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 16 }} >
+                <Row>
+                    <Button onPress={() => { navigation.goBack() }} style={{ backgroundColor: color.pr.pr2, paddingHorizontal: 12, paddingVertical: 6, marginRight: 6, borderRadius: 100, justifyContent: 'center', alignItems: 'center', }}>
+                        <Label style={{ fontSize: 12, color: color.title, fontWeight: 500 }}>Cancelar</Label>
+                    </Button>
+                    <Button onPress={() => { navigation.goBack() }} style={{ backgroundColor: color.pr.pr2, paddingHorizontal: 12, paddingVertical: 6, borderRadius: 100, justifyContent: 'center', alignItems: 'center', }}>
+                        <Label style={{ fontSize: 12, color: color.title, fontWeight: 500 }}>Rastrear</Label>
+                    </Button>
+                </Row>
+                <Title style={{ fontSize: 12, color: '#858585', fontWeight: 500 }}>1 item: R$150,00</Title>
+            </Row>
+        </Column>
+    )
+}
+
+const data = [
+    {
+        name: 'Nome do Produto',
+        image: 'https://img.freepik.com/free-photo/top-view-pet-accessories_23-2150930406.jpg?size=626&ext=jpg&ga=GA1.1.2113030492.1720483200&semt=ais_hybrid',
+        id: '987654323456',
+        price: 'R$150,00',
+        date: '12/06/2024 as 14:23:00',
+        status: 'Entregue',
+        time: '14/06/2024',
+        payment: 'Crédito 3x',
+    },
+    {
+        name: 'Nome do Produto',
+        image: 'https://img.freepik.com/free-photo/top-view-pet-accessories_23-2150930406.jpg?size=626&ext=jpg&ga=GA1.1.2113030492.1720483200&semt=ais_hybrid',
+        id: '987654323456',
+        price: 'R$150,00',
+        date: '12/06/2024 as 14:23:00',
+        status: 'Entregue',
+        time: '14/06/2024',
+        payment: 'Crédito 3x',
+    },
+]
