@@ -6,66 +6,92 @@ import Animated, {
   useAnimatedStyle,
   interpolateColor,
   runOnJS,
+  FadeInDown,
+  FadeOutDown,
+  FadeInUp,
+  withTiming,
 } from "react-native-reanimated"
 
-import { useState } from "react"
+import { useState, useImperativeHandle, forwardRef, } from "react"
 import { Column, Title } from '@theme/global';
 
-export default function TopSheet({ min, max, normal, valueMin, valueNormal, valueMax, }) {
-  const height = useSharedValue(valueMin); // Altura inicial do componente
+const TopSheet = forwardRef(({ min, max, valueMin, valueMax }, ref) => {
+  const height = useSharedValue(valueMin);
 
-  const MIN_HEIGHT = valueMin// Altura mínima
-  const NORMAL_HEIGHT = valueNormal // Altura normal
-  const MAX_HEIGHT =valueMax; // Altura máxima
+  const MIN_HEIGHT = valueMin;
+  const MAX_HEIGHT = valueMax; 
 
   const [currentStatus, setCurrentStatus] = useState('min');
 
+  const handleClose = () => {
+    height.value = withTiming(MIN_HEIGHT);
+    setCurrentStatus('min');
+  };
+
+  const handleExpand = () => {
+    height.value = withSpring(MAX_HEIGHT);
+    setCurrentStatus('max');
+  };
+
+  useImperativeHandle(ref, () => ({
+    close: handleClose,
+    expand: handleExpand,
+  }));
+
+
+
   const pan = Gesture.Pan()
     .onChange((event) => {
-      const offsetDelta = event.changeY + height.value
-      height.value = offsetDelta 
+      const offsetDelta = event.changeY + height.value;
+
+      if (offsetDelta < MIN_HEIGHT) {
+        height.value = MIN_HEIGHT;
+      } else {
+        height.value = offsetDelta;
+      }
     })
     .onEnd(() => {
       const currentHeight = height.value;
-      let targetHeight;
-      if (currentHeight < (MIN_HEIGHT + NORMAL_HEIGHT) / 2) {
-        targetHeight = MIN_HEIGHT;
+      if (currentHeight < (MIN_HEIGHT + MAX_HEIGHT) / 2) {
+        height.value = withTiming(MIN_HEIGHT);
         runOnJS(setCurrentStatus)('min')
-      } else if (currentHeight < (NORMAL_HEIGHT + MAX_HEIGHT) / 2) {
-        targetHeight = NORMAL_HEIGHT;
-        runOnJS(setCurrentStatus)('normal')
+        
       } else {
-        targetHeight = MAX_HEIGHT;
+        height.value = withSpring(MAX_HEIGHT);
         runOnJS(setCurrentStatus)('max')
       }
-      height.value = withSpring(targetHeight);
     });
 
   const animatedStyle = useAnimatedStyle(() => {
     const backgroundColor = interpolateColor(
       height.value,
-      [MIN_HEIGHT, NORMAL_HEIGHT, MAX_HEIGHT],
-      ['#FE25BD', '#FE25BD', '#F7F7F7']
+      [MIN_HEIGHT, MAX_HEIGHT],
+      ['#FFFFFF', '#FFFFFF']
     );
     return {
       height: height.value,
-      backgroundColor,
+      backgroundColor: "#FFFFFF",
     };
   });
 
 
   return (
-    <Animated.View style={[{ width: '100%', top: 0, zIndex: 2, borderBottomLeftRadius: 18,  borderBottomRightRadius: 18, position: 'absolute', overflow: 'hidden', }, animatedStyle]} >
-      <Column style={{ paddingHorizontal: 28, paddingTop: 60, }}>
-        {currentStatus === 'min' && min}
-        {currentStatus === 'normal' && normal}
-        {currentStatus === 'max' && max}
-      </Column>
+    <Animated.View entering={FadeInUp} style={[{ width: '100%', top: 0, zIndex: 99, borderBottomLeftRadius: 18, borderBottomRightRadius: 18, position: 'absolute', overflow: 'hidden', }, animatedStyle]} >
+      {currentStatus === 'min' &&
+        <Animated.View entering={FadeInUp} exiting={FadeOutDown} style={{ paddingHorizontal: 28, paddingTop: 10, }}>
+          {min}
+        </Animated.View>}
+      {currentStatus === 'max' &&
+        <Animated.View entering={FadeInDown} exiting={FadeOutDown} style={{ paddingHorizontal: 28, paddingTop: 10, }}>
+          {max}
+        </Animated.View>}
       <GestureDetector gesture={pan}>
-        <Column style={{ padding: 20, position: 'absolute', bottom: 0, width: '100%',}}>
-          <Column style={{ width: 80, height: 8, backgroundColor: currentStatus === 'max' ? "#30303070" : '#ffffff90', alignSelf: 'center', borderRadius: 100, }} />
+        <Column pv={12} style={{ position: 'absolute', bottom: 0, width: '100%', zIndex: 99, }}>
+          <Column style={{ width: 80, height: 8, backgroundColor: "#30303070", alignSelf: 'center', borderRadius: 100, }} />
         </Column>
       </GestureDetector>
     </Animated.View>
   )
-}
+});
+
+export default TopSheet

@@ -13,6 +13,7 @@ const AudioRecord = ({ onAudioRecord }) => {
     const [isRecording, setIsRecording] = useState(false);
 
     async function startRecording() {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
         try {
             const perm = await Audio.requestPermissionsAsync();
             if (perm.status === "granted") {
@@ -29,6 +30,7 @@ const AudioRecord = ({ onAudioRecord }) => {
     }
 
     async function stopRecording() {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
         setRecording(undefined);
         setIsRecording(false);
         await recording.stopAndUnloadAsync();

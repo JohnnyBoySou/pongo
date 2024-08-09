@@ -19,11 +19,14 @@ import AudioPlayer from './player';
 
 import Connect from '@api/request/socket/connect';
 import { socket } from '@api/request/socket/socket';
+import TopSheet from './../../components/TopSheet/index';
 
 export default function ChatDetailsScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
     const { user, id } = route.params;
 
+
+    const [messages, setmessages] = useState(msgs);
     const flatMsg = useRef();
     const modalCamera = useRef();
     const [msg, setmsg] = useState();
@@ -34,29 +37,63 @@ export default function ChatDetailsScreen({ navigation, route }) {
     const [showBottom, setshowBottom] = useState();
     const [status, setstatus] = useState('Offline');
 
+
+    const topSheetRef = useRef();
+
+    const closeTopSheet = () => {
+        if (topSheetRef.current) {
+            topSheetRef.current.close(); // Chama a função handleClose
+        }
+    };
+
+    const expandTopSheet = () => {
+        if (topSheetRef.current) {
+            topSheetRef.current.expand(); // Chama a função handleExpand
+        }
+    };
+
+
     return (
         <Main style={{ backgroundColor: color.background, }}>
-            <Row ph={margin.h} pv={12} style={{ justifyContent: 'space-between', alignItems: 'center', backgroundColor: color.off, }}>
-                <Row>
-                    <Column style={{ justifyContent: 'center', alignItems: 'flex-end', }}>
-                        <Image style={{ width: 52, height: 52, borderRadius: 100, backgroundColor: color.sc.sc3, marginBottom: -12, }} source={{ uri: user?.avatar }} />
-                        <Connect />
-                    </Column>
-                    <Column style={{ justifyContent: 'center', marginLeft: 12, }}>
-                        <Title>{user.name}</Title>
-                        <Label style={{ marginTop: 2, }}>{status}</Label>
-                    </Column>
-                </Row>
-                <Button onPress={() => { navigation.goBack() }} ph={0} pv={0} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
-                    <X size={22} color={color.sc.sc3} />
-                </Button>
-            </Row>
+            <TopSheet
+                ref={topSheetRef}
+                min={
+                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                        <Button onPress={expandTopSheet} ph={1} pv={1} radius={4}>
+                            <Row>
+                                <Column style={{ justifyContent: 'center', alignItems: 'flex-end', }}>
+                                    <Image style={{ width: 52, height: 52, borderRadius: 100, backgroundColor: color.sc.sc3, marginBottom: -12, }} source={{ uri: user?.avatar }} />
+                                    <Connect />
+                                </Column>
+                                <Column style={{ justifyContent: 'center', marginLeft: 12, }}>
+                                    <Title>{user.name}</Title>
+                                    <Label style={{ marginTop: 2, }}>{status}</Label>
+                                </Column>
+                            </Row>
+                        </Button>
+                        <Button onPress={() => { navigation.goBack() }} ph={0} pv={0} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
+                            <X size={22} color={color.sc.sc3} />
+                        </Button>
+                    </Row>
+                }
+                max={<Column>
+                    <Button onPress={closeTopSheet} ph={0} pv={0} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
+                        <X size={22} color={color.sc.sc3} />
+                    </Button>
+
+                </Column>}
+                valueMin={80}
+                valueMax={600}
+            />
+
+            <Column style={{ height: 90, }} />
+
             <FlatList
                 ref={flatMsg}
                 data={messages}
                 ListHeaderComponent={<Column style={{ alignSelf: 'center', marginTop: 25, backgroundColor: color.sc.sc3, borderRadius: 12, paddingVertical: 12, paddingHorizontal: 20, marginBottom: 20, }}>
                     <Label color="#fff">Inicio do chat em 12 de Jun, 2024</Label>
-                    </Column>}
+                </Column>}
                 renderItem={({ item }) => <Message item={item} />}
                 keyExtractor={item => item.id}
                 style={{ paddingHorizontal: margin.h, }}
@@ -68,7 +105,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
                     }
                 }}
             />
-            {showBottom && <Animated.View entering={ZoomIn} exiting={ZoomOut} style={{ position: 'absolute', bottom: 80, alignSelf: 'center',  }}>
+            {showBottom && <Animated.View entering={ZoomIn} exiting={ZoomOut} style={{ position: 'absolute', bottom: 80, alignSelf: 'center', }}>
                 <Button onPress={() => { flatMsg.current.scrollToEnd({ animated: true }); }} radius={100} ph={0} pv={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', backgroundColor: color.sc.sc3, }}>
                     <ArrowDown size={22} color="#fff" />
                 </Button>
@@ -93,7 +130,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
                 />
                 <Column style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', marginRight: 12, }}>
                     {msg?.length > 0 ?
-                        <SendButton message={msg} setmessage={setmsg} />
+                        <SendButton message={msg} setmessage={setmsg} setmessages={setmessages} messages={messages} />
                         :
                         <AudioRecord onAudioRecord={(uri) => setAudioUri(uri)} />
                     }
@@ -106,7 +143,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
         </Main>
     )
 }
-const SendButton = ({ message, setmessage }) => {
+const SendButton = ({ message, setmessage, setmessages, messages }) => {
     const { color } = useTheme();
     const handleNewMessage = () => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -114,13 +151,15 @@ const SendButton = ({ message, setmessage }) => {
         const hour = new Date().getHours() < 10 ? `0${new Date().getHours()}` : `${new Date().getHours()}`;
         const mins = new Date().getMinutes() < 10 ? `0${new Date().getMinutes()}` : `${new Date().getMinutes()}`;
 
-        socket.emit("message", {
-            message: message,
-            chat_id: id,
-            user_id: user.id,
-            timestamp: { hour, mins },
-        });
+        /*  socket.emit("message", {
+              message: message,
+              chat_id: id,
+              user_id: user.id,
+              timestamp: { hour, mins },
+          });
+          */
         setmessage('');
+        setmessages([...messages, { id: messages.length + 1, name: 'João', message: message, time: `${hour}:${mins}`, author: true }]);
     };
 
 
@@ -138,8 +177,8 @@ const Message = ({ item }) => {
     const { author, time, message, name, } = item;
     return (
         <Column style={{ alignSelf: author ? 'flex-end' : 'flex-start', marginBottom: 20, }}>
-          
-            <Column style={{ backgroundColor: author ? color.off2 : color.sc.sc3+30, marginBottom: 6, borderRadius: 12, borderTopLeftRadius: author ? 12 : 0, borderTopRightRadius: author ? 0 : 12 }} ph={12} pv={12}>
+
+            <Column style={{ backgroundColor: author ? color.off2 : color.sc.sc3 + 30, marginBottom: 6, borderRadius: 12, borderTopLeftRadius: author ? 12 : 0, borderTopRightRadius: author ? 0 : 12 }} ph={12} pv={12}>
                 <Label>{message}</Label>
             </Column>
             <Column style={{ alignSelf: author ? 'flex-end' : 'flex-start', }}>
@@ -149,7 +188,7 @@ const Message = ({ item }) => {
     )
 }
 
-const messages = [
+const msgs = [
     {
         id: 1,
         name: 'João',
