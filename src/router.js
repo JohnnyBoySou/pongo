@@ -38,6 +38,12 @@ import CartScreen from '@screens/tabs/cart';
 //TEST
 import TestScreen from '@screens/test';
 
+//SHOP
+import ShopScreen from '@screens/shop';
+import ShopSingleProductScreen from '@screens/shop/single_product';
+import ShopSingleServiceScreen from '@screens/shop/single_service';
+
+
 //ICONS
 import Octicons from '@expo/vector-icons/Octicons';
 import { CircleUserRound, ShoppingCart } from 'lucide-react-native';
@@ -47,7 +53,7 @@ import { useTheme, Button } from '@theme/global';
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Test'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Shop'>
 
       <Stack.Screen name="ChatList" component={ChatListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
       <Stack.Screen name="ChatDetails" component={ChatDetailsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -69,6 +75,10 @@ export default function Router() {
       <Stack.Screen name="Async" component={AsyncStaticScreen} options={{ ...TransitionPresets.FadeFromBottomAndroid, }} />
       <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
       <Stack.Screen name="Search" component={SearchScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+
+      <Stack.Screen name="Shop" component={ShopScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+      <Stack.Screen name="ShopSingleProduct" component={ShopSingleProductScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+      <Stack.Screen name="ShopSingleService" component={ShopSingleServiceScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
       <Stack.Screen name="Tabs" component={Tabs} options={{ ...TransitionPresets.SlideFromRightIOS, backBehavior: 'none', }} />
     </Stack.Navigator>
