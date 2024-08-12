@@ -5,10 +5,10 @@ import { ThemeProvider } from 'styled-components/native';
 import { preventAutoHideAsync, hideAsync } from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import { View, LogBox, useColorScheme, } from 'react-native';
-import Router from './src/router';
 import { StatusBar } from 'expo-status-bar';
-import light from '@theme/light';
-import dark from '@theme/dark';
+import Router from './src/router';
+import light from './src/theme/light';
+import dark from './src/theme/dark';
 
 preventAutoHideAsync();
 
@@ -20,7 +20,6 @@ export default function App() {
   useEffect(() => {
     LogBox.ignoreAllLogs(true);
 
-    //caregamento das fontes local
     async function loadResourcesAndDataAsync() {
       try {
         await Font.loadAsync({
@@ -51,7 +50,7 @@ export default function App() {
 
   return (
     <View style={{ flex: 1, paddingTop: 36, backgroundColor: selectTheme.background }} onLayout={onLayoutRootView}>
-      <ThemeProvider theme={selectTheme}>
+      <ThemeProvider theme={light}>
         <StatusBar translucent />
         <Router />
       </ThemeProvider>

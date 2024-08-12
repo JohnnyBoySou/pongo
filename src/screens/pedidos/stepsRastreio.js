@@ -3,31 +3,30 @@ import { StyleSheet, View, Text, FlatList } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
 import dummyData from './data';
 
+import { Column } from '@theme/global';
+
 const stepIndicatorStyles = {
     stepIndicatorSize: 30,
     currentStepIndicatorSize: 30,
-    separatorStrokeWidth: 1,
-    currentStepStrokeWidth: 0,
+    separatorStrokeWidth: 2,
+    currentStepStrokeWidth: 5,
+    stepStrokeCurrentColor: '#ebebeb',
+    stepStrokeWidth: 5,
+    stepStrokeUnFinishedColor: '#ebebeb',
     separatorFinishedColor: '#918C8B',
     separatorUnFinishedColor: '#918C8B',
-    stepIndicatorFinishedColor: '#91A6C4',
     stepIndicatorUnFinishedColor: '#D9D9D9',
     stepIndicatorCurrentColor: '#91A6C4',
-    stepIndicatorLabelFontSize: 15,
-    currentStepIndicatorLabelFontSize: 15,
+    stepIndicatorLabelFontSize: 12,
+    currentStepIndicatorLabelFontSize: 12,
     stepIndicatorLabelCurrentColor: '#ffffff',
     stepIndicatorLabelFinishedColor: '#ffffff',
     stepIndicatorLabelUnFinishedColor: '#918C8B',
     labelColor: '#666666',
     labelSize: 12,
-    currentStepLabelColor: '#4aae4f',
 };
 
 export default function StepsRastreio() {
-    const [currentPage, setCurrentPage] = React.useState(3);
-    const viewabilityConfig = React.useRef({ itemVisiblePercentThreshold: 40 })
-        .current;
-
     const renderPage = (rowData) => {
         const item = rowData.item;
         return (
@@ -37,13 +36,7 @@ export default function StepsRastreio() {
             </View>
         );
     };
-
-    const onViewableItemsChanged = React.useCallback(({ viewableItems }) => {
-        const visibleItemsCount = viewableItems.length;
-        if (visibleItemsCount !== 0) {
-            setCurrentPage(viewableItems[visibleItemsCount - 1].index);
-        }
-    }, []);
+  
 
     return (
         <View style={styles.container}>
@@ -52,15 +45,14 @@ export default function StepsRastreio() {
                     customStyles={stepIndicatorStyles}
                     stepCount={3}
                     direction="vertical"
-                    currentPosition={currentPage}
+                    renderStepIndicator={() => <Column></Column>}    
+                    currentPosition={0}
                 />
             </View>
             <FlatList
                 style={{ flexGrow: 1 }}
-                data={dummyData.data}
+                data={dummyData.data.reverse()}
                 renderItem={renderPage}
-                onViewableItemsChanged={onViewableItemsChanged}
-                viewabilityConfig={viewabilityConfig}
             />
         </View>
     );
