@@ -9,12 +9,11 @@ export default function HomeScreen({ navigation, }) {
 
     return (
         <Main >
-            <Scroll>
+            <Scroll >
                 <TopMenu />
                 <Column ph={margin.h}>
 
                     <Title>Escolha qual deseja acessar</Title>
-
                     <Row style={{ columnGap: 12, marginVertical: 12, }}>
                         <Button radius={24} pv={20} style={{ borderWidth: 2, borderColor:'#30303030', flexGrow: 1, }} onPress={() => { navigation.navigate('Institucional') }}>
                             <Column>
@@ -43,7 +42,6 @@ export default function HomeScreen({ navigation, }) {
                             </Column>
                         </Button>
                     </Row>
-
                 </Column>
             </Scroll>
         </Main>

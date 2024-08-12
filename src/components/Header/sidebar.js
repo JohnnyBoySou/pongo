@@ -1,37 +1,25 @@
-
-import { GestureDetector, Gesture } from "react-native-gesture-handler"
+import { GestureDetector, Gesture, ScrollView } from "react-native-gesture-handler"
 import Animated, {
   useSharedValue,
-  withSpring,
   useAnimatedStyle,
-  interpolateColor,
   runOnJS,
-  FadeInDown,
-  FadeOutDown,
   FadeInUp,
   withTiming,
-  FadeInLeft,
-  FadeInRight,
-  FadeOutRight,
 } from "react-native-reanimated"
 
-import { useState, useImperativeHandle, forwardRef, } from "react"
-import { Column, Title, Button, SCREEN_HEIGHT } from '@theme/global';
+import { useState, useImperativeHandle, forwardRef, useEffect, } from "react"
+import { Column, SCREEN_HEIGHT } from '@theme/global';
 
 const SideBar = forwardRef(({ children }, ref) => {
-  const translateX = useSharedValue(0);
-  const [isOpen, setisOpen] = useState(false);
   const MIN_HEIGHT = 0;
-  const MAX_HEIGHT = 300;
-
+  const MAX_HEIGHT = -300;
+  
+  const translateX = useSharedValue(-300);
   const handleClose = () => {
     translateX.value = withTiming(MIN_HEIGHT);
-    setisOpen(false);
   };
-
   const handleExpand = () => {
     translateX.value = withTiming(MAX_HEIGHT);
-    setisOpen(true);
   };
   useImperativeHandle(ref, () => ({
     close: handleClose,
@@ -53,22 +41,16 @@ const SideBar = forwardRef(({ children }, ref) => {
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
-      transform: [{ translateX: -translateX.value }],
+      transform: [{ translateX: translateX.value }],
       backgroundColor: '#fff',
     };
   });
 
   return (
-    <>
-      <Animated.View entering={FadeInUp} style={[{ top: 0, zIndex: 99, position: 'absolute', width: MAX_HEIGHT, flex: 1, overflow: 'hidden', paddingHorizontal: 28,}, animatedStyle]} >
+      <Animated.View style={[{ top: 0, zIndex: 99,  position: 'absolute', width: MAX_HEIGHT, height: SCREEN_HEIGHT, paddingHorizontal: 28, }, animatedStyle]} >
         {children}
-        <GestureDetector gesture={pan}>
-          <Column style={{ position: 'absolute', right: 0, zIndex: 99, width: 40, height: '100%', backgroundColor: '#30303000', }} radius={100}>
-          </Column>
-        </GestureDetector>
       </Animated.View>
-    </>
-  )
+      )
 });
 
 
@@ -78,6 +60,9 @@ const SideBar = forwardRef(({ children }, ref) => {
             <Column></Column>
             </Button>
         </Animated.View>
-      }
+      } <GestureDetector gesture={pan}>
+          <Column style={{ position: 'absolute', right: 0, zIndex: 99, width: 40, height: '100%', backgroundColor: '#30303000', }} radius={100}>
+          </Column>
+        </GestureDetector>
 */
 export default SideBar
