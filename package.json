@@ -16,6 +16,7 @@
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.12",
     "@react-navigation/stack": "*",
+    "@types/react": "~18.2.79",
     "expo": "~51.0.21",
     "expo-av": "~14.0.6",
     "expo-camera": "~15.0.14",
@@ -38,10 +39,13 @@
     "react-native-reanimated": "^3.10.1",
     "react-native-safe-area-context": "^4.10.5",
     "react-native-screens": "3.31.1",
+    "react-native-step-indicator": "^1.0.3",
     "react-native-svg": "^15.2.0",
+    "react-native-swiper": "^1.6.0",
     "react-native-web": "^0.19.12",
     "socket.io-client": "^4.7.5",
-    "styled-components": "*"
+    "styled-components": "*",
+    "typescript": "~5.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

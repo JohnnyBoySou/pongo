@@ -150,13 +150,12 @@ const ItemAlternative = ({ item }) => {
     const { color, font, margin } = useTheme()
     const { name } = item
 
-    const displayedImages = images.slice(0, 4);
     return (
         <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', marginBottom: 12 }}>
             <Column style={{ alignItems: 'flex-start', }}>
 
                 <FlatList
-                    data={images}
+                    data={images.slice(0, 4)}
                     horizontal
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => (
@@ -238,6 +237,5 @@ const images = [
     'https://img.freepik.com/free-photo/top-view-pet-accessories_23-2150930406.jpg?size=626&ext=jpg&ga=GA1.1.2113030492.1720483200&semt=ais_hybrid',
     'https://img.freepik.com/free-photo/top-view-pet-accessories_23-2150930406.jpg?size=626&ext=jpg&ga=GA1.1.2113030492.1720483200&semt=ais_hybrid',
     'https://img.freepik.com/free-photo/top-view-pet-accessories_23-2150930406.jpg?size=626&ext=jpg&ga=GA1.1.2113030492.1720483200&semt=ais_hybrid'
-    // Adicione mais URLs conforme necessário
 ];
 

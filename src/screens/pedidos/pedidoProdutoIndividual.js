@@ -13,6 +13,8 @@ import { Card } from 'react-native-paper';
 import TopMenu from '@components/Header/topmenu';
 import { FlatList } from 'react-native-gesture-handler';
 import WizardForm from './steps';
+import StepsPedido from './stepsPedido';
+import StepsRastreio from './stepsRastreio';
 
 export default function PedidoProdutoIndividualScreen({ navigation, }) {
 
@@ -39,12 +41,9 @@ export default function PedidoProdutoIndividualScreen({ navigation, }) {
 
                 <Header title="Pedido" />
 
+                <StepsPedido />
 
-                <WizardForm />
-
-
-
-                <Column mh={margin.h} mv={margin.v} >
+                <Column mh={margin.h} >
                     <FlatList
                         data={data}
                         keyExtractor={item => item.id}
@@ -56,8 +55,11 @@ export default function PedidoProdutoIndividualScreen({ navigation, }) {
 
                 <Column mh={margin.h} >
                     <Button style={{ width: '100%', backgroundColor: color.pr.pr1, padding: 15 }}><Label style={{ color: color.light, textAlign: 'center' }}>Ir para cesta</Label></Button>
-                </Column>
 
+                </Column>
+                <Column mh={margin.h} mv={margin.v}>
+                    <Button style={{ width: '100%', backgroundColor: '#D9D9D9', padding: 15 }}><Label style={{ color: color.title, textAlign: 'center' }}>Finalizar pagamento</Label></Button>
+                </Column>
             </Scroll>
         </Main >
     )
@@ -122,6 +124,7 @@ const Item = ({ item }) => {
             <Column style={{ marginTop: 12, }}>
                 <Title style={{ fontWeight: 'bold', fontSize: 15, marginBottom: 6 }}>Informações de rastreio</Title>
 
+                <StepsRastreio />
 
             </Column>
 
