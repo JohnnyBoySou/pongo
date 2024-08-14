@@ -5,8 +5,6 @@ import { Dimensions, ScrollView, Image as RNImage } from 'react-native';
 import { Image as ExpoImage } from 'expo-image'
 import { useNavigation } from "@react-navigation/native";
 
-
-
 //UTILS
 export const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 export const useTheme = () => {
@@ -14,18 +12,15 @@ export const useTheme = () => {
   return { color, font, margin };
 }
 
-
 export const useNavigate = () => {
   const navigation = useNavigation();
   return navigation
 }
 
-
-
 //COMPONENTES DE LAYOUT
 export const Main = styled.SafeAreaView`
   flex: 1;
-  background-color: ${props => props.bg || props.theme.background};
+background-color: ${props => props.bg || props.theme.background};
 `
 export const Scroll = styled(ScrollView).attrs(() => ({
   showVerticalScrollIndicator: false,

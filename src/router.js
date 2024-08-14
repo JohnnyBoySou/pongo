@@ -50,6 +50,7 @@ import VillaPongoScreen from '@screens/villapongo';
 
 //SCHOOL
 import SchoolRegisterScreen from '@screens/school/register';
+import SchoolFinishScreen from '@screens/school/finish';
 
 //ICONS
 import Octicons from '@expo/vector-icons/Octicons';
@@ -60,7 +61,7 @@ import { useTheme, Button } from '@theme/global';
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='SchoolRegister'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='ChatList'>
 
           <Stack.Screen name="ChatList" component={ChatListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
           <Stack.Screen name="ChatDetails" component={ChatDetailsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -70,6 +71,7 @@ export default function Router() {
           <Stack.Screen name="PetsDiario" component={PetsDiarioScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
           <Stack.Screen name="SchoolRegister" component={SchoolRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+          <Stack.Screen name="SchoolFinish" component={SchoolFinishScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
           <Stack.Screen name="Institucional" component={InstitucionalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 

@@ -2,7 +2,7 @@ import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { Main, Column, Label, Title, Row, Button, useTheme, SCREEN_HEIGHT, Image } from '@theme/global';
 
 //icons
-import { ArrowDown, Camera, Send, X, } from 'lucide-react-native';
+import { ArrowDown, ArrowLeft, Camera, Search, Send, X, } from 'lucide-react-native';
 
 
 //components
@@ -19,7 +19,9 @@ import AudioPlayer from './player';
 
 import Connect from '@api/request/socket/connect';
 import { socket } from '@api/request/socket/socket';
-import TopSheet from './../../components/TopSheet/index';
+import TopSheet from '@components/TopSheet/index';
+import { Pressable } from 'react-native';
+import Input from '@components/Forms/input';
 
 export default function ChatDetailsScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
@@ -35,9 +37,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
 
     const [audioUri, setAudioUri] = useState(null);
     const [showBottom, setshowBottom] = useState();
-    const [status, setstatus] = useState('Offline');
-
-
+    const [search, setsearch] = useState(false);
     const topSheetRef = useRef();
 
     const closeTopSheet = () => {
@@ -59,31 +59,45 @@ export default function ChatDetailsScreen({ navigation, route }) {
                 ref={topSheetRef}
                 min={
                     <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                        <Button onPress={expandTopSheet} ph={1} pv={1} radius={4}>
-                            <Row>
-                                <Column style={{ justifyContent: 'center', alignItems: 'flex-end', }}>
-                                    <Image style={{ width: 52, height: 52, borderRadius: 100, backgroundColor: color.sc.sc3, marginBottom: -12, }} source={{ uri: user?.avatar }} />
-                                    <Connect />
-                                </Column>
-                                <Column style={{ justifyContent: 'center', marginLeft: 12, }}>
-                                    <Title>{user.name}</Title>
-                                    <Label style={{ marginTop: 2, }}>{status}</Label>
-                                </Column>
-                            </Row>
-                        </Button>
-                        <Button onPress={() => { navigation.goBack() }} ph={0} pv={0} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
-                            <X size={22} color={color.sc.sc3} />
-                        </Button>
+                        <Row>
+                            <Pressable pv={1} ph={1} onPress={() => { navigation.goBack() }} >
+                                <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
+                                    <ArrowLeft size={28} color={color.sc.sc3} />
+                                    <Column style={{ justifyContent: 'center', alignItems: 'flex-end', }}>
+                                        <Image style={{ width: 52, height: 52, borderRadius: 100, backgroundColor: color.sc.sc3, marginBottom: -12, }} source={{ uri: user?.avatar }} />
+                                        <Connect />
+                                    </Column>
+                                </Row>
+                            </Pressable>
+                            <Column style={{ justifyContent: 'center', marginLeft: 12, }}>
+                                <Title>{user?.name}</Title>
+                                <Label style={{ marginTop: 2, }} size={14}>Visto por último {user?.lastOnline}</Label>
+                            </Column>
+                        </Row>
+                        <Row style={{ columnGap: 8, marginRight: 16, }}>
+                            <Button onPress={expandTopSheet} ph={0} pv={0} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
+                                <Search size={22} color={color.sc.sc3} />
+                            </Button>
+                        </Row>
+
                     </Row>
                 }
                 max={<Column>
-                    <Button onPress={closeTopSheet} ph={0} pv={0} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
-                        <X size={22} color={color.sc.sc3} />
-                    </Button>
-
+                    <Row style={{justifyContent: 'center', alignItems: 'center', }}>
+                     
+                        <Input
+                            placeholder="Pesquisar"
+                            value={search}
+                            label="Pesquisar"
+                            setValue={setsearch}
+                        />
+                           <Button onPress={closeTopSheet} ph={0} pv={0} mv={12} style={{ width: 42, marginLeft: 12, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
+                            <X size={22} color={color.sc.sc3} />
+                        </Button>
+                    </Row>
                 </Column>}
                 valueMin={80}
-                valueMax={600}
+                valueMax={SCREEN_HEIGHT - 100}
             />
 
             <Column style={{ height: 90, }} />
