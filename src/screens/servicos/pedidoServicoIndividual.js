@@ -16,7 +16,7 @@ import WizardForm from './steps';
 import StepsPedido from './stepsPedido';
 import StepsRastreio from './stepsRastreio';
 
-export default function PedidoProdutoIndividualScreen({ navigation, }) {
+export default function PedidoServicoIndividualScreen({ navigation, }) {
 
     const { color, font, margin } = useTheme();
 
@@ -74,17 +74,17 @@ const Item = ({ item }) => {
             <Row style={{ alignItems: 'flex-start', justifyContent: 'space-between' }}>
                 <Row>
                     <Image
-                        source={{ uri: 'https://img.freepik.com/free-photo/top-view-pet-accessories_23-2150930406.jpg?size=626&ext=jpg&ga=GA1.1.2113030492.1720483200&semt=ais_hybrid' }}
-                        style={{ width: 62, height: 80, borderRadius: 12 }} />
+                        source={{ uri: 'https://thoseoldpets.co.uk/wp-content/uploads/2022/08/img_1899-2-1.png' }}
+                        style={{ width: 62, height: 80, borderRadius: 12, borderWidth: 0.8, borderColor: '#ecebeb', objectFit: 'cover' }} />
                     <Column mh={12} >
-                        <Title style={{ fontSize: 14, color: '#434343', fontWeight: 700, marginBottom: 3 }}>{name}</Title>
+                        <Label style={{ fontSize: 14, color: '#434343', fontWeight: 700, marginBottom: 3 }}>{name}</Label>
                         <Label style={{ fontSize: 10, color: '#858585', fontWeight: 200, marginBottom: 8 }}>Pedido #987654323456</Label>
-                        <Label style={{ fontSize: 14, color: '#858585', fontWeight: 600 }}>R$300,00</Label>
+                        <Label style={{ fontSize: 14, color: '#858585', fontWeight: 600 }}>R$150,00</Label>
                     </Column>
                 </Row>
                 <Column style={{ backgroundColor: color.light, borderRadius: 8 }}>
                     <Title style={{ fontSize: 10, paddingHorizontal: 8, color: '#000', fontWeight: 500, TitleAlign: 'center' }}>
-                        Cancelar
+                        Ver no diário
                     </Title>
                 </Column>
 
@@ -101,7 +101,7 @@ const Item = ({ item }) => {
             </Column>
 
             <Column style={{ marginTop: 12 }}>
-                <Title style={{ fontWeight: 'bold', fontSize: 15, marginBottom: 6 }} marginBottom={6}>Data da compra: 12/06/2024 as 14:23:00</Title>
+                <Title style={{ fontWeight: 'bold', fontSize: 15 }} marginBottom={6}>Data da compra: 12/06/2024 as 14:23:00</Title>
                 <Label size={14} marginBottom={6}>Tutor: Maria de Oliveira</Label>
                 <Label size={14} marginBottom={6}>Endereço: Retirada em loja frísica xxxxxxxxxxxxxxxx
                     xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</Label>
@@ -122,7 +122,7 @@ const Item = ({ item }) => {
 
 
             <Column style={{ marginTop: 18, }}>
-                <Title style={{ fontWeight: 'bold', fontSize: 15 }}>Informações de rastreio</Title>
+                <Title style={{ fontWeight: 'bold', fontSize: 15 }} marginBottom={-8}>Informações de rastreio</Title>
 
                 <StepsRastreio />
 
