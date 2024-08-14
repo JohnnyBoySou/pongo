@@ -38,7 +38,7 @@ export default function AuthLoginScreen({ navigation, }) {
 
                     </Row>
 
-                    <Title size={26} style={{ marginTop: 20,  marginBottom: 4, }}>Bem-vindo de volta! &#128075; </Title>
+                    <Title size={26} style={{ marginTop: 20,  marginBottom: 4, }}>Bem-vindo de volta!</Title>
                     <Label size={20}>Entre na sua conta Villa Pongo</Label>
 
 

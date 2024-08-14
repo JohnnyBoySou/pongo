@@ -5,7 +5,7 @@ import { Pressable, ScrollView } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import SideBar from './sidebar';
 
-export default function TopMenu({ search = true, }) {
+export default function TopMenu({ search = true, cart = true }) {
     const { color, margin, font } = useTheme();
     const navigation = useNavigation();
 
@@ -26,20 +26,20 @@ export default function TopMenu({ search = true, }) {
             <Column>
                 <Row style={{ paddingHorizontal: margin.h, justifyContent: 'space-between', width: SCREEN_WIDTH, }}>
                     <Button ph={1} pv={1} onPress={toggleSide} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }}>
-                        <Menu size={32} color="#CF5050" strokeWidth={2} />
+                        <Menu size={32} color="#CF5050" strokeWidth={1} />
                     </Button>
                     <Row style={{ alignItems: 'center', columnGap: 12, }}>
-                        <Pressable onPress={() => { navigation.navigate('Cart') }} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }}>
-                            <ShoppingCart size={32} color={color.label} strokeWidth={1.6} />
-                        </Pressable>
+                       {cart && <Pressable onPress={() => { navigation.navigate('Cart') }} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }}>
+                            <ShoppingCart size={32} color={color.label} strokeWidth={1} />
+                        </Pressable>}
                         <Pressable onPress={() => { navigation.navigate('Tabs', { screen: 'Account' }) }} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }}>
-                            <CircleUserRound size={32} color={color.label} strokeWidth={1.6} />
+                            <CircleUserRound size={32} color={color.label} strokeWidth={1} />
                         </Pressable>
                     </Row>
                 </Row>
-                {search && <Button mh={28} mv={24} style={{ borderWidth: 2, borderColor: '#30303030', }} onPress={() => { navigation.navigate('Search') }} >
+                {search && <Button mh={28} mv={24} style={{ borderWidth: 1, borderColor: color.border, }} onPress={() => { navigation.navigate('Search') }} >
                     <Row>
-                        <Search size={24} color={color.label} strokeWidth={1.6} />
+                        <Search size={24} color={color.label} strokeWidth={1} />
                         <Title size={18} style={{ fontFamily: 'Font_Medium', marginLeft: 12, color: color.label, }}>Pesquisar</Title>
                     </Row>
                 </Button>}
