@@ -4,7 +4,7 @@ import { Column } from '@theme/global';
 import { ThemeContext } from 'styled-components/native';
 import { TextInput } from 'react-native';
 
-const Input = ({ value, setValue, disabled, label, mask, props }) => {
+const Input = ({ value, setValue, disabled, label, mask, props, placeholder }) => {
   const { font, color } = useContext(ThemeContext);
   const [focus, setFocus] = useState(false);
   const inputRef = useRef();
@@ -62,7 +62,7 @@ const Input = ({ value, setValue, disabled, label, mask, props }) => {
 
 
   return (
-    <Column style={{ borderColor: disabled ? '#f1f1f1' : focus ? color.sc.sc3 : color.sc.sc3 + 50, backgroundColor: '#fff', borderWidth: 2, paddingVertical: 12, paddingHorizontal: 20, borderRadius: 16, }}>
+    <Column style={{ borderColor: disabled ? '#f1f1f1' : focus ? color.sc.sc3 : color.sc.sc3 + 50, backgroundColor: '#fff', flexGrow: 1, borderWidth: 2, paddingVertical: 12, paddingHorizontal: 20, borderRadius: 16, }}>
       <MotiText
         state={inputAnimation}
         style={{ fontFamily: font.medium, color: '#788BA4', position: 'absolute', top: 0, left: 12, letterSpacing: -0.6, }}

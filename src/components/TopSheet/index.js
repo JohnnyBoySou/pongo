@@ -78,7 +78,7 @@ const TopSheet = forwardRef(({ min, max, valueMin, valueMax }, ref) => {
   return (
     <Animated.View entering={FadeInUp} style={[{ width: '100%', top: 0, zIndex: 99, borderBottomLeftRadius: 18, borderBottomRightRadius: 18, position: 'absolute', overflow: 'hidden', }, animatedStyle]} >
       {currentStatus === 'min' &&
-        <Animated.View entering={FadeInUp} exiting={FadeOutDown} style={{ paddingHorizontal: 28, paddingTop: 10, }}>
+        <Animated.View entering={FadeInUp} exiting={FadeOutDown} style={{ paddingHorizontal: 12, paddingTop: 10, }}>
           {min}
         </Animated.View>}
       {currentStatus === 'max' &&
