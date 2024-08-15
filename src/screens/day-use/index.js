@@ -7,9 +7,6 @@ import TopMenu from '@components/Header/topmenu';
 
 import { MoveRight } from 'lucide-react-native';
 
-import imgBanner from './assets/img/img-escola-banner.png';
-import extensaoDaSuaCasa from './assets/img/extensao-da-sua-casa.png'
-
 import CarrosselRotinaEscola from './CarrosselRotinaEscola';
 import ListaRotinaEscola from './ListaRotinaEscola';
 
@@ -33,7 +30,7 @@ export default function DayUseScreen() {
 
                 <Column mh={margin.h}>
 
-                    <Image source={imgBanner} style={{ width: '100%', height: 223, marginVertical: 24 }} />
+                    <Image source={require('@imgs/img-escola-banner.png')} style={{ width: '100%', height: 223, marginVertical: 24 }} />
 
                     <Text style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 6, paddingHorizontal: 40, fontWeight: 700, lineHeight: 16 }}>Tenha todos os benefícios da Escola Pongo por um dia!</Text>
 
@@ -83,7 +80,7 @@ export default function DayUseScreen() {
                 </Column>
 
                 <Column mv={margin.v} style={{ marginRight: margin.h }}>
-                    <Image source={extensaoDaSuaCasa} style={{ width: '100%', height: 180, borderTopRightRadius: 20, borderBottomRightRadius: 20 }} />
+                    <Image source={require('@imgs/extensao-da-sua-casa.png')} style={{ width: '100%', height: 180, borderTopRightRadius: 20, borderBottomRightRadius: 20 }} />
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>

@@ -13,6 +13,7 @@
         "@env": ["../src/env"],
         "@request/*": ["src/api/request/*"],
         "@lottie/*": ["src/assets/lottie/*"],
+        "@anim/*": ["src/assets/anim/*"],
       }
     }
   }

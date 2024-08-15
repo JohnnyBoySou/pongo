@@ -1,13 +1,10 @@
-import React, { useContext, } from 'react';
-import { Main, Scroll, Column, Label, Title, Row, LabelPR, Button, ButtonOut, ButtonPR } from '@theme/global';
-import { ThemeContext } from 'styled-components/native';
+import React from 'react';
+import { Main, Scroll, Column, Label, Title, Row,  Button, useTheme } from '@theme/global';
 import { ArrowLeft } from 'lucide-react-native';
-
-import SucessAnim from '@anim/sucess';
+//import SucessAnim from '@assets/anim/sucess.js';
 
 export default function SchoolSuccessScreen({ navigation, }) {
-    const { color, font, margin } = useContext(ThemeContext);
-   
+    const { color, font, margin } = useTheme();
     return (
         <Main style={{ backgroundColor: "#fff", }}>
              <Scroll>
@@ -22,20 +19,19 @@ export default function SchoolSuccessScreen({ navigation, }) {
                 </Row>
 
                 <Column style={{ marginHorizontal: margin.h,  justifyContent: 'center', alignItems: 'center', flex: 1, }}>
-                    <SucessAnim />
                     <Title style={{ fontSize: 32, lineHeight: 34, textAlign: 'center', marginVertical: 24, }}>Compra realizada com sucesso!</Title>
                     <Label style={{ textAlign: 'center', }}>Desfrute de serviços em estabelecimentos parceiros acumulando mais pontos!</Label>
 
                 </Column>
 
                 <Column style={{ padding: 32, borderTopLeftRadius: 32, borderTopRightRadius: 32, justifyContent: 'center', alignItems: 'center', }}>
-                    <ButtonPR onPress={() => { navigation.navigate('Donate') }} style={{ paddingHorizontal: 24, borderColor: color.primary, }}>
-                        <LabelPR style={{ fontFamily: font.bold, }}>Ver meus Pets</LabelPR>
-                    </ButtonPR>
+                    <Button  style={{ paddingHorizontal: 24, borderColor: color.primary, }}>
+                        <Label style={{ fontFamily: font.bold, }}>Ver meus Pets</Label>
+                    </Button>
                     <Column style={{ height: 12, }} />
-                    <ButtonOut onPress={() => { navigation.navigate('Tabs', { screen: 'Extract', params: { type: 'Doações' } }) }} style={{ paddingHorizontal: 24, paddingVertical: 12, borderColor: color.secundary, }}>
+                    <Button  style={{ paddingHorizontal: 24, paddingVertical: 12, borderColor: color.secundary, }}>
                         <Label style={{ color: color.secundary, fontFamily: font.bold, }}>Ver escola Pongo</Label>
-                    </ButtonOut>
+                    </Button>
                 </Column>
             </Scroll>
         </Main>

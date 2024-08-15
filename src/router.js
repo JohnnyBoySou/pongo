@@ -50,16 +50,15 @@ import VillaPongoScreen from '@screens/villapongo';
 //SCHOOL
 import SchoolRegisterScreen from '@screens/school/register';
 import SchoolFinishScreen from '@screens/school/finish';
-
+import SchoolSuccessScreen from '@screens/school/success';
 //ICONS
 import Octicons from '@expo/vector-icons/Octicons';
 import { CircleUserRound, ShoppingCart } from 'lucide-react-native';
 import { useTheme, Button } from '@theme/global';
 
-
 import DayUseScreen from '@screens/day-use/index';
-import EscolaPongoScreen from './screens/escola/index';
-import HotelScreen from './screens/hotel/index';
+import EscolaPongoScreen from '@screens/escola/index';
+import HotelScreen from '@screens/hotel/index';
 
 
 export default function Router() {
@@ -78,7 +77,7 @@ export default function Router() {
 
           <Stack.Screen name="SchoolRegister" component={SchoolRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
           <Stack.Screen name="SchoolFinish" component={SchoolFinishScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-
+          <Stack.Screen name="SchoolSuccess" component={SchoolSuccessScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
           <Stack.Screen name="Institucional" component={InstitucionalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
           <Stack.Screen name="Shop" component={ShopScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />

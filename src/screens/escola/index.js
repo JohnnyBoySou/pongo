@@ -22,12 +22,13 @@ import atividades from './assets/img/atividades.png'
 import PlanosList from '@components/Planos';
 import CarrosselRotinaEscola from './CarrosselRotinaEscola';
 import ListaRotinaEscola from './ListaRotinaEscola';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 
 export default function EscolaPongoScreen() {
-
+    const navigation = useNavigation();
     const { color, font, margin } = useTheme();
 
     const handleRegister = (item) => {
@@ -99,10 +100,8 @@ export default function EscolaPongoScreen() {
 
                 <Column mh={margin.h} mv={margin.v}>
                     <Title style={{ fontSize: 18, fontWeight: 700, color: '#979797', paddingVertical: 6, marginVertical: 12, textAlign: 'center' }}>Planos Oferecidos</Title>
-
-
-                    <PlanosList destino={handleRegister} />
                 </Column>
+                <PlanosList destino={handleRegister} />
 
 
                 <Column mh={margin.h} mv={margin.v}>

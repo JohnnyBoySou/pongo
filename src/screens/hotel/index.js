@@ -12,12 +12,6 @@ import Input from '@components/Forms/input';
 import { Card } from 'react-native-paper';
 import CarrosselTopo from './CarrosselTopo';
 
-import imgBanner from './assets/img/img-escola-banner.png';
-import extensaoDaSuaCasa from './assets/img/extensao-da-sua-casa.png'
-import atividades from './assets/img/atividades.png'
-import detalhes from './assets/img/detalhes.png'
-
-
 
 
 import PlanosList from '@components/Planos';
@@ -44,27 +38,21 @@ export default function HotelScreen() {
 
                 <Column mh={margin.h}>
 
-                    <Image source={imgBanner} style={{ width: 304, height: 167, marginVertical: 24 }} />
-
-                    <Label style={{ textAlign: 'center', color: '#918C8B', fontSize: 19, fontWeight: 700, paddingVertical: 6, paddingHorizontal: 26 }}>Aconchegante e impecável, nossos quartos são únicos.</Label>
-                    <Label style={{ textAlign: 'center', color: '#918C8B', fontSize: 15, paddingVertical: 6, paddingHorizontal: 22 }}>Seu pet irá se hospedar em um dos bairros
-                        mais nobres e seguros de São Paulo.</Label>
-
+                    <Image source={require('@imgs/img-escola-banner1.png')} style={{ width: 304, height: 167, marginVertical: 24 }} />
+                    <Title align="center" style={{  paddingVertical: 6,  }}>Aconchegante e impecável, {'\n'}nossos quartos são únicos.</Title>
+                    <Label size={14} align="center" style={{  paddingVertical: 6, paddingHorizontal: 22 }}>Seu pet irá se hospedar em um dos bairros mais nobres e seguros de São Paulo.</Label>
                     <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
-                        <Label style={{ textAlign: 'center', color: color.title }}>Reservar Hotel</Label>
+                        <LabelBT style={{ textAlign: 'center', color: color.title }}>Reservar Hotel</LabelBT>
                     </Button>
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
                     <Title style={{ fontSize: 18, fontWeight: 700, color: '#979797', paddingVertical: 6, marginVertical: 12 }}>Planos</Title>
-
-                    <PlanosList destino={handleRegister} />
                 </Column>
-
+                <PlanosList destino={handleRegister} />
 
                 <Column mh={margin.h} mv={margin.v}>
-                    <Title style={{ fontSize: 18, fontWeight: 700, color: '#979797', paddingVertical: 6, marginVertical: 12 }}>Detalhes e comodidades</Title>
-
+                    <Title style={{ fontSize: 18, color: '#979797', paddingVertical: 6, marginVertical: 12 }}>Detalhes e comodidades</Title>
 
                     <Row alignItems='flex-start' pv={6} style={{ marginRight: 24 }}>
                         <MoveRight size={24} color={'#D9D9D9'} style={{ marginRight: 8 }} />
@@ -116,7 +104,7 @@ export default function HotelScreen() {
                         <Label style={{ fontSize: 13 }}>Café da manhã incluso.</Label>
                     </Row>
 
-                    <Image source={detalhes} style={{ width: '100%', height: 200, borderRadius: 20, marginVertical: 20 }} />
+                    <Image source={require('@imgs/detalhes.png')} style={{ width: '100%', height: 200, borderRadius: 20, marginVertical: 20 }} />
 
                 </Column>
 
