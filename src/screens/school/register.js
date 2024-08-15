@@ -9,8 +9,9 @@ import TextArea from '@components/Forms/textarea';
 import Modal from '@components/Modal/index';
 
 import Animated, { FadeInDown, FadeInLeft, FadeOutLeft, FadeOutUp, SlideInLeft, SlideOutLeft } from 'react-native-reanimated';
-import PaymentCredito from './credito';
-import PaymentPix from './pix';
+
+import Payment from '@components/Payments';
+
 export default function SchoolRegisterScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
     const [plano, setplano] = useState();
@@ -22,6 +23,7 @@ export default function SchoolRegisterScreen({ navigation, route }) {
     //}
 
     const item = {
+        id: 1,
         plano: plano,
         meses: month,
         dias: day,
@@ -44,7 +46,9 @@ export default function SchoolRegisterScreen({ navigation, route }) {
 
     const modalPayment = useRef()
     const handlePay = () => {
-        modalPayment.current.expand()
+        if (plano != null) {
+            modalPayment.current.expand()
+        } else { return }
     }
     return (
         <Main>
@@ -92,47 +96,14 @@ export default function SchoolRegisterScreen({ navigation, route }) {
                 </Column>
             </Scroll>
             <Modal ref={modalPayment} snapPoints={[0.1, SCREEN_HEIGHT]}>
-                <Payment item={item} />
+                {plano && <Payment item={item} destino='Plano escolar' modal={modalPayment} card={
+                    <CardPlano item={plano} destino={handleSelect} />
+                } />
+                }
             </Modal>
         </Main>
     )
 }
-
-const Payment = ({ item }) => {
-    const { color, font, margin } = useTheme();
-    const [type, settype] = useState(null);
-    return (
-        <Column style={{ marginHorizontal: margin.h, marginVertical: 12, }}>
-            
-
-            {type == null && <Column>
-            <Title align="center">Como deseja realizar o pagamento?</Title>
-            <Row style={{ justifyContent: 'center', alignItems: 'center', columnGap: 12, marginTop: 12, }}>
-                <Button radius={12} bg="#F1F1F1" onPress={() => { settype('Credito') }}>
-                    <Column style={{ alignItems: 'center', justifyContent: 'center', }}>
-                        <Image source={require('@assets/icons/credito.png')} style={{ width: 70, height: 50, objectFit: 'contain', marginBottom: 6, }} />
-                        <Column>
-                            <Title size={18}>Cartão</Title>
-                        </Column>
-                    </Column>
-                </Button>
-                <Button radius={12} bg="#F1F1F1" onPress={() => { settype('Pix') }} >
-                    <Column style={{ alignItems: 'center', justifyContent: 'center', }}>
-                        <Image source={require('@assets/icons/pix.png')} style={{ width: 70, height: 50, objectFit: 'contain', marginBottom: 6, }} />
-                        <Column>
-                            <Title size={18}>Pix</Title>
-                        </Column>
-                    </Column>
-                </Button>
-            </Row>
-            </Column>}
-
-            {type === 'Credito' && <PaymentCredito settype={settype} item={item} />}
-            {type === 'Pix' && <PaymentPix settype={settype} item={item} />}
-        </Column>
-    )
-}
-
 
 const CardPlano = ({ item, destino }) => {
     const { color, font, margin } = useTheme();

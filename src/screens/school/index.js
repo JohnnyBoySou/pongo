@@ -1,36 +1,21 @@
-import React, { useState } from 'react';
-import { Pressable, TextInput, ScrollView, Image, FlatList, View, Text } from 'react-native';
-import { Main, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT, useTheme, } from '@theme/global';
-
-import Header from '@components/Header';
-import TopMenu from '@components/Header/topmenu';
-
+import React from 'react';
+import { Image, View, Text } from 'react-native';
+import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, } from '@theme/global';
 
 import { MoveRight } from 'lucide-react-native';
 
-import Input from '@components/Forms/input';
-import { Card } from 'react-native-paper';
-import CarrosselTopo from './CarrosselTopo';
-
-import imgBanner from './assets/img/img-escola-banner.png';
-import extensaoDaSuaCasa from './assets/img/extensao-da-sua-casa.png'
-import atividades from './assets/img/atividades.png'
-
-
-
-
+//Components
+import Header from '@components/Header';
+import TopMenu from '@components/Header/topmenu';
+import Swiper from 'react-native-swiper';
 import PlanosList from '@components/Planos';
-import CarrosselRotinaEscola from './CarrosselRotinaEscola';
-import ListaRotinaEscola from './ListaRotinaEscola';
+
 import { useNavigation } from '@react-navigation/native';
 
 
-
-
-export default function EscolaPongoScreen() {
+export default function SchoolPongoScreen() {
     const navigation = useNavigation();
     const { color, font, margin } = useTheme();
-
     const handleRegister = (item) => {
         navigation.navigate('SchoolRegister', { item: item })
     }
@@ -41,14 +26,11 @@ export default function EscolaPongoScreen() {
                 <TopMenu search={false} />
 
                 <Header title="Escola Pongo" />
+                <Carrossel data={imgs} />
 
                 <Column mh={margin.h}>
-                    <CarrosselTopo />
-
-                    <Image source={imgBanner} style={{ width: '100%', height: 223, marginVertical: 24 }} />
-
+                    <Image source={require('@imgs/img-escola-banner3.png')} style={{ width: '100%', height: 223, marginVertical: 24 }} />
                     <Label style={{ textAlign: 'center', color: '#918C8B', fontStyle: 'italic', fontSize: 18, paddingVertical: 6 }}>Estimule a construção de vínculos, conecte-os com a natureza e mergulhe em experiências multissensoriais.</Label>
-
                     <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
                         <Label style={{ textAlign: 'center', color: color.title }}>Cadastrar pré-matrícula</Label>
                     </Button>
@@ -56,7 +38,6 @@ export default function EscolaPongoScreen() {
 
                 <Column mh={margin.h} mv={margin.v}>
                     <Title style={{ fontSize: 18, fontWeight: 700, color: '#979797', paddingVertical: 6, marginVertical: 12 }}>Conheça a estrutura da Escola Pongo</Title>
-
 
                     <Row alignItems='flex-start' pv={6} style={{ marginRight: 24 }}>
                         <MoveRight size={24} color={'#D9D9D9'} style={{ marginRight: 8 }} />
@@ -95,7 +76,7 @@ export default function EscolaPongoScreen() {
                 </Column>
 
                 <Column mv={margin.v} style={{ marginRight: margin.h }}>
-                    <Image source={extensaoDaSuaCasa} style={{ width: '100%', height: 180, borderTopRightRadius: 20, borderBottomRightRadius: 20 }} />
+                    <Image source={require('@imgs/extensao-da-sua-casa.png')} style={{ width: '100%', height: 180, borderTopRightRadius: 20, borderBottomRightRadius: 20 }} />
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
@@ -103,20 +84,18 @@ export default function EscolaPongoScreen() {
                 </Column>
                 <PlanosList destino={handleRegister} />
 
-
                 <Column mh={margin.h} mv={margin.v}>
                     <Title style={{ fontSize: 18, fontWeight: 700, color: '#979797', paddingVertical: 6, marginTop: 12, textAlign: 'center' }}>Rotina na escola</Title>
                     <Label style={{ fontSize: 12, color: '#979797', textAlign: 'center' }}>Integral 7:00 ás 19:00</Label>
 
-                    <Column mv={margin.v}>
-                        <CarrosselRotinaEscola />
-                    </Column>
                 </Column>
-
+                <Column mv={margin.v}>
+                    <Carrossel data={imgs2} />
+                </Column>
                 <ListaRotinaEscola />
 
                 <Row mh={margin.h} mv={margin.v} alignItems='center'>
-                    <Image source={atividades} style={{ width: 198, height: 264 }} />
+                    <Image source={require('@imgs/atividades.png')} style={{ width: 198, height: 264 }} />
 
                     <Column>
                         <Title style={{ fontSize: 18, fontWeight: 700, color: '#434343', marginVertical: 12 }}>Atividades</Title>
@@ -213,5 +192,74 @@ export default function EscolaPongoScreen() {
 
             </Scroll>
         </Main>
+    );
+}
+
+const imgs = [
+    'https://caninablog.wordpress.com/wp-content/uploads/2013/10/dia-das-bruxas-pet_escola_075-1.jpg',
+    'https://www.decao.com.br/adestramento-de-cao/imagens/daycare-para-caes-de-raca.jpg',
+    'https://www.decao.com.br/adestramento-de-cao/imagens/quanto-custa-escola-para-caes.jpg',
+]
+const imgs2 = [
+    'https://lh6.googleusercontent.com/VAViVE0QG6wpW2yeSzQA7tPOrNFf3hlmUrwr7mogM3oShMFGVVNPRpKFs6Sf23tL_c6tITmB5glV2WSR3O1a4Zxd4zj9o7sb39WLMpaA0n20IG3EK-JkeEvA8-OmWF6GeuLB3qwrUsDbALDzrQm27BZJqIdqTTEHXt-TTsaUKem2jwyQKWehdB8vPJtEdw',
+    'https://s2-g1.glbimg.com/AjCheGSkmh-QkcBw00ttWUBROtk=/0x0:1600x1200/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/n/d/zQ8s7VQtajoP3ePt9dIg/whatsapp-image-2022-07-19-at-17.40.44.jpeg',
+    'https://www.melhoresdestinos.com.br/wp-content/uploads/2021/04/cachorro-hotel-capa.jpg',
+]
+
+function Carrossel({ data }) {
+    return (
+        <Swiper style={{ height: 180, overflow: 'hidden', borderRadius: 20 }} autoplay={true}>
+            {data?.map((img, index) => (
+                <Column key={index} style={{ flex: 1, marginHorizontal: 28, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
+                    <Image
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        source={{ uri: img }}
+                    />
+                </Column>
+            ))}
+        </Swiper>
+    );
+}
+
+
+function ListaRotinaEscola() {
+    const { color, font, margin } = useTheme();
+    const rotina = [
+        "7:00 - Entrada e acompanhamento veterinário",
+        "8:00 - Café da Manhã | Banho de Sol | Hora do Conto",
+        "9:00 - Passeio no Parque Ibirapuera",
+        "10:00 - Descanso | Musicoterapia",
+        "11:00 - Almoço",
+        "12:00 - Hora do Sono",
+        "13:00 - Adestramento",
+        "14:00 - Atividade do dia da semana",
+        "15:00 - Atividades internas",
+        "16:00 - Recreio",
+        "17:00 - Passeio Parque",
+        "18:00 - Higienização",
+        "19:00 - Saída",
+    ];
+
+    return (
+        <View>
+            {rotina.map((item, index) => (
+                <Row
+                    key={index}
+                    style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        paddingVertical: 5,
+                        paddingHorizontal: margin.h,
+                        borderRadius: 8,
+                        backgroundColor: index % 2 === 0 ? '#ffffff' : '#ECEBEB', // Cor intercalada
+                    }}
+                >
+                    <MoveRight size={24} color='#D9D9D9' style={{ marginRight: 8 }} />
+                    <Label style={{ fontSize: 12, fontFamily: font.medium, }}>
+                        {item}
+                    </Label>
+                </Row>
+            ))}
+        </View>
     );
 }

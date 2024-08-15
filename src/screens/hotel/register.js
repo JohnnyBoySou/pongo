@@ -7,7 +7,7 @@ import Modal from '@components/Modal/index';
 import Payment from '@components/Payments';
 
 
-export default function DayUseRegisterScreen({ navigation, route }) {
+export default function HotelRegisterScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
     const [terms, setterms] = useState();
     const [day, setday] = useState([]);

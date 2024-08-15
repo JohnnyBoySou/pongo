@@ -6,11 +6,17 @@ import { getFocusedRouteNameFromRoute, NavigationContainer, useRoute } from '@re
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+//ICONS
+import Octicons from '@expo/vector-icons/Octicons';
+import { CircleUserRound, ShoppingCart } from 'lucide-react-native';
+import { useTheme, Button } from '@theme/global';
+
+
 //STACK SCREEN
 import OnboardingScreen from '@screens/auth/onboarding';
 import AsyncStaticScreen from '@screens/auth/async';
 import SearchScreen from '@screens/search/index';
-import AddPetScreen from '@screens/auth/addpet';
+
 //AUTH
 import AuthLoginScreen from '@screens/auth/login';
 import AuthRegisterScreen from '@screens/auth/register';
@@ -26,6 +32,7 @@ import PedidoProdutoIndividualScreen from '@screens/pedidos/pedidoProdutoIndivid
 import PetsListScreen from '@screens/pets/list';
 import PetsProfileScreen from '@screens/pets/profile';
 import PetsDiarioScreen from '@screens/pets/diario';
+import AddPetScreen from '@screens/auth/addpet';
 
 //CHAT
 import ChatListScreen from '@screens/chat/list';
@@ -51,20 +58,21 @@ import VillaPongoScreen from '@screens/villapongo';
 import SchoolRegisterScreen from '@screens/school/register';
 import SchoolFinishScreen from '@screens/school/finish';
 import SchoolSuccessScreen from '@screens/school/success';
-//ICONS
-import Octicons from '@expo/vector-icons/Octicons';
-import { CircleUserRound, ShoppingCart } from 'lucide-react-native';
-import { useTheme, Button } from '@theme/global';
+import SchoolPongoScreen from '@screens/school/index';
 
+//DAY USE
 import DayUseScreen from '@screens/day-use/index';
-import EscolaPongoScreen from '@screens/escola/index';
+import DayUseRegisterScreen from '@screens/day-use/register';
+
+//HOTEL
 import HotelScreen from '@screens/hotel/index';
+import HotelRegisterScreen from '@screens/hotel/register';
 
 
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Test'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='HotelRegister'>
 
           <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -78,6 +86,8 @@ export default function Router() {
           <Stack.Screen name="SchoolRegister" component={SchoolRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
           <Stack.Screen name="SchoolFinish" component={SchoolFinishScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
           <Stack.Screen name="SchoolSuccess" component={SchoolSuccessScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+          <Stack.Screen name="School" component={SchoolPongoScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+         
           <Stack.Screen name="Institucional" component={InstitucionalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
           <Stack.Screen name="Shop" component={ShopScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -100,8 +110,10 @@ export default function Router() {
           <Stack.Screen name="Tabs" component={Tabs} options={{ ...TransitionPresets.SlideFromRightIOS, backBehavior: 'none', }} />
 
           <Stack.Screen name="DayUse" component={DayUseScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-          <Stack.Screen name="EscolaPongo" component={EscolaPongoScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+          <Stack.Screen name="DayUseRegister" component={DayUseRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+
           <Stack.Screen name="Hotel" component={HotelScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+          <Stack.Screen name="HotelRegister" component={HotelRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         </Stack.Navigator>
     </NavigationContainer>
