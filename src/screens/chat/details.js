@@ -7,7 +7,7 @@ import { ArrowDown, ArrowLeft, Camera, Search, Send, X, } from 'lucide-react-nat
 
 //components
 import { FlatList, TextInput } from 'react-native-gesture-handler';
-import Animated, { ZoomIn, ZoomOut, } from 'react-native-reanimated';
+import Animated, { FadeInDown, FadeOutDown, ZoomIn, ZoomOut, } from 'react-native-reanimated';
 import * as Haptics from 'expo-haptics';
 import Modal from '@components/Modal/index';
 
@@ -37,7 +37,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
 
     const [audioUri, setAudioUri] = useState(null);
     const [showBottom, setshowBottom] = useState();
-    const [search, setsearch] = useState(false);
+    const [search, setsearch] = useState('');
     const topSheetRef = useRef();
 
     const closeTopSheet = () => {
@@ -52,7 +52,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
         }
     };
 
-
+    const searchResult = msgs.filter((item) => item.message.toLowerCase().includes(search.toLowerCase()));
     return (
         <Main style={{ backgroundColor: color.background, }}>
             <TopSheet
@@ -84,7 +84,6 @@ export default function ChatDetailsScreen({ navigation, route }) {
                 }
                 max={<Column>
                     <Row style={{justifyContent: 'center', alignItems: 'center', }}>
-                     
                         <Input
                             placeholder="Pesquisar"
                             value={search}
@@ -95,6 +94,16 @@ export default function ChatDetailsScreen({ navigation, route }) {
                             <X size={22} color={color.sc.sc3} />
                         </Button>
                     </Row>
+                    <Label style={{ marginVertical: 12, }}>Resultados</Label>
+                    {search.length > 1 &&
+                    <Animated.FlatList
+                        entering={FadeInDown}
+                        exiting={FadeOutDown}
+                        data={searchResult}
+                        renderItem={({ item }) => <Message item={item} />}
+                        keyExtractor={item => item.id}
+                        style={{ backgroundColor: '#f7f7f7', borderRadius: 12, paddingHorizontal: 20, paddingVertical: 12, }}
+                    />}
                 </Column>}
                 valueMin={80}
                 valueMax={SCREEN_HEIGHT - 100}

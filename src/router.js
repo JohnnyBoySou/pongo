@@ -22,7 +22,6 @@ import InstitucionalScreen from '@screens/institucional/visita';
 import MeusPedidosScreen from '@screens/pedidos/pedidos';
 import PedidoProdutoIndividualScreen from '@screens/pedidos/pedidoProdutoIndividual';
 
-
 //PETS
 import PetsListScreen from '@screens/pets/list';
 import PetsProfileScreen from '@screens/pets/profile';
@@ -58,10 +57,17 @@ import { CircleUserRound, ShoppingCart } from 'lucide-react-native';
 import { useTheme, Button } from '@theme/global';
 
 
+import DayUseScreen from '@screens/day-use/index';
+import EscolaPongoScreen from './screens/escola/index';
+import HotelScreen from './screens/hotel/index';
+
+
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='ChatList'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Test'>
+
+          <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
           <Stack.Screen name="ChatList" component={ChatListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
           <Stack.Screen name="ChatDetails" component={ChatDetailsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -93,6 +99,11 @@ export default function Router() {
           <Stack.Screen name="Search" component={SearchScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
           <Stack.Screen name="Tabs" component={Tabs} options={{ ...TransitionPresets.SlideFromRightIOS, backBehavior: 'none', }} />
+
+          <Stack.Screen name="DayUse" component={DayUseScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+          <Stack.Screen name="EscolaPongo" component={EscolaPongoScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+          <Stack.Screen name="Hotel" component={HotelScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+
         </Stack.Navigator>
     </NavigationContainer>
   );

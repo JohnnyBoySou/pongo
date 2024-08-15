@@ -7,7 +7,7 @@ export default function ChatListScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
     return (
         <Main>
-            <TopMenu search={false} />
+            <TopMenu search={false} cart={false}/>
             <Column mh={margin.h} mv={20}>
                 <Title size={32}>Atendimento</Title>
             </Column>
@@ -17,12 +17,15 @@ export default function ChatListScreen({ navigation, }) {
                 keyExtractor={item => item.id}
                 ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: color.border, marginVertical: 4, borderRadius: 6, }} />}
             />
-            <Button bg={color.blue} style={{ justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: 30, right: 30, width: 56, height: 56, }}>
-                <Plus size={32} color="#fff" strokeWidth={3} />
-            </Button>
         </Main>
     )
 }
+/*
+
+            <Button bg={color.blue} style={{ justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: 30, right: 30, width: 56, height: 56, }}>
+                <Plus size={32} color="#fff" strokeWidth={3} />
+            </Button>
+*/
 
 const Chat = ({ item }) => {
     const { color } = useTheme();
