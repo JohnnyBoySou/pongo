@@ -5,14 +5,14 @@ import CheckBox from '@components/Forms/checkbox';
 import TextArea from '@components/Forms/textarea';
 import Modal from '@components/Modal/index';
 import Payment from '@components/Payments';
-
+import Calendario from '@components/Calendar';
 
 export default function HotelRegisterScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
     const [terms, setterms] = useState();
     const [day, setday] = useState([]);
     const [desc, setdesc] = useState();
-    const [value, setvalue] = useState('R$ 250,00');
+    const [value, setvalue] = useState();
     const [inclusos, setinclusos] = useState([
 
         {
@@ -40,54 +40,46 @@ export default function HotelRegisterScreen({ navigation, route }) {
         value: value,
         incluso: inclusos,
     }
-    const days = ['Segunda-feira | Fisioterapia', 'Terça-feira | Agility', 'Quarta-feira | Piquenipe no parque', 'Quinta-feira | Agility', 'Sexta-feira | Piscina',]
-    const handleDays = (item) => {
-        if (day.includes(item)) {
-            setday(day.filter((i) => i !== item))
-        } else {
-            setday([...day, item])
-        }
-    }
 
     const modalPayment = useRef()
     const handlePay = () => {
         modalPayment.current.expand()
     }
+
     return (
         <Main>
             <Scroll>
                 <Column>
                     <TopMenu search={false} cart={false} />
                     <Column style={{ height: 20, }}></Column>
-                    <Title align="center" size={24}>Contratar Day Use</Title>
+                    <Title align="center" size={24}>Reservar Hotel</Title>
 
                     <Column mh={margin.h} mv={12}>
-                        <Title size={17} font={font.medium}>Selecione qual dia você deseja: *</Title>
+                        <Title size={17} font={font.medium}>Selecione qual data você deseja: *</Title>
                         <Column style={{ height: 6, }}></Column>
-                        {days?.map((item, index) => (
-                            <Button onPress={() => { handleDays(item) }} radius={12} pv={6} ph={1}>
-                                <Row style={{ columnGap: 8, alignItems: 'center', }}>
-                                    <CheckBox status={day.includes(item)} setstatus={() => { handleDays(item) }} />
-                                    <Title font={font.medium} size={16}>{item}</Title>
-                                </Row>
-                            </Button>))}
+                        <Calendario day={["2024-08-05", "2024-08-12", "2024-08-19", "2024-08-26"]} setday={setday} disabled={true}/>
 
-
-                        <Column style={{ borderWidth: 1, borderColor: color.border, borderRadius: 16, marginVertical: 12, paddingVertical: 20, paddingHorizontal: 20, }}>
-                            <Title>{value}</Title>
+                        <Column style={{ marginVertical: 12, }}>
+                            <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginBottom: 25, }}>
+                                <Label>Baixa temporada</Label>
+                                <Label>Diária: R$ 250,00</Label>
+                            </Row>
+                            <Title>R$ {day.length * 250},00</Title>
                             <Column style={{ height: 12, }} />
-                            <Title size={16}>Incluso:</Title>
-                            {inclusos?.map((item, index) => (
-                                <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                                    <Label style={{ lineHeight: 24, }}>{item?.name} </Label>
-                                    <Label>{item?.label}</Label>
-                                </Row>))}
+                            <Title size={16}>Check In: </Title>
+                            <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                                <Label>14:00h às 20:00h</Label>
+                                <Label align="right">Segunda-feira e{'\n'}Terça-feira</Label>
+                            </Row>
+                            <Column style={{ height: 12, }} />
+                            <Title size={16}>Check Out: </Title>
+                            <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                                <Label>07:00h às 12:00h</Label>
+                                <Label align="right">Dias 12/12/2024 e{'\n'}13/12/2024</Label>
+                            </Row>
+
+
                         </Column>
-
-
-
-
-
 
                         <Column style={{ height: 12, }}></Column>
                         <Title size={17} font={font.medium}>Alguma observação?</Title>
@@ -95,9 +87,9 @@ export default function HotelRegisterScreen({ navigation, route }) {
                         <TextArea value={desc} setValue={setdesc} label="Observações" />
 
                         <Button onPress={() => { setterms(!terms) }} pv={1} ph={1} radius={2} mv={12}>
-                            <Row style={{ columnGap: 12, }}>
+                            <Row style={{ columnGap: 12, alignItems: 'center', }}>
                                 <CheckBox status={terms} setstatus={() => { setterms(!terms) }} />
-                                <Label>Li e estou ciente das normas do estabelecimento</Label>
+                                <Label>Li e estou ciente das normas do{'\n'}estabelecimento</Label>
                             </Row>
                         </Button>
                         <Button onPress={handlePay} bg={color.sc.sc3} style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 12, }}>
@@ -107,17 +99,23 @@ export default function HotelRegisterScreen({ navigation, route }) {
 
                 </Column>
             </Scroll>
+
             <Modal ref={modalPayment} snapPoints={[0.1, SCREEN_HEIGHT]}>
-                <Payment item={item} destino='Day Use' modal={modalPayment} card={
+                <Payment item={item} destino='Hotel' modal={modalPayment} card={
                     <Column style={{ borderWidth: 1, borderColor: color.border, borderRadius: 16, marginVertical: 12, paddingVertical: 20, paddingHorizontal: 20, }}>
-                        <Title>{value}</Title>
+                        <Title>R$ {day.length * 250},00</Title>
                         <Column style={{ height: 12, }} />
-                        <Title size={16}>Incluso:</Title>
-                        {inclusos?.map((item, index) => (
-                            <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                                <Label style={{ lineHeight: 24, }}>{item?.name} </Label>
-                                <Label>{item?.label}</Label>
-                            </Row>))}
+                        <Title size={16}>Check In: </Title>
+                        <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                            <Label>14:00h às 20:00h</Label>
+                            <Label align="right">Segunda-feira e{'\n'}Terça-feira</Label>
+                        </Row>
+                        <Column style={{ height: 12, }} />
+                        <Title size={16}>Check Out: </Title>
+                        <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                            <Label>07:00h às 12:00h</Label>
+                            <Label align="right">Dias 12/12/2024 e{'\n'}13/12/2024</Label>
+                        </Row>
                     </Column>
                 } />
             </Modal>
