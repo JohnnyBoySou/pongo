@@ -6,7 +6,7 @@ import { Apple } from 'lucide-react-native';
 import Header from '@components/Header';
 import Input from '@components/Forms/input';
 
-export default function InstitucionalScreen({ navigation, }) {
+export default function VisitaScreen({ navigation, }) {
 
     const { color, font, margin } = useContext(ThemeContext);
 
@@ -17,7 +17,7 @@ export default function InstitucionalScreen({ navigation, }) {
     return (
         <Main style={{}}>
             <Scroll>
-                <Header title="Solicitar visita"/>
+                <Header title="Solicitar visita" />
                 <Column mh={margin.h} >
                     <Input
                         label="Nome *"
@@ -46,7 +46,7 @@ export default function InstitucionalScreen({ navigation, }) {
                     </Row>
 
                     <Calendar />
-                    
+
                     <Button bg={color.sc.sc3} mtop={12}>
                         <LabelBT color="#fff" align="center">Selecione um horário</LabelBT>
                     </Button>
