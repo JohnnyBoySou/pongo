@@ -47,6 +47,14 @@ export const Column = styled.View`
   margin-horizontal: ${props => props.mh || 0}px;
 `
 
+export const Card = styled.View`
+  flex-direction: column;
+  display: flex;
+  border-radius: 20px;
+  background-color: #ffffff;
+  padding-horizontal: 24; 
+  padding-vertical: 20px; 
+`
 
 //COMPONENTES DE UTILIDADE
 
