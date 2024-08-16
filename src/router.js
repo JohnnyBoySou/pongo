@@ -22,7 +22,8 @@ import AuthLoginScreen from '@screens/auth/login';
 import AuthRegisterScreen from '@screens/auth/register';
 
 //INSTITUCIONAL
-import InstitucionalScreen from '@screens/institucional/visita';
+import InstitucionalScreen from '@screens/institucional/index';
+import InstitucionalVisitaScreen from '@screens/institucional/visita';
 
 //PEDIDOS
 import MeusPedidosScreen from '@screens/pedidos/pedidos';
@@ -60,6 +61,7 @@ import SchoolFinishScreen from '@screens/school/finish';
 import SchoolSuccessScreen from '@screens/school/success';
 import SchoolPongoScreen from '@screens/school/index';
 import SchoolBoletimScreen from '@screens/school/boletim';
+import SchoolDiarioScreen from '@screens/school/diario';
 
 //DAY USE
 import DayUseScreen from '@screens/day-use/index';
@@ -73,7 +75,7 @@ import HotelRegisterScreen from '@screens/hotel/register';
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='SchoolBoletim'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Test'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -89,8 +91,12 @@ export default function Router() {
         <Stack.Screen name="SchoolSuccess" component={SchoolSuccessScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="School" component={SchoolPongoScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="SchoolBoletim" component={SchoolBoletimScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="SchoolDiario" component={SchoolDiarioScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+
 
         <Stack.Screen name="Institucional" component={InstitucionalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="InstitucionalVisita" component={InstitucionalVisitaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+
 
         <Stack.Screen name="Shop" component={ShopScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ShopSingleProduct" component={ShopSingleProductScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
