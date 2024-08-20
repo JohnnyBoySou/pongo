@@ -118,14 +118,13 @@ export default function Calendario({ day, setday, disabled, }) {
     );
 
     return (
-        <Column style={{ borderWidth: 1, borderColor: color.border, borderRadius: 12, marginVertical: 12, paddingBottom: 12, }}>
             <Calendar
                 current={INITIAL_DATE}
-                style={{ borderRadius: 16 }}
+                style={{ borderRadius: 16, paddingBottom: 12,  }}
                 onDayPress={day => {
                     handleDays(day.dateString);
                 }}
-                enableSwipeMonths={true}
+                enableSwipeMonths={false}
                 hideExtraDays={true}
                 markingType={'multi-dot'}
                 markedDates={markedDates}
@@ -139,6 +138,7 @@ export default function Calendario({ day, setday, disabled, }) {
                     />
                 )}
             />
-        </Column>
     );
 }
+
+

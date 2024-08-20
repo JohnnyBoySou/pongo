@@ -58,7 +58,7 @@ export default function HotelRegisterScreen({ navigation, route }) {
                         <Title size={17} font={font.medium}>Selecione qual data você deseja: *</Title>
                         <Column style={{ height: 6, }}></Column>
                         
-                        <Calendario day={["2024-08-05", "2024-08-12", "2024-08-19", "2024-08-26"]} setday={setday} disabled={true}/>
+                        <Calendario day={day} setday={setday} disabled={false}/>
 
                         <Column style={{ marginVertical: 12, }}>
                             <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginBottom: 25, }}>
