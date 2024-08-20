@@ -94,10 +94,10 @@ const Screen2 = ({ color, navigation }) => {
             <Title style={{ letterSpacing: -1, fontSize: 28, lineHeight: 32, textAlign: 'center', }}>Monitore a <C color="#E5C8C9">agenda e {'\n'}boletim</C> do seu Pet a qualquer momento!</Title>
             <Label style={{ letterSpacing: -0.5, fontSize: 18, lineHeight: 22, textAlign: 'center', marginTop: 10, }}>Seja bem vindo ao app da Villa Pongo, utilize seu acesso para fazer login</Label>
             <Column style={{ justifyContent: 'center', alignItems: 'center', columnGap: 20, zIndex: 99, }}>
-                <Button onPress={() => { navigation.navigate('AuthLogin') }} mtop={20} ph={50} bg={color.sc.sc3}>
+                <Button onPress={() => { navigation.navigate('AuthLogin') }} mtop={20} bg={color.sc.sc3} style={{ width: 180, }}>
                     <LabelBT color="#fff" align="center">Entrar</LabelBT>
                 </Button>
-                <Button onPress={() => { navigation.navigate('AuthRegister') }} bg={color.sc.sc3 + 40} ph={50} radius={100} mtop={12}>
+                <Button onPress={() => { navigation.navigate('AuthRegister') }} bg={color.sc.sc3 + 40} ph={12} radius={100} mtop={12} style={{ width: 180, }}>
                     <LabelBT color={color.sc.sc3} align="center">Criar conta</LabelBT>
                 </Button>
             </Column>

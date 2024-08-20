@@ -48,18 +48,19 @@ export default function SchoolBoletimScreen() {
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
                 <TopMenu search={false} />
-                <Row mh={margin.h} mv={margin.v} align='center' justifyContent='space-between'>
+                <Row mh={margin.h} mv={margin.v} style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                    
                     <Column>
-                        <Title>Olá, Maria</Title>
-                        <Column style={{ height: 4, }} />
-                        <Label size={12}>Você está no perfil do: Aufredo</Label>
+                        <Title size={22} style={{ lineHeight: 24, }}>Olá, Maria </Title>
+                        <Label size={12} style={{ lineHeight: 16, }}>Você está no perfil do: Aufredo </Label>
                     </Column>
-                    <Button bg="#fff" pv={8} ph={14}>
+                    <Button bg="#fff" >
                         <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                             <Search size={18} color={'#858585'} />
                             <Label size={12} style={{ marginLeft: 6, lineHeight: 16, }}>Pesquisar</Label>
                         </Row>
                     </Button>
+
                 </Row>
 
                 <Column mh={margin.h}>
@@ -77,7 +78,7 @@ export default function SchoolBoletimScreen() {
                             <Text style={{ fontWeight: 700, marginVertical: 2 }}>Mensalidade: 1/1</Text>
                         </Column>
                     </Card>
-                    <Column style={{height: 24, }} />
+                    <Column style={{ height: 24, }} />
                     <Title>Retrospectiva do semestre</Title>
                     <Column bg="#fff" ph={8} pv={10} mv={12} style={{ borderRadius: 16, }}>
                         <InstagramStories

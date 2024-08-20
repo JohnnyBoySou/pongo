@@ -3,6 +3,7 @@ import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Image } from
 import { FlatList } from 'react-native';
 import TopMenu from '@components/Header/topmenu';
 import { BedSingle, Shapes } from 'lucide-react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function ShopScreen({ navigation, }) {
     const { color, font, } = useTheme();
@@ -48,11 +49,11 @@ const CatsFlat = ({}) => {
     }, [])
 
 
-
     const ExploreItem = ({ item }) => {
+        const navigation = useNavigation()
         const { icon, name, price, id} = item
         return (
-            <Button style={{ flexGrow: 1, backgroundColor: '#fff', }} radius={8} mv={1} mh={1} ph={12} pv={12}>
+            <Button onPress={() => {navigation.navigate('ShopSingleService', { id: id,})}}  style={{ flexGrow: 1, backgroundColor: '#fff', }} radius={8} mv={1} mh={1} ph={12} pv={12}>
                 <Column>
                     {icon}
                     <Label size={16} align="left" style={{ fontFamily: 'Font_Medium', marginTop: 6,  }}>{name}</Label>

@@ -44,7 +44,7 @@ export default function AuthRegisterScreen({ navigation, route, }) {
     const colorPassword = porcentagePassword < 50 ? color.red : porcentagePassword < 80 ? '#f5ad42' : color.green;
 
     const [terms, setterms] = useState(true);
-    const [confirm, setconfirm] = useState(true);
+    const [confirm, setconfirm] = useState(false);
     const [loading, setloading] = useState(false);
     const [success, setsuccess] = useState();
     const [err, seterror] = useState();

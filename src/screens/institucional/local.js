@@ -7,7 +7,7 @@ import Header from '@components/Header';
 import Swiper from 'react-native-swiper';
 import Input from '@components/Forms/input';
 
-export default function InstitucionalOndeEstamosScreen({ navigation, }) {
+export default function InstitucionalLocalScreen({ navigation, }) {
 
     const { color, font, margin } = useContext(ThemeContext);
 

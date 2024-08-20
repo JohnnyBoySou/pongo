@@ -1,9 +1,9 @@
 
 import React, { useContext } from 'react';
-import { ScrollView } from 'react-native';
-import { Main, Scroll, Column, Label, Title, Row, useTheme, Image } from '@theme/global'
+import { Main, Scroll, Column, Label, Title, Row, useTheme, Image, Button } from '@theme/global'
 import { FlatList } from 'react-native-gesture-handler';
 import { Plus } from 'lucide-react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function PetsListScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
@@ -16,15 +16,19 @@ export default function PetsListScreen({ navigation, }) {
                 keyExtractor={item => item.id}
                 showsVerticalScrollIndicator={false}
                 numColumns={2}
-                columnWrapperStyle={{ justifyContent: 'space-evenly', marginHorizontal: 20, columnGap: 20, }}
-                contentContainerStyle={{ marginTop: 20, rowGap: 20, }}
-                ListFooterComponent={<Column style={{justifyContent: 'center', alignItems: 'center', }}>
-                <Column style={{  borderRadius: 100, backgroundColor: color.sc.sc3, width:80, height: 80, justifyContent: 'center', alignItems: 'center',  }}>
-                    <Plus size={38} color="#fff" strokeWidth={2} />
-                </Column>
-                <Title size={18} align="center" style={{ marginTop: 10, }}>Adicionar pet</Title>
-                <Label size={16}  align="center" style={{ marginTop: 2, }}>Adicione um novo pet a sua lista</Label>
-            </Column>}
+                columnWrapperStyle={{ justifyContent: 'space-evenly', marginHorizontal: 20, }}
+                contentContainerStyle={{ marginTop: 20, }}
+                ListFooterComponent={
+                    <Button onPress={() => navigation.navigate('AddPet')} radius={12} pv={12} ph={12}>
+                        <Column style={{ justifyContent: 'center', alignItems: 'center', }}>
+                            <Column style={{ borderRadius: 100, backgroundColor: color.sc.sc3, width: 80, height: 80, justifyContent: 'center', alignItems: 'center', }}>
+                                <Plus size={38} color="#fff" strokeWidth={2} />
+                            </Column>
+                            <Title size={18} align="center" style={{ marginTop: 10, }}>Adicionar pet</Title>
+                            <Label size={16} align="center" style={{ marginTop: 2, }}>Adicione um novo pet a sua lista</Label>
+                        </Column>
+                    </Button>
+                }
             />
         </Main>
     )
@@ -32,22 +36,19 @@ export default function PetsListScreen({ navigation, }) {
 
 
 const Pet = ({ pet }) => {
+    const navigation = useNavigation()
     return (
-        <Column style={{}}>
-            <Column style={{  borderRadius: 100, backgroundColor: pet?.color, overflow: 'hidden', width: 100, height: 100, }}>
-                <Image source={pet?.avatar} style={{ width: 110, height: 110, objectFit: 'contain', marginTop: 10, }} />
+        <Button onPress={() => { navigation.navigate('PetsProfile') }} radius={12} pv={12} ph={12}>
+            <Column style={{}}>
+                <Column style={{ borderRadius: 100, backgroundColor: pet?.color, overflow: 'hidden', width: 100, height: 100, }}>
+                    <Image source={pet?.avatar} style={{ width: 110, height: 110, objectFit: 'contain', marginTop: 10, }} />
+                </Column>
+                <Title size={18} align="center" style={{ marginTop: 10, }}>{pet?.name}</Title>
+                <Label size={16} align="center" style={{ marginTop: 2, }}>{pet?.age}</Label>
             </Column>
-            <Title size={18} align="center" style={{ marginTop: 10, }}>{pet?.name}</Title>
-            <Label size={16}  align="center" style={{ marginTop: 2, }}>{pet?.age}</Label>
-        </Column>
+        </Button>
     )
 }
-
-
-
-
-
-
 
 const pets = [
     {

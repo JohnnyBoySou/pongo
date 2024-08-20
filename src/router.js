@@ -24,6 +24,10 @@ import AuthRegisterScreen from '@screens/auth/register';
 //INSTITUCIONAL
 import InstitucionalScreen from '@screens/institucional/index';
 import InstitucionalVisitaScreen from '@screens/institucional/visita';
+import InstitucionalGaleriaScreen from '@screens/institucional/galeria';
+import InstitucionalRealizacoes from '@screens/institucional/realizacoes';
+import InstitucionalAboutScreen from '@screens/institucional/about';
+import InstitucionalLocalScreen from '@screens/institucional/local';
 
 //PEDIDOS
 import MeusPedidosScreen from '@screens/pedidos/pedidos';
@@ -79,7 +83,7 @@ import HotelRegisterScreen from '@screens/hotel/register';
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Tabs'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Onboarding'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -100,7 +104,10 @@ export default function Router() {
 
         <Stack.Screen name="Institucional" component={InstitucionalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="InstitucionalVisita" component={InstitucionalVisitaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-
+        <Stack.Screen name="InstitucionalAbout" component={InstitucionalAboutScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="InstitucionalGaleria" component={InstitucionalGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="InstitucionalRealizacoes" component={InstitucionalRealizacoes} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="InstitucionalLocal" component={InstitucionalLocalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Shop" component={ShopScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ShopSingleProduct" component={ShopSingleProductScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -149,9 +156,9 @@ function Tabs() {
         tabBarShowLabel: false,
         backBehavior: 'none',
         tabBarActiveTintColor: '#fff',
-        tabBarInactiveTintColor: '#f0a5a5',
+        tabBarInactiveTintColor: '#bacce8',
         tabBarStyle: {
-          backgroundColor: color.primary,
+          backgroundColor: color.sc.sc3,
           height: 64,
           elevation: 0,
         },

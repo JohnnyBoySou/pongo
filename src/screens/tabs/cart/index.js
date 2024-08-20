@@ -13,17 +13,14 @@ export default function HomeScreen({ navigation, }) {
         <Main >
             <Scroll>
                 <TopMenu search={false} />
-                <Column ph={margin.h}>
-
+                <Column ph={margin.h} pv={margin.v}>
                     <Title>Serviços</Title>
-
                     <FlatList
                         data={services}
                         renderItem={({item}) => <Card item={item} />}
                         keyExtractor={item => item.id}
                         showsVerticalScrollIndicator={false}
                     />
-
                     <Title>Produtos</Title>
 
                 </Column>
@@ -71,15 +68,15 @@ const Card = ({item}) => {
     const { title, date, status, price, value, img, time } = item   
     const [isSelect, setisSelect] = useState(false);
     return (
-        <Pressable onLongPress={() => setisSelect(!isSelect)} style={{ borderWidth: 2, borderColor: isSelect ? '#00A3FF50' : '#30303020', backgroundColor: isSelect ? '#00A3FF20' : '#FFF', marginVertical: 8, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
+        <Pressable onLongPress={() => setisSelect(!isSelect)} style={{  backgroundColor: '#FFF', marginVertical: 8, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
             <Row style={{  alignItems: 'center',  }}>
                 <CheckBox status={isSelect} setstatus={setisSelect}/>
                 <MotiImage  source={{uri: img}} style={{ width: 72, height: 82, objectFit: 'cover', borderRadius: 6, marginHorizontal: 12,}}/>
                 <Column>
-                    <Title size={16}>{title}</Title>
-                    <Label size={14}>Data: {date}</Label>
-                    <Label size={14} style={{ marginTop: -4, }}>Horário: {time}</Label>
-                    <Title size={16}>R$ {price},00</Title>
+                    <Title size={14} style={{lineHeight: 18,}}>{title}</Title>
+                    <Label size={12} style={{lineHeight: 18,}}>Data: {date}</Label>
+                    <Label size={12} style={{lineHeight: 18,}}>Horário: {time}</Label>
+                    <Title size={14} style={{lineHeight: 18,}}>R$ {price},00</Title>
                 </Column>
             </Row>
         </Pressable>

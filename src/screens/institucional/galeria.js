@@ -16,7 +16,18 @@ export default function InstitucionalGaleriaScreen({ navigation, }) {
     const [tel, settel] = useState();
     const [type, settype] = useState('Pongo');
 
-
+    const data = {
+        grid: {
+            imgs: ['aea', '', '', '', ''],
+            videos: ['', '', '', '', ''],
+            type: 'mansery',
+        },
+        grid: {
+            imgs: ['aea', '', '', '', ''],
+            videos: ['', '', '', '', ''],
+            type: 'pinterest',
+        },
+    }
 
 
 
@@ -26,7 +37,7 @@ export default function InstitucionalGaleriaScreen({ navigation, }) {
                 <Header title="Galeria" />
                 <Column mh={margin.h} >
 
-                    <Galeria />
+                    <Galeria data={data} />
 
                 </Column>
 
@@ -37,20 +48,26 @@ export default function InstitucionalGaleriaScreen({ navigation, }) {
 
 
 
-const Galeria = () => {
+const Galeria = ({ data }) => {
+
+    const { grid } = data
+
+    const Grid = ({ item }) => {
+        const { imgs, videos} = item
+        return (
+            <Column>
+                <VideoCard url={videos[0]} />
+                <Row style={{ width: '100%', gap: 16, justifyContent: 'space-between', flexWrap: 'wrap' }}>
+                    {imgs?.slice(0,4).map((item, index) => <ImageCard key={index} url={item} />)}
+                </Row>
+                <VideoCard url={videos[1]} />
+            </Column>
+        )
+    }
     return (
         <>
-            <VideoCard />
-            <Row style={{ width: '100%', gap: 16, justifyContent: 'space-between', flexWrap: 'wrap' }}>
-                <ImageCard />
-                <ImageCard />
-                <ImageCard />
-                <ImageCard />
-            </Row>
-            <VideoCard />
+           <Grid item={grid} />
         </>
-
-
     )
 }
 

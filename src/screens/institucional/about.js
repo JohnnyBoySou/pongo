@@ -13,7 +13,7 @@ import PlanosList from '@components/Planos';
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function SobreNosScreen() {
+export default function InstitucionalAboutScreen() {
     const navigation = useNavigation();
     const { color, font, margin } = useTheme();
     const handleRegister = (item) => {
