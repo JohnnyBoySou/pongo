@@ -1,10 +1,21 @@
 import { useContext } from "react";
 import styled, { ThemeContext } from 'styled-components/native';
 import { TouchableRipple } from 'react-native-paper';
-import { Dimensions, ScrollView, Image as RNImage } from 'react-native';
+import { Dimensions, ScrollView, Image as RNImage, ActivityIndicator } from 'react-native';
 import { Image as ExpoImage } from 'expo-image'
 import { useNavigation } from "@react-navigation/native";
 
+
+
+
+
+export const Loader = ({ color = '#91A6C4', size = 20 }) => {
+  return (
+    <ActivityIndicator
+      color={color}
+      size={size} />
+  )
+}
 //UTILS
 export const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 export const useTheme = () => {

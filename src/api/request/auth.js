@@ -1,98 +1,204 @@
 import axios from 'axios';
-
+import validator from 'validator';
 import getToken from '@hooks/getToken';
 import getBaseURL from '@hooks/getBaseUrl';
 
-export const login = async (email, password) => {
+//LOGIN/REGISTER API
+export const loginUser = async (email, password) => {
     const BASE_URL = await getBaseURL();
-    const token = await getToken();
+    const sanitizedEmail = validator.normalizeEmail(email);
+    const sanitizedPassword = validator.escape(password);
     try {
-        const res = await axios.post(`${BASE_URL}/login`, {
-            'email': email,
-            'password': password
-        }, {
+        const response = await axios.post(`${BASE_URL}/auth`, {
+            email: sanitizedEmail,
+            password: sanitizedPassword
+        });
+        return response.data;
+    } catch (error) {
+        const err = JSON.parse(error.request.response);
+        throw new Error(err.message)
+    }
+};
+export const listUser = async () => {
+    const token = await getToken()
+    const BASE_URL = await getBaseURL();
+    try {
+        const res = await axios.get(`${BASE_URL}/user`, {
             headers: {
-                Authorization: `Bearer ${token}`
-            }
+                Authorization: `Bearer ${token}`,
+            },
         });
         return res.data;
     } catch (error) {
+        console.error("Error revalidating token:", error);
+        return false;
+    }
+}
+
+
+export const registerUser = async (params) => {
+    const BASE_URL = await getBaseURL();
+    const sanitizedParams = {
+        email: validator.normalizeEmail(params.email),
+        password: validator.escape(params.password),
+        nome: validator.escape(params.name),
+        cpf: validator.escape(params.cpf),
+        telefone: validator.escape(params.tel),
+        id_empresa: 6,
+    };
+    try {
+        const res = await axios.post(`${BASE_URL}/register`, sanitizedParams);
+        return res.data;
+    } catch (error) {
         const err = JSON.parse(error.request.response);
-        throw new Error(err.message);
+        throw new Error(err.message)
     }
 };
 
 
-export const logout = async () => {
+
+//RESET PASSWORD API
+export const resetPassword = async (email) => {
     const BASE_URL = await getBaseURL();
-    const token = await getToken();
-    try {   
-        const res = await axios.post(`${BASE_URL}/logout`, {}, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
+    const sanitizedEmail = validator.normalizeEmail(email);
+
+    try {
+        const response = await axios.post(`${BASE_URL}/esquecisenhaemail `, {
+            email: sanitizedEmail
         });
-        return res.data;
+        return response.data;
     } catch (error) {
         const err = JSON.parse(error.request.response);
-        throw new Error(err.message);
+        return err.message
     }
-}
+};
+export const resetPasswordCode = async (email, code) => {
+    const BASE_URL = await getBaseURL();
+    const sanitizedEmail = validator.normalizeEmail(email);
 
-export const forgotPassword = async (email) => {
+    try {
+        const response = await axios.post(`${BASE_URL}/esquecisenhacodigo`, {
+            email: sanitizedEmail,
+            codigo: code,
+        });
+        return response.data;
+    } catch (error) {
+        const err = JSON.parse(error.request.response);
+        return err.message
+    }
+};
+export const resetPasswordNew = async (params) => {
+    const BASE_URL = await getBaseURL();
+    try {
+        const res = await axios.post(`${BASE_URL}/esquecisenharedefinir`, {
+            email: params.email,
+            codigo: params.codigo,
+            password: params.password,
+            password_confirmation: params.password_confirmation,
+        },);
+        return res.data;
+    } catch (error) {
+        console.log('Error:', error.message);
+        if (error.request) {
+            console.log('Request data:', error.request);
+        } else {
+            console.log('Error message:', error.message);
+        }
+        throw new Error(error.message);
+    }
+};
+export const resetPasswordOld = async (params) => {
+    const BASE_URL = await getBaseURL();
+    try {
+        const res = await axios.post(`${BASE_URL}/redefinirsenha `, {
+            password: params.password,
+            oldpassword: params.oldpassword,
+        },);
+        return res.data;
+    } catch (error) {
+        console.log('Error:', error.message);
+        if (error.request) {
+            console.log('Request data:', error.request);
+        } else {
+            console.log('Error message:', error.message);
+        }
+        throw new Error(error.message);
+    }
+};
+
+export const updateUser = async (params) => {
     const BASE_URL = await getBaseURL();
     const token = await getToken();
     try {
-        const res = await axios.post(`${BASE_URL}/forgot-password`, {
-            'email': email
-        }, {
-            headers: {
-                Authorization: `Bearer ${token}`
+        const response = await axios.post(
+            `${BASE_URL}/usuarios/editarperfil`,
+            {
+                email: params.email,
+                name: params.name,
+                whatsapp: params.whatsapp,
+                cep: params.cep,
+                avatar: params.avatar,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Error revalidating token:", error);
+        return false;
+    }
+};
+
+export const verifyEmail = async (email, code) => {
+    try {
+        const res = await axios.post(`${await getBaseURL()}/usuarios/validacodigo`, {
+            email: validator.normalizeEmail(email),
+            codigo: code,
+        });
+        return res.data
+    } catch (error) {
+        const err = JSON.parse(error?.request?.response);
+        throw new Error(err.message)
+    }
+};
+
+export const indicacaoUser = async () => {
+    const token = await getToken()
+    const BASE_URL = await getBaseURL();
+    try {
+        const res = await axios.get(`${BASE_URL}/usuarios/indicacao`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
         });
         return res.data;
     } catch (error) {
-        const err = JSON.parse(error.request.response);
-        throw new Error(err.message);
+        console.log(error)
+        const err = JSON.parse(error?.request?.response);
+        throw new Error(err.message)
     }
 }
 
-export const resetPassword = async (email, password, token) => {
+export const excludeUser = async (password, message) => {
+    const token = await getToken()
     const BASE_URL = await getBaseURL();
-    const token = await getToken();
     try {
-        const res = await axios.post(`${BASE_URL}/reset-password`, {
-            'email': email,
-            'password': password,
-            'token': token
+        const res = await axios.post(`${BASE_URL}/usuarios/exclusao`, {
+            password: password,
+            message: message,
         }, {
             headers: {
-                Authorization: `Bearer ${token}`
-            }
+                Authorization: `Bearer ${token}`,
+            },
         });
-        return res.data;
+        return res.data
     } catch (error) {
-        const err = JSON.parse(error.request.response);
-        throw new Error(err.message);
+        console.log(error)
+        const err = JSON.parse(error?.request?.response);
+        throw new Error(err.message)
     }
-}
+};
 
-export const register = async (name, email, password) => {
-    const BASE_URL = await getBaseURL();
-    const token = await getToken();
-    try {
-        const res = await axios.post(`${BASE_URL}/register`, {
-            'name': name,
-            'email': email,
-            'password': password
-        }, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-        return res.data;
-    } catch (error) {
-        const err = JSON.parse(error.request.response);
-        throw new Error(err.message);
-    }
-}

@@ -14,54 +14,48 @@ export default function AccountScreen({ navigation, }) {
     }
 
     return (
-        <Main style={{ backgroundColor: '#fff', }}>
-
+        <Main >
 
             <Scroll>
                 <TopMenu search={false} />
-                <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginHorizontal: margin.h, paddingTop: 10, }}>
-                    <Title>Minha conta</Title>
-                </Row>
-
-
-                <Column mh={margin.h} mv={12} style={{ paddingVertical: 20, paddingHorizontal: 20, borderRadius: 18, borderWidth: 1, borderColor: color.border, }}>
+                <Column mh={margin.h} mv={12} style={{ paddingVertical: 20, paddingHorizontal: 20, borderRadius: 18, backgroundColor: color.light, }}>
                     <Title>Olá, {user?.name}</Title>
                     <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 12, }}>
-                        <Label>Pets cadastrados:</Label>
-                        <Label>{user?.pets}</Label>
+                        <Label size={14}>Pets cadastrados:</Label>
+                        <Label size={14}>{user?.pets}</Label>
                     </Row>
                     <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 4, }}>
-                        <Label>Day use disponíveis:</Label>
-                        <Label>{user?.day_use}</Label>
+                        <Label size={14}>Day use disponíveis:</Label>
+                        <Label size={14}>{user?.day_use}</Label>
                     </Row>
 
                     {user?.desconto && (
-                        <Label style={{ marginTop: 12, }}>Desconto de {user?.desconto} em todos os produtos PONGO.</Label>
+                        <Label size={14} style={{ marginTop: 12, }}>Desconto de {user?.desconto} em todos os produtos PONGO.</Label>
                     )}
 
                 </Column>
 
                 <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginHorizontal: margin.h, paddingTop: 10, }}>
-                    <Title>Meu perfil</Title>
+                    <Title size={18}>Meu perfil</Title>
                 </Row>
 
                 <Column mh={margin.h}>
-                    <Button style={{ borderWidth: 1, borderColor: color.border, marginTop: 12, }} radius={18} pv={1} ph={1}>
+                    <Button style={{ backgroundColor: color.light, marginTop: 12, }} radius={18} pv={1} ph={1} onPress={() => {navigation.navigate('MeusPedidos')}} >
                         <Row style={{ alignItems: 'center', }}>
                             <Image source={require('@imgs/ac1.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
-                            <Title>Meus pedidos</Title>
+                            <Title size={20}>Meus pedidos</Title>
                         </Row>
                     </Button>
-                    <Button style={{ borderWidth: 1, borderColor: color.border, marginTop: 12, }} radius={18} pv={1} ph={1}>
+                    <Button style={{backgroundColor: color.light, marginTop: 12, }} radius={18} pv={1} ph={1} onPress={() => {navigation.navigate('PetsList')}} >
                         <Row style={{ alignItems: 'center', }}>
                             <Image source={require('@imgs/ac2.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
-                            <Title>Meus pets</Title>
+                            <Title size={20}>Meus pets</Title>
                         </Row>
                     </Button>
-                    <Button style={{ borderWidth: 1, borderColor: color.border, marginTop: 12, }} radius={18} pv={1} ph={1}>
+                    <Button style={{ backgroundColor: color.light, marginTop: 12, }} radius={18} pv={1} ph={1} onPress={() => {navigation.navigate('Services')}}>
                         <Row style={{ alignItems: 'center', }}>
                             <Image source={require('@imgs/ac3.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
-                            <Title>Histórico de serviços</Title>
+                            <Title size={20}>Histórico de serviços</Title>
                         </Row>
                     </Button>
                 </Column>
@@ -69,7 +63,7 @@ export default function AccountScreen({ navigation, }) {
                 <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginHorizontal: margin.h, paddingTop: 20, }}>
                     <Title>Suporte</Title>
                 </Row>
-                <Button style={{ backgroundColor: color.blue, marginTop: 12, }} radius={50} pv={16} ph={1} mh={margin.h}>
+                <Button onPress={() => {navigation.navigate('ChatList')}}  style={{ backgroundColor: color.blue, marginTop: 12, }} radius={50} pv={16} ph={1} mh={margin.h}>
                     <Title align="center" color="#fff">Iniciar conversa</Title>
                 </Button>
             </Scroll>

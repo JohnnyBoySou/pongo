@@ -30,7 +30,7 @@ export default function OnboardingScreen({ navigation, route, }) {
 
 
     return (
-        <Main style={{}}>
+        <Main style={{backgroundColor: '#fff',}}>
             <Row style={{ position: 'absolute', top: 10, left: 30, right: 30, zIndex: 99, justifyContent: 'space-between', alignItems: 'center', }}>
 
                 <Button onPress={() => { navigation.goBack() }} pv={0} ph={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3}>
@@ -45,7 +45,7 @@ export default function OnboardingScreen({ navigation, route, }) {
                 <Screen1 color={color} />
                 <Screen2 color={color} navigation={navigation} />
             </PagerView>
-            <Row style={{ marginBottom: 20, width: width, zIndex: 99, paddingHorizontal: 30, justifyContent: 'space-between', zIndex: -4,}}>
+            <Row style={{ marginBottom: 20, width: width, zIndex: 99, paddingHorizontal: 30, justifyContent: 'space-between', zIndex: -4, }}>
                 <PaginationDots
                     index={currentIndex}
                     numberOfDots={numberOfDots}
@@ -97,7 +97,7 @@ const Screen2 = ({ color, navigation }) => {
                 <Button onPress={() => { navigation.navigate('AuthLogin') }} mtop={20} ph={50} bg={color.sc.sc3}>
                     <LabelBT color="#fff" align="center">Entrar</LabelBT>
                 </Button>
-                <Button onPress={() => { navigation.navigate('AuthRegister') }} bg={color.sc.sc3+40} ph={50} radius={100} mtop={12}>
+                <Button onPress={() => { navigation.navigate('AuthRegister') }} bg={color.sc.sc3 + 40} ph={50} radius={100} mtop={12}>
                     <LabelBT color={color.sc.sc3} align="center">Criar conta</LabelBT>
                 </Button>
             </Column>

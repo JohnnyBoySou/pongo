@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import { Pressable, TextInput, ScrollView, Image, } from 'react-native';
-import { Main, View, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT, useTheme, } from '@theme/global';
+import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, } from '@theme/global';
 
 import { ArrowLeft } from 'lucide-react-native';
 import { Search } from 'lucide-react-native';
 
-import Header from '@components/Header';
-import HeaderInternal from '@components/HeaderInternal';
 
-import Input from '@components/Forms/input';
-import { Card } from 'react-native-paper';
 import TopMenu from '@components/Header/topmenu';
 import { FlatList } from 'react-native-gesture-handler';
 
-export default function HistoricoServicosScreen({ navigation, }) {
+export default function ServicesScreen({ navigation, }) {
 
     const { color, font, margin } = useTheme();
 

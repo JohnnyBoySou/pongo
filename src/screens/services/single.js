@@ -16,7 +16,7 @@ import WizardForm from './steps';
 import StepsPedido from './stepsPedido';
 import StepsRastreio from './stepsRastreio';
 
-export default function PedidoServicoIndividualScreen({ navigation, }) {
+export default function ServiceSingleScreen({ navigation, }) {
 
     const { color, font, margin } = useTheme();
 

@@ -5,6 +5,7 @@ import Input from '@components/Forms/input';
 import Modal from '@components/Modal/index';
 import CheckBox from '@components/Forms/checkbox';
 import { Pressable } from 'react-native';
+import { loginUser } from '@api/request/auth';
 
 
 export default function AuthLoginScreen({ navigation, }) {
@@ -16,6 +17,27 @@ export default function AuthLoginScreen({ navigation, }) {
 
     const modalForget = useRef()
 
+    
+    const [loading, setloading] = useState(false);
+    const [success, setsuccess] = useState();
+    const [error, seterror] = useState();
+    const handleLogin = async () => {
+        setloading(true)
+        setsuccess()
+        seterror()
+        try {
+            const res = await loginUser({ email, password, })
+            console.log(res)
+            if(res){
+                setsuccess('Conta criada com sucesso!')
+                navigation.navigate('AddPet')
+            }
+        } catch (error) {
+
+        } finally {
+            setloading(false)
+        }
+    }
     return (
         <Main style={{}}>
             <Scroll>
@@ -56,6 +78,7 @@ export default function AuthLoginScreen({ navigation, }) {
                         label="Senha *"
                         placeholder="Senha"
                         value={password}
+                        pass={true}
                         setValue={setpassword}
                     />
                     <Column style={{ height: 16, }} />
@@ -68,8 +91,12 @@ export default function AuthLoginScreen({ navigation, }) {
                         <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de {'\n'}uso e Privacidade</U></Label>
                     </Row>
 
-                    <Button bg={color.sc.sc3} mbottom={24}>
-                        <LabelBT style={{ color: '#fff', }} align='center'>Entrar</LabelBT>
+                    <Button bg={color.sc.sc3} mbottom={24} disabled={loading} onPress={handleLogin}>
+                        <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
+                            {loading ?
+                                <Loader color="#fff" /> :
+                                <LabelBT style={{ color: '#fff', }} align='center'>Entrar</LabelBT>}
+                        </Row>
                     </Button>
 
                     <Label size={14} align='center' >Ao continuar, você concorda em receber chamadas e mensagens SMS ou pelo WhatsApp, inclusive automáticas, da Villa Pongo e de suas afiliadas, no número informado.</Label>
