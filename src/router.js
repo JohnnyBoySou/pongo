@@ -83,7 +83,7 @@ import HotelRegisterScreen from '@screens/hotel/register';
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Tabs'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Onboarding'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -156,9 +156,9 @@ function Tabs() {
         tabBarShowLabel: false,
         backBehavior: 'none',
         tabBarActiveTintColor: '#fff',
-        tabBarInactiveTintColor: '#bacce8',
+        tabBarInactiveTintColor: '#C3C3C3',
         tabBarStyle: {
-          backgroundColor: color.sc.sc3,
+          backgroundColor: '#918C8B',
           height: 64,
           elevation: 0,
         },
