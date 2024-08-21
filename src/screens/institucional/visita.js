@@ -14,7 +14,7 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
 
     const [name, setname] = useState();
     const [tel, settel] = useState();
-    const [type, settype] = useState('Pongo');
+    const [type, settype] = useState('');
 
     const [date, setDate] = useState(new Date());
     const [mode, setMode] = useState('time');

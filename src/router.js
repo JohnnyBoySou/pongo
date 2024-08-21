@@ -24,7 +24,11 @@ import AuthRegisterScreen from '@screens/auth/register';
 //INSTITUCIONAL
 import InstitucionalScreen from '@screens/institucional/index';
 import InstitucionalVisitaScreen from '@screens/institucional/visita';
+import SobreNosScreen from '@screens/institucional/sobre-nos';
+import RealizacoesScreen from '@screens/institucional/realizacoes';
+import InstitucionalOndeEstamosScreen from '@screens/institucional/onde-estamos';
 import InstitucionalGaleriaScreen from '@screens/institucional/galeria';
+
 import InstitucionalRealizacoes from '@screens/institucional/realizacoes';
 import InstitucionalAboutScreen from '@screens/institucional/about';
 import InstitucionalLocalScreen from '@screens/institucional/local';
@@ -83,7 +87,7 @@ import HotelRegisterScreen from '@screens/hotel/register';
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Institucional'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Onboarding'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -107,7 +111,6 @@ export default function Router() {
         <Stack.Screen name="InstitucionalGaleria" component={InstitucionalGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="InstitucionalRealizacoes" component={InstitucionalRealizacoes} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="InstitucionalLocal" component={InstitucionalLocalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-        <Stack.Screen name="InstitucionalSingleGaleria" component={InstitucionalSingleGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Shop" component={ShopScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ShopSingleProduct" component={ShopSingleProductScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
