@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Main, Scroll, Title, Row, Column, Label, Button, SubLabel, U, LabelBT, Loader, useTheme } from '@theme/global';
 import { TextInput, ActivityIndicator } from 'react-native';
 //ICONS
-import { ArrowLeft, CircleCheck, CircleX } from 'lucide-react-native';
+import {CircleCheck, CircleX } from 'lucide-react-native';
 
 //FORMS
 import Input from '@components/Forms/input';
@@ -13,6 +13,7 @@ import CheckBox from '@components/Forms/checkbox';
 import { registerUser, verifyEmail } from '@api/request/auth';
 import Success from '@components/Forms/success';
 import Error from '@components/Forms/error';
+import Back from '@components/Back';
 import { useNavigation } from '@react-navigation/native';
 import { createPreferences } from '@hooks/preferences';
 
@@ -50,7 +51,7 @@ export default function AuthRegisterScreen({ navigation, route, }) {
     const [err, seterror] = useState();
     const handleRegister = async () => {
 
-        navigation.navigate('AddPet')
+        navigation.navigate('Welcome', { name: name,})
         return
         setloading(true)
         setsuccess()
@@ -71,22 +72,20 @@ export default function AuthRegisterScreen({ navigation, route, }) {
         }
     }
 
-
+    const a = false;
 
     return (
         <Main style={{}}>
             <Scroll>
                 {!confirm ? <Column ph={28}>
-                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                        <Button onPress={() => { navigation.goBack() }} pv={0} ph={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3}>
-                            <ArrowLeft size={20} color="#fff" />
-                        </Button>
-                        <Button mright={-14} radius={12} onPress={() => { navigation.navigate('AuthLogin') }} >
+                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 20}}>
+                        <Back />
+                        {a && <Button radius={12} onPress={() => { navigation.navigate('AuthLogin') }} pv={1} ph={1}>
                             <Column style={{ justifyContent: 'center', alignItems: 'flex-end', backgroundColor: color.sc.sc3 + 20, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
                                 <Label size={14} color={color.sc.sc3}>Já tem uma conta?</Label>
                                 <LabelBT size={14} color={color.sc.sc3}>Entre agora mesmo!</LabelBT>
                             </Column>
-                        </Button>
+                        </Button>}
                     </Row>
                     <Title size={26} style={{ marginTop: 20, marginBottom: 4, }}>Olá! Faça seu cadastro na Villa Pongo aqui</Title>
 

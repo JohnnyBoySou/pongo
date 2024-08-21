@@ -8,7 +8,9 @@ import { AnimatePresence, MotiImage, MotiView, } from 'moti';
 const { width, height } = Dimensions.get('window');
 import PagerView from 'react-native-pager-view';
 
-import Animated, { FadeInDown, useAnimatedStyle, withSpring, withTiming } from 'react-native-reanimated';
+import Animated, { FadeInDown, useAnimatedStyle, withSpring, withTiming, 
+    interpolateColor,
+    useSharedValue, } from 'react-native-reanimated';
 
 export default function OnboardingScreen({ navigation, route, }) {
     const { color, font } = useContext(ThemeContext)
@@ -33,9 +35,7 @@ export default function OnboardingScreen({ navigation, route, }) {
         <Main style={{backgroundColor: '#fff',}}>
             <Row style={{ position: 'absolute', top: 10, left: 30, right: 30, zIndex: 99, justifyContent: 'space-between', alignItems: 'center', }}>
 
-                <Button onPress={() => { navigation.goBack() }} pv={0} ph={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3}>
-                    <ArrowLeft size={20} color="#fff" />
-                </Button>
+                <Column></Column>
                 <Button pv={8} ph={20} bg='#ECEBEB' onPress={() => { setCurrentIndex(2); pagerRef.current.setPage(2) }} >
                     <LabelBT color='#918C8B' align="center">Pular</LabelBT>
                 </Button>
@@ -49,8 +49,8 @@ export default function OnboardingScreen({ navigation, route, }) {
                 <PaginationDots
                     index={currentIndex}
                     numberOfDots={numberOfDots}
-                    activityColor={color.sc.sc3}
-                    disableColor={color.sc.sc3 + 70} />
+                    activityColor="#918C8B"
+                    disableColor='#ECEBEB' />
 
 
                 {currentIndex == 2 && <Column style={{ width: 54, height: 54, borderRadius: 100, }}>
@@ -58,8 +58,8 @@ export default function OnboardingScreen({ navigation, route, }) {
                 <AnimatePresence>
                     {currentIndex != 2 &&
                         <MotiView from={{ opacity: 0, scale: 0, }} animate={{ opacity: 1, scale: 1, }} exit={{ opacity: 0, scale: 0, }} transition={{ type: 'timing' }}>
-                            <Button onPress={goToNext} style={{ width: 54, height: 54, borderRadius: 100, backgroundColor: color.sc.sc3, justifyContent: 'center', alignItems: 'center', }}>
-                                <ArrowRight size={28} color="#fff" />
+                            <Button bg='#ECEBEB' onPress={goToNext} style={{ width: 54, height: 54, borderRadius: 100, justifyContent: 'center', alignItems: 'center', }}>
+                                <ArrowRight size={28} color="#918C8B" />
                             </Button>
                         </MotiView>
                     }
@@ -108,11 +108,15 @@ const Screen2 = ({ color, navigation }) => {
 
 const PaginationDots = ({ index, numberOfDots, activityColor, disableColor }) => {
     // Animated styles
+
+
     const dotStyle = (dotIndex) => {
         return useAnimatedStyle(() => {
 
-            // Animated width
-            const width = withTiming(index === dotIndex ? 45 : 20);
+            const width = withTiming(index === dotIndex ? 45 : 20); 
+            const bgColor = withTiming(index === dotIndex ? 1 : 0, {
+                duration: 300,
+            });
 
             return {
                 backgroundColor: index === dotIndex ? activityColor : disableColor,

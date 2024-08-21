@@ -7,6 +7,7 @@ import Header from '@components/Header';
 import Swiper from 'react-native-swiper';
 import Input from '@components/Forms/input';
 import Modal from '@components/Modal';
+import { useNavigation } from '@react-navigation/native';
 
 export default function InstitucionalGaleriaScreen({ navigation, }) {
 
@@ -102,9 +103,12 @@ const VideoCard = () => {
 };
 
 
-const ImageCard = () => (
+const ImageCard = () => {
+
+    const navigation = useNavigation();
+    return (
     <View style={{ width: 150 }}>
-        <Pressable style={{ backgroundColor: '#fff', borderRadius: 20 }}>
+        <Pressable style={{ backgroundColor: '#fff', borderRadius: 20 }} onPress={() => {navigation.navigate('InstitucionalSingleGaleria', { img: 'https://caninablog.wordpress.com/wp-content/uploads/2013/10/dia-das-bruxas-pet_escola_075-1.jpg'})}} >
             <Image
                 source={{ uri: 'https://caninablog.wordpress.com/wp-content/uploads/2013/10/dia-das-bruxas-pet_escola_075-1.jpg' }}
                 style={{ width: '100%', height: 160, borderRadius: 20 }}
@@ -115,5 +119,5 @@ const ImageCard = () => (
             <Label style={{ fontSize: 10 }}> 10/10/2024</Label>
         </Column>
     </View>
-);
+)}
 

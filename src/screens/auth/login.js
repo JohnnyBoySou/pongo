@@ -6,6 +6,7 @@ import Modal from '@components/Modal/index';
 import CheckBox from '@components/Forms/checkbox';
 import { Pressable } from 'react-native';
 import { loginUser } from '@api/request/auth';
+import Back from '../../components/Back';
 
 
 export default function AuthLoginScreen({ navigation, }) {
@@ -14,15 +15,15 @@ export default function AuthLoginScreen({ navigation, }) {
     const [email, setemail] = useState();
     const [password, setpassword] = useState();
     const [terms, setterms] = useState(true);
-
+    const [name, setname] = useState('Maria');
     const modalForget = useRef()
 
-    
+
     const [loading, setloading] = useState(false);
     const [success, setsuccess] = useState();
     const [error, seterror] = useState();
     const handleLogin = async () => {
-        navigation.navigate('AddPet')
+        navigation.navigate('Welcome', { name: name, })
         return
         setloading(true)
         setsuccess()
@@ -30,7 +31,7 @@ export default function AuthLoginScreen({ navigation, }) {
         try {
             const res = await loginUser({ email, password, })
             console.log(res)
-            if(res){
+            if (res) {
                 setsuccess('Conta criada com sucesso!')
                 navigation.navigate('AddPet')
             }
@@ -40,29 +41,25 @@ export default function AuthLoginScreen({ navigation, }) {
             setloading(false)
         }
     }
+
+    
+    const a = false;
     return (
         <Main style={{}}>
             <Scroll>
                 <Column ph={28}>
 
-
-
-                    <Row style={{ justifyContent: 'space-between', alignItems: 'center',  }}>
-
-                        <Button onPress={() => { navigation.goBack() }} pv={0} ph={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3}>
-                            <ArrowLeft size={20} color="#fff" />
-                        </Button>
-
-                        <Button mright={-14} radius={12} onPress={() => {navigation.navigate('AuthRegister')}} >
-                        <Column style={{ justifyContent: 'center', alignItems: 'flex-end', backgroundColor: color.sc.sc3+20, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12,  }}>
-                            <Label size={14} color={color.sc.sc3}>Ainda não tem uma conta?</Label>
-                            <LabelBT size={14} color={color.sc.sc3}>Crie agora mesmo!</LabelBT>
-                        </Column>
-                        </Button>
-
+                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 20, }}>
+                        <Back />
+                        {a && <Button mright={-14} radius={12} onPress={() => { navigation.navigate('AuthRegister') }} >
+                            <Column style={{ justifyContent: 'center', alignItems: 'flex-end', backgroundColor: color.sc.sc3 + 20, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
+                                <Label size={14} color={color.sc.sc3}>Ainda não tem uma conta?</Label>
+                                <LabelBT size={14} color={color.sc.sc3}>Crie agora mesmo!</LabelBT>
+                            </Column>
+                        </Button>}
                     </Row>
 
-                    <Title size={26} style={{ marginTop: 20,  marginBottom: 4, }}>Olá! Faça seu login utilizando seu usuário e senha da Villa Pongo</Title>
+                    <Title size={26} style={{ marginTop: 20, marginBottom: 4, }}>Olá! Faça seu login utilizando seu usuário e senha da Villa Pongo</Title>
 
                     <Column style={{ height: 16, }} />
                     <Input
@@ -91,7 +88,7 @@ export default function AuthLoginScreen({ navigation, }) {
                         <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de uso e Privacidade</U></Label>
                     </Row>
 
-                    <Button bg='#918C8B'  mbottom={24} disabled={loading} onPress={handleLogin}>
+                    <Button bg='#918C8B' mbottom={24} disabled={loading} onPress={handleLogin}>
                         <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                             {loading ?
                                 <Loader color="#fff" /> :
