@@ -62,9 +62,7 @@ export default function AuthLoginScreen({ navigation, }) {
 
                     </Row>
 
-                    <Title size={26} style={{ marginTop: 20,  marginBottom: 4, }}>Bem-vindo de volta!</Title>
-                    <Label size={20}>Entre na sua conta Villa Pongo</Label>
-
+                    <Title size={26} style={{ marginTop: 20,  marginBottom: 4, }}>Olá! Faça seu login utilizando seu usuário e senha da Villa Pongo</Title>
 
                     <Column style={{ height: 16, }} />
                     <Input
@@ -90,14 +88,14 @@ export default function AuthLoginScreen({ navigation, }) {
 
                     <Row style={{ alignItems: 'center', marginBottom: 32, }}>
                         <CheckBox status={terms} setstatus={setterms} />
-                        <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de {'\n'}uso e Privacidade</U></Label>
+                        <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de uso e Privacidade</U></Label>
                     </Row>
 
                     <Button bg='#918C8B'  mbottom={24} disabled={loading} onPress={handleLogin}>
                         <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                             {loading ?
                                 <Loader color="#fff" /> :
-                                <LabelBT color='#FFFFFF' align='center'>Entrar</LabelBT>}
+                                <LabelBT color='#FFFFFF' align='center'>Continuar</LabelBT>}
                         </Row>
                     </Button>
 

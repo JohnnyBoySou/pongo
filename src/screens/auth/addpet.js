@@ -64,9 +64,10 @@ export default function AddPetScreen({ navigation, route, }) {
                     </Button>
 
                     <Title font={'Voyage_Medium'} align="center" size={28}>VILLA PONGO</Title>
-                    <Title size={24} align='center'>Comece pelo seu Pet</Title>
+                    <Title size={24} align='center' style={{ marginVertical: 12, }}>Comece pelo seu Pet</Title>
 
                     <Column style={{ height: 16, }} />
+                    
                     <Input
                         label="Nome *"
                         placeholder="Nome"
@@ -123,10 +124,11 @@ export default function AddPetScreen({ navigation, route, }) {
                     <Title size={18} font={font.medium}>Escolha uma cor para o perfil do seu Pet *</Title>
                     <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginVertical: 6, }}>
                         {colors.map((item, index) => (
-                            <Button onPress={() => { setselectColor(item.cl) }} style={{ backgroundColor: item.cl, borderWidth: 6, borderColor: selectColor === item.cl ? item.cl + 80 : 'transparent', width: 42, height: 52, }} ph={0} pv={0} radius={100}  >
-                                <Column style={{}}>
-                                </Column>
+                            <Column style={{ borderWidth: 2, borderColor: selectColor === item.cl ? item.cl + 80 : 'transparent', borderRadius: 100 }}>
+                            <Button onPress={() => { setselectColor(item.cl) }} style={{ backgroundColor: item.cl, paddingHorizontal: 0, paddingVertical: 0, marginVertical: 4, marginHorizontal: 4,  }}  radius={100}  >
+                                <Column style={{width: 16, height: 16,}}/> 
                             </Button>
+                            </Column>
                         ))}
                     </Row>
 

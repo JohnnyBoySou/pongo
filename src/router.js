@@ -69,7 +69,6 @@ import SchoolFinishScreen from '@screens/school/finish';
 import SchoolSuccessScreen from '@screens/school/success';
 import SchoolPongoScreen from '@screens/school/index';
 import SchoolBoletimScreen from '@screens/school/boletim';
-import SchoolDiarioScreen from '@screens/school/diario';
 
 //DAY USE
 import DayUseScreen from '@screens/day-use/index';
@@ -99,7 +98,6 @@ export default function Router() {
         <Stack.Screen name="SchoolSuccess" component={SchoolSuccessScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="School" component={SchoolPongoScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="SchoolBoletim" component={SchoolBoletimScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-        <Stack.Screen name="SchoolDiario" component={SchoolDiarioScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
 
         <Stack.Screen name="Institucional" component={InstitucionalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />

@@ -88,8 +88,7 @@ export default function AuthRegisterScreen({ navigation, route, }) {
                             </Column>
                         </Button>
                     </Row>
-                    <Title size={26} style={{ marginTop: 20, marginBottom: 4, }}>Crie sua conta</Title>
-                    <Label size={18}>Crie sua conta na Villa Pongo para aproveitar de beneficios exclusivos.</Label>
+                    <Title size={26} style={{ marginTop: 20, marginBottom: 4, }}>Olá! Faça seu cadastro na Villa Pongo aqui</Title>
 
                     <Column style={{ height: 16, }} />
                     <Input
@@ -128,6 +127,7 @@ export default function AuthRegisterScreen({ navigation, route, }) {
                         placeholder="Senha"
                         value={password}
                         setValue={setpassword}
+                        pass
                     />
                     <Column style={{ height: 16, }} />
                     <Input
@@ -135,20 +135,27 @@ export default function AuthRegisterScreen({ navigation, route, }) {
                         placeholder="Confirme sua senha"
                         value={password2}
                         setValue={setpassword2}
+                        pass
                     />
 
-                    {password?.length >= 1 &&
-                        <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                            <Column style={{ backgroundColor: color.off, height: 10, borderRadius: 30, width: 100, }}>
-                                <Column style={{ width: porcentagePassword, height: 10, borderRadius: 100, backgroundColor: colorPassword, }} />
-                            </Column>
-                            <Button onPress={() => { passStrong.current.expand() }} >
-                                <U>
-                                    <SubLabel style={{ color: colorPassword }}>{messagePassword}</SubLabel>
-                                </U>
-                            </Button>
-                        </Row>
-                    }
+
+                    <Label style={{ fontSize: 14, marginTop: 14, marginBottom: 4,}}>Sua senha deve conter pelo menos:</Label>
+                    <Row style={{ marginTop: 8, columnGap: 8, alignItems: 'center',  }}>
+                        {passwordCriteria?.length ? <CircleCheck size={14} color={color.green} /> : <CircleX size={14} color={color.red} />}
+                        <Label size={12} >Mínimo de 8 caracteres </Label>
+                    </Row>
+                    <Row style={{ marginTop: 8, columnGap: 8, alignItems: 'center', }}>
+                        {passwordCriteria?.upperCase ? <CircleCheck size={14} color={color.green} /> : <CircleX size={14} color={color.red} />}
+                        <Label  size={12} >Uma letra MAIÚSCULA. </Label>
+                    </Row>
+                    <Row style={{ marginTop: 8, columnGap: 8, alignItems: 'center',}}>
+                        {passwordCriteria?.lowerCase ? <CircleCheck size={14} color={color.green} /> : <CircleX size={14} color={color.red} />}
+                        <Label  size={12} >Uma letra minúscula. </Label>
+                    </Row>
+                    <Row style={{ marginTop: 8, columnGap: 8, alignItems: 'center', }}>
+                        {passwordCriteria?.number ? <CircleCheck size={14} color={color.green} /> : <CircleX size={14} color={color.red} />}
+                        <Label  size={12} >Um número. </Label>
+                    </Row>
 
                     <Column style={{ height: 16, }} />
                     {err ? <Error msg={err} /> : success ? <Success msg={success} /> : null}
@@ -270,7 +277,7 @@ const ConfirmEmail = ({ email }) => {
                     ref={fc1}
                     selectionColor='transparent'
                     onChangeText={(e) => { setdigit1(e); if (e.length === 1) fc2.current?.focus() }}
-                    keyboardType='numeric' style={{ color: color.sc.sc3, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus1 ? "#fff" : color.sc.sc3+40, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74,}} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
+                    keyboardType='numeric' style={{ color: color.sc.sc3, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus1 ? "#fff" : color.sc.sc3 + 40, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
                 <TextInput
                     onFocus={() => setfocus2(true)}
                     onBlur={() => setfocus2(false)}
@@ -280,7 +287,7 @@ const ConfirmEmail = ({ email }) => {
                     underlineColorAndroid='transparent'
                     selectionColor='transparent'
                     onChangeText={(e) => { setdigit2(e); if (e.length === 1) fc3.current?.focus() }}
-                    keyboardType='numeric' style={{ color: color.sc.sc3, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus2 ? "#fff" : color.sc.sc3+40, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
+                    keyboardType='numeric' style={{ color: color.sc.sc3, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus2 ? "#fff" : color.sc.sc3 + 40, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
                 <TextInput
                     onFocus={() => setfocus3(true)}
                     onBlur={() => setfocus3(false)}
@@ -289,7 +296,7 @@ const ConfirmEmail = ({ email }) => {
                     ref={fc3}
                     selectionColor='transparent'
                     onChangeText={(e) => { setdigit3(e); if (e.length === 1) fc4.current?.focus() }}
-                    keyboardType='numeric' style={{color: color.sc.sc3, fontFamily: font.bold, textAlign: 'center', borderRadius: 12,  backgroundColor: focus3 ? "#fff" : color.sc.sc3+40, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
+                    keyboardType='numeric' style={{ color: color.sc.sc3, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus3 ? "#fff" : color.sc.sc3 + 40, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
                 <TextInput
                     onFocus={() => setfocus4(true)}
                     onBlur={() => setfocus4(false)}
@@ -298,7 +305,7 @@ const ConfirmEmail = ({ email }) => {
                     selectionColor='transparent'
                     onSubmitEditing={handleVerify}
                     onChangeText={(e) => setdigit4(e)}
-                    keyboardType='numeric' style={{color: color.sc.sc3, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus4 ? "#fff" : color.sc.sc3+40, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
+                    keyboardType='numeric' style={{ color: color.sc.sc3, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus4 ? "#fff" : color.sc.sc3 + 40, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
             </Row>
             <Button disabled={loading} onPress={handleVerify} style={{ marginTop: 20, backgroundColor: color.sc.sc3, }} pv={16} ph={24}>
                 <Row style={{ justifyContent: 'center', alignItems: 'center', }}>

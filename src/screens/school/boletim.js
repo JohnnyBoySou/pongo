@@ -12,12 +12,12 @@ import Chart from '@components/Charts';
 import StarsRate from '@components/StarsRate/index';
 import Calendario from '@components/Calendar';
 
-export default function SchoolBoletimScreen() {
+export default function SchoolBoletimScreen({navigation, }) {
     const { color, font, margin } = useTheme();
 
     const pagerRef = useRef();
     const ScrollButtons = useRef();
-    const types = ['Boletim', 'Agenda', 'Métricas', 'Diário'];
+    const types = ['Boletim', 'Agenda', 'Métricas'];
     const [type, settype] = useState('Boletim');
 
     const handleScreen = (position) => {
@@ -35,10 +35,6 @@ export default function SchoolBoletimScreen() {
                 ScrollButtons.current?.scrollToEnd({ animated: true, });
                 settype('Métricas');
                 break;
-            case 3:
-                ScrollButtons.current?.scrollToEnd({ animated: true, });
-                settype('Diário');
-                break;
             default:
                 break;
         }
@@ -49,7 +45,7 @@ export default function SchoolBoletimScreen() {
             <Scroll>
                 <TopMenu search={false} />
                 <Row mh={margin.h} mv={margin.v} style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                    
+
                     <Column>
                         <Title size={22} style={{ lineHeight: 24, }}>Olá, Maria </Title>
                         <Label size={12} style={{ lineHeight: 16, }}>Você está no perfil do: Aufredo </Label>
@@ -115,6 +111,9 @@ export default function SchoolBoletimScreen() {
                             <LabelBT style={{ textAlign: 'center', color: color.title, fontSize: 14, }}>{item}</LabelBT>
                         </Button>
                     ))}
+                    <Button onPress={() => { navigation.navigate('PetsDiario', { id: 1, }) }} style={{ backgroundColor: 'transparent', }} ph={16} pv={10}>
+                        <LabelBT style={{ textAlign: 'center', color: color.title, fontSize: 14, }}>Diário</LabelBT>
+                    </Button>
                     <Column style={{ width: margin.h, }} />
                 </ScrollView>
 
