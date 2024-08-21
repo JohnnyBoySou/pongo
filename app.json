@@ -2,7 +2,7 @@
   "expo": {
     "name": "Pongo",
     "slug": "pongo",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -14,7 +14,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.engd.villapongo",
-      "buildNumber": "1.1.0",
+      "buildNumber": "1.2.0",
       "infoPlist": {
         "NSCameraUsageDescription": "This app uses the camera to scan barcodes on event tickets.",
         "NSLocationWhenInUseUsageDescription": "This app uses location services to find events near you.",

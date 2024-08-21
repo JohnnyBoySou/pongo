@@ -19,11 +19,12 @@ import SearchScreen from '@screens/search/index';
 //AUTH
 import AuthLoginScreen from '@screens/auth/login';
 import AuthRegisterScreen from '@screens/auth/register';
+import WelcomeScreen from '@screens/auth/welcome';
 
 //INSTITUCIONAL
 import InstitucionalScreen from '@screens/institucional/index';
 import InstitucionalVisitaScreen from '@screens/institucional/visita';
-import RealizacoesScreen from '@screens/institucional/realizacoes';
+import InstitucionalRealizacoesScreen from '@screens/institucional/realizacoes';
 import InstitucionalLocalScreen from '@screens/institucional/local';
 import InstitucionalAboutScreen from '@screens/institucional/about';
 import InstitucionalGaleriaScreen from '@screens/institucional/galeria';
@@ -82,7 +83,7 @@ import HotelRegisterScreen from '@screens/hotel/register';
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='InstitucionalVisita'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Onboarding'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -103,6 +104,7 @@ export default function Router() {
         <Stack.Screen name="InstitucionalVisita" component={InstitucionalVisitaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="InstitucionalAbout" component={InstitucionalAboutScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="InstitucionalLocal" component={InstitucionalLocalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="InstitucionalRealizacoes" component={InstitucionalRealizacoesScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="IntistucionalGaleria" component={InstitucionalGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="IntistucionalSingleGaleria" component={InstitucionalSingleGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -125,7 +127,7 @@ export default function Router() {
         <Stack.Screen name="Async" component={AsyncStaticScreen} options={{ ...TransitionPresets.FadeFromBottomAndroid, }} />
         <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="Search" component={SearchScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-
+        <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="Tabs" component={Tabs} options={{ ...TransitionPresets.SlideFromRightIOS, backBehavior: 'none', }} />
 
         <Stack.Screen name="DayUse" component={DayUseScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />

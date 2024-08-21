@@ -14,14 +14,16 @@ export default function HomeScreen({ navigation, }) {
             <Scroll>
                 <TopMenu search={false} />
                 <Column ph={margin.h} pv={margin.v}>
-                    <Title>Serviços</Title>
+                    <Column mv={12}>
+                        <Title>Serviços</Title>
+                    </Column>
                     <FlatList
                         data={services}
                         renderItem={({ item }) => <Card item={item} />}
                         keyExtractor={item => item.id}
                         showsVerticalScrollIndicator={false}
                     />
-                    <Button onPress={() => { navigation.navigate('ChatList') }} style={{ backgroundColor: '#918C8B', marginTop: 12, }} radius={50} pv={16} ph={1} mh={margin.h}>
+                    <Button onPress={() => { navigation.navigate('ChatList') }} style={{ backgroundColor: '#918C8B', marginTop: 24, }} radius={50} pv={16} ph={1} mh={margin.h}>
                         <Title align="center" color="#fff">Finalizar pedido</Title>
                     </Button>
                 </Column>
@@ -69,7 +71,7 @@ const Card = ({ item }) => {
     const { title, date, status, price, value, img, time } = item
     const [isSelect, setisSelect] = useState(false);
     return (
-        <Pressable onLongPress={() => setisSelect(!isSelect)} style={{ backgroundColor: '#FFF', marginVertical: 8, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
+        <Pressable onLongPress={() => setisSelect(!isSelect)} style={{ backgroundColor: '#FFF', marginVertical: 12, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
             <Row style={{ alignItems: 'center', }}>
                 <CheckBox status={isSelect} setstatus={setisSelect} size={24}/>
                 <MotiImage source={ img } style={{ width: 62, height:72, objectFit: 'contain', borderRadius: 12, marginHorizontal: 12, borderWidth: 1, borderColor: color.border, }} />

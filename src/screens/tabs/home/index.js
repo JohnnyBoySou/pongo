@@ -10,9 +10,9 @@ export default function HomeScreen({ navigation, }) {
         <Main >
             <Scroll >
                 <TopMenu />
-                <Column ph={margin.h}>
+                <Column ph={margin.h} mv={12}>
                     <Title>Escolha qual deseja acessar</Title>
-                    <Row style={{ columnGap: 12, marginVertical: 12, }}>
+                    <Row style={{ columnGap: 12, marginVertical: 16, }}>
                         <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Shop') }}>
                             <Column>
                                 <MotiImage source={require('@imgs/home_1.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />

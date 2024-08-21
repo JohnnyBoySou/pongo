@@ -1,4 +1,4 @@
-rootProject.name = 'Villa Pongo'
+rootProject.name = 'Pongo'
 
 dependencyResolutionManagement {
   versionCatalogs {
