@@ -49,7 +49,7 @@ export default function InstitucionalLocalScreen({ navigation, }) {
                                 borderColor: '#D9D9D9',
                                 marginBottom: 8,
                                 paddingHorizontal: margin.h,
-                                paddingVertical: margin.v,
+                                paddingVertical: margin.h,
                             }}
                         >
                             <Row style={{ alignItems: 'center' }}>

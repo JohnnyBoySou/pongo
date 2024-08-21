@@ -27,14 +27,16 @@ export default function InstitucionalRealizacoesScreen() {
             <Scroll>
 
 
-                <Header title="" />
-
-
-                <Image source={require('@imgs/extensao-da-sua-casa.png')} style={{ width: '100%', position: 'absolute', height: 270, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, zIndex: -1 }} />
-
-                <Column style={{ height: 240 }} />
+                <Header title="Realizações" />
 
                 <Column mh={margin.h}>
+                    <Image source={require('@imgs/extensao-da-sua-casa.png')} style={{ width: '100%', height: 270, borderRadius: 20 }} />
+                </Column>
+
+
+
+
+                <Column mh={margin.h} mv={margin.h}>
 
                     <Title style={{ marginBottom: 24 }}>Realizações</Title>
 
@@ -53,7 +55,7 @@ export default function InstitucionalRealizacoesScreen() {
 
 
 
-                <Column mh={margin.h} style={{ marginTop: 24, marginBottom: 24 }}>
+                <Column mh={margin.h} style={{ marginBottom: 24 }}>
                     <FlatList
                         data={images.slice(0, 4)}
                         horizontal
