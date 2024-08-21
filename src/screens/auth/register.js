@@ -49,6 +49,9 @@ export default function AuthRegisterScreen({ navigation, route, }) {
     const [success, setsuccess] = useState();
     const [err, seterror] = useState();
     const handleRegister = async () => {
+
+        navigation.navigate('AddPet')
+        return
         setloading(true)
         setsuccess()
         seterror()
@@ -157,11 +160,11 @@ export default function AuthRegisterScreen({ navigation, route, }) {
                     </Row>
 
 
-                    <Button bg={color.sc.sc3} mbottom={24} onPress={handleRegister} disabled={loading}>
+                    <Button bg='#918C8B' mbottom={24} onPress={handleRegister} disabled={loading}>
                         <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                             {loading ?
                                 <Loader color="#fff" /> :
-                                <LabelBT style={{ color: '#fff', }} align='center'>Criar conta</LabelBT>}
+                                <LabelBT color="#fff" align='center'>Criar conta</LabelBT>}
                         </Row>
                     </Button>
 

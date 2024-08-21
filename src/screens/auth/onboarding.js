@@ -36,8 +36,8 @@ export default function OnboardingScreen({ navigation, route, }) {
                 <Button onPress={() => { navigation.goBack() }} pv={0} ph={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3}>
                     <ArrowLeft size={20} color="#fff" />
                 </Button>
-                <Button pv={8} ph={20} bg={color.sc.sc3 + 30} onPress={() => { setCurrentIndex(2); pagerRef.current.setPage(2) }} >
-                    <LabelBT color={color.sc.sc3} align="center">Pular</LabelBT>
+                <Button pv={8} ph={20} bg='#ECEBEB' onPress={() => { setCurrentIndex(2); pagerRef.current.setPage(2) }} >
+                    <LabelBT color='#918C8B' align="center">Pular</LabelBT>
                 </Button>
             </Row>
             <PagerView style={{ flex: 1, }} initialPage={0} ref={pagerRef} onPageSelected={(event) => { handleScreen(event.nativeEvent.position) }}>
@@ -94,11 +94,11 @@ const Screen2 = ({ color, navigation }) => {
             <Title style={{ letterSpacing: -1, fontSize: 28, lineHeight: 32, textAlign: 'center', }}>Monitore a <C color="#E5C8C9">agenda e {'\n'}boletim</C> do seu Pet a qualquer momento!</Title>
             <Label style={{ letterSpacing: -0.5, fontSize: 18, lineHeight: 22, textAlign: 'center', marginTop: 10, }}>Seja bem vindo ao app da Villa Pongo, utilize seu acesso para fazer login</Label>
             <Column style={{ justifyContent: 'center', alignItems: 'center', columnGap: 20, zIndex: 99, }}>
-                <Button onPress={() => { navigation.navigate('AuthLogin') }} mtop={20} bg={color.sc.sc3} style={{ width: 180, }}>
+                <Button onPress={() => { navigation.navigate('AuthLogin') }} mtop={20} bg='#918C8B' style={{ width: 180, }}>
                     <LabelBT color="#fff" align="center">Entrar</LabelBT>
                 </Button>
-                <Button onPress={() => { navigation.navigate('AuthRegister') }} bg={color.sc.sc3 + 40} ph={12} radius={100} mtop={12} style={{ width: 180, }}>
-                    <LabelBT color={color.sc.sc3} align="center">Criar conta</LabelBT>
+                <Button onPress={() => { navigation.navigate('AuthRegister') }} bg='#ECEBEB' ph={12} radius={100} mtop={12} style={{ width: 180, }}>
+                    <LabelBT color='#918C8B' align="center">Criar conta</LabelBT>
                 </Button>
             </Column>
         </Column>

@@ -22,6 +22,8 @@ export default function AuthLoginScreen({ navigation, }) {
     const [success, setsuccess] = useState();
     const [error, seterror] = useState();
     const handleLogin = async () => {
+        navigation.navigate('AddPet')
+        return
         setloading(true)
         setsuccess()
         seterror()
@@ -91,11 +93,11 @@ export default function AuthLoginScreen({ navigation, }) {
                         <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de {'\n'}uso e Privacidade</U></Label>
                     </Row>
 
-                    <Button bg={color.sc.sc3} mbottom={24} disabled={loading} onPress={handleLogin}>
+                    <Button bg='#918C8B'  mbottom={24} disabled={loading} onPress={handleLogin}>
                         <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                             {loading ?
                                 <Loader color="#fff" /> :
-                                <LabelBT style={{ color: '#fff', }} align='center'>Entrar</LabelBT>}
+                                <LabelBT color='#FFFFFF' align='center'>Entrar</LabelBT>}
                         </Row>
                     </Button>
 

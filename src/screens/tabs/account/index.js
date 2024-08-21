@@ -39,31 +39,27 @@ export default function AccountScreen({ navigation, }) {
                     <Title size={18}>Meu perfil</Title>
                 </Row>
 
-                <Column mh={margin.h}>
-                    <Button style={{ backgroundColor: color.light, marginTop: 12, }} radius={18} pv={1} ph={1} onPress={() => {navigation.navigate('MeusPedidos')}} >
+                <Column mh={margin.h} style={{ rowGap: 14, marginVertical: 12, }}>
+                    <Button style={{ backgroundColor: color.light,  }} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('MeusPedidos') }} >
                         <Row style={{ alignItems: 'center', }}>
                             <Image source={require('@imgs/ac1.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
                             <Title size={20}>Meus pedidos</Title>
                         </Row>
                     </Button>
-                    <Button style={{backgroundColor: color.light, marginTop: 12, }} radius={18} pv={1} ph={1} onPress={() => {navigation.navigate('PetsList')}} >
+                    <Button style={{ backgroundColor: color.light,  }} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('PetsList') }} >
                         <Row style={{ alignItems: 'center', }}>
                             <Image source={require('@imgs/ac2.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
                             <Title size={20}>Meus pets</Title>
                         </Row>
                     </Button>
-                    <Button style={{ backgroundColor: color.light, marginTop: 12, }} radius={18} pv={1} ph={1} onPress={() => {navigation.navigate('Services')}}>
+                    <Button style={{ backgroundColor: color.light,}} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('Services') }}>
                         <Row style={{ alignItems: 'center', }}>
                             <Image source={require('@imgs/ac3.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
                             <Title size={20}>Histórico de serviços</Title>
                         </Row>
                     </Button>
                 </Column>
-
-                <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginHorizontal: margin.h, paddingTop: 20, }}>
-                    <Title>Suporte</Title>
-                </Row>
-                <Button onPress={() => {navigation.navigate('ChatList')}}  style={{ backgroundColor: color.blue, marginTop: 12, }} radius={50} pv={16} ph={1} mh={margin.h}>
+                <Button onPress={() => { navigation.navigate('ChatList') }} style={{ backgroundColor: '#918C8B', marginTop: 12, }} radius={50} pv={16} ph={1} mh={margin.h}>
                     <Title align="center" color="#fff">Iniciar conversa</Title>
                 </Button>
             </Scroll>

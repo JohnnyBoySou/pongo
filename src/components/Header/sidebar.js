@@ -8,13 +8,13 @@ import Animated, {
 } from "react-native-reanimated"
 
 import { useState, useImperativeHandle, forwardRef, useEffect, } from "react"
-import { Column, SCREEN_HEIGHT } from '@theme/global';
+import { Column, SCREEN_HEIGHT, SCREEN_WIDTH } from '@theme/global';
 
 const SideBar = forwardRef(({ children }, ref) => {
   const MIN_HEIGHT = 0;
-  const MAX_HEIGHT = -300;
+  const MAX_HEIGHT = -SCREEN_WIDTH;
   
-  const translateX = useSharedValue(-300);
+  const translateX = useSharedValue(MAX_HEIGHT);
   const handleClose = () => {
     translateX.value = withTiming(MIN_HEIGHT);
   };
@@ -47,7 +47,7 @@ const SideBar = forwardRef(({ children }, ref) => {
   });
 
   return (
-      <Animated.View style={[{ top: 0, zIndex: 99,  position: 'absolute', width: MAX_HEIGHT, height: SCREEN_HEIGHT, paddingHorizontal: 28, }, animatedStyle]} >
+      <Animated.View style={[{ top: 0, bottom: 0, zIndex: 99,  position: 'absolute',  width: MAX_HEIGHT, height: SCREEN_HEIGHT, paddingHorizontal: 28, }, animatedStyle]} >
         {children}
       </Animated.View>
       )
