@@ -59,8 +59,8 @@ export default function AddPetScreen({ navigation, route, }) {
         <Main style={{}}>
             <Scroll>
                 <Column ph={28}>
-                    <Button pv={8} ph={20} bg={color.sc.sc3 + 30} onPress={() => { navigation.navigate('Tabs', { screen: 'Home', }) }} style={{ alignSelf: 'flex-end', marginBottom: 20, }}>
-                        <LabelBT color={color.sc.sc3} align="center">Pular</LabelBT>
+                    <Button pv={8} ph={20} bg='#ECEBEB' onPress={() => { navigation.navigate('Tabs', { screen: 'Home', }) }} style={{ alignSelf: 'flex-end', marginBottom: 20, }}>
+                        <LabelBT color='#918C8B' align="center">Pular</LabelBT>
                     </Button>
 
                     <Title font={'Voyage_Medium'} align="center" size={28}>VILLA PONGO</Title>
@@ -126,7 +126,7 @@ export default function AddPetScreen({ navigation, route, }) {
                         {colors.map((item, index) => (
                             <Column style={{ borderWidth: 2, borderColor: selectColor === item.cl ? item.cl + 80 : 'transparent', borderRadius: 100 }}>
                             <Button onPress={() => { setselectColor(item.cl) }} style={{ backgroundColor: item.cl, paddingHorizontal: 0, paddingVertical: 0, marginVertical: 4, marginHorizontal: 4,  }}  radius={100}  >
-                                <Column style={{width: 16, height: 16,}}/> 
+                                <Column style={{width: 24, height: 24,}}/> 
                             </Button>
                             </Column>
                         ))}

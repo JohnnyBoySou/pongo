@@ -50,10 +50,10 @@ const Input = ({ value, setValue, disabled, label, mask, props, pass = false }) 
   return (
     <Pressable onPress={() => { inputRef.current.focus() }} >
 
-      <Column style={{ borderColor: disabled ? '#f1f1f1' : focus ? color.sc.sc3 : color.sc.sc3 + 50, backgroundColor: '#fff', flexGrow: 1, borderWidth: 1, paddingBottom: 8, paddingTop: 24, paddingHorizontal: 16, borderRadius: 12, }}>
+      <Column style={{ borderColor: disabled ? '#f1f1f1' : focus ? color.label : 'transparent', backgroundColor: '#fff', flexGrow: 1, borderWidth: 2, paddingBottom: 8, paddingTop: 24, paddingHorizontal: 16, borderRadius: 12, }}>
         <MotiText
           state={inputAnimation}
-          style={{ fontFamily: font.medium, color: '#788BA4', letterSpacing: -0.6, position: 'absolute', top: 6, left: 16, zIndex: 1, }}
+          style={{ fontFamily: font.medium, color: color.label, letterSpacing: -0.6, position: 'absolute', top: 6, left: 16, zIndex: 1, }}
           transition={{ type: 'timing', duration: 200 }}
         >
           {label}
