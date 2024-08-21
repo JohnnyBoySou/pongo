@@ -23,37 +23,37 @@ export default function InstitucionalScreen({ navigation, }) {
 
                     <Carrossel data={imgs} />
 
-                    <Title style={{ marginTop: 24, marginBottom: -6, }}>Saiba mais</Title>
+                    <Title style={{ marginTop: 32, marginBottom: 24 }}>Saiba mais</Title>
 
-                    <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => {navigation.navigate('InstitucionalVisita')}} >
+                    <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => { navigation.navigate('InstitucionalVisita') }} >
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-solicitar-visita.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
                             <Title>Solicitar Visita</Title>
                         </Row>
                     </Pressable>
 
-                    <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => {navigation.navigate('InstitucionalAbout')}} >
+                    <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => { navigation.navigate('InstitucionalAbout') }} >
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-sobre-nos.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
                             <Title>Sobre nós</Title>
                         </Row>
                     </Pressable>
 
-                    <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => {navigation.navigate('InstitucionalRealizacoes')}} >
+                    <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => { navigation.navigate('InstitucionalRealizacoes') }} >
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-realizacoes.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
                             <Title>Realizações</Title>
                         </Row>
                     </Pressable>
 
-                    <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => {navigation.navigate('InstitucionalLocal')}} >
+                    <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => { navigation.navigate('InstitucionalLocal') }} >
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-onde-estamos.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
                             <Title>Onde estamos</Title>
                         </Row>
                     </Pressable>
 
-                    <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => {navigation.navigate('InstitucionalGaleria')}} >
+                    <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => { navigation.navigate('InstitucionalGaleria') }} >
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-galeria.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
                             <Title>Galeria</Title>

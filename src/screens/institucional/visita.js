@@ -5,6 +5,8 @@ import { ThemeContext } from 'styled-components/native';
 import { Apple } from 'lucide-react-native';
 import Header from '@components/Header';
 import Input from '@components/Forms/input';
+import Calendario from '@components/Calendar';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function InstitucionalVisitaScreen({ navigation, }) {
 
@@ -13,6 +15,31 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
     const [name, setname] = useState();
     const [tel, settel] = useState();
     const [type, settype] = useState('');
+
+
+    const [date, setDate] = useState(new Date(1598051730000));
+    const [mode, setMode] = useState('time');
+    const [show, setShow] = useState(false);
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate;
+        setShow(false);
+        setDate(currentDate);
+    };
+
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    };
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    const showTimepicker = () => {
+        showMode('time');
+    };
+
 
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
@@ -50,11 +77,21 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
                         </Row>
                     </Column>
 
-                    <Calendar />
+                    <Calendario />
 
                     <Button bg={'#FFFFFF'} mtop={12}>
                         <Text align="center" style={{ textAlign: 'center', fontWeight: '700', color: "#434343" }}>Selecione um horário:</Text>
                     </Button>
+
+                    <DateTimePicker
+                        testID="dateTimePicker"
+                        value={date}
+                        mode={mode}
+                        is24Hour={true}
+                        onChange={onChange}
+                    />
+
+
 
                     <Button bg={color.pr.pr1} mtop={12}>
                         <Text align="center" style={{ textAlign: 'center', fontWeight: '700', color: "#fff" }}>Agendar visita</Text>
@@ -69,10 +106,3 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
     )
 }
 
-const Calendar = () => {
-    return (
-        <Column >
-            <Title>Calendário</Title>
-        </Column>
-    )
-}

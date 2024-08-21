@@ -25,7 +25,7 @@ export default function InstitucionalAboutScreen() {
             <Scroll>
                 <TopMenu search={false} />
 
-                <Header title="Sobre Nós" />
+                <Header title="Sobre a Villa Pongo" />
 
                 <Column mh={margin.h}>
                     <Text style={{ color: '#979797', marginBottom: 12 }}>
@@ -78,6 +78,10 @@ export default function InstitucionalAboutScreen() {
                     <Text style={{ color: '#979797', marginBottom: 12 }}>
                         E para isso estamos apoiados em nossos PRINCÍPIOS e VALORES que são Respeito, Alteridade, Responsabilidade, Pioneirismo, Inovação, Ética e Excelência.
                     </Text>
+
+                    <Button onPress={() => { navigation.goBack() }} style={{ backgroundColor: color.border, marginTop: 20, marginBottom: 20, }} radius={12}>
+                        <Title size={18} align='center' font={font.medium}>Voltar</Title>
+                    </Button>
                 </Column>
 
             </Scroll>
