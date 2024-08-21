@@ -19,6 +19,7 @@ export default{
     off2: "#303030",
     waves: '#91A6C4',
 
+    icons: '#F1F1F1',
     pr: {
       pr1: '#918C8B',
       pr2: '#ECEBEB',

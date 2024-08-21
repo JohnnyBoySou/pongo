@@ -1,8 +1,9 @@
 export default{
-  background: "#FFFFFF",
+  background: "#ECEBEB",
   color: {
     primary: "#CF5050",
     secundary: "#5C0D45",
+    bg: "#ECEBEB",
 
     light: '#FFFFFF',
 
@@ -20,7 +21,7 @@ export default{
     off2: "#FFFFFF",
     waves: '#91A6C4',
 
-
+    icons: '#434343',
     pr: {
       pr1: '#918C8B',
       pr2: '#ECEBEB',

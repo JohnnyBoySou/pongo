@@ -3,6 +3,7 @@ import { Column, Title, Main, Row, Label, Button, LabelBT, useTheme, Scroll, Sub
 import Input from '@components/Forms/input';
 import Modal from '@components/Modal/index';
 import TextArea from '@components/Forms/textarea';
+import CheckBox from '@components/Forms/checkbox';
 
 export default function AddPetScreen({ navigation, route, }) {
     const { color, margin, font } = useTheme()
@@ -12,19 +13,18 @@ export default function AddPetScreen({ navigation, route, }) {
     const [type, settype] = useState();
     const [genero, setgenero] = useState();
     const [selectColor, setselectColor] = useState();
-    const [desc, setdesc] = useState();
-    
+    const [desc, setdesc] = useState('');
+
+
+
+
     const modalForget = useRef()
     const animals = [
         {
-            icon: '🐱',
-            label: 'Gato',
-            color: color.sc.sc2,
+            label: 'Dog',
         },
         {
-            icon: '🐶',
-            label: 'Cão',
-            color: color.sc.sc3,
+            label: 'Cat',
         },
     ]
 
@@ -44,12 +44,16 @@ export default function AddPetScreen({ navigation, route, }) {
     ]
 
     const colors = [
-        {cl: '#E5C8C9'},
-        {cl: '#91A6C4'},
-        {cl: '#778428'},
-        {cl: '#EBD269'},
-        {cl: '#918C8B'}
+        { cl: '#E5C8C9' },
+        { cl: '#91A6C4' },
+        { cl: '#778428' },
+        { cl: '#EBD269' },
+        { cl: '#918C8B' }
     ]
+
+    const handlePet = () => {
+        navigation.navigate('Tabs', { screen: 'Home', })
+    }
 
     return (
         <Main style={{}}>
@@ -60,10 +64,10 @@ export default function AddPetScreen({ navigation, route, }) {
                     </Button>
 
                     <Title font={'Voyage_Medium'} align="center" size={28}>VILLA PONGO</Title>
-                    <Title size={24} align='center'>Comece pelo seu Pet</Title>
-                    <Label size={16} align='center'>Preencha os dados do seu pet ou clique em pular logo acima</Label>
+                    <Title size={24} align='center' style={{ marginVertical: 12, }}>Comece pelo seu Pet</Title>
 
                     <Column style={{ height: 16, }} />
+                    
                     <Input
                         label="Nome *"
                         placeholder="Nome"
@@ -85,46 +89,52 @@ export default function AddPetScreen({ navigation, route, }) {
                         value={desc}
                         setValue={setdesc}
                     />
+                    <Label size={14} style={{ marginTop: 12, marginBottom: 6, alignSelf: 'flex-end', backgroundColor: '#918C8B', color: '#fff', borderRadius: 4, paddingHorizontal: 6, paddingVertical: 4, marginTop: -30, marginRight: 8, }} >{desc?.length}/200</Label>
                     <Column style={{ height: 16, }} />
 
 
-                    <Title color={color.sc.sc3} size={18} font={font.medium}>Seu pet é um *</Title>
-                    <Row style={{ marginVertical: 12, columnGap: 20,}}>
-                    {animals.map((item, index) => (
-                        <Button style={{ backgroundColor: type === item.label ? item.color : item.color + 50, width: 100, }} radius={12} onPress={() => { settype(item.label) }} >
-                            <Column style={{ alignItems: 'center',  }}>
-                                <Title style={{ fontSize: 32, }}>{item?.icon}</Title>
-                                <SubLabel size={18} color={type === item.label ? '#FFF' : '#00000090'}>{item?.label}</SubLabel>
-                            </Column>
-                        </Button>
-                    ))}
-                    </Row>
-
-
-                    <Title color={color.sc.sc3} size={18} font={font.medium}>Gênero *</Title>
-                    <Row style={{ marginVertical: 12, columnGap: 12, }}>
-                    {generos.map((item, index) => (
-                        <Button style={{ backgroundColor: genero === item.id ? color.sc.sc3 : color.sc.sc3 + 50,  }} radius={16} onPress={() => { setgenero(item.id) }} >
-                            <Column style={{ alignItems: 'center',  }}>
-                                <SubLabel size={18} color={genero === item.id ? '#FFF' : '#00000090'}>{item?.label}</SubLabel>
-                            </Column>
-                        </Button>
-                    ))}
-                    </Row>
-
-                    <Title color={color.sc.sc3} size={18} font={font.medium}>Escolha uma cor para o perfil do seu Pet *</Title>
-                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 12, }}>
-                        {colors.map((item, index) => (
-                            <Button onPress={() => {setselectColor(item.cl)}}  style={{ backgroundColor: item.cl, borderWidth: 6, borderColor: selectColor === item.cl ? item.cl+80 : 'transparent', width: 42, height: 52,}} ph={0} pv={0} radius={100}  >
-                                <Column style={{ }}>
-                                </Column>
+                    <Column style={{ height: 12, }} />
+                    <Title size={18} font={font.medium}>Seu pet é um *</Title>
+                    <Row style={{ marginVertical: 6, columnGap: 12, }}>
+                        {animals.map((item) => (
+                            <Button radius={12} onPress={() => { settype(item.label) }} pv={6} ph={6} >
+                                <Row style={{ alignItems: 'center', }}>
+                                    <CheckBox size={24} status={type === item.label} setstatus={() => { settype(item.label) }} />
+                                    <Label size={18} style={{ marginLeft: 8, }} >{item?.label}</Label>
+                                </Row>
                             </Button>
                         ))}
                     </Row>
 
-                
 
-                    <Button bg={color.sc.sc3} mbottom={24} mtop={24} >
+                    <Column style={{ height: 12, }} />
+                    <Title size={18} font={font.medium}>Gênero *</Title>
+                    <Row style={{ marginVertical: 6, columnGap: 8, }}>
+                        {generos.map((item, index) => (
+                            <Button radius={12} onPress={() => { setgenero(item.id) }} pv={6} ph={6} >
+                                <Row style={{ alignItems: 'center', }}>
+                                    <CheckBox status={genero === item.id} setstatus={() => { setgenero(item.id) }} size={24} />
+                                    <Label size={18} style={{ marginLeft: 8, }} >{item?.label}</Label>
+                                </Row>
+                            </Button>
+                        ))}
+                    </Row>
+
+                    <Column style={{ height: 12, }} />
+                    <Title size={18} font={font.medium}>Escolha uma cor para o perfil do seu Pet *</Title>
+                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginVertical: 6, }}>
+                        {colors.map((item, index) => (
+                            <Column style={{ borderWidth: 2, borderColor: selectColor === item.cl ? item.cl + 80 : 'transparent', borderRadius: 100 }}>
+                            <Button onPress={() => { setselectColor(item.cl) }} style={{ backgroundColor: item.cl, paddingHorizontal: 0, paddingVertical: 0, marginVertical: 4, marginHorizontal: 4,  }}  radius={100}  >
+                                <Column style={{width: 16, height: 16,}}/> 
+                            </Button>
+                            </Column>
+                        ))}
+                    </Row>
+
+
+
+                    <Button bg='#918C8B' mbottom={24} mtop={24} onPress={handlePet} >
                         <LabelBT style={{ color: '#fff', }} align='center'>Pronto</LabelBT>
                     </Button>
 

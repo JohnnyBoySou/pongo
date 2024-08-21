@@ -8,7 +8,7 @@ const Tab = createBottomTabNavigator();
 
 //ICONS
 import Octicons from '@expo/vector-icons/Octicons';
-import { CircleUserRound, ShoppingCart } from 'lucide-react-native';
+import { Bell, CircleUserRound, GraduationCap, ShoppingCart } from 'lucide-react-native';
 import { useTheme, Button } from '@theme/global';
 
 
@@ -48,7 +48,7 @@ import ChatDetailsScreen from '@screens/chat/details';
 import HomeScreen from '@screens/tabs/home';
 import AccountScreen from '@screens/tabs/account';
 import CartScreen from '@screens/tabs/cart';
-
+import NotifyScreen from '@screens/tabs/notify';
 //TEST
 import TestScreen from '@screens/test';
 
@@ -60,13 +60,16 @@ import ShopSingleServiceScreen from '@screens/shop/single_service';
 //VILLA PONGO
 import VillaPongoScreen from '@screens/villapongo';
 
+//SERVICES
+import ServicesScreen from '@screens/services';
+import ServicesSingleScreen from '@screens/services/single';
+
 //SCHOOL
 import SchoolRegisterScreen from '@screens/school/register';
 import SchoolFinishScreen from '@screens/school/finish';
 import SchoolSuccessScreen from '@screens/school/success';
 import SchoolPongoScreen from '@screens/school/index';
 import SchoolBoletimScreen from '@screens/school/boletim';
-import SchoolDiarioScreen from '@screens/school/diario';
 
 //DAY USE
 import DayUseScreen from '@screens/day-use/index';
@@ -96,7 +99,6 @@ export default function Router() {
         <Stack.Screen name="SchoolSuccess" component={SchoolSuccessScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="School" component={SchoolPongoScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="SchoolBoletim" component={SchoolBoletimScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-        <Stack.Screen name="SchoolDiario" component={SchoolDiarioScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
 
         <Stack.Screen name="Institucional" component={InstitucionalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -112,6 +114,11 @@ export default function Router() {
         <Stack.Screen name="ShopSingleService" component={ShopSingleServiceScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="VillaPongo" component={VillaPongoScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+
+
+        <Stack.Screen name="Services" component={ServicesScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="ServicesSingle" component={ServicesSingleScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+
 
         <Stack.Screen name="MeusPedidos" component={MeusPedidosScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="PedidoProdutoIndividual" component={PedidoProdutoIndividualScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -142,16 +149,16 @@ function Tabs() {
   const { color, font } = useTheme();
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home'
   return (
-    <Tab.Navigator initialRouteName="Account"
+    <Tab.Navigator initialRouteName="Home"
       screenOptions={{
         tabBarButton: (props) => <Button {...props} ph={0} pv={0} radius={6} />,
         headerShown: false,
         tabBarShowLabel: false,
         backBehavior: 'none',
         tabBarActiveTintColor: '#fff',
-        tabBarInactiveTintColor: '#f0a5a5',
+        tabBarInactiveTintColor: '#C3C3C3',
         tabBarStyle: {
-          backgroundColor: color.primary,
+          backgroundColor: '#918C8B',
           height: 64,
           elevation: 0,
         },
@@ -164,11 +171,17 @@ function Tabs() {
       <Tab.Screen name="Cart" component={CartScreen} options={{
         tabBarBadge: 3,
         tabBarBadgeStyle: { backgroundColor: '#fff', fontFamily: font.bold, fontSize: 12, },
-        tabBarIcon: ({ color, size }) => (<ShoppingCart name="search" size={routeName === 'Seach' ? size + 3 : size} color={color} />),
+        tabBarIcon: ({ color, size }) => (<ShoppingCart size={routeName === 'Cart' ? size + 3 : size} color={color} />),
+      }} />
+      <Tab.Screen name="School" component={SchoolBoletimScreen} options={{
+        tabBarIcon: ({ color, size }) => (<GraduationCap size={routeName === 'School' ? size + 6 : size + 2} color={color} />),
       }} />
 
+      <Tab.Screen name="Notify" component={NotifyScreen} options={{
+        tabBarIcon: ({ color, size }) => (<Bell size={routeName === 'Notify' ? size + 3 : size} color={color} />),
+      }} />
       <Tab.Screen name="Account" component={AccountScreen} options={{
-        tabBarIcon: ({ color, size }) => (<CircleUserRound name="user" size={routeName === 'Account' ? size + 3 : size} color={color} />),
+        tabBarIcon: ({ color, size }) => (<CircleUserRound size={routeName === 'Account' ? size + 3 : size} color={color} />),
       }} />
     </Tab.Navigator>
   )

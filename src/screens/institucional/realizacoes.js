@@ -15,7 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FlatList } from 'react-native-gesture-handler';
 
 
-export default function RealizacoesScreen() {
+export default function InstitucionalRealizacoesScreen() {
     const navigation = useNavigation();
     const { color, font, margin } = useTheme();
     const handleRegister = (item) => {

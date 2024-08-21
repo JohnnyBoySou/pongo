@@ -6,7 +6,7 @@ import { Apple } from 'lucide-react-native';
 import Header from '@components/Header';
 import Input from '@components/Forms/input';
 
-export default function VisitaScreen({ navigation, }) {
+export default function InstitucionalVisitaScreen({ navigation, }) {
 
     const { color, font, margin } = useContext(ThemeContext);
 
