@@ -11,11 +11,10 @@ import Octicons from '@expo/vector-icons/Octicons';
 import { Bell, CircleUserRound, GraduationCap, ShoppingCart } from 'lucide-react-native';
 import { useTheme, Button } from '@theme/global';
 
-
 //STACK SCREEN
 import OnboardingScreen from '@screens/auth/onboarding';
+import AsyncStaticScreen from '@screens/auth/async';
 import SearchScreen from '@screens/search/index';
-import WelcomeScreen from '@screens/auth/welcome';
 
 //AUTH
 import AuthLoginScreen from '@screens/auth/login';
@@ -24,16 +23,11 @@ import AuthRegisterScreen from '@screens/auth/register';
 //INSTITUCIONAL
 import InstitucionalScreen from '@screens/institucional/index';
 import InstitucionalVisitaScreen from '@screens/institucional/visita';
-import SobreNosScreen from '@screens/institucional/sobre-nos';
 import RealizacoesScreen from '@screens/institucional/realizacoes';
-import InstitucionalOndeEstamosScreen from '@screens/institucional/onde-estamos';
-import InstitucionalGaleriaScreen from '@screens/institucional/galeria';
-
-import InstitucionalRealizacoes from '@screens/institucional/realizacoes';
-import InstitucionalAboutScreen from '@screens/institucional/about';
 import InstitucionalLocalScreen from '@screens/institucional/local';
+import InstitucionalAboutScreen from '@screens/institucional/about';
+import InstitucionalGaleriaScreen from '@screens/institucional/galeria';
 import InstitucionalSingleGaleriaScreen from '@screens/institucional/singe_galeria';
-
 //PEDIDOS
 import MeusPedidosScreen from '@screens/pedidos/pedidos';
 import PedidoProdutoIndividualScreen from '@screens/pedidos/pedidoProdutoIndividual';
@@ -53,6 +47,7 @@ import HomeScreen from '@screens/tabs/home';
 import AccountScreen from '@screens/tabs/account';
 import CartScreen from '@screens/tabs/cart';
 import NotifyScreen from '@screens/tabs/notify';
+
 //TEST
 import TestScreen from '@screens/test';
 
@@ -87,7 +82,7 @@ import HotelRegisterScreen from '@screens/hotel/register';
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Onboarding'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='InstitucionalVisita'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -104,13 +99,12 @@ export default function Router() {
         <Stack.Screen name="School" component={SchoolPongoScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="SchoolBoletim" component={SchoolBoletimScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
-
         <Stack.Screen name="Institucional" component={InstitucionalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="InstitucionalVisita" component={InstitucionalVisitaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="InstitucionalAbout" component={InstitucionalAboutScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-        <Stack.Screen name="InstitucionalGaleria" component={InstitucionalGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-        <Stack.Screen name="InstitucionalRealizacoes" component={InstitucionalRealizacoes} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="InstitucionalLocal" component={InstitucionalLocalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="IntistucionalGaleria" component={InstitucionalGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="IntistucionalSingleGaleria" component={InstitucionalSingleGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Shop" component={ShopScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ShopSingleProduct" component={ShopSingleProductScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -121,7 +115,6 @@ export default function Router() {
         <Stack.Screen name="Services" component={ServicesScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ServicesSingle" component={ServicesSingleScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
-
         <Stack.Screen name="MeusPedidos" component={MeusPedidosScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="PedidoProdutoIndividual" component={PedidoProdutoIndividualScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -129,9 +122,9 @@ export default function Router() {
         <Stack.Screen name="AuthRegister" component={AuthRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="AddPet" component={AddPetScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
+        <Stack.Screen name="Async" component={AsyncStaticScreen} options={{ ...TransitionPresets.FadeFromBottomAndroid, }} />
         <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="Search" component={SearchScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-        <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Tabs" component={Tabs} options={{ ...TransitionPresets.SlideFromRightIOS, backBehavior: 'none', }} />
 
