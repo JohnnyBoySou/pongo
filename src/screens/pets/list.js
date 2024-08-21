@@ -4,11 +4,15 @@ import { Main, Scroll, Column, Label, Title, Row, useTheme, Image, Button } from
 import { FlatList } from 'react-native-gesture-handler';
 import { Plus } from 'lucide-react-native';
 import { useNavigation } from '@react-navigation/native';
+import Back from '@components/Back';
 
 export default function PetsListScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
     return (
         <Main>
+            <Column style={{ marginLeft: margin.h, marginBottom: 30, }}>
+                <Back />
+            </Column>
             <Title align="center">Selecione o perfil do Pet</Title>
             <FlatList
                 data={pets}

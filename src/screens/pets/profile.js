@@ -3,11 +3,12 @@ import { ScrollView } from 'react-native';
 import { Main, Scroll, Column, Label, Title, Row, useTheme, Image, Button, SCREEN_WIDTH } from '@theme/global'
 import { FlatList } from 'react-native-gesture-handler';
 import { Pencil, Plus } from 'lucide-react-native';
+import Back from '@components/Back';
 
 export default function PetsProfileScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
     return (
-        <Main>
+        <Main style={{ paddingTop: 0, }}>
             <FlatList
                 data={pets}
                 renderItem={({ item }) => <Pet pet={item} />}
@@ -24,16 +25,23 @@ export default function PetsProfileScreen({ navigation, }) {
 const Pet = ({ pet }) => {
     const { color, font, margin } = useTheme();
     return (
-        <Column bg={color.primary} style={{ flex: 1, width: SCREEN_WIDTH,}}>
-            <Column style={{ borderBottomLeftRadius: 100, borderBottomRightRadius: 100, backgroundColor: pet?.color, overflow: 'hidden', width: SCREEN_WIDTH, height: 300, }}>
+        <Column   style={{ flex: 1, width: SCREEN_WIDTH,}}>
+            <Column style={{ borderBottomLeftRadius: 130, paddingTop: 36, borderBottomRightRadius: 130, backgroundColor: pet?.color, overflow: 'hidden', width: SCREEN_WIDTH, height: 336, }}>
+                <Column style={{ marginTop: 20, marginLeft: 20, }}>
+                    <Back />
+                </Column>
                 <Image source={pet?.avatar} style={{ width: 300, height: 320, objectFit: 'contain', marginTop: 10, alignSelf: 'center', }} />
             </Column>
             <Row style={{ backgroundColor: '#fff', alignSelf: 'center', paddingHorizontal: 8, paddingVertical: 8, borderRadius: 100, marginTop: -26, justifyContent: 'space-between', alignItems: 'center', }}>
                 <Title size={18} align="center" color={color.sc.sc3} style={{ marginHorizontal: 20, }}>{pet?.name}</Title>
-                <Button ph={1} pv={1} style={{ backgroundColor: color.sc.sc3 + 40, justifyContent: 'center', alignItems: 'center', width: 36, height: 36, }}><Pencil size={18} color={color.sc.sc3} /></Button>
             </Row>
 
-            <Column  style={{ borderTopLeftRadius: 150, borderTopRightRadius: 150, marginTop: -100, paddingTop: 120, zIndex: -99, }}>
+            <Button ph={1} pv={1} style={{ justifyContent: 'center', alignItems: 'center', height: 36, alignSelf: 'center', }}>
+                <Title size={16} color="#fff">Editar perfil</Title>
+            </Button>
+
+
+            <Column  style={{ borderTopLeftRadius: 150, borderTopRightRadius: 150, marginTop: -100, paddingTop: 120, zIndex: -99, flex: 1,}} bg="#918C8B">
                 <Row style={{ columnGap: 12, paddingHorizontal: 20, }}>
                     <Column>
                         <Title color="#fff" size={16}>Tags</Title>

@@ -2,12 +2,7 @@ import { useContext } from "react";
 import styled, { ThemeContext } from 'styled-components/native';
 import { TouchableRipple } from 'react-native-paper';
 import { Dimensions, ScrollView, Image as RNImage, ActivityIndicator } from 'react-native';
-import { Image as ExpoImage } from 'expo-image'
 import { useNavigation } from "@react-navigation/native";
-
-
-
-
 
 export const Loader = ({ color = '#91A6C4', size = 20 }) => {
   return (
@@ -31,14 +26,14 @@ export const useNavigate = () => {
 //COMPONENTES DE LAYOUT
 export const Main = styled.SafeAreaView`
   flex: 1;
-background-color: ${props => props.bg || props.theme.background};
+  padding-top: 36;
+  background-color: ${props => props.bg || props.theme.background};
 `
 export const Scroll = styled(ScrollView).attrs(() => ({
   showVerticalScrollIndicator: false,
   showHorizontalScrollIndicator: false,
 }))`
 `
-
 
 export const Row = styled.View`
   flex-direction: row;

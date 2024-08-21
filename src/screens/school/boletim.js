@@ -21,7 +21,6 @@ export default function SchoolBoletimScreen({navigation, }) {
     const [type, settype] = useState('Boletim');
 
     const handleScreen = (position) => {
-        pagerRef.current.setPage(position);
         switch (position) {
             case 0:
                 ScrollButtons.current?.scrollTo({ x: 0, y: 0, animated: true, });
@@ -56,7 +55,6 @@ export default function SchoolBoletimScreen({navigation, }) {
                             <Label size={12} style={{ marginLeft: 6, lineHeight: 16, }}>Pesquisar</Label>
                         </Row>
                     </Button>
-
                 </Row>
 
                 <Column mh={margin.h}>
@@ -74,7 +72,33 @@ export default function SchoolBoletimScreen({navigation, }) {
                             <Text style={{ fontWeight: 700, marginVertical: 2 }}>Mensalidade: 1/1</Text>
                         </Column>
                     </Card>
-                    <Column style={{ height: 24, }} />
+                   
+                </Column>
+
+                <ScrollView ref={ScrollButtons} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 0, marginTop: 20, }}>
+                    <Column style={{ width: margin.h, }} />
+                    {types.map((item, index) => (
+                        <Button onPress={() => { handleScreen(index) }} style={{ opacity: type == item ? 1 : 0.5, backgroundColor: type == item ? '#fff' : 'transparent', }} ph={16} pv={10}>
+                            <LabelBT style={{ textAlign: 'center', color: color.title, fontSize: 14, }}>{item}</LabelBT>
+                        </Button>
+                    ))}
+                    <Button onPress={() => { navigation.navigate('PetsDiario', { id: 1, }) }} style={{ backgroundColor: 'transparent', }} ph={16} pv={10}>
+                        <LabelBT style={{ textAlign: 'center', color: color.title, fontSize: 14, }}>Diário</LabelBT>
+                    </Button>
+                    <Column style={{ width: margin.h, }} />
+                </ScrollView>
+                <Column pv={20}>
+                    {type == 'Boletim' && <CardBoletim/>}
+                    {type == 'Agenda' && <CardAgenda  />}
+                    {type == 'Métricas' && <CardMetricas />}
+                </Column>
+            </Scroll>
+        </Main>
+    );
+}
+
+ /*
+  <Column style={{ height: 24, }} />
                     <Title>Retrospectiva do semestre</Title>
                     <Column bg="#fff" ph={8} pv={10} mv={12} style={{ borderRadius: 16, }}>
                         <InstagramStories
@@ -102,71 +126,33 @@ export default function SchoolBoletimScreen({navigation, }) {
                             closeIconColor={'#fff'}
                         />
                     </Column>
-                </Column>
-
-                <ScrollView ref={ScrollButtons} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 0 }}>
-                    <Column style={{ width: margin.h, }} />
-                    {types.map((item, index) => (
-                        <Button onPress={() => { handleScreen(index) }} style={{ opacity: type == item ? 1 : 0.5, backgroundColor: type == item ? '#fff' : 'transparent', }} ph={16} pv={10}>
-                            <LabelBT style={{ textAlign: 'center', color: color.title, fontSize: 14, }}>{item}</LabelBT>
-                        </Button>
-                    ))}
-                    <Button onPress={() => { navigation.navigate('PetsDiario', { id: 1, }) }} style={{ backgroundColor: 'transparent', }} ph={16} pv={10}>
-                        <LabelBT style={{ textAlign: 'center', color: color.title, fontSize: 14, }}>Diário</LabelBT>
-                    </Button>
-                    <Column style={{ width: margin.h, }} />
-                </ScrollView>
-
-                <PagerView style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT, marginVertical: 12, }} initialPage={0} ref={pagerRef} onPageSelected={(event) => { handleScreen(event.nativeEvent.position) }}>
-                    <CardBoletim key={0} />
-                    <CardAgenda key={1} />
-                    <CardMetricas key={2} />
-                    <CardDiario key={3} />
-                </PagerView>
-
-            </Scroll>
-        </Main>
-    );
-}
-
-const CardDiario = () => {
-    const { color, font, margin } = useTheme();
-    return (
-        <Column mh={margin.h}>
-        </Column>
-    )
-}
-
+ */
 const CardMetricas = () => {
     const { color, font, margin } = useTheme();
     return (
         <Column mh={margin.h} style={{}}>
             <Row>
-                <Column bg="#fff" style={{ borderRadius: 16, rowGap: 6, flexGrow: 1, }} pv={20} ph={20}>
+                <Column bg="#fff" style={{ borderRadius: 16, rowGap: 12, flexGrow: 1, }} pv={20} ph={20}>
                     <Label size={14}>Passos</Label>
                     <Title size={16}>5.000</Title>
-                    <Column style={{ height: 4, }} />
                     <Label size={14}>Refeições</Label>
                     <Title size={16}>23</Title>
-                    <Column style={{ height: 4, }} />
                     <Label size={14}>Sonecas</Label>
                     <Title size={16}>10</Title>
                 </Column>
-                <Column style={{ width: 16, }} />
-                <Column bg={color.sc.sc3} style={{ borderRadius: 16, }} pv={20} ph={20}>
+                <Column style={{ width: 24, }} />
+                <Column bg={color.sc.sc3} style={{ borderRadius: 16, rowGap: 12,}} pv={20} ph={20}>
                     <Title color="#fff">Performance</Title>
-                    <Column style={{ height: 12, }} />
                     <Chart
                         value={58}
                         activeStrokeColor='#FFFFFF'
                         inActiveStrokeColor='#FFFFFF'
                         inActiveStrokeOpacity={0.3} />
-                    <Column style={{ height: 12, }} />
                     <Title color="#fff" size={12}>Alteração de +11.03</Title>
                     <Label color="#fff" size={10}>Bônus comportamento +1.30</Label>
                 </Column>
             </Row>
-            <Row mv={16}>
+            <Row mv={24} style={{ columnGap: 24, }}>
                 <Column bg='#E5C8C9' style={{ borderRadius: 16, }} pv={20} ph={20}>
                     <Title color="#fff">Socialização</Title>
                     <Column style={{ height: 12, }} />
@@ -178,7 +164,6 @@ const CardMetricas = () => {
                     <Column style={{ height: 12, }} />
                     <Title color="#fff" size={12}>Alteração de +11.03</Title>
                 </Column>
-                <Column style={{ width: 16, }} />
                 <Column bg="#fff" style={{ borderRadius: 16, rowGap: 6, flexGrow: 1, }} pv={20} ph={20}>
                     <Label size={14}>Banhos</Label>
                     <Title size={16}>52</Title>
