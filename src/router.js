@@ -24,6 +24,11 @@ import AuthRegisterScreen from '@screens/auth/register';
 //INSTITUCIONAL
 import InstitucionalScreen from '@screens/institucional/index';
 import InstitucionalVisitaScreen from '@screens/institucional/visita';
+import SobreNosScreen from '@screens/institucional/sobre-nos';
+import RealizacoesScreen from '@screens/institucional/realizacoes';
+import InstitucionalOndeEstamosScreen from '@screens/institucional/onde-estamos';
+import InstitucionalGaleriaScreen from '@screens/institucional/galeria';
+
 
 //PEDIDOS
 import MeusPedidosScreen from '@screens/pedidos/pedidos';
@@ -75,7 +80,7 @@ import HotelRegisterScreen from '@screens/hotel/register';
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Test'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='SobreNos'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -96,6 +101,10 @@ export default function Router() {
 
         <Stack.Screen name="Institucional" component={InstitucionalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="InstitucionalVisita" component={InstitucionalVisitaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="SobreNos" component={SobreNosScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="Realizacoes" component={RealizacoesScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="OndeEstamos" component={InstitucionalOndeEstamosScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="Galeria" component={InstitucionalGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
 
         <Stack.Screen name="Shop" component={ShopScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />

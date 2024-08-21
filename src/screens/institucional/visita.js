@@ -12,7 +12,7 @@ export default function VisitaScreen({ navigation, }) {
 
     const [name, setname] = useState();
     const [tel, settel] = useState();
-    const [type, settype] = useState('Pongo');
+    const [type, settype] = useState('');
 
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>

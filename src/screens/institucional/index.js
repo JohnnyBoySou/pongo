@@ -19,7 +19,7 @@ export default function InstitucionalScreen({ navigation, }) {
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
                 <Header title="Institucional" />
-                <Column mh={margin.h} >
+                <Column mh={margin.h} style={{ marginBottom: margin.v }} >
 
                     <Carrossel data={imgs} />
 
