@@ -91,9 +91,12 @@ export default function ServicesScreen({ navigation, }) {
                     />
                 </Column>
 
+
                 <Column mh={margin.h} marginTop={0} marginBottom={24} >
                     <Button style={{ width: '100%', backgroundColor: color.pr.pr1, padding: 15 }}><Label style={{ color: color.light, textAlign: 'center' }}>Solicitar novo serviço</Label></Button>
                 </Column>
+
+                <Column style={{ height: 60 }} />
 
             </Scroll>
             <TabBar />

@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Pressable, ScrollView, Text } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import SideBar from './sidebar';
+import Back from '@components/Back';
 
 export default function TopMenu({ search = true, cart = true }) {
     const { color, margin, font } = useTheme();
@@ -37,12 +38,23 @@ export default function TopMenu({ search = true, cart = true }) {
                         </Button>
                     </Row>
                 </Row>
-                {search && <Button mh={28} mv={14} style={{ backgroundColor: color.light, }} onPress={() => { navigation.navigate('Search') }} >
-                    <Row>
-                        <Search size={24} color={color.label} strokeWidth={1} />
-                        <Title size={18} style={{ fontFamily: 'Font_Medium', marginLeft: 12, color: color.label, }}>Pesquisar</Title>
-                    </Row>
-                </Button>}
+
+                <Row style={{ marginHorizontal: margin.h, flex: 1, alignItems: 'center' }}>
+                    {search &&
+                        <>
+                            <Back />
+
+                            <Button mv={14} style={{ backgroundColor: color.light, flex: 1, marginLeft: 12 }} onPress={() => { navigation.navigate('Search') }} >
+
+                                <Row>
+                                    <Search size={24} color={color.label} strokeWidth={1} />
+                                    <Title size={18} style={{ fontFamily: 'Font_Medium', marginLeft: 12, color: color.label, }}>Pesquisar</Title>
+                                </Row>
+                            </Button>
+                        </>
+                    }
+
+                </Row>
             </Column>
             <SideBar ref={sidebar}>
                 <ScrollView>

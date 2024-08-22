@@ -9,6 +9,7 @@ import { MoveRight } from 'lucide-react-native';
 
 import CarrosselRotinaEscola from './CarrosselRotinaEscola';
 import ListaRotinaEscola from './ListaRotinaEscola';
+import TabBar from '@components/TabBar';
 
 
 
@@ -34,9 +35,9 @@ export default function DayUseScreen() {
 
                     <Text style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 6, paddingHorizontal: 40, fontWeight: 700, lineHeight: 16 }}>Tenha todos os benefícios da Escola Pongo por um dia!</Text>
 
-                    <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
+                    { /* <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
                         <Label style={{ textAlign: 'center', color: color.title }}>Contratar Day Use</Label>
-                    </Button>
+                    </Button> */ }
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
@@ -94,15 +95,18 @@ export default function DayUseScreen() {
 
                 <ListaRotinaEscola />
 
-                <Column mh={margin.h} mv={margin.v}>
+                <Column style={{ height: 80 }} />
+
+                { /* <Column mh={margin.h} mv={margin.v}>
                     <Button style={{ width: '100%', backgroundColor: color.pr.pr2 }}>
                         <Text style={{ textAlign: 'center', color: color.title }}>Contratar Day Use</Text>
                     </Button>
-                </Column>
+                </Column> */ }
 
 
 
             </Scroll>
+            <TabBar />
         </Main>
     );
 }

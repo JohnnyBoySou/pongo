@@ -14,7 +14,7 @@ export default function HomeScreen({ navigation, }) {
                 <TopMenu />
                 <Column ph={margin.h} mv={18}>
                     <Title>Escolha qual deseja acessar</Title>
-                    <Row style={{ columnGap: 12, marginBottom: 8, marginTop: 24, flex: 1, width: '100%' }}>
+                    <Row style={{ columnGap: 16, marginBottom: 8, marginTop: 24, flex: 1, width: '100%' }}>
                         <MotiView
                             from={{ translateX: -55, opacity: 0 }}
                             animate={{ translateX: 0, opacity: 1 }}
@@ -50,7 +50,7 @@ export default function HomeScreen({ navigation, }) {
                         </MotiView>
 
                     </Row>
-                    <Row style={{ columnGap: 8, }}>
+                    <Row style={{ columnGap: 16, marginTop: 8, flex: 1 }}>
                         <MotiView
                             from={{ translateX: -55, opacity: 0 }}
                             animate={{ translateX: 0, opacity: 1 }}
@@ -62,7 +62,7 @@ export default function HomeScreen({ navigation, }) {
                         >
                             <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Tabs', { screen: 'Account' }) }}>
                                 <Column>
-                                    <MotiImage source={require('@imgs/home_3.png')} style={{ width: '100%', height: 130, objectFit: 'contain', marginHorizontal: 0, }} />
+                                    <MotiImage source={require('@imgs/home_3.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
                                     <Title align="center" size={18}>Minha conta</Title>
                                 </Column>
                             </Button>
@@ -79,13 +79,13 @@ export default function HomeScreen({ navigation, }) {
                             <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Institucional') }}>
                                 <Column>
                                     <MotiImage source={require('@imgs/home_4.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
-                                    <Title align="center" size={17}>Conheça mais</Title>
+                                    <Title align="center" size={16}>Conheça mais</Title>
                                 </Column>
                             </Button>
                         </MotiView>
                     </Row>
                 </Column>
-                <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor:'#918C8B', }} radius={50} pv={16} ph={1} mv={32} mh={margin.h}>
+                <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor: '#918C8B', }} radius={50} pv={16} ph={1} mv={12} mh={margin.h}>
                     <Title align="center" font={font.medium} color="#918C8B">Iniciar conversa</Title>
                 </Button>
             </Scroll>

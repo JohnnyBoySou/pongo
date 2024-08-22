@@ -17,6 +17,7 @@ import CarrosselTopo from './CarrosselTopo';
 import PlanosList from '@components/Planos';
 import CarrosselRotinaEscola from './CarrosselRotinaEscola';
 import ListaRotinaEscola from './ListaRotinaEscola';
+import TabBar from '@components/TabBar';
 
 
 
@@ -39,11 +40,11 @@ export default function HotelScreen() {
                 <Column mh={margin.h}>
 
                     <Image source={require('@imgs/img-escola-banner1.png')} style={{ width: 304, height: 167, marginVertical: 24 }} />
-                    <Title align="center" style={{  paddingVertical: 6,  }}>Aconchegante e impecável, {'\n'}nossos quartos são únicos.</Title>
-                    <Label size={14} align="center" style={{  paddingVertical: 6, paddingHorizontal: 22 }}>Seu pet irá se hospedar em um dos bairros mais nobres e seguros de São Paulo.</Label>
-                    <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
+                    <Title align="center" style={{ paddingVertical: 6, }}>Aconchegante e impecável, {'\n'}nossos quartos são únicos.</Title>
+                    <Label size={14} align="center" style={{ paddingVertical: 6, paddingHorizontal: 22 }}>Seu pet irá se hospedar em um dos bairros mais nobres e seguros de São Paulo.</Label>
+                    { /* <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
                         <LabelBT style={{ textAlign: 'center', color: color.title }}>Reservar Hotel</LabelBT>
-                    </Button>
+                    </Button> */ }
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
@@ -148,17 +149,20 @@ export default function HotelScreen() {
                         <Label style={{ color: '#fff', fontSize: 13, marginTop: 12 }}>Respeitar os horários de Check In e Check Out</Label>
                         <Label style={{ color: '#fff', fontSize: 11, marginTop: 6 }}>(Após o horário de Check Out, haverá uma tolerância de 15 minutos, excedido esse tempo será cobrado Late Check Out, no valor da diária contratada)</Label>
 
-
-                        <Button style={{ backgroundColor: '#fff', marginVertical: 32 }}>
+                        <Column style={{ height: 40 }} />
+                        { /* <Button style={{ backgroundColor: '#fff', marginVertical: 32 }}>
                             <Text style={{ fontSize: 12, color: '#434343', textAlign: 'center', fontWeight: 400 }}>Cadastrar pré-matrícula</Text>
-                        </Button>
+                        </Button> */ }
                     </Column>
 
 
 
                 </View>
 
+
+
             </Scroll>
+            <TabBar />
         </Main>
     );
 }

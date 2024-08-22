@@ -5,13 +5,14 @@ import { FlatList } from 'react-native-gesture-handler';
 import { Plus } from 'lucide-react-native';
 import { useNavigation } from '@react-navigation/native';
 import Back from '@components/Back';
-import TopMenu  from '@components/Header/topmenu';
+import TopMenu from '@components/Header/topmenu';
+import TabBar from '@components/TabBar';
 
 export default function PetsListScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
     return (
         <Main>
-           
+
             <TopMenu search={false} />
             <Column style={{ marginLeft: margin.h, marginBottom: 30, }}>
                 <Back />
@@ -25,8 +26,10 @@ export default function PetsListScreen({ navigation, }) {
                 numColumns={2}
                 columnWrapperStyle={{ justifyContent: 'space-evenly', marginHorizontal: 20, }}
                 contentContainerStyle={{ marginTop: 20, }}
-               
+
             />
+
+            <TabBar />
         </Main>
     )
 }
