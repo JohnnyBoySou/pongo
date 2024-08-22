@@ -5,11 +5,14 @@ import { FlatList } from 'react-native-gesture-handler';
 import { Plus } from 'lucide-react-native';
 import { useNavigation } from '@react-navigation/native';
 import Back from '@components/Back';
+import TopMenu  from '@components/Header/topmenu';
 
 export default function PetsListScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
     return (
         <Main>
+           
+            <TopMenu search={false} />
             <Column style={{ marginLeft: margin.h, marginBottom: 30, }}>
                 <Back />
             </Column>
@@ -22,17 +25,7 @@ export default function PetsListScreen({ navigation, }) {
                 numColumns={2}
                 columnWrapperStyle={{ justifyContent: 'space-evenly', marginHorizontal: 20, }}
                 contentContainerStyle={{ marginTop: 20, }}
-                ListFooterComponent={
-                    <Button onPress={() => navigation.navigate('AddPet')} radius={12} pv={12} ph={12}>
-                        <Column style={{ justifyContent: 'center', alignItems: 'center', }}>
-                            <Column style={{ borderRadius: 100, backgroundColor: color.sc.sc3, width: 80, height: 80, justifyContent: 'center', alignItems: 'center', }}>
-                                <Plus size={38} color="#fff" strokeWidth={2} />
-                            </Column>
-                            <Title size={18} align="center" style={{ marginTop: 10, }}>Adicionar pet</Title>
-                            <Label size={16} align="center" style={{ marginTop: 2, }}>Adicione um novo pet a sua lista</Label>
-                        </Column>
-                    </Button>
-                }
+               
             />
         </Main>
     )
@@ -85,3 +78,18 @@ const pets = [
     },
 
 ]
+
+
+/**
+ *  ListFooterComponent={
+                    <Button onPress={() => navigation.navigate('AddPet')} radius={12} pv={12} ph={12}>
+                        <Column style={{ justifyContent: 'center', alignItems: 'center', }}>
+                            <Column style={{ borderRadius: 100, backgroundColor: color.sc.sc3, width: 80, height: 80, justifyContent: 'center', alignItems: 'center', }}>
+                                <Plus size={38} color="#fff" strokeWidth={2} />
+                            </Column>
+                            <Title size={18} align="center" style={{ marginTop: 10, }}>Adicionar pet</Title>
+                            <Label size={16} align="center" style={{ marginTop: 2, }}>Adicione um novo pet a sua lista</Label>
+                        </Column>
+                    </Button>
+                }
+ */

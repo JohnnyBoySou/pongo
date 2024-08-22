@@ -21,9 +21,7 @@ export default function TabBar({ }) {
             <Button ph={0} pv={0} style={{flexGrow: 1, justifyContent: 'center', alignItems: 'center', }} radius={6} onPress={() => {navigation.navigate('Tabs', { screen: 'Home',})}} >
                 <Octicons name="home" size={20} color="#C3C3C3" />
             </Button>
-            <Button ph={0} pv={0} style={{flexGrow: 1, justifyContent: 'center', alignItems: 'center', }}  radius={6} onPress={() => {navigation.navigate('Tabs', { screen: 'Cart',})}} >
-                <ShoppingCart size={24} color="#C3C3C3" />
-            </Button>
+       
             <Button ph={0} pv={0} style={{flexGrow: 1, justifyContent: 'center', alignItems: 'center', }} radius={6} onPress={() => {navigation.navigate('Tabs', { screen: 'School',})}} >
                 <GraduationCap  size={28} color="#C3C3C3" />
             </Button>
@@ -36,3 +34,9 @@ export default function TabBar({ }) {
         </Row>
     )
 }
+
+/*
+     <Button ph={0} pv={0} style={{flexGrow: 1, justifyContent: 'center', alignItems: 'center', }}  radius={6} onPress={() => {navigation.navigate('Tabs', { screen: 'Cart',})}} >
+                <ShoppingCart size={24} color="#C3C3C3" />
+            </Button>
+            */

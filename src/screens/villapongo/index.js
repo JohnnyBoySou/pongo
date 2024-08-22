@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Image } from '@theme/global';
 import TopMenu from '@components/Header/topmenu';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
-
+import { useNavigation } from '@react-navigation/native';
+import TabBar from '@components/TabBar';
+import Back from '@components/Back';
 export default function VillaPongoScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
     return (
         <Main>
             <Scroll>
                 <Column>
+                <Back />
                     <TopMenu />
                     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                         <Column style={{ width: 28, }} />
@@ -46,6 +49,7 @@ export default function VillaPongoScreen({ navigation, }) {
 
                 </Column>
             </Scroll>
+            <TabBar />
         </Main>
     )
 }
@@ -53,8 +57,9 @@ export default function VillaPongoScreen({ navigation, }) {
 const Card = ({ item }) => {
     const { color, font, margin } = useTheme();
     const { name, time, price, img } = item
+    const navigation = useNavigation()
     return (
-        <Button pv={12} ph={12} radius={12} mh={0} mv={6} style={{ borderWidth: 1, borderColor: color.border, }}>
+        <Button pv={12} ph={12} radius={12} mh={0} mv={6} style={{ borderWidth: 1, borderColor: color.border, }} onPress={() => {navigation.navigate(item.screen)}} >
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
                 <Row>
                     <Image style={{ width: 46, height: 46, backgroundColor: '#d7d7d7', borderRadius: 8, marginRight: 12, }} />
@@ -65,8 +70,6 @@ const Card = ({ item }) => {
                     </Column>
                 </Row>
                 <Column>
-                    <Label size={14}></Label>
-                    <Title size={16}>{price}</Title>
                 </Column>
             </Row>
         </Button>
@@ -75,46 +78,25 @@ const Card = ({ item }) => {
 
 const data = [
     {
-        name: 'Banho',
-        time: 'Tempo de duração',
-        price: 'R$ 150,00',
-        id: 1,
-        img: '',
-    },
-    {
-        name: 'Tosa',
-        time: 'Tempo de duração',
-        price: 'R$ 150,00',
-        id: 2,
-        img: '',
-    },
-    {
-        name: 'Hospital veterinário',
-        time: 'Tempo de duração',
-        price: 'R$ 150,00',
-        id: 2,
-        img: '',
-    },
-    {
         name: 'Hotel',
         time: 'Tempo de duração',
-        price: 'R$ 150,00',
         id: 2,
-        img: '',
+        img: 'Hotel',
+        screen: 'Hotel',
     },
     {
         name: 'Day use',
         time: 'Tempo de duração',
-        price: 'R$ 150,00',
         id: 2,
         img: '',
+        screen: 'DayUse',
     },
     {
         name: 'Escola',
         time: 'Tempo de duração',
-        price: 'R$ 150,00',
         id: 2,
         img: '',
+        screen: 'School',
     },
 
 ]

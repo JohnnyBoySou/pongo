@@ -75,10 +75,10 @@ const Input = ({ value, setValue, disabled, label, mask, props, pass = false }) 
         {pass && <Pressable onPress={() => {setsecure(!secure)}} style={{ position: 'absolute', right: 16, top: 18 }}>
           {secure ? <Eye
             size={24}
-            color={color.sc.sc3}
+            color={color.title}
           /> : <EyeOff 
             size={24}
-            color={color.sc.sc3}
+            color={color.label}
           />}
         </Pressable>}
       </Column>

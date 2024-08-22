@@ -15,21 +15,16 @@ export default function WelcomeScreen({ navigation, route }) {
     return (
         <Main style={{ backgroundColor: "#918C8B", flex: 1, justifyContent: 'center', alignItems: 'center', }}>
 
-            <Column style={{ position: 'absolute', top: 40, justifyContent: 'center', alignItems: 'center', }}>
-                <Animated.View entering={FadeInUp} style={{ justifyContent: 'center', alignItems: 'center', }}>
-                    <Title color="#fff" font='Voyage_Medium' style={{ lineHeight: 42, fontSize: 32, }}>VILLA PONGO</Title>
-                    <Image source={require('@imgs/wel.png')} style={{ width: 132, height: 6, }} />
-                </Animated.View>
-            </Column>
+           
             <Animated.View entering={FadeInDown.delay(500)}>
                 <Title color="#fff" font='Voyage_Medium' style={{ lineHeight: 42, fontSize: 32, }}>Seja bem-vinda, {name}!</Title>
             </Animated.View>
-            <Animated.View entering={FadeInDown.delay(1000)}>
+            <Animated.View entering={FadeInDown.delay(800)}>
                 <Label color="#fff" style={{ lineHeight: 20, }}>É um prazer ter você conosco!</Label>
             </Animated.View>
 
-            <Animated.View entering={FadeInLeft.delay(2000)}>
-                <Button bg="#d9d9d9" mv={16} pv={8} ph={20} onPress={() => { navigation.navigate('AddPet') }}  >
+            <Animated.View entering={FadeInLeft.delay(1200)}>
+                <Button bg="#d9d9d9" mv={16} pv={8} ph={20} onPress={() => { navigation.navigate('Tabs') }}  >
                     <ArrowRight size={24} color="#918C8B" />
                 </Button>
             </Animated.View>

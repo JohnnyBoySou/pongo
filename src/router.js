@@ -41,11 +41,13 @@ import AddPetScreen from '@screens/auth/addpet';
 
 //CHAT
 import ChatListScreen from '@screens/chat/list';
+import ChatNewScreen from '@screens/chat/new';
 import ChatDetailsScreen from '@screens/chat/details';
 
 //TABS SCREEN
 import HomeScreen from '@screens/tabs/home';
 import AccountScreen from '@screens/tabs/account';
+import AccountDetailsScreen from '@screens/tabs/account/details';
 import CartScreen from '@screens/tabs/cart';
 import NotifyScreen from '@screens/tabs/notify';
 
@@ -89,6 +91,7 @@ export default function Router() {
 
         <Stack.Screen name="ChatList" component={ChatListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatDetails" component={ChatDetailsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="ChatNew" component={ChatNewScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="PetsList" component={PetsListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="PetsProfile" component={PetsProfileScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -128,6 +131,7 @@ export default function Router() {
         <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="Search" component={SearchScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="AccountDetails" component={AccountDetailsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="Tabs" component={Tabs} options={{ ...TransitionPresets.SlideFromRightIOS, backBehavior: 'none', }} />
 
         <Stack.Screen name="DayUse" component={DayUseScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -167,11 +171,7 @@ function Tabs() {
         tabBarIcon: ({ color, size }) => (<Octicons name="home" size={routeName === 'Home' ? size + 3 : size} color={color} />),
       }} />
 
-      <Tab.Screen name="Cart" component={CartScreen} options={{
-        tabBarBadge: 3,
-        tabBarBadgeStyle: { backgroundColor: '#fff', fontFamily: font.bold, fontSize: 12, },
-        tabBarIcon: ({ color, size }) => (<ShoppingCart size={routeName === 'Cart' ? size + 3 : size} color={color} />),
-      }} />
+    
       <Tab.Screen name="School" component={SchoolBoletimScreen} options={{
         tabBarIcon: ({ color, size }) => (<GraduationCap size={routeName === 'School' ? size + 6 : size + 2} color={color} />),
       }} />
@@ -196,6 +196,10 @@ function Tabs() {
     ScaleFromCenterAndroid 
     DefaultTransition 
     ModalTransition
-
+  <Tab.Screen name="Cart" component={CartScreen} options={{
+        tabBarBadge: 3,
+        tabBarBadgeStyle: { backgroundColor: '#fff', fontFamily: font.bold, fontSize: 12, },
+        tabBarIcon: ({ color, size }) => (<ShoppingCart size={routeName === 'Cart' ? size + 3 : size} color={color} />),
+      }} />
 
 */

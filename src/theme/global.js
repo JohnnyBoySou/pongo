@@ -3,6 +3,9 @@ import styled, { ThemeContext } from 'styled-components/native';
 import { TouchableRipple } from 'react-native-paper';
 import { Dimensions, ScrollView, Image as RNImage, ActivityIndicator } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
+import ButtonPrimary from "@components/Buttons";
+
+export { ButtonPrimary };
 
 export const Loader = ({ color = '#91A6C4', size = 20 }) => {
   return (

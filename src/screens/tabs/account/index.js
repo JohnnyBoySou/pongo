@@ -1,5 +1,5 @@
 import React, { useContext, } from 'react';
-import { Main, Scroll, Title, Row, Column, useTheme, Label, Image, Button } from '@theme/global';
+import { Main, Scroll, Title, Row, Column, useTheme, Label, Image, Button, ButtonPrimary } from '@theme/global';
 import TopMenu from '@components/Header/topmenu';
 
 export default function AccountScreen({ navigation, }) {
@@ -35,21 +35,18 @@ export default function AccountScreen({ navigation, }) {
 
                 </Column>
 
-                <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginHorizontal: margin.h, paddingTop: 10, }}>
-                    <Title size={18}>Meu perfil</Title>
-                </Row>
-
                 <Column mh={margin.h} style={{ rowGap: 22, marginVertical: 22, }}>
-                    <Button style={{ backgroundColor: color.light, }} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('MeusPedidos') }} >
-                        <Row style={{ alignItems: 'center', }}>
-                            <Image source={require('@imgs/ac1.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
-                            <Title size={20}>Meus pedidos</Title>
-                        </Row>
-                    </Button>
+
                     <Button style={{ backgroundColor: color.light, }} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('PetsList') }} >
                         <Row style={{ alignItems: 'center', }}>
                             <Image source={require('@imgs/ac2.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
                             <Title size={20}>Meus pets</Title>
+                        </Row>
+                    </Button>
+                    <Button style={{ backgroundColor: color.light, }} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('AccountDetails') }} >
+                        <Row style={{ alignItems: 'center', }}>
+                            <Image source={require('@imgs/ac2.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
+                            <Title size={20}>Meu perfil</Title>
                         </Row>
                     </Button>
                     <Button style={{ backgroundColor: color.light, }} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('Services') }}>
@@ -58,11 +55,35 @@ export default function AccountScreen({ navigation, }) {
                             <Title size={20}>Histórico de serviços</Title>
                         </Row>
                     </Button>
+                    <Button style={{ backgroundColor: color.light, }} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('ChatList') }}>
+                        <Row style={{ alignItems: 'center', }}>
+                            <Image source={require('@imgs/chat.png')} style={{ width: 80, height: 80, marginRight: 12, objectFit: 'contain', }} />
+                            <Title size={20}>Histórico de conversas</Title>
+                        </Row>
+                    </Button>
                 </Column>
-                <Button onPress={() => { navigation.navigate('ChatList') }} style={{ backgroundColor: '#918C8B' }} radius={50} pv={16} ph={1} mh={margin.h}>
-                    <Title align="center" color="#fff">Iniciar conversa</Title>
+                <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor: '#918C8B', }} radius={50} pv={16} ph={1} mh={margin.h}>
+                    <Title align="center" font={font.medium} color="#918C8B">Iniciar conversa</Title>
                 </Button>
+
+                <Column bg="#fff" mh={margin.h} style={{ borderRadius: 16, }} pv={10} ph={8} mv={12}>
+
+                    <ButtonPrimary label="Meus pedidos light" type='Light' login />
+
+                    <ButtonPrimary label="Meus pedidos" type='Default' />
+
+                    <ButtonPrimary label="Meus pedidos dark" type='Dark' />
+
+                </Column>
             </Scroll>
         </Main>
     )
 }
+/**
+ *      <Button style={{ backgroundColor: color.light, }} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('MeusPedidos') }} >
+                        <Row style={{ alignItems: 'center', }}>
+                            <Image source={require('@imgs/ac1.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
+                            <Title size={20}>Meus pedidos</Title>
+                        </Row>
+                    </Button>
+ */

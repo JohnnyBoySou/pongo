@@ -6,6 +6,7 @@ import { Apple } from 'lucide-react-native';
 import Header from '@components/Header';
 import Swiper from 'react-native-swiper';
 import Input from '@components/Forms/input';
+import TopMenu from '@components/Header/topmenu';
 
 export default function InstitucionalScreen({ navigation, }) {
 
@@ -18,12 +19,11 @@ export default function InstitucionalScreen({ navigation, }) {
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
-                <Header title="Institucional" />
-                <Column mh={margin.h} style={{ marginBottom: margin.v }} >
-
+                <TopMenu  title="Conheça mais"/>
+                <Column mh={margin.h} mv={12}>
                     <Carrossel data={imgs} />
 
-                    <Title style={{ marginTop: 32, marginBottom: 24 }}>Saiba mais</Title>
+                    <Column style={{height: 20, }} />
 
                     <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => { navigation.navigate('InstitucionalVisita') }} >
                         <Row style={{ alignItems: 'center' }}>

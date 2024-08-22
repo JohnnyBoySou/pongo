@@ -9,7 +9,7 @@ const Header = ({ title, }) => {
     const navigation = useNavigation();
     return (
         <Row style={{ paddingHorizontal: margin.h, justifyContent: 'space-between', alignItems: 'center', paddingVertical: 16,  }}>
-           <    Back/>
+            <Back/>
             <Title style={{ textAlign: 'center', fontSize: 22, lineHeight: 26, }}>{title}</Title>
 
             <Column style={{ width: 42, height: 42, }}></Column>

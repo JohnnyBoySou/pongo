@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Main, Scroll, Title, Row, Column, Label, Button, SubLabel, U, useTheme, SCREEN_WIDTH, LabelBT } from '@theme/global';
+import { Main, Scroll, Title, Row, Column, Label, Button, SubLabel, U, useTheme, SCREEN_WIDTH, LabelBT, SCREEN_HEIGHT } from '@theme/global';
 import { ArrowLeft, CircleCheck, CircleX } from 'lucide-react-native';
 import Input from '@components/Forms/input';
 import Modal from '@components/Modal/index';
@@ -42,7 +42,7 @@ export default function AuthLoginScreen({ navigation, }) {
         }
     }
 
-    
+
     const a = false;
     return (
         <Main style={{}}>
@@ -51,15 +51,9 @@ export default function AuthLoginScreen({ navigation, }) {
 
                     <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 20, }}>
                         <Back />
-                        {a && <Button mright={-14} radius={12} onPress={() => { navigation.navigate('AuthRegister') }} >
-                            <Column style={{ justifyContent: 'center', alignItems: 'flex-end', backgroundColor: color.sc.sc3 + 20, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
-                                <Label size={14} color={color.sc.sc3}>Ainda não tem uma conta?</Label>
-                                <LabelBT size={14} color={color.sc.sc3}>Crie agora mesmo!</LabelBT>
-                            </Column>
-                        </Button>}
                     </Row>
 
-                    <Title size={26} style={{ marginTop: 20, marginBottom: 4, }}>Olá! Faça seu login utilizando seu usuário e senha da Villa Pongo</Title>
+                    <Title size={26} style={{ marginTop: 20, marginBottom: 4, }}>Olá! Acesse sua conta utilizando seu e-mail e senha.</Title>
 
                     <Column style={{ height: 16, }} />
                     <Input
@@ -88,7 +82,7 @@ export default function AuthLoginScreen({ navigation, }) {
                         <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de uso e Privacidade</U></Label>
                     </Row>
 
-                    <Button bg='#918C8B' mbottom={24} disabled={loading} onPress={handleLogin}>
+                    <Button bg='#918C8B'  disabled={loading} onPress={handleLogin}>
                         <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                             {loading ?
                                 <Loader color="#fff" /> :
@@ -96,14 +90,21 @@ export default function AuthLoginScreen({ navigation, }) {
                         </Row>
                     </Button>
 
+                    <Button radius={12} onPress={() => { navigation.navigate('AuthRegister') }} mv={12}>
+                        <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
+                            <Label size={14} color={color.sc.sc3} align="center">Ainda não tem uma conta?</Label>
+                            <LabelBT size={14} color={color.sc.sc3} align="center" >Clique aqui para criar</LabelBT>
+                        </Column>
+                    </Button>
+
                     <Label size={14} align='center' >Ao continuar, você concorda em receber chamadas e mensagens SMS ou pelo WhatsApp, inclusive automáticas, da Villa Pongo e de suas afiliadas, no número informado.</Label>
 
                 </Column>
             </Scroll>
 
-            <Modal ref={modalForget} snapPoints={[0.1, 200]}>
+            <Modal ref={modalForget} snapPoints={[0.1, SCREEN_HEIGHT]}>
                 <Column style={{ marginHorizontal: margin.h, marginVertical: margin.v, }}>
-                    <SubLabel style={{ color: color.secundary, fontSize: 18, }}>Requisitos para a senha</SubLabel>
+                    <Title style={{  }}>Recuperar a senha</Title>
                 </Column>
             </Modal>
         </Main>
