@@ -34,22 +34,23 @@ export default function PetsListScreen({ navigation, }) {
 
     return (
         <Main>
-            <TopMenu search={false} />
-            <Column style={{ marginLeft: margin.h, marginVertical: 20, }}>
-                <Back />
-            </Column>
-            <Title align="center">Selecione o perfil do Pet</Title>
-            {loading ? <Loader /> :
-                <FlatList
-                    data={data}
-                    renderItem={({ item }) => <Pet pet={item} navigation={navigation} />}
-                    keyExtractor={item => item.id}
-                    showsVerticalScrollIndicator={false}
-                    numColumns={2}
-                    columnWrapperStyle={{ justifyContent: 'space-evenly', marginHorizontal: 20, }}
-                    contentContainerStyle={{ marginTop: 20, }}
-                />}
+            <Scroll>
+                <Column style={{ marginBottom: margin.h }}>
+                    <TopMenu search={true} />
+                </Column>
 
+                <Title align="center">Selecione o perfil do Pet</Title>
+                {loading ? <Loader /> :
+                    <FlatList
+                        data={data}
+                        renderItem={({ item }) => <Pet pet={item} navigation={navigation} />}
+                        keyExtractor={item => item.id}
+                        showsVerticalScrollIndicator={false}
+                        numColumns={2}
+                        columnWrapperStyle={{ justifyContent: 'space-evenly', marginHorizontal: 20, }}
+                        contentContainerStyle={{ marginTop: 20, }}
+                    />}
+            </Scroll>
             <TabBar />
         </Main>
     )
