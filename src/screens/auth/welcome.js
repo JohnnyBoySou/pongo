@@ -3,8 +3,6 @@ import { Main, Title, useTheme, Label, Image, Column, Button, View } from '@them
 import { ArrowRight } from 'lucide-react-native';
 import Animated, { FadeInDown, FadeInLeft, FadeInUp } from 'react-native-reanimated';
 export default function WelcomeScreen({ navigation, route }) {
-    //verificacoes e animação
-    const { font, color, margin } = useTheme();
 
     const name = route.params?.name ? route.params?.name : 'Visitante'
     
