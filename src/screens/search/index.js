@@ -1,9 +1,11 @@
-import React, { useContext, useState } from 'react';
-import { Main, Scroll, Column, Row, Button } from '@theme/global';
+import React, { useContext, useState, useEffect } from 'react';
+import { Main, Scroll, Column, Row, Button, Title, Image, Label } from '@theme/global';
+import { FlatList } from 'react-native';
 import { ThemeContext } from 'styled-components/native';
 import { TextInput } from 'react-native';
 import { Search } from 'lucide-react-native';
 import Back from '@components/Back';
+import TopMenu from '@components/Header/topmenu';
 
 export default function SearchScreen({ navigation, route }) {
     const { color, font, margin } = useContext(ThemeContext);
@@ -15,6 +17,11 @@ export default function SearchScreen({ navigation, route }) {
     return (
         <Main style={{ backgroundColor: "#ECEBEB", }}>
             <Scroll>
+
+                <Column style={{ marginBottom: margin.h }}>
+                    <TopMenu search={false} />
+                </Column>
+
                 <Row style={{ marginHorizontal: margin.h, flex: 1, alignItems: 'center' }}>
                     <Back />
                     <Row style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
@@ -33,7 +40,99 @@ export default function SearchScreen({ navigation, route }) {
                         </Button>
                     </Row>
                 </Row>
+
+                <Column style={{ marginHorizontal: margin.h, marginTop: margin.h, flex: 1, }}>
+                    <Title color='#858585'>Recentes</Title>
+                </Column>
+
+                <ItensFlat type="Produtos" />
             </Scroll>
         </Main>
     )
 }
+
+
+
+const ItensFlat = ({ type }) => {
+
+    const [loading, setloading] = useState(true);
+    const [data, setdata] = useState(exp);
+
+    useEffect(() => {
+        const fecthData = async () => {
+            setloading(true)
+            try {
+                // const res = await getExplore()
+                //setdata(res)
+            } catch (error) {
+                console.log(error)
+            } finally {
+                setloading(false)
+            }
+        }
+        fecthData()
+    }, [])
+
+
+
+    const ExploreItem = ({ item }) => {
+        const { img, name, price, id } = item
+        return (
+            <Button style={{ flexGrow: 1, }} radius={4} mv={1} mh={1} ph={1} pv={1}>
+                <Column>
+                    <Image source={{ uri: img }} style={{ width: 100, height: 100, objectFit: 'cover', borderRadius: 12, marginBottom: 6, }} />
+                    <Label size={15}>{name} {'\n'} {price}</Label>
+
+                </Column>
+            </Button>
+        )
+    }
+
+    return (
+        <FlatList
+            data={data}
+            renderItem={({ item }) => <ExploreItem item={item} />}
+            keyExtractor={item => item.id}
+            ListHeaderComponent={<Column style={{ width: 16, }}></Column>}
+            ListFooterComponent={<Column style={{ width: 16, }}></Column>}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={{ marginVertical: 12, }}
+            contentContainerStyle={{ columnGap: 12 }}
+        />
+    )
+}
+
+const exp = [
+    {
+        id: 1,
+        name: 'Teste',
+        img: 'https://i.pinimg.com/736x/2e/ab/9b/2eab9b19d939a71a3dad72678c83d9f1.jpg',
+        price: 'R$ 150,00',
+    },
+    {
+        id: 2,
+        name: 'Teste',
+        img: 'https://i.pinimg.com/736x/2e/ab/9b/2eab9b19d939a71a3dad72678c83d9f1.jpg',
+        price: 'R$ 150,00',
+    },
+    {
+        id: 3,
+        name: 'Teste',
+        img: 'https://i.pinimg.com/736x/2e/ab/9b/2eab9b19d939a71a3dad72678c83d9f1.jpg',
+        price: 'R$ 100,00',
+    },
+    {
+        id: 4,
+        name: 'Teste',
+        img: 'https://i.pinimg.com/736x/2e/ab/9b/2eab9b19d939a71a3dad72678c83d9f1.jpg',
+        price: 'R$ 150,00',
+    },
+    {
+        id: 5,
+        name: 'Teste',
+        img: 'https://i.pinimg.com/736x/2e/ab/9b/2eab9b19d939a71a3dad72678c83d9f1.jpg',
+        price: 'R$ 100,00',
+    },
+
+]
