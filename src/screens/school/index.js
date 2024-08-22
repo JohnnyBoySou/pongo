@@ -11,6 +11,7 @@ import Swiper from 'react-native-swiper';
 import PlanosList from '@components/Planos';
 
 import { useNavigation } from '@react-navigation/native';
+import TabBar from '@components/TabBar';
 
 
 export default function SchoolPongoScreen() {
@@ -31,9 +32,9 @@ export default function SchoolPongoScreen() {
                 <Column mh={margin.h}>
                     <Image source={require('@imgs/img-escola-banner3.png')} style={{ width: '100%', height: 223, marginVertical: 24 }} />
                     <Label style={{ textAlign: 'center', color: '#918C8B', fontStyle: 'italic', fontSize: 18, paddingVertical: 6 }}>Estimule a construção de vínculos, conecte-os com a natureza e mergulhe em experiências multissensoriais.</Label>
-                    <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
+                    { /* <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
                         <Label style={{ textAlign: 'center', color: color.title }}>Cadastrar pré-matrícula</Label>
-                    </Button>
+                    </Button> */ }
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
@@ -180,17 +181,19 @@ export default function SchoolPongoScreen() {
                         <Label style={{ color: '#fff', fontSize: 13, marginTop: 12 }}>Respeitar os horários de entrada e saída.</Label>
                         <Label style={{ color: '#fff', fontSize: 11, marginTop: 6 }}>(Horário de entrada permitido até as 9:00am. Após o horário de saída, haverá uma tolerância de 15 minutos, excedido esse tempo, o aluno dormirá no Hotel sendo acrescentado a PERNOITE).</Label>
 
+                        <Column style={{ height: 80 }} />
 
-                        <Button style={{ backgroundColor: '#fff', marginVertical: 32 }}>
+                        { /* <Button style={{ backgroundColor: '#fff', marginVertical: 32 }}>
                             <Text style={{ fontSize: 12, color: '#434343', textAlign: 'center', fontWeight: 400 }}>Cadastrar pré-matrícula</Text>
-                        </Button>
+                        </Button> */ }
                     </Column>
 
 
 
                 </View>
-
             </Scroll>
+
+            <TabBar />
         </Main>
     );
 }

@@ -2,12 +2,13 @@ import { Main, Button, Column, Label, Title, Row, Image, useTheme, useNavigate }
 import { FlatList } from 'react-native-gesture-handler';
 import TopMenu from '@components/Header/topmenu';
 import { Plus } from 'lucide-react-native';
+import TabBar from '@components/TabBar';
 
 export default function ChatListScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
     return (
         <Main>
-            <TopMenu search={false} cart={false}/>
+            <TopMenu search={false} cart={false} />
             <Column mh={margin.h} mv={20}>
                 <Title size={32}>Atendimento</Title>
             </Column>
@@ -17,6 +18,7 @@ export default function ChatListScreen({ navigation, }) {
                 keyExtractor={item => item.id}
                 ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: color.border, marginVertical: 4, borderRadius: 6, }} />}
             />
+            <TabBar />
         </Main>
     )
 }

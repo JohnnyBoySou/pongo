@@ -11,7 +11,7 @@ export default function VillaPongoScreen({ navigation, }) {
         <Main>
             <Scroll>
                 <Column>
-                <Back />
+
                     <TopMenu />
                     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                         <Column style={{ width: 28, }} />
@@ -59,7 +59,7 @@ const Card = ({ item }) => {
     const { name, time, price, img } = item
     const navigation = useNavigation()
     return (
-        <Button pv={12} ph={12} radius={12} mh={0} mv={6} style={{ borderWidth: 1, borderColor: color.border, }} onPress={() => {navigation.navigate(item.screen)}} >
+        <Button pv={12} ph={12} radius={12} mh={0} mv={6} style={{ borderWidth: 1, borderColor: color.border, }} onPress={() => { navigation.navigate(item.screen) }} >
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
                 <Row>
                     <Image style={{ width: 46, height: 46, backgroundColor: '#d7d7d7', borderRadius: 8, marginRight: 12, }} />

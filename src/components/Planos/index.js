@@ -33,8 +33,8 @@ const CardPlano = ({ item, destino }) => {
     const { id, name, date, price, inclusos } = item
     return (
         <Animated.View entering={FadeInRight} exiting={FadeOutRight}>
-            <Column style={{ width: 260, borderWidth: 1, borderColor: id % 2 != 0 ? 'transparent' : color.border, backgroundColor: id % 2 === 0 ? 'transparent' : '#F7F7F7', borderRadius: 18, paddingHorizontal: 20, }}>
-                <Row style={{ justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 20, marginBottom: 8, }}>
+            <Column style={{ width: 260, borderWidth: 1, borderColor: id % 2 != 0 ? 'transparent' : color.border, backgroundColor: id % 2 === 0 ? 'transparent' : '#F7F7F7', borderRadius: 18, paddingHorizontal: 20, paddingVertical: 20 }}>
+                <Row style={{ justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 8, }}>
                     <Title size={17} width={120}>Plano {name}</Title>
                     <Label size={15}>{price}</Label>
                 </Row>
@@ -43,9 +43,9 @@ const CardPlano = ({ item, destino }) => {
                 <Title size={16}>Inclusos:</Title>
                 <Column style={{ height: 6, }}></Column>
                 {inclusos.map((item, index) => <Label key={index} size={14} style={{ lineHeight: 20, }}>{item}</Label>)}
-                <Button onPress={() => { destino(item) }} style={{ backgroundColor: color.border, marginTop: 20, marginBottom: 20, }} radius={12}>
+                { /* <Button onPress={() => { destino(item) }} style={{ backgroundColor: color.border, marginTop: 20, marginBottom: 20, }} radius={12}>
                     <Title size={18} align='center' font={font.medium}>Escolher</Title>
-                </Button>
+                </Button> */ }
             </Column>
         </Animated.View>
     )

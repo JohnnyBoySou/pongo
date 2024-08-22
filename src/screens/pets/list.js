@@ -1,11 +1,13 @@
 
 import React, { useEffect, useState } from 'react';
-import { Main, Scroll, Column, Label, Title, Row, useTheme, Image, Button, Back, Loader } from '@theme/global'
+import { Main, Scroll, Column, Label, Title, Row, useTheme, Image, Button, Back, Loader, } from '@theme/global'
 import { FlatList } from 'react-native-gesture-handler';
 //components
 import TopMenu from '@components/Header/topmenu';
 //API
 import { listPets } from '@api/request/pets';
+import TabBar from '@components/TabBar';
+
 
 
 export default function PetsListScreen({ navigation, }) {
@@ -38,7 +40,6 @@ export default function PetsListScreen({ navigation, }) {
             </Column>
             <Title align="center">Selecione o perfil do Pet</Title>
 
-
             {loading ? <Loader /> : 
             <FlatList
                 data={data}
@@ -48,7 +49,10 @@ export default function PetsListScreen({ navigation, }) {
                 numColumns={2}
                 columnWrapperStyle={{ justifyContent: 'space-evenly', marginHorizontal: 20, }}
                 contentContainerStyle={{ marginTop: 20, }}
+
             />}
+
+            <TabBar />
         </Main>
     )
 }
