@@ -13,11 +13,11 @@ export default function SearchScreen({ navigation, route }) {
     const handleSearch = () => {
     }
     return (
-        <Main style={{ backgroundColor: "#fff", }}>
+        <Main style={{ backgroundColor: "#ECEBEB", }}>
             <Scroll>
-                <Column style={{ marginHorizontal: margin.h, marginVertical: 20, flex: 1, }}>
+                <Row style={{ marginHorizontal: margin.h, flex: 1, alignItems: 'center' }}>
                     <Back />
-                    <Row style={{ marginVertical: 24, justifyContent: 'center', alignItems: 'center', }}>
+                    <Row style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
                         <TextInput
                             value={query}
                             onChangeText={e => { setquery(e); query?.length > 3 ? handleSearch() : null }}
@@ -26,13 +26,13 @@ export default function SearchScreen({ navigation, route }) {
                             placeholder='Buscar'
                             placeholderTextColor={color.title + 60}
                             onSubmitEditing={handleSearch}
-                            style={{ backgroundColor: '#f7f7f7', borderRadius: 12, padding: 12, width: '100%', fontFamily: font.bold, fontSize: 16, color: color.secundary, borderWidth: 2, borderColor: focus ? color.primary : '#f7f7f7' }}
+                            style={{ backgroundColor: '#fff', borderRadius: 12, padding: 12, marginLeft: 12, flex: 1, fontFamily: font.bold, fontSize: 16, color: color.secundary, borderWidth: 2, borderColor: focus ? color.sc.sc3 : '#fff' }}
                         />
-                        <Button radius={6} disabled={loading} onPress={handleSearch} ph={12} pv={12} style={{  backgroundColor: color.primary, borderRadius: 8, position: 'absolute', right: 6, }}>
+                        <Button radius={6} disabled={loading} onPress={handleSearch} ph={12} pv={12} style={{ backgroundColor: color.sc.sc3, borderRadius: 8, position: 'absolute', right: 0 }}>
                             <Search size={24} color="#fff" style={{ zIndex: 99, }} />
                         </Button>
                     </Row>
-                </Column>
+                </Row>
             </Scroll>
         </Main>
     )

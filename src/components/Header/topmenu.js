@@ -1,7 +1,7 @@
 import { CalendarCheck, CircleHelp, CircleUserRound, FileClock, Heart, Hotel, Menu, PackageCheck, School, Search, Settings, ShoppingCart, Store, X } from 'lucide-react-native';
 import { Column, Row, Title, SCREEN_WIDTH, useTheme, Button, SCREEN_HEIGHT } from '@theme/global';
 import { useNavigation } from '@react-navigation/native';
-import { Pressable, ScrollView } from 'react-native';
+import { Pressable, ScrollView, Text } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import SideBar from './sidebar';
 
@@ -29,7 +29,7 @@ export default function TopMenu({ search = true, cart = true }) {
                         <Menu size={32} color={color.icons} strokeWidth={2} />
                     </Button>
                     <Row style={{ alignItems: 'center', columnGap: 12, }}>
-                       {cart && <Button pv={1} ph={1} onPress={() => { navigation.navigate('Cart') }} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }}>
+                        {cart && <Button pv={1} ph={1} onPress={() => { navigation.navigate('Cart') }} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }}>
                             <ShoppingCart size={32} color={color.icons} strokeWidth={1.5} />
                         </Button>}
                         <Button pv={1} ph={1} onPress={() => { navigation.navigate('Tabs', { screen: 'Account' }) }} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }}>
@@ -46,12 +46,43 @@ export default function TopMenu({ search = true, cart = true }) {
             </Column>
             <SideBar ref={sidebar}>
                 <ScrollView>
-                <Column>
-                    <Button onPress={toggleSide} ph={0} pv={0} style={{ width: 42, height: 42, alignSelf: 'flex-end', marginVertical: 20, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
-                        <X size={22} color={color.sc.sc3} />
-                    </Button>
-                    <Column style={{ width: SCREEN_WIDTH, backgroundColor: '#303030', borderRadius: 12 }}></Column>
-                </Column>
+                    <Column>
+                        <Button onPress={toggleSide} ph={0} pv={0} style={{ width: 42, height: 42, alignSelf: 'flex-end', marginVertical: 20, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
+                            <X size={22} color={color.sc.sc3} />
+                        </Button>
+                        <Column style={{ width: SCREEN_WIDTH, borderRadius: 12, marginTop: -42 }}>
+                            <Button style={{ width: '100%' }}>
+                                <Text style={{ fontWeight: 700, color: color.sc.sc3 }}>Favoritos</Text>
+                            </Button>
+                            <Button style={{ width: '100%' }}>
+                                <Text style={{ fontWeight: 700, color: color.sc.sc3 }}>Cesta</Text>
+                            </Button>
+                            <Button style={{ width: '100%' }}>
+                                <Text style={{ fontWeight: 500, color: color.pr.pr3 }}>Loja Pongo</Text>
+                            </Button>
+                            <Button style={{ width: '100%' }}>
+                                <Text style={{ fontWeight: 500, color: color.pr.pr3 }}>Escola Pongo</Text>
+                            </Button>
+                            <Button style={{ width: '100%' }}>
+                                <Text style={{ fontWeight: 500, color: color.pr.pr3 }}>Day Use</Text>
+                            </Button>
+                            <Button style={{ width: '100%' }}>
+                                <Text style={{ fontWeight: 500, color: color.pr.pr3 }}>Hotel Pongo</Text>
+                            </Button>
+                            <Button style={{ width: '100%' }}>
+                                <Text style={{ fontWeight: 500, color: color.pr.pr3 }}>Histórico de serviços</Text>
+                            </Button>
+                            <Button style={{ width: '100%' }}>
+                                <Text style={{ fontWeight: 500, color: color.pr.pr3 }}>Meus pedidos</Text>
+                            </Button>
+                            <Button style={{ width: '100%' }}>
+                                <Text style={{ fontWeight: 500, color: color.pr.pr1 }}>Configurações</Text>
+                            </Button>
+                            <Button style={{ width: '100%' }}>
+                                <Text style={{ fontWeight: 500, color: color.pr.pr1 }}>Dúvidas frequentes</Text>
+                            </Button>
+                        </Column>
+                    </Column>
                 </ScrollView>
 
             </SideBar>

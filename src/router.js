@@ -156,8 +156,10 @@ function Tabs() {
         tabBarInactiveTintColor: '#C3C3C3',
         tabBarStyle: {
           backgroundColor: '#918C8B',
-          height: 64,
+          height: 90,
           elevation: 0,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20
         },
       }}
     >

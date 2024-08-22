@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Main, Scroll, Column, Row, Title, Button, useTheme, Label,  LabelBT } from '@theme/global';
+import { Main, Scroll, Column, Row, Title, Button, useTheme, Label, LabelBT } from '@theme/global';
 import { MotiImage } from 'moti';
 import TopMenu from '@components/Header/topmenu';
 import CheckBox from '@components/Forms/checkbox';
@@ -71,21 +71,21 @@ const Card = ({ item }) => {
     const { title, date, status, price, value, img, time } = item
     const [isSelect, setisSelect] = useState(false);
     return (
-        <Pressable onLongPress={() => setisSelect(!isSelect)} style={{ backgroundColor: '#FFF', marginVertical: 12, paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
+        <Pressable onLongPress={() => setisSelect(!isSelect)} style={{ backgroundColor: '#FFF', marginVertical: 12, paddingHorizontal: 16, paddingVertical: 18, borderRadius: 12, }}>
             <Row style={{ alignItems: 'center', }}>
-                <CheckBox status={isSelect} setstatus={setisSelect} size={24}/>
-                <MotiImage source={ img } style={{ width: 62, height:72, objectFit: 'contain', borderRadius: 12, marginHorizontal: 12, borderWidth: 1, borderColor: color.border, }} />
+                <CheckBox status={isSelect} setstatus={setisSelect} size={22} />
+                <MotiImage source={img} style={{ width: 62, height: 72, objectFit: 'contain', borderRadius: 12, marginHorizontal: 12, borderWidth: 1, borderColor: color.border, }} />
                 <Column>
                     <Title size={14} style={{ lineHeight: 18, }}>{title}</Title>
-                    <Label size={10} style={{ lineHeight: 12, marginTop: 4,}}>Data: {date}</Label>
-                    <Label size={10} style={{ lineHeight: 12, marginBottom: 4,}}>Horário: {time}</Label>
+                    <Label size={10} style={{ lineHeight: 12, marginTop: 4, }}>Data: {date}</Label>
+                    <Label size={10} style={{ lineHeight: 12, marginBottom: 4, }}>Horário: {time}</Label>
                     <LabelBT size={14} style={{ lineHeight: 18, }}>R$ {price},00</LabelBT>
                 </Column>
-                <Button style={{ position: 'absolute', top: -5, right: -10,  }}>
+                <Button style={{ position: 'absolute', top: -5, right: -10, }}>
                     <LabelBT color={color.red} size={12}>Excluir</LabelBT>
                 </Button>
-                <Button style={{ position: 'absolute', bottom: 5, right: 0, backgroundColor: '#ECEBEB',  }} pv={4} ph={6} radius={6}>
-                    <LabelBT color={color.title} size={10}>Adicionar oberservação</LabelBT>
+                <Button style={{ position: 'absolute', bottom: 5, right: 0, backgroundColor: '#ECEBEB', }} pv={4} ph={6} radius={6}>
+                    <LabelBT color={color.title} size={10}>Add oberservação</LabelBT>
                 </Button>
             </Row>
         </Pressable>

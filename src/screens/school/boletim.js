@@ -12,7 +12,7 @@ import Chart from '@components/Charts';
 import StarsRate from '@components/StarsRate/index';
 import Calendario from '@components/Calendar';
 
-export default function SchoolBoletimScreen({navigation, }) {
+export default function SchoolBoletimScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
 
     const pagerRef = useRef();
@@ -43,21 +43,21 @@ export default function SchoolBoletimScreen({navigation, }) {
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
                 <TopMenu search={false} />
-                <Row mh={margin.h} mv={margin.v} style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                <Row mh={margin.h} mv={margin.h} style={{ justifyContent: 'space-between', alignItems: 'center', }}>
 
                     <Column>
                         <Title size={22} style={{ lineHeight: 24, }}>Olá, Maria </Title>
-                        <Label size={12} style={{ lineHeight: 16, }}>Você está no perfil do: Aufredo </Label>
+                        <Label size={12} style={{ lineHeight: 16, marginTop: 4, color: color.pr.pr3 }}>Você está no perfil do: Aufredo </Label>
                     </Column>
-                    <Button bg="#fff" >
-                        <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
+                    <Button bg="#fff" onPress={() => { navigation.navigate('Search') }}>
+                        <Row style={{ justifyContent: 'center', alignItems: 'center', }} >
                             <Search size={18} color={'#858585'} />
                             <Label size={12} style={{ marginLeft: 6, lineHeight: 16, }}>Pesquisar</Label>
                         </Row>
                     </Button>
                 </Row>
 
-                <Column mh={margin.h}>
+                <Column mh={margin.h} mv={6} >
                     <Card>
                         <Row justifyContent='space-between'>
                             <Title>Plano Ret</Title>
@@ -72,7 +72,11 @@ export default function SchoolBoletimScreen({navigation, }) {
                             <Text style={{ fontWeight: 700, marginVertical: 2 }}>Mensalidade: 1/1</Text>
                         </Column>
                     </Card>
-                   
+
+                    <Button style={{ backgroundColor: color.sc.sc3, marginTop: margin.h }} ph={16} pv={10} >
+                        <Label style={{ textAlign: 'center', color: color.light, fontSize: 14, }}>Ver Retrospectiva</Label>
+                    </Button>
+
                 </Column>
 
                 <ScrollView ref={ScrollButtons} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 0, marginTop: 20, }}>
@@ -88,8 +92,8 @@ export default function SchoolBoletimScreen({navigation, }) {
                     <Column style={{ width: margin.h, }} />
                 </ScrollView>
                 <Column pv={20}>
-                    {type == 'Boletim' && <CardBoletim/>}
-                    {type == 'Agenda' && <CardAgenda  />}
+                    {type == 'Boletim' && <CardBoletim />}
+                    {type == 'Agenda' && <CardAgenda />}
                     {type == 'Métricas' && <CardMetricas />}
                 </Column>
             </Scroll>
@@ -97,36 +101,36 @@ export default function SchoolBoletimScreen({navigation, }) {
     );
 }
 
- /*
-  <Column style={{ height: 24, }} />
-                    <Title>Retrospectiva do semestre</Title>
-                    <Column bg="#fff" ph={8} pv={10} mv={12} style={{ borderRadius: 16, }}>
-                        <InstagramStories
-                            stories={stories}
-                            showName={true}
-                            progressColor="#ffffff90"
-                            progressActiveColor="#ffffff"
-                            modalAnimationDuration={300}
-                            storyAnimationDuration={300}
-                            animationDuration={3000}
-                            avatarListContainerProps={{
-                                showsHorizontalScrollIndicator: false,
-                            }}
-                            avatarListContainerStyle={{ columnGap: 12, }}
-                            textStyle={{
-                                color: '#fff',
-                                fontFamily: font.medium,
-                            }}
-                            nameTextStyle={{
-                                fontFamily: font.medium,
-                                textAlign: 'center',
-                                fontSize: 12,
-                            }}
-                            avatarBorderColors={[color.sc.sc3,]}
-                            closeIconColor={'#fff'}
-                        />
-                    </Column>
- */
+/*
+ <Column style={{ height: 24, }} />
+                   <Title>Retrospectiva do semestre</Title>
+                   <Column bg="#fff" ph={8} pv={10} mv={12} style={{ borderRadius: 16, }}>
+                       <InstagramStories
+                           stories={stories}
+                           showName={true}
+                           progressColor="#ffffff90"
+                           progressActiveColor="#ffffff"
+                           modalAnimationDuration={300}
+                           storyAnimationDuration={300}
+                           animationDuration={3000}
+                           avatarListContainerProps={{
+                               showsHorizontalScrollIndicator: false,
+                           }}
+                           avatarListContainerStyle={{ columnGap: 12, }}
+                           textStyle={{
+                               color: '#fff',
+                               fontFamily: font.medium,
+                           }}
+                           nameTextStyle={{
+                               fontFamily: font.medium,
+                               textAlign: 'center',
+                               fontSize: 12,
+                           }}
+                           avatarBorderColors={[color.sc.sc3,]}
+                           closeIconColor={'#fff'}
+                       />
+                   </Column>
+*/
 const CardMetricas = () => {
     const { color, font, margin } = useTheme();
     return (
@@ -141,7 +145,7 @@ const CardMetricas = () => {
                     <Title size={16}>10</Title>
                 </Column>
                 <Column style={{ width: 24, }} />
-                <Column bg={color.sc.sc3} style={{ borderRadius: 16, rowGap: 12,}} pv={20} ph={20}>
+                <Column bg={color.sc.sc3} style={{ borderRadius: 16, rowGap: 12, }} pv={20} ph={20}>
                     <Title color="#fff">Performance</Title>
                     <Chart
                         value={58}
