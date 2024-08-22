@@ -19,6 +19,7 @@ export default function HomeScreen({ navigation, }) {
                             animate={{ translateX: 0, opacity: 1 }}
                             transition={{
                                 delay: 200,
+                                type: 'timing',
                             }}
                             style={{ flexGrow: 1 }}
                         >
@@ -35,6 +36,7 @@ export default function HomeScreen({ navigation, }) {
                             animate={{ translateX: 0, opacity: 1 }}
                             transition={{
                                 delay: 400,
+                                type: 'timing',
                             }}
                             style={{ flexGrow: 1 }}
                         >
@@ -53,6 +55,7 @@ export default function HomeScreen({ navigation, }) {
                             animate={{ translateX: 0, opacity: 1 }}
                             transition={{
                                 delay: 600,
+                                type: 'timing',
                             }}
                             style={{ flexGrow: 1 }}
                         >
@@ -68,6 +71,7 @@ export default function HomeScreen({ navigation, }) {
                             animate={{ translateX: 0, opacity: 1 }}
                             transition={{
                                 delay: 800,
+                                type: 'timing',
                             }}
                             style={{ flexGrow: 1 }}
                         >
