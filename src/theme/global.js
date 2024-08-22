@@ -4,8 +4,8 @@ import { TouchableRipple } from 'react-native-paper';
 import { Dimensions, ScrollView, Image as RNImage, ActivityIndicator } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import ButtonPrimary from "@components/Buttons";
-
-export { ButtonPrimary };
+import Back from "@components/Back";
+export { ButtonPrimary, Back };
 
 export const Loader = ({ color = '#91A6C4', size = 20 }) => {
   return (
@@ -70,6 +70,7 @@ export const Card = styled.View`
 export const Image = styled(RNImage).attrs(() => ({
   transition: 300,
 }))`
+background-color: ${props => props.bg || '#d3d3d3'}
 `
 
 export const Button = styled(TouchableRipple).attrs(() => ({

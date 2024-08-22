@@ -153,9 +153,10 @@ export const updateUser = async (params) => {
 };
 
 export const verifyEmail = async (email, code) => {
+    const sanitizedEmail = validator.isEmail(email) ? validator.normalizeEmail(email) : undefined;
     try {
-        const res = await axios.post(`${await getBaseURL()}/usuarios/validacodigo`, {
-            email: validator.normalizeEmail(email),
+        const res = await axios.post(`${await getBaseURL()}/validacodigo`, {
+            email: sanitizedEmail,
             codigo: code,
         });
         return res.data
@@ -164,23 +165,6 @@ export const verifyEmail = async (email, code) => {
         throw new Error(err.message)
     }
 };
-
-export const indicacaoUser = async () => {
-    const token = await getToken()
-    const BASE_URL = await getBaseURL();
-    try {
-        const res = await axios.get(`${BASE_URL}/usuarios/indicacao`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-        return res.data;
-    } catch (error) {
-        console.log(error)
-        const err = JSON.parse(error?.request?.response);
-        throw new Error(err.message)
-    }
-}
 
 export const excludeUser = async (password, message) => {
     const token = await getToken()

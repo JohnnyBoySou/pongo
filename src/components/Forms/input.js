@@ -61,7 +61,7 @@ const Input = ({ value, setValue, disabled, label, mask, props, pass = false }) 
 
         <TextInput
           {...props}
-          style={{ fontSize: 18, fontFamily: font.medium, color: disabled ? color.title + 60 : '#425a7a', }}
+          style={{ fontSize: 18, fontFamily: font.medium, color: disabled ? color.title + 60 : color.title, }}
           ref={inputRef}
           onFocus={handleFocus}
           onBlur={handleBlur}

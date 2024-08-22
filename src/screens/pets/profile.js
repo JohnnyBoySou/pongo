@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ScrollView } from 'react-native';
 import { Main, Scroll, Column, Label, Title, Row, useTheme, Image, Button, SCREEN_WIDTH } from '@theme/global'
 import { FlatList } from 'react-native-gesture-handler';
@@ -7,6 +7,26 @@ import Back from '@components/Back';
 
 export default function PetsProfileScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
+
+    const [data, setdata] = useState();
+    const [loading, setloading] = useState();
+    useEffect(() => {
+        const fecthData = () => {
+            setloading(true)
+            try {
+                setdata()                
+            } catch (error) {
+                console.log(error)
+            } finally{
+                setloading(false)
+            }
+        }
+
+    }, []);
+
+
+
+
     return (
         <Main style={{ paddingTop: 0, }}>
             <FlatList

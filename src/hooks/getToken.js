@@ -1,10 +1,10 @@
-//import { getPreferences } from '@api/user/preferences';
+import { getPreferences } from '@hooks/preferences';
 
 const getToken = async () => {
-    //const preferences = await getPreferences();
-   // if (preferences?.token) {
-    //    return preferences.token;
-   // }
+    const preferences = await getPreferences();
+    if (preferences?.token) {
+        return preferences.token;
+    }
     return null;
 }
 

@@ -1,8 +1,8 @@
 export default{
   background: "#ECEBEB",
   color: {
-    primary: "#CF5050",
-    secundary: "#5C0D45",
+    primary: "#918C8B",
+    secundary: "#D9D9D9",
     bg: "#ECEBEB",
 
     light: '#FFFFFF',

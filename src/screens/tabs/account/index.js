@@ -66,15 +66,6 @@ export default function AccountScreen({ navigation, }) {
                     <Title align="center" font={font.medium} color="#918C8B">Iniciar conversa</Title>
                 </Button>
 
-                <Column bg="#fff" mh={margin.h} style={{ borderRadius: 16, }} pv={10} ph={8} mv={12}>
-
-                    <ButtonPrimary label="Meus pedidos light" type='Light' login />
-
-                    <ButtonPrimary label="Meus pedidos" type='Default' />
-
-                    <ButtonPrimary label="Meus pedidos dark" type='Dark' />
-
-                </Column>
             </Scroll>
         </Main>
     )

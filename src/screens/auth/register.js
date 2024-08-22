@@ -1,20 +1,19 @@
 import React, { useState, useRef } from 'react';
-import { Main, Scroll, Title, Row, Column, Label, Button, SubLabel, U, LabelBT, Loader, useTheme } from '@theme/global';
-import { TextInput, ActivityIndicator } from 'react-native';
+import { Main, Scroll, Title, Row, Column, Label, Button, SubLabel, U, LabelBT, Loader, useTheme, Back } from '@theme/global';
+import { TextInput, } from 'react-native';
 //ICONS
-import {CircleCheck, CircleX } from 'lucide-react-native';
+import { CircleCheck, CircleX } from 'lucide-react-native';
 
 //FORMS
 import Input from '@components/Forms/input';
 import Modal from '@components/Modal/index';
 import CheckBox from '@components/Forms/checkbox';
-
 //API
 import { registerUser, verifyEmail } from '@api/request/auth';
+
 import Success from '@components/Forms/success';
 import Error from '@components/Forms/error';
-import Back from '@components/Back';
-import { useNavigation } from '@react-navigation/native';
+ 
 import { createPreferences } from '@hooks/preferences';
 
 export default function AuthRegisterScreen({ navigation, route, }) {
@@ -41,8 +40,6 @@ export default function AuthRegisterScreen({ navigation, route, }) {
 
     const passwordCriteria = checkPasswordStrength(password);
     const porcentagePassword = Object.values(passwordCriteria).filter((e) => e).length / Object.values(passwordCriteria).length * 100;
-    const messagePassword = porcentagePassword < 50 ? 'Fraca' : porcentagePassword < 80 ? 'Razoável' : 'Forte';
-    const colorPassword = porcentagePassword < 50 ? color.red : porcentagePassword < 80 ? '#f5ad42' : color.green;
 
     const [terms, setterms] = useState(true);
     const [confirm, setconfirm] = useState(false);
@@ -50,9 +47,6 @@ export default function AuthRegisterScreen({ navigation, route, }) {
     const [success, setsuccess] = useState();
     const [err, seterror] = useState();
     const handleRegister = async () => {
-
-        navigation.navigate('Welcome', { name: name,})
-        return
         setloading(true)
         setsuccess()
         seterror()
@@ -62,7 +56,7 @@ export default function AuthRegisterScreen({ navigation, route, }) {
             if (res) {
                 setsuccess('Verifique seu e-mail!')
                 setconfirm(true)
-                //navigation.navigate('AddPet')
+                // navigation.navigate('Welcome', { name: name, })
             }
         } catch (error) {
             console.log(error.message)
@@ -78,10 +72,7 @@ export default function AuthRegisterScreen({ navigation, route, }) {
         <Main style={{}}>
             <Scroll>
                 {!confirm ? <Column ph={28}>
-                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 20}}>
-                        <Back />
-                       
-                    </Row>
+                    <Back />
                     <Title size={26} style={{ marginTop: 20, marginBottom: 4, }}>Olá! Faça seu cadastro aqui.</Title>
 
                     <Column style={{ height: 16, }} />
@@ -133,22 +124,22 @@ export default function AuthRegisterScreen({ navigation, route, }) {
                     />
 
 
-                    <Label style={{ fontSize: 14, marginTop: 14, marginBottom: 4,}}>Sua senha deve conter pelo menos:</Label>
-                    <Row style={{ marginTop: 8, columnGap: 8, alignItems: 'center',  }}>
+                    <Label style={{ fontSize: 14, marginTop: 14, marginBottom: 4, }}>Sua senha deve conter pelo menos:</Label>
+                    <Row style={{ marginTop: 8, columnGap: 8, alignItems: 'center', }}>
                         {passwordCriteria?.length ? <CircleCheck size={14} color={color.green} /> : <CircleX size={14} color={color.red} />}
                         <Label size={12} >Mínimo de 8 caracteres </Label>
                     </Row>
                     <Row style={{ marginTop: 8, columnGap: 8, alignItems: 'center', }}>
                         {passwordCriteria?.upperCase ? <CircleCheck size={14} color={color.green} /> : <CircleX size={14} color={color.red} />}
-                        <Label  size={12} >Uma letra MAIÚSCULA. </Label>
+                        <Label size={12} >Uma letra MAIÚSCULA. </Label>
                     </Row>
-                    <Row style={{ marginTop: 8, columnGap: 8, alignItems: 'center',}}>
+                    <Row style={{ marginTop: 8, columnGap: 8, alignItems: 'center', }}>
                         {passwordCriteria?.lowerCase ? <CircleCheck size={14} color={color.green} /> : <CircleX size={14} color={color.red} />}
-                        <Label  size={12} >Uma letra minúscula. </Label>
+                        <Label size={12} >Uma letra minúscula. </Label>
                     </Row>
                     <Row style={{ marginTop: 8, columnGap: 8, alignItems: 'center', }}>
                         {passwordCriteria?.number ? <CircleCheck size={14} color={color.green} /> : <CircleX size={14} color={color.red} />}
-                        <Label  size={12} >Um número. </Label>
+                        <Label size={12} >Um número. </Label>
                     </Row>
 
                     <Column style={{ height: 16, }} />
@@ -169,15 +160,15 @@ export default function AuthRegisterScreen({ navigation, route, }) {
                         </Row>
                     </Button>
                     <Button radius={12} onPress={() => { navigation.navigate('AuthLogin') }} mv={12}>
-                            <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
-                                <Label size={14} color={color.sc.sc3} align="center">Já tem uma conta?</Label>
-                                <LabelBT size={14} color={color.sc.sc3} align="center">Clique aqui para entrar</LabelBT>
-                            </Column>
-                        </Button>
+                        <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
+                            <Label size={14} color={color.sc.sc3} align="center">Já tem uma conta?</Label>
+                            <LabelBT size={14} color={color.sc.sc3} align="center">Clique aqui para entrar</LabelBT>
+                        </Column>
+                    </Button>
                     <Label size={14} style={{ lineHeight: 18, }} align='center' >Ao continuar, você concorda em receber chamadas e mensagens SMS ou pelo WhatsApp, inclusive automáticas, da Villa Pongo e de suas afiliadas, no número informado.</Label>
 
                     <Column style={{ height: 70, }} />
-                </Column> : <ConfirmEmail email={email} />}
+                </Column> : <ConfirmEmail email={email} name={name} navigation={navigation} />}
             </Scroll>
 
             <Modal ref={passStrong} snapPoints={[0.1, 200]}>
@@ -206,12 +197,11 @@ export default function AuthRegisterScreen({ navigation, route, }) {
 }
 
 
-const ConfirmEmail = ({ email }) => {
+const ConfirmEmail = ({ email, name, navigation }) => {
     const { color, font, margin, } = useTheme();
     const [loading, setloading] = useState(false);
     const [error, seterror] = useState();
     const [success, setsuccess] = useState();
-    const navigation = useNavigation();
 
     const handleVerify = async () => {
         seterror()
@@ -221,18 +211,17 @@ const ConfirmEmail = ({ email }) => {
             try {
                 const res = await verifyEmail(email, digit1 + digit2 + digit3 + digit4)
                 if (res) {
-                    setsuccess('Email verificado com sucesso! Aguarde um momento...')
+                    setsuccess('E-mail confirmado! Aguarde um momento...')
                     const saveUser = {
                         "token": res.token,
                     };
                     // OneSignal.login(res.uiid)
                     const preferences = await createPreferences(saveUser)
                     setTimeout(() => {
-                        navigation.replace('AddPets')
+                        navigation.replace('Welcome', { name: name, })
                     }, 500);
                 }
             } catch (error) {
-                console.log(error)
                 seterror(error.message)
             } finally {
                 setloading(false)
@@ -262,8 +251,7 @@ const ConfirmEmail = ({ email }) => {
     return (
         <Column style={{ marginHorizontal: margin.h, }}>
             <Column style={{ marginTop: 24, }}>
-                <Title style={{ marginBottom: 8, }}>Código de verificação</Title>
-                <Label>Confira seu e-mail e copie o código enviado.</Label>
+                <Title size={26} style={{ marginBottom: 8, }}>Confirme seu e-mail</Title>
             </Column>
             {success ? <Success msg={success} show={true} /> : error ? <Error msg={error} show={true} /> : null}
 
@@ -276,7 +264,7 @@ const ConfirmEmail = ({ email }) => {
                     ref={fc1}
                     selectionColor='transparent'
                     onChangeText={(e) => { setdigit1(e); if (e.length === 1) fc2.current?.focus() }}
-                    keyboardType='numeric' style={{ color: color.sc.sc3, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus1 ? "#fff" : color.sc.sc3 + 40, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
+                    keyboardType='numeric' style={{ color: color.title, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus1 ? "#fff" : color.secundary, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
                 <TextInput
                     onFocus={() => setfocus2(true)}
                     onBlur={() => setfocus2(false)}
@@ -286,7 +274,7 @@ const ConfirmEmail = ({ email }) => {
                     underlineColorAndroid='transparent'
                     selectionColor='transparent'
                     onChangeText={(e) => { setdigit2(e); if (e.length === 1) fc3.current?.focus() }}
-                    keyboardType='numeric' style={{ color: color.sc.sc3, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus2 ? "#fff" : color.sc.sc3 + 40, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
+                    keyboardType='numeric' style={{ color: color.title, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus2 ? "#fff" : color.secundary, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
                 <TextInput
                     onFocus={() => setfocus3(true)}
                     onBlur={() => setfocus3(false)}
@@ -295,7 +283,7 @@ const ConfirmEmail = ({ email }) => {
                     ref={fc3}
                     selectionColor='transparent'
                     onChangeText={(e) => { setdigit3(e); if (e.length === 1) fc4.current?.focus() }}
-                    keyboardType='numeric' style={{ color: color.sc.sc3, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus3 ? "#fff" : color.sc.sc3 + 40, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
+                    keyboardType='numeric' style={{ color: color.title, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus3 ? "#fff" : color.secundary, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
                 <TextInput
                     onFocus={() => setfocus4(true)}
                     onBlur={() => setfocus4(false)}
@@ -304,11 +292,11 @@ const ConfirmEmail = ({ email }) => {
                     selectionColor='transparent'
                     onSubmitEditing={handleVerify}
                     onChangeText={(e) => setdigit4(e)}
-                    keyboardType='numeric' style={{ color: color.sc.sc3, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus4 ? "#fff" : color.sc.sc3 + 40, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
+                    keyboardType='numeric' style={{ color: color.title, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus4 ? "#fff" : color.secundary, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
             </Row>
-            <Button disabled={loading} onPress={handleVerify} style={{ marginTop: 20, backgroundColor: color.sc.sc3, }} pv={16} ph={24}>
+            <Button disabled={loading} onPress={handleVerify} style={{ marginTop: 20, backgroundColor: color.primary, }} pv={16} ph={24}>
                 <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
-                    {loading ? <ActivityIndicator animating={loading} color="#fff" size={26} /> : <Title size={16} color="#fff">Verificar código</Title>}
+                    {loading ? <Loader color="#fff" size={26} /> : <Title size={18} color="#fff">Verificar código</Title>}
                 </Row>
             </Button>
         </Column>

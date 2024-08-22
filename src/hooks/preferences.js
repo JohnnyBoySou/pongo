@@ -42,45 +42,4 @@ async function excludePreferences() {
   }
 }
 
-async function addLike(array) {
-  try {
-    const preferences = await getPreferences();
-    if (!preferences.likes) {
-      preferences.likes = [];
-    }
-    preferences.likes = preferences.likes.concat(array);
-    await editPreferences(preferences);
-    return true;
-  } catch (error) {
-    console.error("Error adding likes array:", error);
-    return false;
-  }
-}
-
-async function verifyLiked(id) {
-  try {
-    const preferences = await getPreferences();
-    return preferences.likes && preferences.likes.some((manga) => manga.id === id);
-  } catch (error) {
-    console.error("Error verifying liked manga:", error);
-    return false;
-  }
-}
-
-async function removeLike(id) {
-  try {
-    const preferences = await getPreferences();
-    if (!preferences.likes) {
-      preferences.likes = [];
-    }
-    preferences.likes = preferences.likes.filter((manga) => manga.id !== id);
-    await editPreferences(preferences);
-    return true;
-  } catch (error) {
-    console.error("Error removing like:", error);
-    return false;
-  }
-}
-
-
-export { getPreferences, editPreferences, createPreferences, excludePreferences, addLike, verifyLiked, removeLike };
+export { getPreferences, editPreferences, createPreferences, excludePreferences, };

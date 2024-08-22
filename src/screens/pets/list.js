@@ -1,83 +1,72 @@
 
-import React, { useContext } from 'react';
-import { Main, Scroll, Column, Label, Title, Row, useTheme, Image, Button } from '@theme/global'
+import React, { useEffect, useState } from 'react';
+import { Main, Scroll, Column, Label, Title, Row, useTheme, Image, Button, Back, Loader } from '@theme/global'
 import { FlatList } from 'react-native-gesture-handler';
-import { Plus } from 'lucide-react-native';
-import { useNavigation } from '@react-navigation/native';
-import Back from '@components/Back';
-import TopMenu  from '@components/Header/topmenu';
+//components
+import TopMenu from '@components/Header/topmenu';
+//API
+import { listPets } from '@api/request/pets';
+
 
 export default function PetsListScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
+
+    const [data, setdata] = useState([]);
+    const [loading, setloading] = useState();
+    useEffect(() => {
+        const fecthData = async () => {
+            setloading(true)
+            try {
+                const res = await listPets()
+                setdata(res)
+            } catch (error) {
+                console.log(error)
+            } finally {
+                setloading(false)
+            }
+        }
+
+        fecthData()
+    }, []);
+
+
     return (
         <Main>
-           
             <TopMenu search={false} />
-            <Column style={{ marginLeft: margin.h, marginBottom: 30, }}>
+            <Column style={{ marginLeft: margin.h, marginVertical: 20, }}>
                 <Back />
             </Column>
             <Title align="center">Selecione o perfil do Pet</Title>
+
+
+            {loading ? <Loader /> : 
             <FlatList
-                data={pets}
-                renderItem={({ item }) => <Pet pet={item} />}
+                data={data}
+                renderItem={({ item }) => <Pet pet={item} navigation={navigation} />}
                 keyExtractor={item => item.id}
                 showsVerticalScrollIndicator={false}
                 numColumns={2}
                 columnWrapperStyle={{ justifyContent: 'space-evenly', marginHorizontal: 20, }}
                 contentContainerStyle={{ marginTop: 20, }}
-               
-            />
+            />}
         </Main>
     )
 }
 
 
-const Pet = ({ pet }) => {
-    const navigation = useNavigation()
+const Pet = ({ pet, navigation }) => {
+    const avatar = pet?.img ? { uri: pet?.img } : require('@imgs/img_default.png')
     return (
-        <Button onPress={() => { navigation.navigate('PetsProfile') }} radius={12} pv={12} ph={12}>
+        <Button onPress={() => { navigation.navigate('PetsProfile', { id: pet?.id, }) }} radius={12} pv={12} ph={12}>
             <Column style={{}}>
-                <Column style={{ borderRadius: 100, backgroundColor: pet?.color, overflow: 'hidden', width: 100, height: 100, }}>
-                    <Image source={pet?.avatar} style={{ width: 110, height: 110, objectFit: 'contain', marginTop: 10, }} />
-                </Column>
+                <Image source={avatar} bg="#fff" style={{ width: 110, height: 110, objectFit: 'cover', marginTop: 10, borderRadius: 100,  }} />
                 <Title size={18} align="center" style={{ marginTop: 10, }}>{pet?.name}</Title>
-                <Label size={16} align="center" style={{ marginTop: 2, }}>{pet?.age}</Label>
+                <Label size={16} align="center" style={{ marginTop: 2, }}>{pet?.age} anos</Label>
             </Column>
         </Button>
     )
 }
 
-const pets = [
-    {
-        name: 'Lilica',
-        avatar: require('@imgs/pet1.png'),
-        id: 1,
-        age: '12 anos',
-        color: '#E5C8C9',
-    },
-    {
-        name: 'Lua',
-        avatar: require('@imgs/pet2.png'),
-        id: 1,
-        age: '4 anos',
-        color: '#91A6C4',
-    },
-    {
-        name: 'Melt',
-        avatar: require('@imgs/pet3.png'),
-        id: 3,
-        age: '6 anos',
-        color: '#EBD269',
-    },
-    {
-        name: 'Aufredo',
-        avatar: require('@imgs/pet4.png'),
-        id: 4,
-        age: '8 anos',
-        color: '#B7BCA3',
-    },
-
-]
 
 
 /**

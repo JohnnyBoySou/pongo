@@ -1,14 +1,16 @@
 import { Title, Column } from '@theme/global';
-import { CheckCircle, CheckIcon } from "lucide-react-native";
-
+import { CheckIcon } from "lucide-react-native";
+import Animated, { FadeInUp } from 'react-native-reanimated';
 const Success = ({ msg }) => {
     return (
-        <Column style={{ alignItems: 'center', marginVertical: 12, paddingVertical: 14, paddingHorizontal: 8, borderRadius: 6, backgroundColor: '#00A3FF', flexDirection: 'row' }}>
-            <Column style={{ width: 32, height: 32, backgroundColor: '#ffffff40', borderRadius: 100, justifyContent: 'center', alignItems: 'center', }}>
-                <CheckIcon size={18} color="#fff" />
+        <Animated.View entering={FadeInUp} >
+        <Column style={{ alignItems: 'center', marginVertical: 12, paddingVertical: 14, paddingHorizontal: 20, borderRadius: 10, backgroundColor: '#778428', flexDirection: 'row' }}>
+            <Column style={{ width: 32, height: 32,  borderRadius: 100, justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffffff40', }}>
+                <CheckIcon size={24} color="#fff" />
             </Column>
-            <Title style={{ fontSize: 14, marginLeft: 12, color: '#fff', textAlign: 'center', }}>{msg}</Title>
+            <Title style={{ fontSize: 14, marginLeft: 12, color: '#fff',  lineHeight: 16, fontFamily: 'Font_Medium', marginRight: 12, }}>{msg}</Title>
         </Column>
+        </Animated.View>
     )
 }
 export default Success;

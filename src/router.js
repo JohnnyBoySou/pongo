@@ -81,11 +81,10 @@ import DayUseRegisterScreen from '@screens/day-use/register';
 import HotelScreen from '@screens/hotel/index';
 import HotelRegisterScreen from '@screens/hotel/register';
 
-
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Onboarding'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='PetsList'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 

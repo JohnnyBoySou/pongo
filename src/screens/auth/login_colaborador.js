@@ -1,69 +1,58 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Main, Scroll, Title, Row, Column, Label, Button, SubLabel, U, useTheme, Loader, LabelBT, SCREEN_HEIGHT, Back } from '@theme/global';
-//Components
-
+import { Main, Scroll, Title, Row, Column, Label, Button, SubLabel, U, useTheme, SCREEN_WIDTH, LabelBT, SCREEN_HEIGHT } from '@theme/global';
+import { ArrowLeft, CircleCheck, CircleX } from 'lucide-react-native';
 import Input from '@components/Forms/input';
 import Modal from '@components/Modal/index';
 import CheckBox from '@components/Forms/checkbox';
-import Success from '@components/Forms/success';
-import Error from '@components/Forms/error';
-//API
+import { Pressable } from 'react-native';
 import { loginUser } from '@api/request/auth';
-import { createPreferences } from '@hooks/preferences';
+import Back from '../../components/Back';
+
 
 export default function AuthLoginScreen({ navigation, }) {
     const { color, margin, } = useTheme()
 
-    const [loading, setloading] = useState(false);
-    const [email, setemail] = useState('admin@admin.com');
-    const [password, setpassword] = useState('123456');
+    const [email, setemail] = useState();
+    const [password, setpassword] = useState();
     const [terms, setterms] = useState(true);
-
+    const [name, setname] = useState('Maria');
     const modalForget = useRef()
-    const passRef = useRef()
 
+
+    const [loading, setloading] = useState(false);
     const [success, setsuccess] = useState();
     const [error, seterror] = useState();
-
     const handleLogin = async () => {
+        navigation.navigate('Welcome', { name: name, })
+        return
         setloading(true)
         setsuccess()
         seterror()
         try {
-            const res = await loginUser(email, password)
-            if (res?.nome) {
-                setsuccess('Conectado com sucesso!')
-                const saveUser = {
-                    "avatar": res?.avatar,
-                    "name": res?.name,
-                    "email": res?.email,
-                    "token": res?.token,
-                };
-                //  if (res.uiid) {
-                //       OneSignal.login(res.uiid)
-                //     }
-                const preferences = await createPreferences(saveUser)
-                if(preferences){
-                    console.log(saveUser)
-                    setTimeout(() => {
-                        navigation.navigate('Welcome', { name: res?.nome, })
-                    }, 600);
-                }
+            const res = await loginUser({ email, password, })
+            console.log(res)
+            if (res) {
+                setsuccess('Conta criada com sucesso!')
+                navigation.navigate('AddPet')
             }
         } catch (error) {
-            console.log(error.message)
-            seterror(error.message)
+
         } finally {
             setloading(false)
         }
     }
 
 
+    const a = false;
     return (
         <Main style={{}}>
             <Scroll>
                 <Column ph={28}>
-                    <Back />
+
+                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 20, }}>
+                        <Back />
+                    </Row>
+
                     <Title size={26} style={{ marginTop: 20, marginBottom: 4, }}>Olá! Acesse sua conta utilizando seu e-mail e senha.</Title>
 
                     <Column style={{ height: 16, }} />
@@ -71,33 +60,29 @@ export default function AuthLoginScreen({ navigation, }) {
                         label="E-mail *"
                         placeholder="Email"
                         value={email}
-                        onSubmitEditing={() => { passRef.current.focus() }}
                         setValue={setemail}
                     />
                     <Column style={{ height: 16, }} />
+
 
                     <Input
                         label="Senha *"
                         placeholder="Senha"
                         value={password}
-                        ref={passRef}
                         pass={true}
                         setValue={setpassword}
-                        onSubmitEditing={handleLogin}
                     />
-                    <Button pv={12} radius={8} ph={8} mv={8} onPress={() => { modalForget.current.expand() }}>
+                    <Column style={{ height: 16, }} />
+                    <Pressable style={{ marginBottom: 24, }} onPress={() => { modalForget.current.expand() }}>
                         <U><LabelBT color={color.title} style={{ fontSize: 16, }}>Recuperar senha</LabelBT></U>
-                    </Button>
+                    </Pressable>
 
                     <Row style={{ alignItems: 'center', marginBottom: 32, }}>
                         <CheckBox status={terms} setstatus={setterms} />
                         <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de uso e Privacidade</U></Label>
                     </Row>
 
-
-                    {success ? <Success msg={success} /> : error ? <Error msg={error} /> : null}
-
-                    <Button bg='#918C8B' disabled={loading} onPress={handleLogin}>
+                    <Button bg='#918C8B'  disabled={loading} onPress={handleLogin}>
                         <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                             {loading ?
                                 <Loader color="#fff" /> :
@@ -119,7 +104,7 @@ export default function AuthLoginScreen({ navigation, }) {
 
             <Modal ref={modalForget} snapPoints={[0.1, SCREEN_HEIGHT]}>
                 <Column style={{ marginHorizontal: margin.h, marginVertical: margin.v, }}>
-                    <Title style={{}}>Recuperar a senha</Title>
+                    <Title style={{  }}>Recuperar a senha</Title>
                 </Column>
             </Modal>
         </Main>
