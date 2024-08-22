@@ -8,6 +8,7 @@ import { Search } from 'lucide-react-native';
 
 import TopMenu from '@components/Header/topmenu';
 import { FlatList } from 'react-native-gesture-handler';
+import TabBar from '@components/TabBar';
 
 export default function ServicesScreen({ navigation, }) {
 
@@ -95,6 +96,7 @@ export default function ServicesScreen({ navigation, }) {
                 </Column>
 
             </Scroll>
+            <TabBar />
         </Main >
     )
 }

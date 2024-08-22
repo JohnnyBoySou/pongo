@@ -49,8 +49,8 @@ export default function App() {
   }
 
   return (
-    <View style={{ flex: 1,  backgroundColor: selectTheme.background }} onLayout={onLayoutRootView}>
-      <ThemeProvider theme={selectTheme}>
+    <View style={{ flex: 1,  backgroundColor: light.background }} onLayout={onLayoutRootView}>
+      <ThemeProvider theme={light}>
         <StatusBar translucent />
         <Router />
       </ThemeProvider>
