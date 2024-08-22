@@ -22,7 +22,7 @@ export default function PetsProfileScreen({ navigation, }) {
                 setloading(false)
             }
         }
-
+        
     }, []);
 
 

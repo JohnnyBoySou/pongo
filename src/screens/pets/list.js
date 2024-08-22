@@ -39,18 +39,16 @@ export default function PetsListScreen({ navigation, }) {
                 <Back />
             </Column>
             <Title align="center">Selecione o perfil do Pet</Title>
-
-            {loading ? <Loader /> : 
-            <FlatList
-                data={data}
-                renderItem={({ item }) => <Pet pet={item} navigation={navigation} />}
-                keyExtractor={item => item.id}
-                showsVerticalScrollIndicator={false}
-                numColumns={2}
-                columnWrapperStyle={{ justifyContent: 'space-evenly', marginHorizontal: 20, }}
-                contentContainerStyle={{ marginTop: 20, }}
-
-            />}
+            {loading ? <Loader /> :
+                <FlatList
+                    data={data}
+                    renderItem={({ item }) => <Pet pet={item} navigation={navigation} />}
+                    keyExtractor={item => item.id}
+                    showsVerticalScrollIndicator={false}
+                    numColumns={2}
+                    columnWrapperStyle={{ justifyContent: 'space-evenly', marginHorizontal: 20, }}
+                    contentContainerStyle={{ marginTop: 20, }}
+                />}
 
             <TabBar />
         </Main>
@@ -63,7 +61,7 @@ const Pet = ({ pet, navigation }) => {
     return (
         <Button onPress={() => { navigation.navigate('PetsProfile', { id: pet?.id, }) }} radius={12} pv={12} ph={12}>
             <Column style={{}}>
-                <Image source={avatar} bg="#fff" style={{ width: 110, height: 110, objectFit: 'cover', marginTop: 10, borderRadius: 100,  }} />
+                <Image source={avatar} bg="#fff" style={{ width: 110, height: 110, objectFit: 'cover', marginTop: 10, borderRadius: 100, }} />
                 <Title size={18} align="center" style={{ marginTop: 10, }}>{pet?.name}</Title>
                 <Label size={16} align="center" style={{ marginTop: 2, }}>{pet?.age} anos</Label>
             </Column>
