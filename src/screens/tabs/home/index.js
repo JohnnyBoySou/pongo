@@ -1,5 +1,5 @@
 import React from 'react';
-import { Main, Scroll, Column, Row, Title, Button, useTheme } from '@theme/global';
+import { Main, Scroll, Column, Row, Title, Button, useTheme, LabelBT } from '@theme/global';
 import { MotiImage } from 'moti';
 import TopMenu from '@components/Header/topmenu';
 import { MotiView, MotiText } from 'moti'
@@ -11,10 +11,9 @@ export default function HomeScreen({ navigation, }) {
     return (
         <Main >
             <Scroll >
-                <TopMenu back={false}/>
-                <Column ph={margin.h} mv={18}>
-                    <Title>Escolha qual deseja acessar</Title>
-                    <Row style={{ columnGap: 16, marginBottom: 8, marginTop: 24, flex: 1, width: '100%' }}>
+                <TopMenu back={false} />
+                <Column ph={margin.h} mv={12}>
+                    <Row style={{ columnGap: 16, marginBottom: 8,  flex: 1, width: '100%' }}>
                         <MotiView
                             from={{ translateX: -55, opacity: 0 }}
                             animate={{ translateX: 0, opacity: 1 }}
@@ -85,10 +84,19 @@ export default function HomeScreen({ navigation, }) {
                         </MotiView>
                     </Row>
                 </Column>
-                <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 1, borderColor: '#918C8B', }} radius={50} pv={16} ph={1} mv={12} mh={margin.h}>
-                    <Text color="#918C8B" style={{ textAlign: 'center', fontWeight: 700, color: '#918C8B' }}>Iniciar conversa</Text>
-                </Button>
-                <Column style={{height: 30, }} />
+                <MotiView
+                    from={{ translateY: 55, opacity: 0 }}
+                    animate={{ translateY: 0, opacity: 1 }}
+                    transition={{
+                        delay: 800,
+                        type: 'timing',
+                    }}>
+
+                    <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor: '#918C8B', marginTop: 16, }} pv={16} ph={1} mh={margin.h}>
+                        <LabelBT color="#918C8B" style={{ textAlign: 'center', }}>Iniciar conversa</LabelBT>
+                    </Button>
+                </MotiView>
+                <Column style={{ height: 30, }} />
             </Scroll>
         </Main>
     )
