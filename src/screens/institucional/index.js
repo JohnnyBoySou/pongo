@@ -7,6 +7,7 @@ import Header from '@components/Header';
 import Swiper from 'react-native-swiper';
 import Input from '@components/Forms/input';
 import TopMenu from '@components/Header/topmenu';
+import TabBar from '@components/TabBar';
 
 export default function InstitucionalScreen({ navigation, }) {
 
@@ -62,7 +63,9 @@ export default function InstitucionalScreen({ navigation, }) {
 
 
                 </Column>
+                <Column style={{ height: 50 }} />
             </Scroll>
+            <TabBar />
         </Main>
     )
 }

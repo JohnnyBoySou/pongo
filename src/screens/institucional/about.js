@@ -11,6 +11,7 @@ import Swiper from 'react-native-swiper';
 import PlanosList from '@components/Planos';
 
 import { useNavigation } from '@react-navigation/native';
+import TabBar from '@components/TabBar';
 
 
 export default function InstitucionalAboutScreen() {
@@ -23,6 +24,7 @@ export default function InstitucionalAboutScreen() {
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
+                <TopMenu back={false} search={false} />
                 <Header title="Sobre a Villa Pongo" />
 
                 <Column mh={margin.h}>
@@ -81,8 +83,9 @@ export default function InstitucionalAboutScreen() {
                         <Title size={18} align='center' font={font.medium}>Voltar</Title>
                     </Button>
                 </Column>
-
+                <Column style={{ height: 50 }} />
             </Scroll>
+            <TabBar />
         </Main>
     );
 }

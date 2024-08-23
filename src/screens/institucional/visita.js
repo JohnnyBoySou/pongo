@@ -7,6 +7,8 @@ import CalendarioHorizontal from '@components/Calendar/horizontal';
 import Modal from '@components/Modal';
 import { ScrollView, } from 'react-native-gesture-handler';
 import { Check, EyeOff } from 'lucide-react-native';
+import TabBar from '@components/TabBar';
+import TopMenu from '@components/Header/topmenu';
 import { registerVisita } from '@api/request/institucional';
 import Success from '@components/Forms/success';
 import Error from '@components/Forms/error';
@@ -47,6 +49,7 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
+                <TopMenu back={false} search={false} />
                 <Header title="Solicitar visita" />
                 <Column mh={margin.h} >
                     <Input
@@ -105,6 +108,7 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
                 </Column>
 
             </Scroll>
+            <TabBar />
 
             <Modal ref={timerRef} snapPoints={[0.1, 300]}>
                 <TimePicker sethora={sethora} setminutos={setminutos} minutos={minutos} hora={hora} timerRef={timerRef} />
@@ -144,5 +148,6 @@ const TimePicker = ({ sethora, setminutos, minutos, hora, timerRef }) => {
             </ScrollView>
 
         </Row>
+
     )
 }
