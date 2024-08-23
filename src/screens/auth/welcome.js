@@ -6,15 +6,13 @@ import { getPreferences } from '@hooks/preferences';
 
 export default function WelcomeScreen({ navigation, route }) {
 
-    const name = route.params?.name ? route.params?.name : 'Visitante'
-
+    const [name, setname] = useState(route.params?.name ? route.params?.name : 'Visitante');
     useEffect(() => {
-        
-        const fecthData = () => {
+        const fecthData = async () => {
             try {
-                const res = getPreferences()
-                console.log(res)
+                const res = await getPreferences()
                 if(res?.name){
+                    setname(res?.name)
                     setTimeout(() => {
                         navigation.navigate('Tabs')
                     }, 3000)

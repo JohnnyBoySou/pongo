@@ -66,6 +66,7 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
                                 <TextInput ref={searchRef} 
                                 onFocus={() => { setfocusSearch(true) }}
                                 onBlur={() => { setfocusSearch(false) }}
+                                disabled={handleSearch ? false : true}
                                 placeholder="Pesquisar" style={{ flex: 1, fontFamily: 'Font_Medium', fontSize: 16, color: color.label, marginLeft: 12, }} />
                             </Row>
                         </Button>

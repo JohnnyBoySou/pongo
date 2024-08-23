@@ -33,6 +33,7 @@ export default function ServicesScreen({ navigation, }) {
             setloading(true)
             try {
                 const res = await listServices(page)
+                console.log(res)
                 setdata(res)
             } catch (error) {
                 console.log(error)

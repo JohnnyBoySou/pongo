@@ -23,7 +23,7 @@ export default function HomeScreen({ navigation, }) {
                             }}
                             style={{ flexGrow: 1 }}
                         >
-                            <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { Linking.openURL('https://pongo.com.br') }}>
+                            <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Shop') }}>
                                 <Column>
                                     <MotiImage source={require('@imgs/home_1.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
                                     <Title align="center" size={18}>Loja Pongo</Title>

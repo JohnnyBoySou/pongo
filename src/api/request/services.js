@@ -12,6 +12,7 @@ export const listServices = async (page = 1) => {
                 Authorization: `Bearer ${token}`,
             },
         });
+        console.log(res.data)
         return res.data.data
     } catch (error) {
         const err = JSON.parse(error.request.response);
@@ -23,7 +24,7 @@ export const singleService = async (id) => {
     const BASE_URL = await getBaseURL();
     const token = await getToken();
     try {
-        const res = await axios.get(`${BASE_URL}/servico-single/${id}`, {
+        const res = await axios.get(`${BASE_URL}/servico-single/${id}/${tipo}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

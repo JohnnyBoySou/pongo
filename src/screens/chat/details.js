@@ -55,7 +55,6 @@ export default function ChatDetailsScreen({ navigation, route }) {
 
 
 
-
     const [data, setdata] = useState();
     const [loading, setloading] = useState(true);
     useEffect(() => {
@@ -63,10 +62,10 @@ export default function ChatDetailsScreen({ navigation, route }) {
             setloading(true)
             try {
                 const res = await listMessages(token)
-                console.log(res)
+                setdata(res)
             } catch (error) {
                 console.log(error)
-            } finally{setloading(false)}
+            } finally { setloading(false) }
         }
         fecthData();
     }, []);
@@ -82,8 +81,9 @@ export default function ChatDetailsScreen({ navigation, route }) {
         <Main style={{ backgroundColor: color.background, }}>
             <TopSheet
                 ref={topSheetRef}
+                bg={color.bg}
                 min={
-                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                    <Row style={{ justifyContent: 'space-between', alignItems: 'center',  paddingTop: 30,}}>
                         <Row>
                             <Pressable pv={1} ph={1} onPress={() => { navigation.goBack() }} >
                                 <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
@@ -108,29 +108,31 @@ export default function ChatDetailsScreen({ navigation, route }) {
                     </Row>
                 }
                 max={<Column>
-                    <Row style={{justifyContent: 'center', alignItems: 'center', }}>
+                    <Column style={{ marginTop: 30, }}>
+                        <Button onPress={closeTopSheet} ph={0} pv={0} mv={12} style={{ width: 42, marginLeft: 12, height: 42, alignSelf: 'flex-end', justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
+                            <X size={22} color={color.sc.sc3} />
+                        </Button>
                         <Input
                             placeholder="Pesquisar"
                             value={search}
                             label="Pesquisar"
                             setValue={setsearch}
                         />
-                           <Button onPress={closeTopSheet} ph={0} pv={0} mv={12} style={{ width: 42, marginLeft: 12, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
-                            <X size={22} color={color.sc.sc3} />
-                        </Button>
-                    </Row>
-                    <Label style={{ marginVertical: 12, }}>Resultados</Label>
+
+                    </Column>
+
+                    {searchResult &&<Label style={{ marginVertical: 12, }}>Resultados</Label>}
                     {search.length > 1 &&
-                    <Animated.FlatList
-                        entering={FadeInDown}
-                        exiting={FadeOutDown}
-                        data={searchResult}
-                        renderItem={({ item }) => <Message item={item} />}
-                        keyExtractor={item => item.id}
-                        style={{ backgroundColor: '#f7f7f7', borderRadius: 12, paddingHorizontal: 20, paddingVertical: 12, }}
-                    />}
+                        <Animated.FlatList
+                            entering={FadeInDown}
+                            exiting={FadeOutDown}
+                            data={searchResult}
+                            renderItem={({ item }) => <Message item={item} />}
+                            keyExtractor={item => item.id}
+                            style={{ }}
+                        />}
                 </Column>}
-                valueMin={80}
+                valueMin={120}
                 valueMax={SCREEN_HEIGHT - 100}
             />
 
@@ -242,55 +244,13 @@ const msgs = [
         name: 'João',
         message: 'Olá, tudo bem?',
         time: '10:00',
-        author: true,
+        type: 'U',
     },
     {
         id: 2,
         name: 'Atendente Pongo',
         message: 'Bom dia, como posso ajudar?',
         time: '10:02',
-        author: false,
-    },
-    {
-        id: 3,
-        name: 'João',
-        message: 'Estou com um problema no meu pedido, ele ainda não chegou.',
-        time: '10:05',
-        author: true,
-    },
-    {
-        id: 4,
-        name: 'Atendente Pongo',
-        message: 'Entendo. Pode me fornecer o número do pedido para verificarmos?',
-        time: '10:06',
-        author: false,
-    },
-    {
-        id: 5,
-        name: 'João',
-        message: 'Claro, o número do pedido é 123456.',
-        time: '10:08',
-        author: true,
-    },
-    {
-        id: 6,
-        name: 'Atendente Pongo',
-        message: 'Obrigado. Vou verificar o status e já retorno com uma resposta.',
-        time: '10:10',
-        author: false,
-    },
-    {
-        id: 7,
-        name: 'Atendente Pongo',
-        message: 'Verifiquei que o pedido está em trânsito e deve chegar até amanhã.',
-        time: '10:15',
-        author: false,
-    },
-    {
-        id: 8,
-        name: 'João',
-        message: 'Obrigado pela informação. Vou aguardar.',
-        time: '10:17',
-        author: true,
+        type: 'C',
     }
 ];

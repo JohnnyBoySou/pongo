@@ -1,13 +1,15 @@
-import React, { useContext, useState } from 'react';
-import { Text } from 'react-native';
-import { Main, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT, useTheme } from '@theme/global';
+import React, { useContext, useState, useRef } from 'react';
+import { Main, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT, useTheme, Loader } from '@theme/global';
 import { ThemeContext } from 'styled-components/native';
 import Header from '@components/Header';
 import Input from '@components/Forms/input';
 import CalendarioHorizontal from '@components/Calendar/horizontal';
 import Modal from '@components/Modal';
 import { ScrollView, } from 'react-native-gesture-handler';
-import { Check } from 'lucide-react-native';
+import { Check, EyeOff } from 'lucide-react-native';
+import { registerVisita } from '@api/request/institucional';
+import Success from '@components/Forms/success';
+import Error from '@components/Forms/error';
 
 export default function InstitucionalVisitaScreen({ navigation, }) {
 
@@ -16,13 +18,31 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
     const [name, setname] = useState();
     const [tel, settel] = useState();
     const [type, settype] = useState('');
-    const timerRef = React.useRef();
+    const timerRef = useRef();
 
+    const [success, setsuccess] = useState();
+    const [error, seterror] = useState();
     const [day, setday] = useState();
-    const [date, setDate] = useState(new Date());
 
     const [minutos, setminutos] = useState();
     const [hora, sethora] = useState();
+    const [loading, setloading] = useState();
+
+    const handleRegister = async () => {
+        setloading(true)
+        try {
+            const res = await registerVisita(day, hora, tel, name, type)
+            setsuccess('Solicitação de visita recebida com sucesso. Faremos a confirmação em breve via WhatsApp.')
+        } catch (err) {
+            console.log(err)
+            seterror(err)
+        } finally {
+            setTimeout(() => {
+                setloading(false) 
+            }, 1000);
+        }
+    }
+
 
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
@@ -49,8 +69,8 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
                         <Title>Escolha qual deseja visitar:</Title>
                         <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginVertical: 16, }} >
 
-                            <Button bg={type === 'Pongo' ? '#918C8B' : '#ffffff' + 60} style={{ width: '48%' }} radius={12} onPress={() => { settype('Pongo') }} >
-                                <LabelBT align="center" color={type === 'Pongo' ? "#fff" : '#918C8B'}>Pongo</LabelBT>
+                            <Button bg={type === 'Hotel' ? '#918C8B' : '#ffffff' + 60} style={{ width: '48%' }} radius={12} onPress={() => { settype('Hotel') }} >
+                                <LabelBT align="center" color={type === 'Hotel' ? "#fff" : '#918C8B'}>Pongo</LabelBT>
                             </Button>
                             <Button bg={type === 'Villa Pongo' ? '#918C8B' : '#ffffff' + 60} style={{ width: '48%' }} radius={12} onPress={() => { settype('Villa Pongo') }}  >
                                 <LabelBT align="center" color={type === 'Villa Pongo' ? "#fff" : '#918C8B'}>Villa Pongo</LabelBT>
@@ -67,11 +87,20 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
 
                 <Column mh={margin.h} mv={30}>
                     <Title>Qual horario da visita:</Title>
-                    <Button bg={minutos ? color.primary : '#fff'} pv={16} mtop={20} onPress={() => { timerRef.current.snapToIndex(1) }} radius={8}>
-                        <SubLabel align="center" style={{ textAlign: 'center', color: minutos ? '#fff': color.title, fontSize: 18,}}>{minutos ? hora + ':' + minutos : 'Selecione um horário' }</SubLabel>
+                    <Button bg={minutos ? color.primary : '#fff'} mbottom={10} pv={16} mtop={20} onPress={() => { timerRef.current.snapToIndex(1) }} radius={8}>
+                        <SubLabel align="center" style={{ textAlign: 'center', color: minutos ? '#fff' : color.title, fontSize: 18, }}>{minutos ? hora + ':' + minutos : 'Selecione um horário'}</SubLabel>
                     </Button>
-                    <Button bg={color.sc.sc1} mtop={30}>
-                        <LabelBT align="center" style={{  color: "#fff" }}>Agendar visita</LabelBT>
+
+
+                    {success ? <Success msg={success} /> : error ? <Error msg={error} /> : null}
+
+
+                    <Button bg={color.sc.sc1} mtop={10} onPress={handleRegister} disabled={loading}>
+                        <Row style={{ justifyContent: 'center', alignItems: 'center',  }}>
+                            {loading ? <Loader color="#fff"/> :
+                                <LabelBT align="center" style={{ color: "#fff" }}>Agendar visita</LabelBT>
+                            }
+                        </Row>
                     </Button>
                 </Column>
 

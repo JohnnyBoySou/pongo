@@ -15,7 +15,7 @@ import Animated, {
 import { useState, useImperativeHandle, forwardRef, } from "react"
 import { Column, Title } from '@theme/global';
 
-const TopSheet = forwardRef(({ min, max, valueMin, valueMax }, ref) => {
+const TopSheet = forwardRef(({ min, max, valueMin, valueMax, bg }, ref) => {
   const height = useSharedValue(valueMin);
 
   const MIN_HEIGHT = valueMin;
@@ -70,7 +70,7 @@ const TopSheet = forwardRef(({ min, max, valueMin, valueMax }, ref) => {
     );
     return {
       height: height.value,
-      backgroundColor: "#FFFFFF",
+      backgroundColor: bg,
     };
   });
 

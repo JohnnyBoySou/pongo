@@ -39,6 +39,7 @@ import PetsProfileScreen from '@screens/pets/profile';
 import PetsDiarioScreen from '@screens/pets/diario';
 import PetsStoryScreen from '@screens/pets/story';
 import AddPetScreen from '@screens/auth/addpet';
+import PetsSingleGaleriaScreen from '@screens/pets/singe_galeria';
 
 //CHAT
 import ChatListScreen from '@screens/chat/list';
@@ -85,7 +86,7 @@ import HotelRegisterScreen from '@screens/hotel/register';
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='PetsList'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Welcome'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -97,6 +98,7 @@ export default function Router() {
         <Stack.Screen name="PetsProfile" component={PetsProfileScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="PetsDiario" component={PetsDiarioScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="PetsStory" component={PetsStoryScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="PetsSingleGaleria" component={PetsSingleGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="SchoolRegister" component={SchoolRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="SchoolFinish" component={SchoolFinishScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />

@@ -7,6 +7,7 @@ import TabBar from '@components/TabBar';
 
 //API
 import { singlePet } from '@api/request/pets';
+import { useNavigation } from '@react-navigation/native';
 
 export default function PetsProfileScreen({ navigation, route }) {
     const id = route?.params?.id ? route?.params?.id : 1;
@@ -18,6 +19,7 @@ export default function PetsProfileScreen({ navigation, route }) {
             setloading(true)
             try {
                 const res = await singlePet(id)
+                console.log(res)
                 setdata(res)
             } catch (error) {
                 console.log(error)
@@ -43,13 +45,14 @@ export default function PetsProfileScreen({ navigation, route }) {
 
 const Pet = ({ pet }) => {
     const { color, font, margin } = useTheme();
+    const navigation = useNavigation()
     return (
         <Scroll>
             <Column style={{ flex: 1, }}>
-                <Column style={{ zIndex: 99, marginTop: 30, marginLeft: 28,}}>
+                <Column style={{ zIndex: 99, marginTop: 30, marginLeft: 28, }}>
                     <Back />
                 </Column>
-                
+
                 <Image source={{ uri: pet?.img }} style={{ width: SCREEN_WIDTH, height: 320, objectFit: 'cover', marginTop: -76, alignSelf: 'center', borderBottomLeftRadius: 130, borderBottomRightRadius: 130, }} />
                 <Row style={{ backgroundColor: '#fff', alignSelf: 'center', paddingHorizontal: 8, paddingVertical: 8, borderRadius: 100, marginTop: -26, justifyContent: 'space-between', alignItems: 'center', }}>
                     <Title size={18} align="center" color={color.sc.sc3} style={{ marginHorizontal: 20, }}>{pet?.name}</Title>
@@ -89,17 +92,17 @@ const Pet = ({ pet }) => {
                     <Row style={{ justifyContent: 'space-evenly', alignItems: 'center', }}>
                         <Button ph={4} pv={4} radius={6}>
                             <Column style={{ justifyContent: 'center', alignItems: 'center', }}>
-                                <Image source={require("@imgs/pr1.png")} style={{ width: 50, height: 50, marginBottom: 6, borderRadius: 100,}} />
+                                <Image source={require("@imgs/pr1.png")} style={{ width: 50, height: 50, marginBottom: 6, borderRadius: 100, }} />
                                 <Title size={16} color="#fff">Escola</Title>
                             </Column>
                         </Button>
                         <Button ph={4} pv={4} radius={6}>
                             <Column style={{ justifyContent: 'center', alignItems: 'center', }}>
-                                <Image source={require("@imgs/pr2.png")} style={{ width: 50, height: 50, marginBottom: 6, borderRadius: 100,}} />
+                                <Image source={require("@imgs/pr2.png")} style={{ width: 50, height: 50, marginBottom: 6, borderRadius: 100, }} />
                                 <Title size={16} color="#fff">Agenda</Title>
                             </Column>
                         </Button>
-                        <Button ph={4} pv={4} radius={6}>
+                        <Button ph={4} pv={4} radius={6} onPress={() => { navigation.navigate('PetsDiario', { id: pet?.id }) }} >
                             <Column style={{ justifyContent: 'center', alignItems: 'center', }}>
                                 <Image source={require("@imgs/pr3.png")} style={{ width: 50, height: 50, marginBottom: 6, borderRadius: 100, }} />
                                 <Title size={16} color="#fff">Diário</Title>
