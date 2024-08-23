@@ -1,14 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { ScrollView, Text } from 'react-native';
-import { Main, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT } from '@theme/global';
+import { Text } from 'react-native';
+import { Main, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT, useTheme } from '@theme/global';
 import { ThemeContext } from 'styled-components/native';
-import { Apple } from 'lucide-react-native';
 import Header from '@components/Header';
 import Input from '@components/Forms/input';
-import Calendario from '@components/Calendar';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import CalendarioHorizontal from '@components/Calendar/horizontal';
 import Modal from '@components/Modal';
+import { ScrollView, } from 'react-native-gesture-handler';
+import { Check } from 'lucide-react-native';
 
 export default function InstitucionalVisitaScreen({ navigation, }) {
 
@@ -21,18 +20,9 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
 
     const [day, setday] = useState();
     const [date, setDate] = useState(new Date());
-    const [show, setShow] = useState(false);
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate;
-        setShow(false);
-        setDate(currentDate);
-    };
-
-    const showMode = () => {
-        setShow(true);
-    };
-
+    const [minutos, setminutos] = useState();
+    const [hora, sethora] = useState();
 
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
@@ -55,8 +45,8 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
                         mask="PHONE"
                     />
 
-                    <Column mv={margin.v}>
-                        <Text>Escolha qual deseja visitar:</Text>
+                    <Column style={{ marginTop: 30, }}>
+                        <Title>Escolha qual deseja visitar:</Title>
                         <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginVertical: 16, }} >
 
                             <Button bg={type === 'Pongo' ? '#918C8B' : '#ffffff' + 60} style={{ width: '48%' }} radius={12} onPress={() => { settype('Pongo') }} >
@@ -69,33 +59,61 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
                     </Column>
 
                 </Column>
-                <CalendarioHorizontal setday={setday} day={day} />
-                <Column mh={margin.h} mv={12}>
-                    <Button bg={'#FFFFFF'} mtop={12} onPress={showMode} >
-                        <Text align="center" style={{ textAlign: 'center', fontWeight: '700', color: "#434343" }}>Selecione um horário: {date.toLocaleTimeString().slice(0, -3)}</Text>
-                    </Button>
 
-                    <Button bg={color.pr.pr1} mtop={12}>
-                        <Text align="center" style={{ textAlign: 'center', fontWeight: '700', color: "#fff" }}>Agendar visita</Text>
+                <Column mh={margin.h} mv={12}>
+                    <Title>Qual dia da visita:</Title>
+                </Column>
+                <CalendarioHorizontal setday={setday} day={day} />
+
+                <Column mh={margin.h} mv={30}>
+                    <Title>Qual horario da visita:</Title>
+                    <Button bg={minutos ? color.primary : '#fff'} pv={16} mtop={20} onPress={() => { timerRef.current.snapToIndex(1) }} radius={8}>
+                        <SubLabel align="center" style={{ textAlign: 'center', color: minutos ? '#fff': color.title, fontSize: 18,}}>{minutos ? hora + ':' + minutos : 'Selecione um horário' }</SubLabel>
+                    </Button>
+                    <Button bg={color.pr.pr1} mtop={30}>
+                        <LabelBT align="center" style={{  color: "#fff" }}>Agendar visita</LabelBT>
                     </Button>
                 </Column>
 
             </Scroll>
-            {show && <DateTimePicker
-                    value={date}
-                    mode='time'
-                    is24Hour={true}
-                    onChange={onChange}
-                />}
+
+            <Modal ref={timerRef} snapPoints={[0.1, 300]}>
+                <TimePicker sethora={sethora} setminutos={setminutos} minutos={minutos} hora={hora} timerRef={timerRef} />
+            </Modal>
         </Main>
     )
 }
 
-/* <Modal ref={timerRef} snapPoints={[0.1, 200]}>
-                {show && <DateTimePicker
-                    value={date}
-                    mode='time'
-                    is24Hour={true}
-                    onChange={onChange}
-                />}
-            </Modal> */
+
+const TimePicker = ({ sethora, setminutos, minutos, hora, timerRef }) => {
+
+    const horas = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,]
+    const mins = ['00', 10, 20, 30, 40, 50,]
+
+    const { color } = useTheme()
+    return (
+        <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
+            <ScrollView style={{ height: 260, marginHorizontal: 30, }} showsVerticalScrollIndicator={false}>
+                {horas?.map((h, index) => (
+                    <Button ph={20} pv={10} radius={100} onPress={() => { sethora(h) }} bg={hora == h ? color.primary : 'transparent'} key={index}>
+                        <Label size={42} color={hora == h ? "#fff" : color.title} style={{ textAlign: 'center', lineHeight: 50, }}>{h}</Label>
+                    </Button>
+                ))}
+            </ScrollView>
+            <Column>
+                <Title style={{ justifyContent: 'center', alignItems: 'center', fontSize: 100, lineHeight: 100, }}>:</Title>
+                {minutos && <Button bg={color.primary} ph={8} pv={8} onPress={() => { timerRef.current.snapToIndex(0) }} >
+                    <Check size={30} color="#fff" />
+                </Button>}
+            </Column>
+            <ScrollView style={{ height: 260, marginHorizontal: 30, }} showsVerticalScrollIndicator={false}>
+                {mins?.map((h, index) => (
+                    <Button ph={20} pv={10} radius={100} onPress={() => { setminutos(h) }} bg={minutos == h ? color.primary : 'transparent'} key={index}>
+                        <Label size={42} color={minutos == h ? "#fff" : color.title} style={{ textAlign: 'center', lineHeight: 50, }}>{h}</Label>
+                    </Button>
+                ))}
+            </ScrollView>
+
+        </Row>
+    )
+}

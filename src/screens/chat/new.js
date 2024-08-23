@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Image } from '@theme/global';
-import { ActivityIndicator } from 'react-native';
+import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Image, Loader } from '@theme/global';
+import { createChat } from '@api/request/chat';
+
 export default function ChatNewScreen({ navigation, }) {
     const { color, font, } = useTheme();
 
@@ -14,12 +15,28 @@ export default function ChatNewScreen({ navigation, }) {
         id: 1,
     }
 
-
+    const [loading, setloading] = useState();    
+    const [data, setdata] = useState();
+    const [titulo, settitulo] = useState('Preciso de ajuda');
+    
     useEffect(() => {
-        setTimeout(() => {
-            navigation.navigate('ChatDetails', { user: user, id: user.id })
-        }, 4000)
+        const fecthData = async () => {
+            setloading(true)
+            try {
+                const res = await createChat(titulo)
+                setdata(res)
+                if(res){
+//                    navigation.navigate('ChatDetails', { user: user, id: user.id })
+                }
+            } catch (error) {
+                console.log(error)
+            } finally{
+                setloading(false)
+            }
+        }
+        fecthData();
     }, [])
+    
 
 
     return (
@@ -27,7 +44,7 @@ export default function ChatNewScreen({ navigation, }) {
             <Column style={{ backgroundColor: '#fff', borderRadius: 24, marginHorizontal: 28, justifyContent: 'center', alignItems: 'center', }} pv={20} ph={30}>
                 <Image source={require('@imgs/chatload.png')} style={{ width: 200, height: 200, objectFit: 'contain' }} />
                 <Label align='center' style={{ marginVertical: 20, }}>Por favor aguarde, você será {'\n'}direcionado para o atendente {'\n'}disponível em 5 segundos</Label>
-                <ActivityIndicator size={32} color={color.pr.pr1} />
+                <Loader size={32} color={color.pr.pr1} />
             </Column>
         </Main>
     )

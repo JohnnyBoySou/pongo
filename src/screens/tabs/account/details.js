@@ -110,7 +110,7 @@ export default function AccountDetailsScreen({ navigation }) {
                 <Column style={{ paddingHorizontal: margin.h, }}>
                     <Back />
                     <Column style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 20, }}>
-                        <Image style={{ width: 144, height: 144, borderRadius: 100, alignSelf: 'center', }} contentFit="cover" transition={1000} cachePolicy="disk" source={profile} />
+                        <Image style={{ width: 144, height: 144, borderRadius: 100, alignSelf: 'center', marginBottom: 20, }} contentFit="cover" transition={1000} cachePolicy="disk" source={profile} />
                         <ButtonPrimary onPress={handleImage} label="Escolher foto de perfil" />
                     </Column>
                     <Column style={{ marginBottom: 20, }}>
@@ -157,10 +157,7 @@ export default function AccountDetailsScreen({ navigation }) {
                         />
                     </Column>
 
-                    <Column style={{ marginBottom: 20, }}>
-                        <Title>Senha</Title>
-                        <ButtonPrimary onPress={() => { navigation.navigate('AccountReset',) }} label="Redefinir minha senha" />
-                    </Column>
+                    <ButtonPrimary onPress={() => { navigation.navigate('AccountReset',) }} label="Redefinir minha senha" />
 
                     <Label style={{ borderRadius: 12, paddingHorizontal: 24, paddingVertical: 12, textAlign: 'center', }}>
                         As alterações podem levar alguns minutos para serem processadas

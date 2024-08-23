@@ -1,33 +1,57 @@
-import { Main, Button, Column, Label, Title, Row, Image, useTheme, useNavigate } from '@theme/global';
+import { Main, Button, Column, Label, Title, Row, Image, useTheme, useNavigate, Loader, LabelBT } from '@theme/global';
 import { FlatList } from 'react-native-gesture-handler';
 import TopMenu from '@components/Header/topmenu';
-import { Plus } from 'lucide-react-native';
 import TabBar from '@components/TabBar';
+import { useEffect, useState } from 'react';
+import { listChats } from '@api/request/chat';
 
 export default function ChatListScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
+    const [loading, setloading] = useState();
+    const [data, setdata] = useState();
+
+    useEffect(() => {
+        const fecthData = async () => {
+            setloading(true)
+            try {
+                const res = await listChats()
+                setdata(res)
+            } catch (error) {
+                console.log(error)
+            } finally {
+                setloading(false)
+            }
+        }
+        fecthData();
+    }, [])
+
     return (
         <Main>
-            <TopMenu search={false} cart={false} />
-            <Column mh={margin.h} mv={20}>
-                <Title size={32}>Atendimento</Title>
+            <TopMenu cart={false} />
+            <Column mh={margin.h} mv={24}>
+                <Title>Suas conversas</Title>
             </Column>
-            <FlatList
-                data={chats}
-                renderItem={({ item }) => <Chat item={item} />}
-                keyExtractor={item => item.id}
-                ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: color.border, marginVertical: 4, borderRadius: 6, }} />}
-            />
+            {loading ? <Loader /> :
+            <Column>
+                <FlatList
+                    data={data}
+                    renderItem={({ item }) => <Chat item={item} />}
+                    keyExtractor={item => item.id}
+                    windowSize={10}
+                    maxToRenderPerBatch={6}
+                    ListFooterComponent={() => <Label size={14} style={{ textAlign: 'center', marginVertical: 80, }}>Nenhum atendimento encontrado</Label>}
+                    ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: color.border, marginVertical: 4, borderRadius: 6, }} />}
+                />
+            <Button style={{ backgroundColor: color.pr.pr1, }} pv={16} mh={margin.h} marginTop={0} marginBottom={24} onPress={() => {navigation.navigate('ChatNew')}} >
+                <LabelBT style={{ color: color.light, textAlign: 'center' }}>Iniciar novo atendimento</LabelBT>
+            </Button>
+            </Column>
+                
+                }
             <TabBar />
         </Main>
     )
 }
-/*
-
-            <Button bg={color.blue} style={{ justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: 30, right: 30, width: 56, height: 56, }}>
-                <Plus size={32} color="#fff" strokeWidth={3} />
-            </Button>
-*/
 
 const Chat = ({ item }) => {
     const { color } = useTheme();

@@ -1,25 +1,27 @@
 import { CalendarCheck, CircleHelp, CircleUserRound, FileClock, Heart, Hotel, Menu, PackageCheck, School, Search, Settings, ShoppingCart, Store, X } from 'lucide-react-native';
-import { Column, Row, Title, SCREEN_WIDTH, useTheme, Button, SCREEN_HEIGHT } from '@theme/global';
+import { Column, Row, Title, SCREEN_WIDTH, useTheme, Button, SCREEN_HEIGHT, SubLabel, Image } from '@theme/global';
 import { useNavigation } from '@react-navigation/native';
-import { Pressable, ScrollView, Text } from 'react-native';
+import { Pressable, Text, StyleSheet } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import SideBar from './sidebar';
 import Back from '@components/Back';
+import Animated, { FadeInRight, FadeInUp, FadeOutRight } from 'react-native-reanimated';
 
-export default function TopMenu({ search = true, cart = true }) {
+export default function TopMenu({ search = true, cart = false, back = true }) {
     const { color, margin, font } = useTheme();
     const navigation = useNavigation();
 
-    const [isOpen, setisOpen] = useState(false);
+    const [isOpen, setisOpen] = useState(true);
 
     const sidebar = useRef()
     const toggleSide = () => {
         if (isOpen) {
             sidebar.current?.close()
+            setisOpen(false)
         } else {
+            setisOpen(true)
             sidebar.current?.expand()
         }
-        setisOpen(!isOpen)
     }
 
     return (
@@ -39,69 +41,95 @@ export default function TopMenu({ search = true, cart = true }) {
                     </Row>
                 </Row>
 
-                <Row style={{ marginHorizontal: margin.h, flex: 1, alignItems: 'center' }}>
-                    {search &&
-                        <>
+                <Row style={{ marginHorizontal: margin.h,  alignItems: 'center', marginTop: 4, }}>
+                    {back &&
+                        <Column style={{ marginRight: 12, }}>
                             <Back />
-
-                            <Button mv={14} style={{ backgroundColor: color.light, flex: 1, marginLeft: 12 }} onPress={() => { navigation.navigate('Search') }} >
-
-                                <Row>
-                                    <Search size={24} color={color.label} strokeWidth={1} />
-                                    <Title size={18} style={{ fontFamily: 'Font_Medium', marginLeft: 12, color: color.label, }}>Pesquisar</Title>
-                                </Row>
-                            </Button>
-                        </>
+                        </Column>
                     }
-
+                    {search &&
+                        <Button mv={14} style={{ backgroundColor: color.light, flex: 1, }} onPress={() => { navigation.navigate('Search') }} >
+                            <Row>
+                                <Search size={24} color={color.label} strokeWidth={1} />
+                                <Title size={18} style={{ fontFamily: 'Font_Medium', marginLeft: 12, color: color.label, }}>Pesquisar</Title>
+                            </Row>
+                        </Button>
+                    }
                 </Row>
             </Column>
-            <SideBar ref={sidebar}>
-                <ScrollView>
-                    <Column>
-                        <Button onPress={toggleSide} ph={0} pv={0} style={{ width: 42, height: 42, alignSelf: 'flex-end', marginVertical: 20, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
-                            <X size={22} color={color.sc.sc3} />
-                        </Button>
-                        <Column style={{ width: SCREEN_WIDTH, borderRadius: 12, marginTop: -42 }}>
-                            <Button style={{ width: '100%' }}>
-                                <Text style={{ fontWeight: 700, color: color.sc.sc3 }}>Favoritos</Text>
+            <SideBar ref={sidebar} >
+                {!isOpen &&
+                    <Column style={{ marginHorizontal: 28, borderRadius: 12, marginTop: 12 }}>
+                        <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                            <Animated.Image entering={FadeInUp.delay(100)} exiting={FadeOutRight} source={require('@imgs/icon.png')} style={{ width: 82, height: 92, borderRadius: 120, }} />
+                            <Button onPress={toggleSide} ph={0} pv={0} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.secundary}>
+                                <X size={22} color={color.primary} />
                             </Button>
-                            <Button style={{ width: '100%' }}>
-                                <Text style={{ fontWeight: 700, color: color.sc.sc3 }}>Cesta</Text>
-                            </Button>
-                            <Button style={{ width: '100%' }}>
-                                <Text style={{ fontWeight: 500, color: color.pr.pr3 }}>Loja Pongo</Text>
-                            </Button>
-                            <Button style={{ width: '100%' }}>
-                                <Text style={{ fontWeight: 500, color: color.pr.pr3 }}>Escola Pongo</Text>
-                            </Button>
-                            <Button style={{ width: '100%' }}>
-                                <Text style={{ fontWeight: 500, color: color.pr.pr3 }}>Day Use</Text>
-                            </Button>
-                            <Button style={{ width: '100%' }}>
-                                <Text style={{ fontWeight: 500, color: color.pr.pr3 }}>Hotel Pongo</Text>
-                            </Button>
-                            <Button style={{ width: '100%' }}>
-                                <Text style={{ fontWeight: 500, color: color.pr.pr3 }}>Histórico de serviços</Text>
-                            </Button>
-                            <Button style={{ width: '100%' }}>
-                                <Text style={{ fontWeight: 500, color: color.pr.pr3 }}>Meus pedidos</Text>
-                            </Button>
-                            <Button style={{ width: '100%' }}>
-                                <Text style={{ fontWeight: 500, color: color.pr.pr1 }}>Configurações</Text>
-                            </Button>
-                            <Button style={{ width: '100%' }}>
-                                <Text style={{ fontWeight: 500, color: color.pr.pr1 }}>Dúvidas frequentes</Text>
-                            </Button>
-                        </Column>
-                    </Column>
-                </ScrollView>
-
+                        </Row>
+                        {screens.map((screen, index) => (
+                            <Animated.View key={index} entering={FadeInRight.delay(index * 150)} exiting={FadeOutRight} style={{ marginTop: 8 }}>
+                                <Button mleft={-20} style={{}} onPress={() => { navigation.navigate(screen?.screen) }} >
+                                    <SubLabel style={{ color: color.pr.pr3, fontFamily: font.medium, fontSize: 16, letterSpacing: - 0.6, }}>{screen?.name}</SubLabel>
+                                </Button>
+                            </Animated.View>
+                        ))}
+                    </Column>}
             </SideBar>
         </>
 
     )
 }
+
+
+const screens = [
+    {
+        id: 1,
+        name: 'Favoritos',
+        screen: 'Favorites',
+    },
+    {
+        id: 2,
+        name: 'Cesta',
+        screen: 'Cart',
+    },
+    {
+        id: 3,
+        name: 'Loja Pongo',
+        screen: 'VillaPongo',
+    },
+    {
+        id: 4,
+        name: 'Escola Pongo',
+        screen: 'SchoolPongo',
+    },
+    {
+        id: 5,
+        name: 'Day Use',
+        screen: 'DayUse',
+    },
+    {
+        id: 6,
+        name: 'Hotel Pongo',
+        screen: 'HotelPongo',
+    }, {
+        id: 7,
+        name: 'Historico de serviços',
+        screen: 'Services',
+    },
+    {
+        id: 9,
+        name: 'Configurações',
+        screen: 'Settings',
+    },
+    {
+        id: 10,
+        name: 'Dúvidas frequentes',
+        screen: 'Help',
+    },
+]
+
+
+
 
 /**
  * 

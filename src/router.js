@@ -37,6 +37,7 @@ import PedidoProdutoIndividualScreen from '@screens/pedidos/pedidoProdutoIndivid
 import PetsListScreen from '@screens/pets/list';
 import PetsProfileScreen from '@screens/pets/profile';
 import PetsDiarioScreen from '@screens/pets/diario';
+import PetsStoryScreen from '@screens/pets/story';
 import AddPetScreen from '@screens/auth/addpet';
 
 //CHAT
@@ -84,7 +85,7 @@ import HotelRegisterScreen from '@screens/hotel/register';
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='PetsList'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Onboarding'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -95,6 +96,7 @@ export default function Router() {
         <Stack.Screen name="PetsList" component={PetsListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="PetsProfile" component={PetsProfileScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="PetsDiario" component={PetsDiarioScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="PetsStory" component={PetsStoryScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="SchoolRegister" component={SchoolRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="SchoolFinish" component={SchoolFinishScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -107,7 +109,7 @@ export default function Router() {
         <Stack.Screen name="InstitucionalAbout" component={InstitucionalAboutScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="InstitucionalLocal" component={InstitucionalLocalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="InstitucionalRealizacoes" component={InstitucionalRealizacoesScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-        <Stack.Screen name="IntistucionalGaleria" component={InstitucionalGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="InstitucionalGaleria" component={InstitucionalGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="IntistucionalSingleGaleria" component={InstitucionalSingleGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Shop" component={ShopScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -159,7 +161,7 @@ function Tabs() {
         tabBarInactiveTintColor: '#C3C3C3',
         tabBarStyle: {
           backgroundColor: '#918C8B',
-          height: 90,
+          height: 80,
           elevation: 0,
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20

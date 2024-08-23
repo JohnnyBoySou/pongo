@@ -11,11 +11,10 @@ export default function TabBar({ }) {
             width: SCREEN_WIDTH,
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
-            paddingVertical: 12,
             position: 'absolute',
             bottom: 0, zIndex: 99,
             backgroundColor: '#918C8B',
-            height: 90,
+            height: 80,
         }}>
 
             <Button ph={0} pv={0} style={{flexGrow: 1, justifyContent: 'center', alignItems: 'center', }} radius={6} onPress={() => {navigation.navigate('Tabs', { screen: 'Home',})}} >

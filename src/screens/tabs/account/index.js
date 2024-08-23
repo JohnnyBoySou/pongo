@@ -17,7 +17,7 @@ export default function AccountScreen({ navigation, }) {
         <Main >
 
             <Scroll>
-                <TopMenu search={false} />
+                <TopMenu search={false} back={false}/>
                 <Column mh={margin.h} mv={24} style={{ paddingVertical: 24, paddingHorizontal: 20, borderRadius: 18, backgroundColor: color.light, }}>
                     <Title>Olá, {user?.name}</Title>
                     <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 12, }}>
@@ -45,7 +45,7 @@ export default function AccountScreen({ navigation, }) {
                     </Button>
                     <Button style={{ backgroundColor: color.light, }} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('AccountDetails') }} >
                         <Row style={{ alignItems: 'center', }}>
-                            <Image source={require('@imgs/ac2.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
+                            <Image source={require('@imgs/profile.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
                             <Title size={20}>Meu perfil</Title>
                         </Row>
                     </Button>
@@ -66,6 +66,7 @@ export default function AccountScreen({ navigation, }) {
                     <Title align="center" font={font.medium} color="#918C8B">Iniciar conversa</Title>
                 </Button>
 
+                <Column style={{height: 30, }} />
             </Scroll>
         </Main>
     )

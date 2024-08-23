@@ -35,10 +35,7 @@ export default function PetsListScreen({ navigation, }) {
     return (
         <Main>
             <TopMenu search={false} />
-            <Column style={{ marginLeft: margin.h, marginVertical: 20, }}>
-                <Back />
-            </Column>
-            <Title align="center">Selecione o perfil do Pet</Title>
+            <Title align="center" style={{ marginVertical: 30, }}>Selecione o perfil do Pet</Title>
             {loading ? <Loader /> :
                 <FlatList
                     data={data}
@@ -46,6 +43,7 @@ export default function PetsListScreen({ navigation, }) {
                     keyExtractor={item => item.id}
                     showsVerticalScrollIndicator={false}
                     numColumns={2}
+                    ListFooterComponent={() => <Label align="center" style={{ marginVertical: 50, }}>Nenhum pet encontrado.</Label>}
                     columnWrapperStyle={{ justifyContent: 'space-evenly', marginHorizontal: 20, }}
                     contentContainerStyle={{ marginTop: 20, }}
                 />}
@@ -63,7 +61,7 @@ const Pet = ({ pet, navigation }) => {
             <Column style={{}}>
                 <Image source={avatar} bg="#fff" style={{ width: 110, height: 110, objectFit: 'cover', marginTop: 10, borderRadius: 100, }} />
                 <Title size={18} align="center" style={{ marginTop: 10, }}>{pet?.name}</Title>
-                <Label size={16} align="center" style={{ marginTop: 2, }}>{pet?.age} anos</Label>
+                <Label size={16} align="center" style={{ marginTop: 2, }}>{pet?.age} ano{pet?.age > 1 ? 's' : ''}</Label>
             </Column>
         </Button>
     )

@@ -19,12 +19,11 @@ export default function InstitucionalScreen({ navigation, }) {
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
-                <TopMenu  title="Conheça mais"/>
-                <Column mh={margin.h} mv={12}>
-                    <Carrossel data={imgs} />
-
-                    <Column style={{height: 20, }} />
-
+                <TopMenu title="Conheça mais" />
+                <Column style={{ height: 12, }} />
+                <Carrossel data={imgs} />
+                <Column mh={margin.h}>
+                    <Column style={{ height: 20, }} />
                     <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => { navigation.navigate('InstitucionalVisita') }} >
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-solicitar-visita.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
@@ -63,7 +62,6 @@ export default function InstitucionalScreen({ navigation, }) {
 
 
                 </Column>
-
             </Scroll>
         </Main>
     )
@@ -77,9 +75,9 @@ const imgs = [
 
 function Carrossel({ data }) {
     return (
-        <Swiper style={{ height: 180, overflow: 'hidden', borderRadius: 20 }} autoplay={true}>
+        <Swiper style={{ height: 180, overflow: 'hidden', borderRadius: 20 }} autoplay={true} loop={false}>
             {data?.map((img, index) => (
-                <Column key={index} style={{ flex: 1, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
+                <Column key={index} style={{ flex: 1, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', marginHorizontal: 28, }}>
                     <Image
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                         source={{ uri: img }}

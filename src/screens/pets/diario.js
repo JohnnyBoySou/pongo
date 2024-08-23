@@ -5,6 +5,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import { Plus, Heart, MessageCircle, } from 'lucide-react-native';
 import Header from '@components/Header/index';
 import Modal from '@components/Modal/index';    
+import TabBar from '@components/TabBar';
 
 export default function PetsDiarioScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
@@ -63,6 +64,7 @@ export default function PetsDiarioScreen({ navigation, }) {
                 </Modal>
 
             </Scroll>
+            <TabBar />
         </Main>
     )
 }

@@ -42,9 +42,8 @@ export default function SchoolBoletimScreen({ navigation, }) {
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
-                <TopMenu search={false} />
-                <Row mh={margin.h} mv={margin.h} style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-
+                <TopMenu search={false} back={false} />
+                <Row mh={margin.h} mv={20} style={{ justifyContent: 'space-between', alignItems: 'center', }}>
                     <Column>
                         <Title size={22} style={{ lineHeight: 24, }}>Olá, Maria </Title>
                         <Label size={12} style={{ lineHeight: 16, marginTop: 4, color: color.pr.pr3 }}>Você está no perfil do: Aufredo </Label>
@@ -57,27 +56,46 @@ export default function SchoolBoletimScreen({ navigation, }) {
                     </Button>
                 </Row>
 
-                <Column mh={margin.h} mv={6} >
-                    <Card>
-                        <Row justifyContent='space-between'>
-                            <Title>Plano Ret</Title>
-                            <Text style={{ textAlign: 'right', fontWeight: 700 }}>Segunda-feira {'\n'} 1 mês </Text>
-                        </Row>
-                        <Column>
-                            <Text style={{ fontWeight: 700, marginVertical: 2 }}>Incluso: </Text>
-                            <Text style={{ fontWeight: 500, color: '#979797', fontSize: 11, marginVertical: 2 }}>Uniforme </Text>
-                            <Text style={{ fontWeight: 500, color: '#979797', fontSize: 11, marginVertical: 2 }}>Pote hermético </Text>
-                            <Text style={{ fontWeight: 500, color: '#979797', fontSize: 11, marginVertical: 2 }}>Agenda </Text>
-                            <Text style={{ fontWeight: 500, color: '#979797', fontSize: 11, marginVertical: 2 }}>Desconto de 5% em todos os produtos PONGO. </Text>
-                            <Text style={{ fontWeight: 700, marginVertical: 2 }}>Mensalidade: 1/1</Text>
-                        </Column>
-                    </Card>
 
-                    <Button style={{ backgroundColor: color.sc.sc3, marginTop: margin.h }} ph={16} pv={10} >
-                        <Label style={{ textAlign: 'center', color: color.light, fontSize: 14, }}>Ver Retrospectiva</Label>
-                    </Button>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled>
+                    <Column style={{ width: SCREEN_WIDTH, paddingHorizontal: margin.h, }}>
+                        <Card>
+                            <Row justifyContent='space-between'>
+                                <Title>Plano Ret</Title>
+                                <Title size={14} style={{ textAlign: 'right', }}>Segunda-feira {'\n'} 1 mês </Title>
+                            </Row>
+                            <Column style={{ rowGap: 7, }}>
+                                <Title size={16} style={{ marginVertical: 2 }}>Incluso: </Title>
+                                <Label size={12}>Uniforme </Label>
+                                <Label size={12}>Pote hermético </Label>
+                                <Label size={12}>Agenda </Label>
+                                <Label size={12}>Desconto de 5% em todos os produtos PONGO. </Label>
+                                <Title size={14} style={{ fontWeight: 700, marginVertical: 2 }}>Mensalidade: 1/1</Title>
+                            </Column>
+                        </Card>
+                    </Column>
+                    <Column style={{ width: SCREEN_WIDTH, paddingHorizontal: margin.h, }}>
+                        <Card>
+                            <Row justifyContent='space-between'>
+                                <Title>Upgrade de plano</Title>
+                            </Row>
+                            <Column style={{ rowGap: 7, }}>
+                                <Title size={14} style={{ marginTop: 12, marginBottom: 4, }}>Conheça as vantagens: </Title>
+                                <Label size={12}>DayUse</Label>
+                                <Label size={12}>Diaria no hotel</Label>
+                                <Label size={12}>Desconto de 7% em todos os produtos PONGO. </Label>
+                                <Button bg={color.sc.sc3+30} mtop={6}>
+                                    <Title size={14} align="center" style={{ color: color.sc.sc3,  }}>Fazer upgrade</Title>
+                                </Button>
+                            </Column>
+                        </Card>
+                    </Column>
+                </ScrollView>
 
-                </Column>
+                <Button style={{ backgroundColor: color.sc.sc3, marginTop: 20 }} pv={16} mh={margin.h} onPress={() => {navigation.navigate('PetsStory',{id: '1'})}} >
+                    <LabelBT style={{ textAlign: 'center', color: color.light, fontSize: 14, }}>Ver Retrospectiva</LabelBT>
+                </Button>
+
 
                 <ScrollView ref={ScrollButtons} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 0, marginTop: 20, }}>
                     <Column style={{ width: margin.h, }} />

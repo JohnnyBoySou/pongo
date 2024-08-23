@@ -26,7 +26,7 @@ export default function AuthRegisterScreen({ navigation, route, }) {
     const [password, setpassword] = useState();
     const [password2, setpassword2] = useState();
 
-    const passStrong = useRef()
+  
 
     const checkPasswordStrength = (password) => {
         const criteria = {
@@ -38,8 +38,7 @@ export default function AuthRegisterScreen({ navigation, route, }) {
         return criteria;
     };
 
-    const passwordCriteria = checkPasswordStrength(password);
-    const porcentagePassword = Object.values(passwordCriteria).filter((e) => e).length / Object.values(passwordCriteria).length * 100;
+    const passwordCriteria = checkPasswordStrength(password); 
 
     const [terms, setterms] = useState(true);
     const [confirm, setconfirm] = useState(false);
@@ -171,27 +170,7 @@ export default function AuthRegisterScreen({ navigation, route, }) {
                 </Column> : <ConfirmEmail email={email} name={name} navigation={navigation} />}
             </Scroll>
 
-            <Modal ref={passStrong} snapPoints={[0.1, 200]}>
-                <Column style={{ marginHorizontal: margin.h, marginVertical: margin.v, }}>
-                    <SubLabel style={{ color: color.secundary, fontSize: 18, }}>Requisitos para a senha</SubLabel>
-                    <Row style={{ marginTop: 8, }}>
-                        {passwordCriteria?.length ? <CircleCheck size={18} color={color.green} /> : <CircleX size={18} color={color.red} />}
-                        <Label style={{ fontSize: 16, marginLeft: 12, }}>Mínimo de 8 caracteres</Label>
-                    </Row>
-                    <Row style={{ marginTop: 8, }}>
-                        {passwordCriteria?.upperCase ? <CircleCheck size={18} color={color.green} /> : <CircleX size={18} color={color.red} />}
-                        <Label style={{ fontSize: 16, marginLeft: 12, }}>Uma letra MAIÚSCULA.</Label>
-                    </Row>
-                    <Row style={{ marginTop: 8, }}>
-                        {passwordCriteria?.lowerCase ? <CircleCheck size={18} color={color.green} /> : <CircleX size={18} color={color.red} />}
-                        <Label style={{ fontSize: 16, marginLeft: 12, }}>Uma letra minúscula.</Label>
-                    </Row>
-                    <Row style={{ marginTop: 8, }}>
-                        {passwordCriteria?.number ? <CircleCheck size={18} color={color.green} /> : <CircleX size={18} color={color.red} />}
-                        <Label style={{ fontSize: 16, marginLeft: 12, }}>Um número.</Label>
-                    </Row>
-                </Column>
-            </Modal>
+      
         </Main>
     )
 }

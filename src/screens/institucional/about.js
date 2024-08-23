@@ -23,8 +23,6 @@ export default function InstitucionalAboutScreen() {
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
-                <TopMenu search={false} />
-
                 <Header title="Sobre a Villa Pongo" />
 
                 <Column mh={margin.h}>

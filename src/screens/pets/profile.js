@@ -1,28 +1,32 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { Main, Scroll, Column, Label, Title, Row, useTheme, Image, Button, SCREEN_WIDTH } from '@theme/global'
-import { FlatList } from 'react-native-gesture-handler';
-import { Pencil, Plus } from 'lucide-react-native';
+
+//Components
 import Back from '@components/Back';
 import TabBar from '@components/TabBar';
 
-export default function PetsProfileScreen({ navigation, }) {
-    const { color, font, margin } = useTheme();
+//API
+import { singlePet } from '@api/request/pets';
+
+export default function PetsProfileScreen({ navigation, route }) {
+    const id = route?.params?.id ? route?.params?.id : 1;
 
     const [data, setdata] = useState();
-    const [loading, setloading] = useState();
+    const [loading, setloading] = useState(false);
     useEffect(() => {
-        const fecthData = () => {
+        const fecthData = async () => {
             setloading(true)
             try {
-                setdata()                
+                const res = await singlePet(id)
+                setdata(res)
             } catch (error) {
                 console.log(error)
-            } finally{
+            } finally {
                 setloading(false)
             }
         }
-        
+
+        fecthData()
     }, []);
 
 
@@ -30,15 +34,7 @@ export default function PetsProfileScreen({ navigation, }) {
 
     return (
         <Main style={{ paddingTop: 0, }}>
-            <FlatList
-                data={pets}
-                renderItem={({ item }) => <Pet pet={item} />}
-                horizontal
-                pagingEnabled
-                keyExtractor={item => item.id}
-                style={{ flex: 1, }}
-            />
-
+            <Pet pet={data} />
             <TabBar />
         </Main>
     )
@@ -49,13 +45,12 @@ const Pet = ({ pet }) => {
     const { color, font, margin } = useTheme();
     return (
         <Scroll>
-            <Column style={{ flex: 1, width: SCREEN_WIDTH, }}>
-                <Column style={{ borderBottomLeftRadius: 130, paddingTop: 36, borderBottomRightRadius: 130, backgroundColor: pet?.color, overflow: 'hidden', width: SCREEN_WIDTH, height: 336, }}>
-                    <Column style={{ marginTop: 20, marginLeft: 20, }}>
-                        <Back />
-                    </Column>
-                    <Image source={pet?.avatar} style={{ width: 300, height: 320, objectFit: 'contain', marginTop: 10, alignSelf: 'center', }} />
+            <Column style={{ flex: 1, }}>
+                <Column style={{ zIndex: 99, marginTop: 30, marginLeft: 28,}}>
+                    <Back />
                 </Column>
+                
+                <Image source={{ uri: pet?.img }} style={{ width: SCREEN_WIDTH, height: 320, objectFit: 'cover', marginTop: -76, alignSelf: 'center', borderBottomLeftRadius: 130, borderBottomRightRadius: 130, }} />
                 <Row style={{ backgroundColor: '#fff', alignSelf: 'center', paddingHorizontal: 8, paddingVertical: 8, borderRadius: 100, marginTop: -26, justifyContent: 'space-between', alignItems: 'center', }}>
                     <Title size={18} align="center" color={color.sc.sc3} style={{ marginHorizontal: 20, }}>{pet?.name}</Title>
                 </Row>
@@ -65,32 +60,31 @@ const Pet = ({ pet }) => {
                 </Button>
 
 
-                <Column style={{ borderTopLeftRadius: 150, borderTopRightRadius: 150, marginTop: -100, paddingTop: 120, zIndex: -99, flex: 1, paddingBottom: 80 }} bg="#918C8B">
+                <Column style={{ borderTopLeftRadius: 150, borderTopRightRadius: 150, marginTop: -100, paddingTop: 140, zIndex: -99, paddingBottom: 180 }} bg="#918C8B">
                     <Row style={{ columnGap: 12, paddingHorizontal: 20, }}>
                         <Column>
                             <Title color="#fff" size={16}>Tags</Title>
-                            <Title color="#fff" size={14} font={font.medium} style={{ marginTop: 12, backgroundColor: pet?.color, borderRadius: 100, paddingHorizontal: 12, paddingVertical: 6, alignSelf: 'flex-start' }}>{pet?.type}</Title>
-                            <Title color="#fff" size={14} font={font.medium} style={{ marginVertical: 6, backgroundColor: pet?.color, borderRadius: 100, paddingHorizontal: 12, paddingVertical: 6, alignSelf: 'flex-start' }}>{pet?.genero}</Title>
-                            <Title color="#fff" size={14} font={font.medium} style={{ backgroundColor: pet?.color, borderRadius: 100, paddingHorizontal: 12, paddingVertical: 6, alignSelf: 'flex-start' }}>{pet?.age}</Title>
+                            <Title color={color.title} size={14} font={font.medium} style={{ marginVertical: 12, backgroundColor: '#E5C8C9', borderRadius: 100, paddingHorizontal: 12, paddingVertical: 6, alignSelf: 'flex-start' }}>{pet?.race}</Title>
+                            <Title color={color.title} size={14} font={font.medium} style={{ backgroundColor: '#E5C8C9', borderRadius: 100, paddingHorizontal: 12, paddingVertical: 6, alignSelf: 'flex-start' }}>{pet?.age} ano{pet?.age > 1 ? 's' : ''}</Title>
                         </Column>
                         <Column style={{ width: '70%', }}>
                             <Title color="#fff" size={16}>Bio</Title>
-                            <Label color="#fff" size={14} lineHeight={16} style={{ marginTop: 12, letterSpacing: 0.2, }}>{pet?.bio}</Label>
+                            <Label color="#fff" size={14} lineHeight={16} style={{ marginTop: 12, letterSpacing: 0.2, }}>{pet?.bio ? pet?.bio : 'Nenhuma bio informada'}</Label>
                         </Column>
                     </Row>
 
-                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginHorizontal: margin.h, marginVertical: 20, }}>
-                        <Column style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', borderRadius: 8, paddingHorizontal: 20, paddingVertical: 12, }}>
-                            <Label>Banhos</Label>
-                            <Title>{pet?.banhos}</Title>
+                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginHorizontal: margin.h, marginVertical: 20, columnGap: 20, }}>
+                        <Column style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#999493', borderRadius: 8, paddingHorizontal: 14, paddingVertical: 12, }}>
+                            <Title color="#fff">Banhos</Title>
+                            <Label color="#fff">{pet?.banhos}</Label>
                         </Column>
-                        <Column style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', borderRadius: 8, paddingHorizontal: 20, paddingVertical: 12, }}>
-                            <Label>Tosas</Label>
-                            <Title>{pet?.tosas}</Title>
+                        <Column style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#999493', borderRadius: 8, paddingHorizontal: 14, paddingVertical: 12, }}>
+                            <Title color="#fff">Tosas</Title>
+                            <Label color="#fff">{pet?.tosas}</Label>
                         </Column>
-                        <Column style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', borderRadius: 8, paddingHorizontal: 20, paddingVertical: 12, }}>
-                            <Label>Consultas</Label>
-                            <Title>{pet?.consultas}</Title>
+                        <Column style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#999493', borderRadius: 8, paddingHorizontal: 14, paddingVertical: 12, }}>
+                            <Title color="#fff">Consultas</Title>
+                            <Label color="#fff">{pet?.consultas}</Label>
                         </Column>
                     </Row>
 
@@ -98,28 +92,23 @@ const Pet = ({ pet }) => {
                     <Row style={{ justifyContent: 'space-evenly', alignItems: 'center', }}>
                         <Button ph={4} pv={4} radius={6}>
                             <Column style={{ justifyContent: 'center', alignItems: 'center', }}>
-                                <Image source={require("@imgs/pr1.png")} style={{ width: 50, height: 50, marginBottom: 6, }} />
+                                <Image source={require("@imgs/pr1.png")} style={{ width: 50, height: 50, marginBottom: 6, borderRadius: 100,}} />
                                 <Title size={16} color="#fff">Escola</Title>
                             </Column>
                         </Button>
                         <Button ph={4} pv={4} radius={6}>
                             <Column style={{ justifyContent: 'center', alignItems: 'center', }}>
-                                <Image source={require("@imgs/pr2.png")} style={{ width: 50, height: 50, marginBottom: 6, }} />
+                                <Image source={require("@imgs/pr2.png")} style={{ width: 50, height: 50, marginBottom: 6, borderRadius: 100,}} />
                                 <Title size={16} color="#fff">Agenda</Title>
                             </Column>
                         </Button>
                         <Button ph={4} pv={4} radius={6}>
                             <Column style={{ justifyContent: 'center', alignItems: 'center', }}>
-                                <Image source={require("@imgs/pr3.png")} style={{ width: 50, height: 50, marginBottom: 6, }} />
+                                <Image source={require("@imgs/pr3.png")} style={{ width: 50, height: 50, marginBottom: 6, borderRadius: 100, }} />
                                 <Title size={16} color="#fff">Diário</Title>
                             </Column>
                         </Button>
-                        <Button ph={4} pv={4} radius={6}>
-                            <Column style={{ justifyContent: 'center', alignItems: 'center', }}>
-                                <Image source={require("@imgs/pr4.png")} style={{ width: 50, height: 50, marginBottom: 6, }} />
-                                <Title size={16} color="#fff">Novo</Title>
-                            </Column>
-                        </Button>
+                       
 
                     </Row>
 
@@ -133,38 +122,13 @@ const Pet = ({ pet }) => {
     )
 }
 
+/*
+ <Button ph={4} pv={4} radius={6}>
+                            <Column style={{ justifyContent: 'center', alignItems: 'center', }}>
+                                <Image source={require("@imgs/pr4.png")} style={{ width: 50, height: 50, marginBottom: 6, }} />
+                                <Title size={16} color="#fff">Novo</Title>
+                            </Column>
+                        </Button>
+*/
 
 
-
-const pets = [
-    {
-        name: 'Aufredo',
-        avatar: require('@imgs/pet4.png'),
-        id: 4,
-        type: 'Dog',
-        genero: 'Macho',
-        age: '8 anos',
-        banhos: 23,
-        tosas: 12,
-        consultas: 8,
-        bio: 'Alfredo é um cachorro amigável e brincalhão, com um pelo macio e brilhante. Ele adora correr no parque e fazer novos amigos, tanto humanos quanto outros bichinhos.',
-        color: '#B7BCA3',
-    },
-
-    {
-        name: 'Melt',
-        avatar: require('@imgs/pet3.png'),
-        id: 3,
-        type: 'Dog',
-        genero: 'Macho',
-        age: '6 anos',
-        color: '#EBD269',
-        bio: 'Melt é um cachorro massa de mais.',
-        banhos: 12,
-        tosas: 5,
-        consultas: 6,
-    }
-
-
-
-]

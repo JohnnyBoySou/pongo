@@ -3,9 +3,30 @@ import styled, { ThemeContext } from 'styled-components/native';
 import { TouchableRipple } from 'react-native-paper';
 import { Dimensions, ScrollView, Image as RNImage, ActivityIndicator } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
-import ButtonPrimary from "@components/Buttons";
-import Back from "@components/Back";
-export { ButtonPrimary, Back };
+import { ArrowLeft } from 'lucide-react-native';
+
+
+export function Back() {
+  const navigation = useNavigation();
+  return (
+    <Button onPress={() => { navigation.goBack() }} pv={0} ph={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg='#FFFFFF'>
+      <ArrowLeft size={16} color='#858585' />
+    </Button>
+  )
+}
+
+export function ButtonPrimary({ login = false, type = 'Default', label, pv = 15, ph = 20, fontStyle, onPress, ...props }) {
+  const { color, } = useTheme();
+  const bg = type === 'Default' ? '#918C8B' : type === 'Light' ? '#ECEBEB' : '#202020';
+  const text = type === 'Default' ? color.light : type === 'Light' ? '#434343' : '#fff';
+  return (
+    <Button {...props} onPress={onPress} pv={pv} ph={ph} style={{ justifyContent: 'center', alignItems: 'center', }} bg={bg} >
+      <Row>
+        <SubLabel style={{ fontStyle, color: text, }}>{label}</SubLabel>
+      </Row>
+    </Button>
+  )
+}
 
 export const Loader = ({ color = '#91A6C4', size = 20 }) => {
   return (
@@ -70,7 +91,7 @@ export const Card = styled.View`
 export const Image = styled(RNImage).attrs(() => ({
   transition: 300,
 }))`
-background-color: ${props => props.bg || '#d3d3d3'}
+background-color: ${props => props.bg || 'transparent'}
 `
 
 export const Button = styled(TouchableRipple).attrs(() => ({

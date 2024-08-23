@@ -47,7 +47,7 @@ const SideBar = forwardRef(({ children }, ref) => {
   });
 
   return (
-      <Animated.View style={[{ top: 0, bottom: 0, zIndex: 99,  position: 'absolute',  width: MAX_HEIGHT, height: SCREEN_HEIGHT, paddingHorizontal: 28, }, animatedStyle]} >
+      <Animated.View style={[{ top: 0, bottom: 0, zIndex: 99,  position: 'absolute', width: SCREEN_WIDTH, height: '100%', overflow: 'hidden', paddingHorizontal: 28, }, animatedStyle]} >
         {children}
       </Animated.View>
       )

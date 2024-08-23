@@ -2,10 +2,31 @@ import React, { useEffect, useState } from 'react';
 import { Main, Title, useTheme, Label, Image, Column, Button, View } from '@theme/global';
 import { ArrowRight } from 'lucide-react-native';
 import Animated, { FadeInDown, FadeInLeft, FadeInUp } from 'react-native-reanimated';
+import { getPreferences } from '@hooks/preferences';
+
 export default function WelcomeScreen({ navigation, route }) {
 
     const name = route.params?.name ? route.params?.name : 'Visitante'
-    
+
+    useEffect(() => {
+        
+        const fecthData = () => {
+            try {
+                const res = getPreferences()
+                console.log(res)
+                if(res?.name){
+                    setTimeout(() => {
+                        navigation.navigate('Tabs')
+                    }, 3000)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        
+       fecthData()
+    }, [])
+
     return (
         <Main style={{ backgroundColor: "#918C8B", flex: 1, justifyContent: 'center', alignItems: 'center', }}>
 

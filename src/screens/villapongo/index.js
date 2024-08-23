@@ -13,9 +13,9 @@ export default function VillaPongoScreen({ navigation, }) {
                 <Column>
 
                     <TopMenu />
-                    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: 12, }}>
                         <Column style={{ width: 28, }} />
-                        <Row style={{ borderWidth: 1, borderColor: color.border, borderRadius: 16, paddingHorizontal: 20, paddingVertical: 20, justifyContent: 'center', alignItems: 'center', }}>
+                        <Row style={{ backgroundColor: '#FFF',borderRadius: 16, paddingHorizontal: 20, paddingVertical: 20, justifyContent: 'center', alignItems: 'center', }}>
                             <Column>
                                 <Title>Compre na loja</Title>
                                 <Label>Lorem ipsum</Label>
@@ -24,7 +24,7 @@ export default function VillaPongoScreen({ navigation, }) {
                             </Column>
                             <Image source={require('@imgs/villa1.png')} style={{ width: 100, height: 100, objectFit: 'contain', marginLeft: 12, }} />
                         </Row>
-                        <Row style={{ borderWidth: 1, borderColor: color.border, borderRadius: 16, paddingHorizontal: 20, paddingVertical: 20, marginHorizontal: 12, justifyContent: 'center', alignItems: 'center', }}>
+                        <Row style={{  backgroundColor: '#FFF', borderRadius: 16, paddingHorizontal: 20, paddingVertical: 20, marginHorizontal: 12, justifyContent: 'center', alignItems: 'center', }}>
                             <Image source={require('@imgs/villa2.png')} style={{ width: 100, height: 100, objectFit: 'contain', marginRight: 12, }} />
                             <Column>
                                 <Title>Compre na loja</Title>
@@ -33,6 +33,7 @@ export default function VillaPongoScreen({ navigation, }) {
                                 <Label>Lorem ipsum</Label>
                             </Column>
                         </Row>
+                        <Column style={{width: 20, }} />
                     </ScrollView>
 
                     <Column mh={margin.h} mv={20}>
@@ -59,7 +60,7 @@ const Card = ({ item }) => {
     const { name, time, price, img } = item
     const navigation = useNavigation()
     return (
-        <Button pv={12} ph={12} radius={12} mh={0} mv={6} style={{ borderWidth: 1, borderColor: color.border, }} onPress={() => { navigation.navigate(item.screen) }} >
+        <Button pv={12} ph={12} radius={12} mh={0} mv={6} style={{  backgroundColor: '#FFF', }} onPress={() => { navigation.navigate(item.screen) }} >
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
                 <Row>
                     <Image style={{ width: 46, height: 46, backgroundColor: '#d7d7d7', borderRadius: 8, marginRight: 12, }} />

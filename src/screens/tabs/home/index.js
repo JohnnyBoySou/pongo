@@ -11,7 +11,7 @@ export default function HomeScreen({ navigation, }) {
     return (
         <Main >
             <Scroll >
-                <TopMenu />
+                <TopMenu back={false}/>
                 <Column ph={margin.h} mv={18}>
                     <Title>Escolha qual deseja acessar</Title>
                     <Row style={{ columnGap: 16, marginBottom: 8, marginTop: 24, flex: 1, width: '100%' }}>
@@ -88,6 +88,7 @@ export default function HomeScreen({ navigation, }) {
                 <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor: '#918C8B', }} radius={50} pv={16} ph={1} mv={12} mh={margin.h}>
                     <Title align="center" font={font.medium} color="#918C8B">Iniciar conversa</Title>
                 </Button>
+                <Column style={{height: 30, }} />
             </Scroll>
         </Main>
     )

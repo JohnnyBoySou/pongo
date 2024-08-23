@@ -6,6 +6,7 @@ import { TextInput } from 'react-native';
 import { Search } from 'lucide-react-native';
 import Back from '@components/Back';
 import TopMenu from '@components/Header/topmenu';
+import TabBar from '@components/TabBar';
 
 export default function SearchScreen({ navigation, route }) {
     const { color, font, margin } = useContext(ThemeContext);
@@ -16,13 +17,9 @@ export default function SearchScreen({ navigation, route }) {
     }
     return (
         <Main style={{ backgroundColor: "#ECEBEB", }}>
-            <Scroll>
-
-                <Column style={{ marginBottom: margin.h }}>
-                    <TopMenu search={false} />
-                </Column>
-
-                <Row style={{ marginHorizontal: margin.h, flex: 1, alignItems: 'center' }}>
+            <Scroll >
+                <TopMenu search={false} back={false} />
+                <Row style={{ marginHorizontal: margin.h, alignItems: 'center' }}>
                     <Back />
                     <Row style={{ justifyContent: 'center', alignItems: 'center', flex: 1 }}>
                         <TextInput
@@ -33,9 +30,9 @@ export default function SearchScreen({ navigation, route }) {
                             placeholder='Buscar'
                             placeholderTextColor={color.title + 60}
                             onSubmitEditing={handleSearch}
-                            style={{ backgroundColor: '#fff', borderRadius: 12, padding: 12, marginLeft: 12, flex: 1, fontFamily: font.bold, fontSize: 16, color: color.secundary, borderWidth: 2, borderColor: focus ? color.sc.sc3 : '#fff' }}
+                            style={{ backgroundColor: '#fff', borderRadius: 12, paddingVertical: 12, paddingHorizontal: 20, marginLeft: 12, flex: 1, fontFamily: font.medium, fontSize: 16, color: color.title, borderWidth: 2, borderColor: focus ? color.sc.sc3 : '#fff' }}
                         />
-                        <Button radius={6} disabled={loading} onPress={handleSearch} ph={12} pv={12} style={{ backgroundColor: color.sc.sc3, borderRadius: 8, position: 'absolute', right: 0 }}>
+                        <Button radius={20} disabled={loading} onPress={handleSearch} ph={8} pv={8} style={{ backgroundColor: color.sc.sc3, borderRadius: 8, position: 'absolute', right: 6, }}>
                             <Search size={24} color="#fff" style={{ zIndex: 99, }} />
                         </Button>
                     </Row>
@@ -44,9 +41,9 @@ export default function SearchScreen({ navigation, route }) {
                 <Column style={{ marginHorizontal: margin.h, marginTop: margin.h, flex: 1, }}>
                     <Title color='#858585'>Recentes</Title>
                 </Column>
-
                 <ItensFlat type="Produtos" />
             </Scroll>
+            <TabBar />
         </Main>
     )
 }
