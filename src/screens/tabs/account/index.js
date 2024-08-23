@@ -1,6 +1,7 @@
 import React, { useContext, } from 'react';
 import { Main, Scroll, Title, Row, Column, useTheme, Label, Image, Button, ButtonPrimary } from '@theme/global';
 import TopMenu from '@components/Header/topmenu';
+import { Linking, Text } from 'react-native';
 
 export default function AccountScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
@@ -62,8 +63,8 @@ export default function AccountScreen({ navigation, }) {
                         </Row>
                     </Button>
                 </Column>
-                <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor: '#918C8B', }} radius={50} pv={16} ph={1} mh={margin.h}>
-                    <Title align="center" font={font.medium} color="#918C8B">Iniciar conversa</Title>
+                <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 1, borderColor: '#918C8B', }} radius={50} pv={16} ph={1} mh={margin.h}>
+                    <Text color="#918C8B" style={{ textAlign: 'center', fontWeight: 700, color: '#918C8B' }}>Iniciar conversa</Text>
                 </Button>
 
                 <Column style={{height: 30, }} />

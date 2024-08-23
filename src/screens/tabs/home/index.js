@@ -3,7 +3,7 @@ import { Main, Scroll, Column, Row, Title, Button, useTheme } from '@theme/globa
 import { MotiImage } from 'moti';
 import TopMenu from '@components/Header/topmenu';
 import { MotiView, MotiText } from 'moti'
-import { Linking } from 'react-native';
+import { Linking, Text } from 'react-native';
 
 export default function HomeScreen({ navigation, }) {
     const { color, font, margin, } = useTheme();
@@ -85,8 +85,8 @@ export default function HomeScreen({ navigation, }) {
                         </MotiView>
                     </Row>
                 </Column>
-                <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor: '#918C8B', }} radius={50} pv={16} ph={1} mv={12} mh={margin.h}>
-                    <Title align="center" font={font.medium} color="#918C8B">Iniciar conversa</Title>
+                <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 1, borderColor: '#918C8B', }} radius={50} pv={16} ph={1} mv={12} mh={margin.h}>
+                    <Text color="#918C8B" style={{ textAlign: 'center', fontWeight: 700, color: '#918C8B' }}>Iniciar conversa</Text>
                 </Button>
                 <Column style={{height: 30, }} />
             </Scroll>

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { ScrollView, Image, Pressable, Text } from 'react-native';
+import { ScrollView, Image, Pressable, Text, Linking } from 'react-native';
 import { Main, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT } from '@theme/global';
 import { ThemeContext } from 'styled-components/native';
 import { Apple } from 'lucide-react-native';
@@ -15,21 +15,39 @@ export default function InstitucionalLocalScreen({ navigation, }) {
     const [tel, settel] = useState();
     const [type, settype] = useState('Pongo');
 
+    const openAppleMaps = (latitude, longitude) => {
+        const url = `http://maps.apple.com/?ll=${latitude},${longitude}`
+
+        Linking.canOpenURL(url)
+            .then((supported) => {
+                if (supported) {
+                    return Linking.openURL(url);
+                } else {
+                    Alert.alert("Erro", "Não foi possível abrir o Apple Maps");
+                }
+            })
+            .catch((err) => Alert.alert("Erro ao abrir o mapa", err.message));
+    };
+
     // Array de dados das lojas
     const lojas = [
         {
             local: "Shopping Cidade Jardim",
-            loja: "PONGO Outfitters",
-            endereco: "Av. Magalhães de Castro, 12.000 | Cidade Jardim | São Paulo/SP | 05502-001",
+            loja: "Pongo",
+            endereco: "Av. Magalhães de Castro, 12000 - 2 Piso - Cidade Jardim, São Paulo - SP, 05502-001",
             horariosSemana: "Segunda a Sábado das 10h às 22:00h",
             horariosFeriado: "Domingos e Feriados das 14:00h às 20:00h",
+            lat: "-23.5981196",
+            long: "-46.6976166"
         },
         {
-            local: "Shopping Iguatemi",
-            loja: "PONGO Exclusive",
-            endereco: "Av. Brig. Faria Lima, 2232 | Jardim Paulistano | São Paulo/SP | 01489-900",
-            horariosSemana: "Segunda a Sábado das 10h às 22:00h",
-            horariosFeriado: "Domingos e Feriados das 14:00h às 20:00h",
+            local: "Vila Nova Conceição",
+            loja: "Villa Pongo",
+            endereco: "Av. Antônio Joaquim de Moura Andrade, 80 - Vila Nova Conceição, São Paulo - SP, 04507-000",
+            horariosSemana: "Segunda a Sábado das 90h às 20:00h",
+            horariosFeriado: "Domingos e Feriados Fechado",
+            lat: "-23.5871167",
+            long: "-46.6647227"
         },
         // Adicione mais lojas conforme necessário
     ];
@@ -64,7 +82,7 @@ export default function InstitucionalLocalScreen({ navigation, }) {
                                 <Text style={{ color: '#979797' }}>{loja.horariosFeriado}</Text>
                             </Column>
 
-                            <Button bg={color.pr.pr2} mtop={12}>
+                            <Button bg={color.pr.pr2} mtop={12} onPress={() => openAppleMaps(loja.lat, loja.long)}>
                                 <Text align="center" style={{ textAlign: 'center', color: color.pr.pr3 }}>Ver no mapa</Text>
                             </Button>
                         </Pressable>

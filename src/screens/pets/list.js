@@ -8,8 +8,6 @@ import TopMenu from '@components/Header/topmenu';
 import { listPets } from '@api/request/pets';
 import TabBar from '@components/TabBar';
 
-
-
 export default function PetsListScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
 
