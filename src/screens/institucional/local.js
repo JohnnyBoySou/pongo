@@ -6,6 +6,8 @@ import { Apple } from 'lucide-react-native';
 import Header from '@components/Header';
 import Swiper from 'react-native-swiper';
 import Input from '@components/Forms/input';
+import TopMenu from '@components/Header/topmenu';
+import TabBar from '@components/TabBar';
 
 export default function InstitucionalLocalScreen({ navigation, }) {
 
@@ -55,6 +57,7 @@ export default function InstitucionalLocalScreen({ navigation, }) {
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
+                <TopMenu back={false} search={false} />
                 <Header title="Onde estamos" />
                 <Column mh={margin.h} >
                     {lojas.map((loja, index) => (
@@ -94,6 +97,7 @@ export default function InstitucionalLocalScreen({ navigation, }) {
                 </Column>
 
             </Scroll>
+            <TabBar />
         </Main>
     )
 }

@@ -8,6 +8,8 @@ import CalendarioHorizontal from '@components/Calendar/horizontal';
 import Modal from '@components/Modal';
 import { ScrollView, } from 'react-native-gesture-handler';
 import { Check } from 'lucide-react-native';
+import TabBar from '@components/TabBar';
+import TopMenu from '@components/Header/topmenu';
 
 export default function InstitucionalVisitaScreen({ navigation, }) {
 
@@ -27,6 +29,7 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
+                <TopMenu back={false} search={false} />
                 <Header title="Solicitar visita" />
                 <Column mh={margin.h} >
                     <Input
@@ -68,14 +71,15 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
                 <Column mh={margin.h} mv={30}>
                     <Title>Qual horario da visita:</Title>
                     <Button bg={minutos ? color.primary : '#fff'} pv={16} mtop={20} onPress={() => { timerRef.current.snapToIndex(1) }} radius={8}>
-                        <SubLabel align="center" style={{ textAlign: 'center', color: minutos ? '#fff': color.title, fontSize: 18,}}>{minutos ? hora + ':' + minutos : 'Selecione um horário' }</SubLabel>
+                        <SubLabel align="center" style={{ textAlign: 'center', color: minutos ? '#fff' : color.title, fontSize: 18, }}>{minutos ? hora + ':' + minutos : 'Selecione um horário'}</SubLabel>
                     </Button>
                     <Button bg={color.sc.sc1} mtop={30}>
-                        <LabelBT align="center" style={{  color: "#fff" }}>Agendar visita</LabelBT>
+                        <LabelBT align="center" style={{ color: "#fff" }}>Agendar visita</LabelBT>
                     </Button>
                 </Column>
 
             </Scroll>
+            <TabBar />
 
             <Modal ref={timerRef} snapPoints={[0.1, 300]}>
                 <TimePicker sethora={sethora} setminutos={setminutos} minutos={minutos} hora={hora} timerRef={timerRef} />
@@ -115,5 +119,6 @@ const TimePicker = ({ sethora, setminutos, minutos, hora, timerRef }) => {
             </ScrollView>
 
         </Row>
+
     )
 }

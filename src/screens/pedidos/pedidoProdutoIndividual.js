@@ -37,7 +37,7 @@ export default function PedidoProdutoIndividualScreen({ navigation, }) {
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
 
-                <TopMenu search={false} />
+                <TopMenu search={false} back={false} />
 
                 <Header title="Pedido" />
 

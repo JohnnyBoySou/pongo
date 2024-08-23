@@ -13,6 +13,7 @@ import PlanosList from '@components/Planos';
 import { useNavigation } from '@react-navigation/native';
 
 import { FlatList } from 'react-native-gesture-handler';
+import TabBar from '@components/TabBar';
 
 
 export default function InstitucionalRealizacoesScreen() {
@@ -26,6 +27,7 @@ export default function InstitucionalRealizacoesScreen() {
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
 
+                <TopMenu back={false} search={false} />
 
                 <Header title="Realizações" />
 
@@ -68,9 +70,10 @@ export default function InstitucionalRealizacoesScreen() {
                     />
                 </Column>
 
-
+                <Column style={{ height: 50 }} />
 
             </Scroll>
+            <TabBar />
         </Main>
     );
 }

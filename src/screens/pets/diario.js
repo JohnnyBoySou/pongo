@@ -6,6 +6,7 @@ import { Plus, Heart, MessageCircle, } from 'lucide-react-native';
 import Header from '@components/Header/index';
 import Modal from '@components/Modal/index';
 import TabBar from '@components/TabBar';
+import TopMenu from '@components/Header/topmenu';
 
 export default function PetsDiarioScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
@@ -20,6 +21,9 @@ export default function PetsDiarioScreen({ navigation, }) {
     return (
         <Main>
             <Scroll>
+
+                <TopMenu back={true} search={false} />
+
                 <Column style={{ borderRadius: 100, borderWidth: 4, borderColor: color.border, alignSelf: 'center', }}>
                     <Column style={{ backgroundColor: pet.color, borderRadius: 100, marginHorizontal: 8, marginVertical: 8, justifyContent: 'center', alignItems: 'center', width: 155, height: 155, alignSelf: 'center', overflow: 'hidden', }}>
                         <Image source={pet.avatar} style={{ width: 155, height: 155, objectFit: 'contain', marginBottom: -20, }} />
@@ -46,6 +50,7 @@ export default function PetsDiarioScreen({ navigation, }) {
                     </Column>
                 </Modal>
 
+                <Column style={{ height: 50 }} />
             </Scroll>
             <TabBar />
         </Main>
@@ -66,9 +71,9 @@ const CardDiario = ({ item, openComment }) => {
                 <Button style={{ justifyContent: 'center', alignItems: 'center', width: 42, height: 42, }}>
                     <Heart size={24} color="#91A6C4" strokeWidth={2} />
                 </Button>
-                <Button pv={2} ph={2} style={{ justifyContent: 'center', alignItems: 'center', width: 42, height: 42, }} onPress={() => { openComment(comment_id) }} >
+                { /* <Button pv={2} ph={2} style={{ justifyContent: 'center', alignItems: 'center', width: 42, height: 42, }} onPress={() => { openComment(comment_id) }} >
                     <MessageCircle size={24} color="#91A6C4" strokeWidth={2} />
-                </Button>
+                </Button> */ }
             </Row>
             <Label>{legenda}</Label>
         </Column>
