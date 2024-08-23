@@ -92,7 +92,7 @@ export default function HomeScreen({ navigation, }) {
                         type: 'timing',
                     }}>
 
-                    <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor: '#918C8B', marginTop: 16, }} pv={16} ph={1} mh={margin.h}>
+                    <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor: '#918C8B', marginTop: 32, }} pv={16} ph={1} mh={margin.h}>
                         <LabelBT color="#918C8B" style={{ textAlign: 'center', }}>Iniciar conversa</LabelBT>
                     </Button>
                 </MotiView>

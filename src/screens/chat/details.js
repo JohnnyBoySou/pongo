@@ -22,11 +22,11 @@ import { socket } from '@api/request/socket/socket';
 import TopSheet from '@components/TopSheet/index';
 import { Pressable } from 'react-native';
 import Input from '@components/Forms/input';
+import { listMessages } from '@api/request/chat';
 
 export default function ChatDetailsScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
-    const { user, id } = route.params;
-
+    const { user, token } = route.params;
 
     const [messages, setmessages] = useState(msgs);
     const flatMsg = useRef();
@@ -51,6 +51,31 @@ export default function ChatDetailsScreen({ navigation, route }) {
             topSheetRef.current.expand(); // Chama a função handleExpand
         }
     };
+
+
+
+
+
+    const [data, setdata] = useState();
+    const [loading, setloading] = useState(true);
+    useEffect(() => {
+        const fecthData = async () => {
+            setloading(true)
+            try {
+                const res = await listMessages(token)
+                console.log(res)
+            } catch (error) {
+                console.log(error)
+            } finally{setloading(false)}
+        }
+        fecthData();
+    }, []);
+
+
+
+
+
+
 
     const searchResult = msgs.filter((item) => item.message.toLowerCase().includes(search.toLowerCase()));
     return (

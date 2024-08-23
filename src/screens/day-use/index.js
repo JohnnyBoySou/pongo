@@ -25,7 +25,7 @@ export default function DayUseScreen() {
     return (
         <Main style={{ backgroundColor: '#FFFFFF' }}>
             <Scroll>
-                <TopMenu search={false} />
+                <TopMenu search={false} back={false}/>
 
                 <Header title="Day Use" />
 

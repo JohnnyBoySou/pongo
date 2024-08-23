@@ -32,7 +32,7 @@ export default function PetsListScreen({ navigation, }) {
 
     return (
         <Main>
-            <TopMenu search={false} />
+            <TopMenu />
             <Title align="center" style={{ marginVertical: 30, }}>Selecione o perfil do Pet</Title>
             {loading ? <Loader /> :
                 <FlatList
@@ -41,8 +41,8 @@ export default function PetsListScreen({ navigation, }) {
                     keyExtractor={item => item.id}
                     showsVerticalScrollIndicator={false}
                     numColumns={2}
-                    ListFooterComponent={() => <Label align="center" style={{ marginVertical: 50, }}>Nenhum pet encontrado.</Label>}
-                    columnWrapperStyle={{ justifyContent: 'space-evenly', marginHorizontal: 20, }}
+                    ListEmptyComponent={() => <Label align="center" style={{ marginVertical: 50, }}>Nenhum pet encontrado.</Label>}
+                    columnWrapperStyle={{alignSelf: 'center', }}
                     contentContainerStyle={{ marginTop: 20, }}
                 />}
 

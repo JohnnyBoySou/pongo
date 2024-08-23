@@ -50,7 +50,6 @@ export default function VillaPongoScreen({ navigation, }) {
 
                 </Column>
             </Scroll>
-            <TabBar />
         </Main>
     )
 }

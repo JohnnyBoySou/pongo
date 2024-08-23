@@ -95,7 +95,7 @@ const getMaskFunction = (mask) => {
     case 'PHONE':
       return { maskFunction: applyPhoneMask, maxLength: 16 };
     case 'CEP':
-      return { maskFunction: applyCepMask, maxLength: 8 };
+      return { maskFunction: applyCepMask, maxLength: 9 };
     default:
       return { maskFunction: (text) => text, maxLength: undefined };
   }
@@ -119,7 +119,7 @@ function applyCpfMask(value) {
 function applyCepMask(value) {
   return value
     .replace(/\D/g, '') // Remove tudo o que não é dígito
-    .slice(0, 8) // Limita a 8 dígitos
+    .slice(0, 9) // Limita a 8 dígitos
     .replace(/(\d{5})(\d)/, '$1-$2'); // Coloca um hífen entre o quinto e o sexto dígito
 }
 

@@ -33,7 +33,7 @@ export default function HotelScreen() {
     return (
         <Main style={{ backgroundColor: '#FFFFFF' }}>
             <Scroll>
-                <TopMenu search={false} />
+                <TopMenu search={false} back={false}/>
 
                 <Header title="Hotel" />
 
@@ -159,7 +159,7 @@ export default function HotelScreen() {
 
                 </View>
 
-
+                            
 
             </Scroll>
             <TabBar />

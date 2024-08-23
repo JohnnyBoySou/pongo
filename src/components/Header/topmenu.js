@@ -1,13 +1,13 @@
 import { CalendarCheck, CircleHelp, CircleUserRound, FileClock, Heart, Hotel, Menu, PackageCheck, School, Search, Settings, ShoppingCart, Store, X } from 'lucide-react-native';
 import { Column, Row, Title, SCREEN_WIDTH, useTheme, Button, SCREEN_HEIGHT, SubLabel, Image } from '@theme/global';
 import { useNavigation } from '@react-navigation/native';
-import { Pressable, Text, StyleSheet } from 'react-native';
+import { Pressable, Text, StyleSheet, TextInput } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import SideBar from './sidebar';
 import Back from '@components/Back';
 import Animated, { FadeInRight, FadeInUp, FadeOutRight } from 'react-native-reanimated';
 
-export default function TopMenu({ search = true, cart = false, back = true }) {
+export default function TopMenu({ search = true, cart = false, back = true, handleSearch }) {
     const { color, margin, font } = useTheme();
     const navigation = useNavigation();
 
@@ -24,6 +24,18 @@ export default function TopMenu({ search = true, cart = false, back = true }) {
         }
     }
 
+
+    const getSearch = () => {
+        if(handleSearch){
+            searchRef.current.focus()
+            handleSearch()
+        }else{
+            navigation.navigate('Search') 
+        }
+    }
+
+    const [focusSearch, setfocusSearch] = useState();
+    const searchRef = useRef()
     return (
         <>
             <Column>
@@ -48,10 +60,13 @@ export default function TopMenu({ search = true, cart = false, back = true }) {
                         </Column>
                     }
                     {search &&
-                        <Button mv={14} style={{ backgroundColor: color.light, flex: 1, }} onPress={() => { navigation.navigate('Search') }} >
-                            <Row>
-                                <Search size={24} color={color.label} strokeWidth={1} />
-                                <Title size={18} style={{ fontFamily: 'Font_Medium', marginLeft: 12, color: color.label, }}>Pesquisar</Title>
+                        <Button mv={14} style={{ backgroundColor: color.light, flex: 1, borderWidth: 2, borderColor: focusSearch ? color.label : 'transparent', }} onPress={getSearch} pv={10}>
+                            <Row style={{ justifyContent: 'center', alignItems: 'center',  }}>
+                                <Search size={24} color={color.label} strokeWidth={2} />
+                                <TextInput ref={searchRef} 
+                                onFocus={() => { setfocusSearch(true) }}
+                                onBlur={() => { setfocusSearch(false) }}
+                                placeholder="Pesquisar" style={{ flex: 1, fontFamily: 'Font_Medium', fontSize: 16, color: color.label, marginLeft: 12, }} />
                             </Row>
                         </Button>
                     }
@@ -82,16 +97,7 @@ export default function TopMenu({ search = true, cart = false, back = true }) {
 
 
 const screens = [
-    {
-        id: 1,
-        name: 'Favoritos',
-        screen: 'Favorites',
-    },
-    {
-        id: 2,
-        name: 'Cesta',
-        screen: 'Cart',
-    },
+  
     {
         id: 3,
         name: 'Loja Pongo',
@@ -118,8 +124,8 @@ const screens = [
     },
     {
         id: 9,
-        name: 'Configurações',
-        screen: 'Settings',
+        name: 'Minha Conta',
+        screen: 'Account',
     },
     {
         id: 10,

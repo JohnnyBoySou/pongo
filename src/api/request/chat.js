@@ -25,16 +25,21 @@ export const createChat = async (titulo) => {
     const token = await getToken();
     try {
         const res = await axios.post(`${BASE_URL}/chats/criarchat`, {
-            titulo: titulo,
+            titulo: 'teste',
         }, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
-        return res.data.data
+        return res.data
     } catch (error) {
-        const err = JSON.parse(error.request.response);
-        throw new Error(err.message)
+        console.log('Error:', error.message);
+        if (error.request) {
+            console.log('Request data:', error.request);
+        } else {
+            console.log('Error message:', error.message);
+        }
+        throw new Error(error.message);
     }
 }
 
@@ -67,9 +72,8 @@ export const listMessages = async (id) => {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
-        });
-        console.log(res.data)
-        return res.data
+        }); 
+        return res.data.data
     } catch (error) {
         const err = JSON.parse(error.request.response);
         throw new Error(err.message)

@@ -70,7 +70,7 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
                     <Button bg={minutos ? color.primary : '#fff'} pv={16} mtop={20} onPress={() => { timerRef.current.snapToIndex(1) }} radius={8}>
                         <SubLabel align="center" style={{ textAlign: 'center', color: minutos ? '#fff': color.title, fontSize: 18,}}>{minutos ? hora + ':' + minutos : 'Selecione um horário' }</SubLabel>
                     </Button>
-                    <Button bg={color.pr.pr1} mtop={30}>
+                    <Button bg={color.sc.sc1} mtop={30}>
                         <LabelBT align="center" style={{  color: "#fff" }}>Agendar visita</LabelBT>
                     </Button>
                 </Column>

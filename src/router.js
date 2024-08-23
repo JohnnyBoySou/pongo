@@ -8,7 +8,7 @@ const Tab = createBottomTabNavigator();
 
 //ICONS
 import Octicons from '@expo/vector-icons/Octicons';
-import { Bell, CircleUserRound, GraduationCap, ShoppingCart } from 'lucide-react-native';
+import { Bell, CircleUserRound, GraduationCap, Hotel, ShoppingCart } from 'lucide-react-native';
 import { useTheme, Button } from '@theme/global';
 
 //STACK SCREEN
@@ -85,7 +85,7 @@ import HotelRegisterScreen from '@screens/hotel/register';
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Onboarding'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='PetsList'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -173,12 +173,12 @@ function Tabs() {
       }} />
 
     
-      <Tab.Screen name="School" component={SchoolBoletimScreen} options={{
-        tabBarIcon: ({ color, size }) => (<GraduationCap size={routeName === 'School' ? size + 6 : size + 2} color={color} />),
+      <Tab.Screen name="Shop" component={ShopScreen} options={{
+        tabBarIcon: ({ color, size }) => (<ShoppingCart size={routeName === 'School' ? size + 6 : size + 2} color={color} />),
       }} />
 
-      <Tab.Screen name="Notify" component={NotifyScreen} options={{
-        tabBarIcon: ({ color, size }) => (<Bell size={routeName === 'Notify' ? size + 3 : size} color={color} />),
+      <Tab.Screen name="VillaPongo" component={VillaPongoScreen} options={{
+        tabBarIcon: ({ color, size }) => (<Hotel size={routeName === 'Notify' ? size + 3 : size} color={color} />),
       }} />
       <Tab.Screen name="Account" component={AccountScreen} options={{
         tabBarIcon: ({ color, size }) => (<CircleUserRound size={routeName === 'Account' ? size + 3 : size} color={color} />),

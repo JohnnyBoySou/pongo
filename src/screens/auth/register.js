@@ -176,7 +176,7 @@ export default function AuthRegisterScreen({ navigation, route, }) {
 }
 
 
-const ConfirmEmail = ({ email, name, navigation }) => {
+export const ConfirmEmail = ({ email, name, navigation }) => {
     const { color, font, margin, } = useTheme();
     const [loading, setloading] = useState(false);
     const [error, seterror] = useState();

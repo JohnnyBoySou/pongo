@@ -4,7 +4,7 @@ import { Main, Scroll, Column, Label, Title, Row, useTheme, Image, Button, SCREE
 import { FlatList } from 'react-native-gesture-handler';
 import { Plus, Heart, MessageCircle, } from 'lucide-react-native';
 import Header from '@components/Header/index';
-import Modal from '@components/Modal/index';    
+import Modal from '@components/Modal/index';
 import TabBar from '@components/TabBar';
 
 export default function PetsDiarioScreen({ navigation, }) {
@@ -20,7 +20,6 @@ export default function PetsDiarioScreen({ navigation, }) {
     return (
         <Main>
             <Scroll>
-                <Header />
                 <Column style={{ borderRadius: 100, borderWidth: 4, borderColor: color.border, alignSelf: 'center', }}>
                     <Column style={{ backgroundColor: pet.color, borderRadius: 100, marginHorizontal: 8, marginVertical: 8, justifyContent: 'center', alignItems: 'center', width: 155, height: 155, alignSelf: 'center', overflow: 'hidden', }}>
                         <Image source={pet.avatar} style={{ width: 155, height: 155, objectFit: 'contain', marginBottom: -20, }} />
@@ -28,27 +27,11 @@ export default function PetsDiarioScreen({ navigation, }) {
                 </Column>
 
                 <Column style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 20, }}>
-                    <Title size={24}>{pet?.name}</Title>
-                    <Label align="center" style={{ marginVertical: 12, marginHorizontal: 20, }}>{pet?.bio}</Label>
-                    <Row style={{ columnGap: 8, }}>
-                        <Title color="#fff" size={14} font={font.medium} style={{ backgroundColor: pet?.color, borderRadius: 100, paddingHorizontal: 12, paddingVertical: 6, alignSelf: 'flex-start' }}>{pet?.type}</Title>
-                        <Title color="#fff" size={14} font={font.medium} style={{ backgroundColor: pet?.color, borderRadius: 100, paddingHorizontal: 12, paddingVertical: 6, alignSelf: 'flex-start' }}>{pet?.genero}</Title>
-                        <Title color="#fff" size={14} font={font.medium} style={{ backgroundColor: pet?.color, borderRadius: 100, paddingHorizontal: 12, paddingVertical: 6, alignSelf: 'flex-start' }}>{pet?.age}</Title>
-                    </Row>
+                    <Title size={24}>{pet?.titulo}</Title>
                 </Column>
 
-                <Row style={{ marginHorizontal: margin.h, columnGap: 12, marginBottom: 24, }}>
-                    <Column style={{ borderRadius: 12, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 120, borderWidth: 1, borderColor: color.border, }}>
-                        <Title>Boletim</Title>
-                    </Column>
-                    <Column style={{ borderRadius: 12, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 120, borderWidth: 1, borderColor: color.border, }}>
-                        <Title>Agenda</Title>
-                    </Column>
-                </Row>
 
-
-                <Title align="center">Diário do Pet</Title>
-
+                <Title align="center">Diário 12/06/2024</Title>
                 <FlatList
                     data={diario}
                     keyExtractor={item => item.id}
@@ -57,7 +40,7 @@ export default function PetsDiarioScreen({ navigation, }) {
                 />
 
 
-                <Modal ref={modalComment} snapPoints={[0.1, SCREEN_HEIGHT -30]}>
+                <Modal ref={modalComment} snapPoints={[0.1, SCREEN_HEIGHT - 30]}>
                     <Column>
                         <Title align="center">Comentários</Title>
                     </Column>
@@ -98,6 +81,7 @@ const pet = {
     name: 'Aufredo',
     avatar: require('@imgs/pet4.png'),
     id: 4,
+    titulo: 'Titulo da pongo',
     type: 'Dog',
     genero: 'Macho',
     age: '8 anos',

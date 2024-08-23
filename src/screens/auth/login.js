@@ -14,6 +14,7 @@ import { createPreferences } from '@hooks/preferences';
 import { TextInput } from 'react-native';
 
 import Animated, { FadeInDown, SlideInRight, SlideOutRight } from 'react-native-reanimated';
+import { ConfirmEmail } from './register';
 
 export default function AuthLoginScreen({ navigation, }) {
     const { color, margin, } = useTheme()
@@ -21,6 +22,7 @@ export default function AuthLoginScreen({ navigation, }) {
     const [loading, setloading] = useState(false);
     const [email, setemail] = useState('admin@admin.com');
     const [password, setpassword] = useState('123456');
+    const [name, setname] = useState();
     const [terms, setterms] = useState(true);
 
     const modalForget = useRef()
@@ -29,17 +31,31 @@ export default function AuthLoginScreen({ navigation, }) {
     const [success, setsuccess] = useState();
     const [error, seterror] = useState();
 
+    const [type, settype] = useState();
+
     const handleLogin = async () => {
         setloading(true)
         setsuccess()
         seterror()
         try {
             const res = await loginUser(email, password)
-            if (res?.nome) {
+            setname(res?.nome)
+            if (res?.status === 'Pendente') {
+                seterror('Confirme seu e-mail para ativar sua conta. Aguarde um momento...')
+                setTimeout(() => {
+                    settype('ConfirmEmail')
+                }, 2000);
+                return
+            }
+            else if (res?.status == 'Inativo') {
+                seterror('Sua conta foi desativada, entre em contato com o suporte')
+                return
+            }
+            else if (res?.status === 'Ativo') {
                 setsuccess('Conectado com sucesso!')
                 const saveUser = {
                     "avatar": res?.avatar,
-                    "name": res?.name,
+                    "name": res?.nome,
                     "email": res?.email,
                     "token": res?.token,
                 };
@@ -66,6 +82,8 @@ export default function AuthLoginScreen({ navigation, }) {
     return (
         <Main style={{}}>
             <Scroll>
+
+                {type === 'ConfirmEmail' ? <ConfirmEmail navigation={navigation} email={email} name={name}/> : 
                 <Column ph={28}>
                     <Back />
                     <Title size={26} style={{ marginTop: 20, marginBottom: 4, }}>Olá! Acesse sua conta utilizando seu e-mail e senha.</Title>
@@ -116,7 +134,7 @@ export default function AuthLoginScreen({ navigation, }) {
 
                     <Label size={14} align='center' >Ao continuar, você concorda em receber chamadas e mensagens SMS ou pelo WhatsApp, inclusive automáticas, da Villa Pongo e de suas afiliadas, no número informado.</Label>
 
-                </Column>
+                </Column>}
             </Scroll>
 
             <Modal ref={modalForget} snapPoints={[0.1, SCREEN_HEIGHT]} bg={color.bg}>

@@ -104,7 +104,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#ECEBEB',
   },
   stepIndicator: {
-    marginVertical: 50,
+    marginTop: 10,
+    marginBottom: 60,
   },
   page: {
     flex: 1,

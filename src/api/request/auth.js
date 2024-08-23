@@ -127,16 +127,23 @@ export const resetPasswordOld = async (params) => {
 };
 
 export const updateUser = async (params) => {
+    
+    console.log(params)
+
+
+
     const BASE_URL = await getBaseURL();
     const token = await getToken();
     try {
         const response = await axios.post(
-            `${BASE_URL}/usuarios/editarperfil`,
+            `${BASE_URL}/editarperfil`,
             {
-                email: params.email,
-                name: params.name,
-                whatsapp: params.whatsapp,
+                nome: params.name,
+                telefone: params.tel,
                 cep: params.cep,
+                bairro: params.bairro,
+                complemento: params.complemento,
+                cidade: params.cidade,
                 avatar: params.avatar,
             },
             {
@@ -145,10 +152,16 @@ export const updateUser = async (params) => {
                 },
             }
         );
+        console.log(response.data);
         return response.data;
     } catch (error) {
-        console.error("Error revalidating token:", error);
-        return false;
+        console.log('Error:', error.message);
+        if (error.request) {
+            console.log('Request data:', error.request);
+        } else {
+            console.log('Error message:', error.message);
+        }
+        throw new Error(error.message);
     }
 };
 

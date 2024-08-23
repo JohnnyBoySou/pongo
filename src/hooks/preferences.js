@@ -42,4 +42,22 @@ async function excludePreferences() {
   }
 }
 
-export { getPreferences, editPreferences, createPreferences, excludePreferences, };
+
+async function updatePreferences(updatedPreferences) {
+  try {
+    // Obter as preferências atuais
+    const currentPreferences = await getPreferences();
+    
+    // Atualizar apenas os parâmetros enviados, mantendo os outros intactos
+    const newPreferences = { ...currentPreferences, ...updatedPreferences };
+    
+    // Salvar as novas preferências
+    await AsyncStorage.setItem("@settings", JSON.stringify(newPreferences));
+    return true;
+  } catch (error) {
+    console.error("Error updating preferences:", error);
+    return false;
+  }
+}
+
+export { getPreferences, editPreferences, updatePreferences, createPreferences, excludePreferences, };

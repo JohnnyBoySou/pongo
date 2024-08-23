@@ -24,7 +24,7 @@ export default function SchoolPongoScreen() {
     return (
         <Main style={{ backgroundColor: '#FFFFFF' }}>
             <Scroll>
-                <TopMenu search={false} />
+                <TopMenu search={false} back={false}/>
 
                 <Header title="Escola Pongo" />
                 <Carrossel data={imgs} />

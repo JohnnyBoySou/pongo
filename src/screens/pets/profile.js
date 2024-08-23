@@ -55,12 +55,9 @@ const Pet = ({ pet }) => {
                     <Title size={18} align="center" color={color.sc.sc3} style={{ marginHorizontal: 20, }}>{pet?.name}</Title>
                 </Row>
 
-                <Button ph={1} pv={1} style={{ justifyContent: 'center', alignItems: 'center', height: 36, alignSelf: 'center', }}>
-                    <Title size={16} color="#fff">Editar perfil</Title>
-                </Button>
 
 
-                <Column style={{ borderTopLeftRadius: 150, borderTopRightRadius: 150, marginTop: -100, paddingTop: 140, zIndex: -99, paddingBottom: 180 }} bg="#918C8B">
+                <Column style={{ borderTopLeftRadius: 150, borderTopRightRadius: 150, marginTop: -100, paddingTop: 180, zIndex: -99, paddingBottom: 180 }} bg="#918C8B">
                     <Row style={{ columnGap: 12, paddingHorizontal: 20, }}>
                         <Column>
                             <Title color="#fff" size={16}>Tags</Title>
@@ -74,17 +71,17 @@ const Pet = ({ pet }) => {
                     </Row>
 
                     <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginHorizontal: margin.h, marginVertical: 20, columnGap: 20, }}>
-                        <Column style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#999493', borderRadius: 8, paddingHorizontal: 14, paddingVertical: 12, }}>
-                            <Title color="#fff">Banhos</Title>
-                            <Label color="#fff">{pet?.banhos}</Label>
+                        <Column style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', borderRadius: 8, paddingHorizontal: 14, paddingVertical: 12, }}>
+                            <Title >Banhos</Title>
+                            <Label >{pet?.banhos}</Label>
                         </Column>
-                        <Column style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#999493', borderRadius: 8, paddingHorizontal: 14, paddingVertical: 12, }}>
-                            <Title color="#fff">Tosas</Title>
-                            <Label color="#fff">{pet?.tosas}</Label>
+                        <Column style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', borderRadius: 8, paddingHorizontal: 14, paddingVertical: 12, }}>
+                            <Title >Tosas</Title>
+                            <Label >{pet?.tosas}</Label>
                         </Column>
-                        <Column style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#999493', borderRadius: 8, paddingHorizontal: 14, paddingVertical: 12, }}>
-                            <Title color="#fff">Consultas</Title>
-                            <Label color="#fff">{pet?.consultas}</Label>
+                        <Column style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', borderRadius: 8, paddingHorizontal: 14, paddingVertical: 12, }}>
+                            <Title >Consultas</Title>
+                            <Label >{pet?.consultas}</Label>
                         </Column>
                     </Row>
 
@@ -108,14 +105,9 @@ const Pet = ({ pet }) => {
                                 <Title size={16} color="#fff">Diário</Title>
                             </Column>
                         </Button>
-                       
-
                     </Row>
 
                 </Column>
-
-
-
 
             </Column>
         </Scroll>

@@ -21,8 +21,8 @@ export default function ServicesScreen({ navigation, }) {
     const [focus, setfocus] = useState(false);
     const handleSearch = () => {
     }
-
-    const types = ['Processando', 'Concluído', 'Cancelado', 'Reembolso'];
+    //cinza, laranja, verde, vermelho
+    const types = ['Não iniciado','Em andamento', 'Concluído', 'Cancelado', ];
     const [filter, setfilter] = useState('Processando');
 
     const [data, setdata] = useState([]);
@@ -51,18 +51,18 @@ export default function ServicesScreen({ navigation, }) {
     return (
         <Main >
             <Scroll>
-                <TopMenu />
+                <TopMenu handleSearch={() =>{}}/>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 0 }}>
                     <Column style={{ width: margin.h, }} />
                     {types.map((item, index) => (
-                        <Button onPress={() => { setfilter(item) }} style={{ backgroundColor: filter == item ? color.primary : 'transparent', }} ph={15} pv={12}>
+                        <Button onPress={() => { setfilter(item) }} style={{ backgroundColor: filter == item ? color.primary : 'transparent', }} ph={15} pv={10}>
                             <LabelBT size={14} style={{ textAlign: 'center', color: filter == item ? '#fff' : color.label, }}>{item}</LabelBT>
                         </Button>
                     ))}
                     <Column style={{ width: margin.h, }} />
                 </ScrollView>
 
-                <Column mh={margin.h} mv={margin.v} >
+                <Column mh={margin.h} mv={20} >
                     {loading ? <Loader size={28} /> :
                         <FlatList
                             data={data}
@@ -117,9 +117,6 @@ const Card = ({ item, navigation }) => {
             </Column>
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 16 }} >
                 <Row>
-                    <Button onPress={() => { navigation.goBack() }} style={{ backgroundColor: color.pr.pr2, paddingHorizontal: 12, paddingVertical: 6, marginRight: 6, borderRadius: 100, justifyContent: 'center', alignItems: 'center', }}>
-                        <Label style={{ fontSize: 12, color: color.title, fontWeight: 500 }}>Cancelar</Label>
-                    </Button>
 
                 </Row>
                 <Title style={{ fontSize: 12, lineHeight: 15, color: '#858585', fontWeight: 500 }}>{pet?.item} item: R$ {value},00</Title>
@@ -176,10 +173,6 @@ const ItemAlternative = ({ item }) => {
             </Column>
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 16 }} >
                 <Row>
-                    <Button onPress={() => { navigation.goBack() }} style={{ backgroundColor: color.pr.pr2, paddingHorizontal: 12, paddingVertical: 6, marginRight: 6, borderRadius: 100, justifyContent: 'center', alignItems: 'center', }}>
-                        <Label style={{ fontSize: 12, color: color.title, fontWeight: 500 }}>Cancelar</Label>
-                    </Button>
-
                 </Row>
                 <Title style={{ fontSize: 12, color: '#858585', fontWeight: 500 }}>2 item: R$300,00</Title>
             </Row>

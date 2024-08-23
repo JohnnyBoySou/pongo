@@ -4,6 +4,7 @@ import TopMenu from '@components/Header/topmenu';
 import TabBar from '@components/TabBar';
 import { useEffect, useState } from 'react';
 import { listChats } from '@api/request/chat';
+import { formatDateTime } from '@hooks/utils';
 
 export default function ChatListScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
@@ -32,22 +33,25 @@ export default function ChatListScreen({ navigation, }) {
                 <Title>Suas conversas</Title>
             </Column>
             {loading ? <Loader /> :
-            <Column>
-                <FlatList
-                    data={data}
-                    renderItem={({ item }) => <Chat item={item} />}
-                    keyExtractor={item => item.id}
-                    windowSize={10}
-                    maxToRenderPerBatch={6}
-                    ListFooterComponent={() => <Label size={14} style={{ textAlign: 'center', marginVertical: 80, }}>Nenhum atendimento encontrado</Label>}
-                    ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: color.border, marginVertical: 4, borderRadius: 6, }} />}
-                />
-            <Button style={{ backgroundColor: color.pr.pr1, }} pv={16} mh={margin.h} marginTop={0} marginBottom={24} onPress={() => {navigation.navigate('ChatNew')}} >
-                <LabelBT style={{ color: color.light, textAlign: 'center' }}>Iniciar novo atendimento</LabelBT>
-            </Button>
-            </Column>
-                
-                }
+                <Column>
+                    <FlatList
+                        data={data}
+                        renderItem={({ item }) => <Chat item={item} />}
+                        keyExtractor={item => item.id}
+                        windowSize={10}
+                        maxToRenderPerBatch={6}
+                        ListEmptyComponent={() => <Label size={14} style={{ textAlign: 'center', marginVertical: 80, }}>Nenhum atendimento encontrado</Label>}
+                        ListFooterComponent={() => <Column style={{ height: 320, width: 20, }}></Column>}
+                        ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: color.border, marginVertical: 4, borderRadius: 6, }} />}
+                    />
+                    <Button style={{ backgroundColor: color.pr.pr1, }} pv={16} mh={margin.h} marginTop={0} marginBottom={24} onPress={() => { navigation.navigate('ChatNew') }} >
+                        <LabelBT style={{ color: color.light, textAlign: 'center' }}>Iniciar novo atendimento</LabelBT>
+                    </Button>
+
+                </Column>
+
+            }
+
             <TabBar />
         </Main>
     )
@@ -55,18 +59,19 @@ export default function ChatListScreen({ navigation, }) {
 
 const Chat = ({ item }) => {
     const { color } = useTheme();
-    const { avatar, lastMsg, time, name, unread, id } = item
+    console.log(item)
+    const { avatar, lastMsg, time, name, unread, id, token_chat, criado_em, criado_por, status, titulo } = item
     const navigation = useNavigate()
     return (
-        <Button onPress={() => { navigation.navigate('ChatDetails', { id: id, user: item }) }} radius={4}>
+        <Button onPress={() => { navigation.navigate('ChatDetails', { token: token_chat, user: item }) }} radius={4}>
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
                 <Image style={{ width: 56, height: 56, borderRadius: 100, backgroundColor: '#f7f7f7', }} source={{ uri: avatar }} />
                 <Column style={{ flexGrow: 1, marginLeft: 12, }}>
-                    <Title size={18}>{name}</Title>
-                    <Label size={14} style={{ marginTop: 4, }}>{lastMsg} </Label>
+                    <Title size={18}>{titulo}</Title>
+                    <Label size={14} style={{ marginTop: 4, }}>{formatDateTime(criado_em).slice(14)} </Label>
                 </Column>
                 <Column style={{ alignItems: 'flex-end' }}>
-                    <Label size={14}>{time}</Label>
+                    <Label size={14}>{formatDateTime(criado_em).slice(0, 10)}</Label>
                     {unread > 0 && <Column style={{ backgroundColor: color.blue, marginTop: 4, width: 26, height: 26, justifyContent: 'center', borderRadius: 100, alignItems: 'center', }}><Label style={{ color: '#fff', fontFamily: 'Font_Bold', marginTop: 2, fontSize: 14 }}>{unread}</Label></Column>}
                 </Column>
             </Row>
