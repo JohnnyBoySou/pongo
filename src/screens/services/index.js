@@ -17,37 +17,48 @@ import { ArrowLeft } from 'lucide-react-native';
 export default function ServicesScreen({ navigation, }) {
 
     const { color, font, margin } = useTheme();
-    const [query, setquery] = useState();
-    const [focus, setfocus] = useState(false);
-    const handleSearch = () => {
-    }
 
-
-    const [data, setdata] = useState([]);
     const [loading, setloading] = useState();
     const [page, setpage] = useState(1);
     const [selectService, setselectService] = useState('');
-    const [filter, setfilter] = useState();
-
 
     const [grooming, setgrooming] = useState();
     const [vet, setvet] = useState();
     const [hospitality, sethospitality] = useState();
-    const [creche, setcreche] = useState();
     const [escola, setescola] = useState();
+
+    const [groomingTypes, setgroomingTypes] = useState();
+    const [vetTypes, setvetTypes] = useState();
+    const [hotelTypes, sethotelTypes] = useState();
+    const [escolaTypes, setescolaTypes] = useState();
 
     useEffect(() => {
         const fecthData = async () => {
             setloading(true)
             try {
                 const res = await listServices(page)
-                console.log(res.dadospethospitalities?.data)
-                setgrooming(res.dadosgroomings?.data)
-                setvet(res.dadosvet?.data)
-                sethospitality(res.dadospethospitalities?.data)
-                setcreche(res.dadoscreche?.data)
-                setescola(res.dadosescolapacotes?.data)
 
+                const dataGrooming = res.dadosgroomings?.data
+                const typesGrooming = Array.from(new Set(dataGrooming.map(item => `${item.id_service}-${item.name}`))).map(key => ({ id: parseInt(key.split('-')[0]), name: key.split('-')[1] }));
+
+                const dataVet = res.dadosvet?.data
+                const typesVet = Array.from(new Set(dataVet.map(item => `${item.id_service}-${item.name}`))).map(key => ({ id: parseInt(key.split('-')[0]), name: key.split('-')[1] }));
+
+                const dataHotel = res.dadospethospitalities?.data
+                const typesHotel = Array.from(new Set(dataHotel.map(item => `${item.id_service}-${item.name}`))).map(key => ({ id: parseInt(key.split('-')[0]), name: key.split('-')[1] }));
+
+                const dataEscola = res.dadosescolapacotes?.data
+                const typesEscola = Array.from(new Set(dataEscola.map(item => `${item.id_service}-${item.name}`))).map(key => ({ id: parseInt(key.split('-')[0]), name: key.split('-')[1] }));
+
+                setgrooming(dataGrooming)
+                setvet(dataVet)
+                sethospitality(dataHotel)
+                setescola(dataEscola)
+
+                setgroomingTypes(typesGrooming)
+                setvetTypes(typesVet)
+                sethotelTypes(typesHotel)
+                setescolaTypes(typesEscola)
 
             } catch (error) {
                 console.log(error)
@@ -56,13 +67,23 @@ export default function ServicesScreen({ navigation, }) {
             }
         }
         fecthData()
-    }, [selectService, page,]);
+    }, [page,]);
     const [filteredData, setfilteredData] = useState();
 
     const handleFilter = (item) => {
+        if (item == 'tudo') {
+            setfilter({name: 'Tudo', id: 0,})
+            setfilteredData()
+            return
+        }
         setfilter(item)
+        const data = selectService?.name == 'Grooming' ? grooming : selectService?.name == 'Veterinario' ? vet : selectService?.name == 'Hotel' ? hospitality : selectService?.name == 'Escola' ? escola : []
         setfilteredData(data.filter(i => i.id_service == item.id))
     }
+
+    const data = filteredData ? filteredData : selectService?.name == 'Grooming' ? grooming : selectService?.name == 'Veterinario' ? vet : selectService?.name == 'Hotel' ? hospitality : selectService?.name == 'Escola' ? escola : []
+    const types = selectService?.name == 'Grooming' ? groomingTypes : selectService?.name == 'Veterinario' ? vetTypes : selectService?.name == 'Hotel' ? hotelTypes : selectService?.name == 'Escola' ? escolaTypes : []
+    const [filter, setfilter] = useState({name: 'Tudo', id: 0,});
 
     return (
         <Main >
@@ -71,13 +92,16 @@ export default function ServicesScreen({ navigation, }) {
 
                 {selectService ?
                     <Column>
-                        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 12 }}>
-                            <Button onPress={() => { setselectService(''); setfilteredData([]) }} ph={1} pv={1} style={{ justifyContent: 'center', alignItems: 'center', width: 40, height: 40, marginLeft: 28, }} bg="#fff">
+
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 6 }}>
+                            <Button onPress={() => { setselectService(); }} ph={1} pv={1} style={{ justifyContent: 'center', alignItems: 'center', width: 40, height: 40, marginLeft: 28, marginRight: 8,}} bg="#fff">
                                 <ArrowLeft size={20} color={color.label} />
                             </Button>
 
-
-                            {selectService?.itens?.map((item, index) => (
+                            <Button onPress={() => { handleFilter('tudo');}} style={{ backgroundColor: filter?.id == 0 ? color.sc.sc3 : 'transparent', }} ph={15} pv={10}>
+                                <LabelBT size={14} style={{ textAlign: 'center', color: filter?.id == 0 ? '#fff' : color.label, }}>Tudo</LabelBT>
+                            </Button>
+                            {types?.map((item, index) => (
                                 <Button key={index} onPress={() => { handleFilter(item) }} style={{ backgroundColor: filter?.id == item?.id ? color.sc.sc3 : 'transparent', }} ph={15} pv={10}>
                                     <LabelBT size={14} style={{ textAlign: 'center', color: filter?.id == item?.id ? '#fff' : color.label, }}>{item.name}</LabelBT>
                                 </Button>
@@ -88,14 +112,14 @@ export default function ServicesScreen({ navigation, }) {
                         <Column mh={margin.h} mv={20} >
                             {loading ? <Loader size={28} /> :
                                 <FlatList
-                                    data={filteredData ? filteredData : selectService.name == 'Grooming' ? grooming : selectService.name == 'Veterinario' ? vet : selectService.name == 'Hotel' ? hospitality : selectService.name == 'Creche' ? creche : selectService.name == 'Escola' ? escola : []}
+                                    data={data}
                                     keyExtractor={item => item.id}
                                     windowSize={4}
                                     updateCellsBatchingPeriod={100}
                                     maxToRenderPerBatch={4}
                                     initialNumToRender={4}
                                     ListEmptyComponent={() => <Label size={16} style={{ textAlign: 'center', marginVertical: 60 }}>Nenhum resultado encontrado.</Label>}
-                                    renderItem={({ item }) => <Card item={item} navigation={navigation} />}
+                                    renderItem={({ item }) => <Card item={item} navigation={navigation} type={selectService.type} />}
                                 />}
                         </Column>
 
@@ -107,7 +131,7 @@ export default function ServicesScreen({ navigation, }) {
                         <FlatList
                             style={{ marginTop: 6, }}
                             data={servicesData}
-                            columnWrapperStyle={{  columnGap: 20, }}
+                            columnWrapperStyle={{ columnGap: 20, }}
                             contentContainerStyle={{ rowGap: 20, }}
                             renderItem={({ item }) => <CardService item={item} setselectService={setselectService} />}
                             keyExtractor={item => item.id}
@@ -126,7 +150,7 @@ export default function ServicesScreen({ navigation, }) {
 }
 
 
-const Card = ({ item, navigation }) => {
+const Card = ({ item, navigation, type }) => {
     const { color, font, margin } = useTheme()
     const { name, id, img, status, criado_em, entrada, payment, value, pet, } = item
 
@@ -192,20 +216,20 @@ const Card = ({ item, navigation }) => {
     )
 }
 
-const CardService = ({ item, setselectService }) => {
+const CardService = ({ item, setselectService, }) => {
     const { name, label, price, img } = item
     return (
-        <Button pv={12} ph={12} radius={12} mh={0} mv={0} style={{ backgroundColor: '#FFF', flexGrow: 1, }} onPress={() => { setselectService(item) }} >
-                <Column>
-                    <Image source={img} style={{ width: 76, height: 76, borderRadius: 8, marginRight: 12, }} />
-                    <Column style={{ justifyContent: 'center', }}>
-                        <Column style={{ height: 12, }} />
-                        <Title size={16}>{name}</Title>
-                        <Column style={{ height: 6, }} />
-                        <Label size={14}>{label}</Label>
-                        <Column style={{ height: 12, }} />
-                    </Column>
+        <Button pv={20} ph={20} radius={12} mh={0} mv={0} style={{ backgroundColor: '#FFF', flexGrow: 1, }} onPress={() => { setselectService(item) }} >
+            <Column>
+                <Image source={img} style={{ width: 76, height: 76, borderRadius: 8, }} />
+                <Column style={{ justifyContent: 'center', }}>
+                    <Column style={{ height: 12, }} />
+                    <Title size={16}>{name}</Title>
+                    <Column style={{ height: 6, }} />
+                    <Label size={14}>{label}</Label>
+                    <Column style={{ height: 12, }} />
                 </Column>
+            </Column>
         </Button>
     )
 }
