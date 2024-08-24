@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Main, Scroll, Column, Label, Title, Row, useTheme, Image, Button, SCREEN_WIDTH, Loader } from '@theme/global'
+import { Main, Scroll, Column, Label, Title, Row, useTheme, Image, Button, SCREEN_WIDTH, Loader, LabelBT } from '@theme/global'
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import TabBar from '@components/TabBar';
 import { listDiario } from '@api/request/pets';
@@ -48,12 +48,18 @@ export default function PetsDiarioScreen({ navigation, route }) {
         <Main>
             <Scroll>
                 <TopMenu />
-                <Row style={{ backgroundColor: '#fff', borderRadius: 12, alignItems: 'center', marginVertical: 12, marginHorizontal: margin.h, paddingVertical: 12, paddingHorizontal: 20, }}>
-                    <Image source={{ uri: pet?.img }} style={{ width: 72, height: 72, borderRadius: 12, objectFit: 'cover', }} />
-                    <Column style={{ justifyContent: 'center', marginVertical: 20, marginHorizontal: 12, }}>
-                        <Title size={24}>{pet?.name}</Title>
-                        <Label>{pet?.age} anos</Label>
-                    </Column>
+                <Row style={{ backgroundColor: '#fff', justifyContent: 'space-between', alignItems: 'center', borderRadius: 12, alignItems: 'center', marginVertical: 12, marginHorizontal: margin.h, paddingVertical: 12, paddingHorizontal: 20, }}>
+                    <Row style={{ justifyContent: 'center', alignItems: 'center',  }}>
+                        <Image source={{ uri: pet?.img }} style={{ width: 72, height: 72, borderRadius: 12, objectFit: 'cover', }} />
+                        <Column style={{ justifyContent: 'center', marginVertical: 20, marginHorizontal: 12, }}>
+                            <Title size={24}>{pet?.name}</Title>
+                            <Label>{pet?.age} anos</Label>
+                        </Column>
+                    </Row>
+
+                    <Button pv={12} style={{ backgroundColor: color.sc.sc3 + 30, }} onPress={() => {navigation.navigate('PetsList')}} >
+                        <LabelBT size={16} color={color.sc.sc3}>Alterar</LabelBT>
+                    </Button>
                 </Row>
 
                 {loading ? <Loader /> :
@@ -64,6 +70,7 @@ export default function PetsDiarioScreen({ navigation, route }) {
                         showsVerticalScrollIndicator={false}
                         updateCellsBatchingPeriod={500}
                         initialNumToRender={5}
+                        ListEmptyComponent={<Column style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 50, }}><Label>Nenhuma publicação encontrada.</Label></Column>}
                         maxToRenderPerBatch={5}
                         onEndReachedThreshold={0.5} // Define o quão próximo do fim da lista a função deve ser chamada
                         ListFooterComponent={<Column style={{ marginVertical: 20, height: 120, }} />}

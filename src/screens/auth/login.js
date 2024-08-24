@@ -134,6 +134,13 @@ export default function AuthLoginScreen({ navigation, }) {
 
                     <Label size={14} align='center' >Ao continuar, você concorda em receber chamadas e mensagens SMS ou pelo WhatsApp, inclusive automáticas, da Villa Pongo e de suas afiliadas, no número informado.</Label>
 
+
+                    <Button radius={12} onPress={() => { navigation.navigate('AuthLoginColaborador') }} mv={12} bg={color.label+20}>
+                        <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
+                            <Label size={14} align="center">Entrar como</Label>
+                            <LabelBT size={14}  align="center" >Colaborador</LabelBT>
+                        </Column>
+                    </Button>
                 </Column>}
             </Scroll>
 

@@ -20,6 +20,7 @@ import SearchScreen from '@screens/search/index';
 import AuthLoginScreen from '@screens/auth/login';
 import AuthRegisterScreen from '@screens/auth/register';
 import WelcomeScreen from '@screens/auth/welcome';
+import AuthLoginColaboradorScreen from '@screens/auth/login_colaborador';
 
 //INSTITUCIONAL
 import InstitucionalScreen from '@screens/institucional/index';
@@ -45,6 +46,7 @@ import PetsSingleGaleriaScreen from '@screens/pets/singe_galeria';
 import ChatListScreen from '@screens/chat/list';
 import ChatNewScreen from '@screens/chat/new';
 import ChatDetailsScreen from '@screens/chat/details';
+import ChatColaboradorListScreen from '@screens/colaborador/list';
 
 //TABS SCREEN
 import HomeScreen from '@screens/tabs/home';
@@ -86,13 +88,14 @@ import HotelRegisterScreen from '@screens/hotel/register';
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Welcome'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Services'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="ChatList" component={ChatListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatDetails" component={ChatDetailsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatNew" component={ChatNewScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="ChatColaboradorList" component={ChatColaboradorListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="PetsList" component={PetsListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="PetsProfile" component={PetsProfileScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -129,6 +132,7 @@ export default function Router() {
         <Stack.Screen name="AuthLogin" component={AuthLoginScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="AuthRegister" component={AuthRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="AddPet" component={AddPetScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="AuthLoginColaborador" component={AuthLoginColaboradorScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Async" component={AsyncStaticScreen} options={{ ...TransitionPresets.FadeFromBottomAndroid, }} />
         <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />

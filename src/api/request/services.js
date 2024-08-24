@@ -12,15 +12,14 @@ export const listServices = async (page = 1) => {
                 Authorization: `Bearer ${token}`,
             },
         });
-        console.log(res.data)
-        return res.data.data
+        return res.data
     } catch (error) {
         const err = JSON.parse(error.request.response);
         throw new Error(err.message)
     }
 }
 
-export const singleService = async (id) => {
+export const singleService = async (id, tipo) => {
     const BASE_URL = await getBaseURL();
     const token = await getToken();
     try {
@@ -29,7 +28,6 @@ export const singleService = async (id) => {
                 Authorization: `Bearer ${token}`,
             },
         });
-        console.log(res.data)
         return res.data
     } catch (error) {
         const err = JSON.parse(error.request.response);

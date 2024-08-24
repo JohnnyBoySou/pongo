@@ -11,13 +11,12 @@ import TopMenu from '@components/Header/topmenu';
 import { FlatList } from 'react-native-gesture-handler';
 import TabBar from '@components/TabBar';
 
-export default function ServiceSingleScreen({ navigation, }) {
+export default function ServiceSingleScreen({ navigation, route }) {
 
     const { color, font, margin } = useTheme();
+    const pet = route.params.pet
+    const id = route.params.id
 
-    const [name, setname] = useState();
-    const [tel, settel] = useState();
-    const [type, settype] = useState('Pongo');
 
     const [query, setquery] = useState();
     const [loading, setloading] = useState(false);
@@ -32,22 +31,7 @@ export default function ServiceSingleScreen({ navigation, }) {
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
-
-                <TopMenu search={false} back={false} />
-
-                <Header title="Hotel" />
-
-                <Column mh={margin.h} marginTop={30} >
-                    <FlatList
-                        data={data}
-                        keyExtractor={item => item.id}
-                        renderItem={({ item }) => <Item item={item} />}
-                    />
-                </Column>
-
-                <Column mh={margin.h} mv={120}>
-                    <Button style={{ width: '100%', backgroundColor: color.sc.sc3,}}><LabelBT style={{ color: color.light, textAlign: 'center' }}>Diário do pet</LabelBT></Button>
-                </Column>
+                {pet && <CardPet item={pet} />}
             </Scroll>
             <TabBar />
         </Main >
@@ -55,18 +39,21 @@ export default function ServiceSingleScreen({ navigation, }) {
 }
 
 
-const Item = ({ item }) => {
+const CardPet = ({ item }) => {
     const { color, font, margin } = useTheme()
-    const { name } = item
+    console.log(item)
+
+    const { name, entrada, criado_em, status, id_pet_pet, id_service, payment, value, id, pet} = item
     return (
         <Column style={{ borderRadius: 12, overflow: 'hidden', marginBottom: 12 }}>
+            <Header title={name} />             
             <Row style={{ alignItems: 'flex-start', justifyContent: 'space-between' }}>
                 <Row>
                     <Image
                         source={{ uri: 'https://thoseoldpets.co.uk/wp-content/uploads/2022/08/img_1899-2-1.png' }}
                         style={{ width: 62, height: 80, borderRadius: 12, borderWidth: 0.8, borderColor: '#ecebeb', objectFit: 'cover' }} />
                     <Column mh={12} >
-                        <Label style={{ fontSize: 14, color: '#434343', fontWeight: 700, marginBottom: 3 }}>{name}</Label>
+                        <Label style={{ fontSize: 14, color: '#434343', fontWeight: 700, marginBottom: 3 }}>{item?.name}</Label>
                         <Label style={{ fontSize: 10, color: '#858585', fontWeight: 200, marginBottom: 8 }}>Pedido #987654323456</Label>
                         <Label style={{ fontSize: 14, color: '#858585', fontWeight: 600 }}>R$150,00</Label>
                     </Column>
@@ -96,7 +83,9 @@ const Item = ({ item }) => {
                     <Label size={14} marginBottom={6}>Forma de pagamento: Cartão de Crédito</Label>
                 </Column>
             </Row>
-
+            <Column mh={margin.h} mv={120}>
+                    <Button style={{ width: '100%', backgroundColor: color.sc.sc3, }}><LabelBT style={{ color: color.light, textAlign: 'center' }}>Diário do pet</LabelBT></Button>
+                </Column>
         </Column>
     )
 }
@@ -116,14 +105,5 @@ const data = [
         colaborador: 'Jorge',
         data_transacao: '12/06/2024 às 14:00',
     },
-    /*{
-        name: 'Nome do Produto',
-        image: 'https://img.freepik.com/free-photo/top-view-pet-accessories_23-2150930406.jpg?size=626&ext=jpg&ga=GA1.1.2113030492.1720483200&semt=ais_hybrid',
-        id: '987654323456',
-        price: 'R$150,00',
-        date: '12/06/2024 as 14:23:00',
-        status: 'Entregue',
-        time: '14/06/2024',
-        payment: 'Crédito 3x',
-    },*/
+
 ]

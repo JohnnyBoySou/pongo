@@ -19,7 +19,6 @@ export default function PetsProfileScreen({ navigation, route }) {
             setloading(true)
             try {
                 const res = await singlePet(id)
-                console.log(res)
                 setdata(res)
             } catch (error) {
                 console.log(error)
@@ -58,9 +57,7 @@ const Pet = ({ pet }) => {
                     <Title size={18} align="center" color={color.sc.sc3} style={{ marginHorizontal: 20, }}>{pet?.name}</Title>
                 </Row>
 
-
-
-                <Column style={{ borderTopLeftRadius: 150, borderTopRightRadius: 150, marginTop: -100, paddingTop: 180, zIndex: -99, paddingBottom: 180 }} bg="#918C8B">
+                <Column style={{ borderTopLeftRadius: 150, borderTopRightRadius: 150, marginTop: -100, paddingTop: 140, zIndex: -99, paddingBottom: 180 }} bg="#918C8B">
                     <Row style={{ columnGap: 12, paddingHorizontal: 20, }}>
                         <Column>
                             <Title color="#fff" size={16}>Tags</Title>
@@ -102,7 +99,7 @@ const Pet = ({ pet }) => {
                                 <Title size={16} color="#fff">Agenda</Title>
                             </Column>
                         </Button>
-                        <Button ph={4} pv={4} radius={6} onPress={() => { navigation.navigate('PetsDiario', { id: pet?.id }) }} >
+                        <Button ph={4} pv={4} radius={6} onPress={() => { navigation.navigate('PetsDiario', { id: pet?.id, pet: pet, }) }} >
                             <Column style={{ justifyContent: 'center', alignItems: 'center', }}>
                                 <Image source={require("@imgs/pr3.png")} style={{ width: 50, height: 50, marginBottom: 6, borderRadius: 100, }} />
                                 <Title size={16} color="#fff">Diário</Title>

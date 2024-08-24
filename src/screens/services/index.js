@@ -3,8 +3,6 @@ import { Pressable, TextInput, ScrollView, Image, } from 'react-native';
 import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Loader, LabelBT } from '@theme/global';
 import { FlatList } from 'react-native-gesture-handler';
 
-import { ArrowLeft, Search } from 'lucide-react-native';
-
 //components
 import TopMenu from '@components/Header/topmenu';
 import TabBar from '@components/TabBar';
@@ -12,7 +10,9 @@ import { formatDateTime } from '@hooks/utils';
 
 //API
 import { listServices } from '@api/request/services';
-
+import { useNavigation } from '@react-navigation/native';
+import { servicesData } from '@api/data/services';
+import { ArrowLeft } from 'lucide-react-native';
 
 export default function ServicesScreen({ navigation, }) {
 
@@ -21,20 +21,34 @@ export default function ServicesScreen({ navigation, }) {
     const [focus, setfocus] = useState(false);
     const handleSearch = () => {
     }
-    //cinza, laranja, verde, vermelho
-    const types = ['Não iniciado','Em andamento', 'Concluído', 'Cancelado', ];
-    const [filter, setfilter] = useState('Processando');
+
 
     const [data, setdata] = useState([]);
     const [loading, setloading] = useState();
     const [page, setpage] = useState(1);
+    const [selectService, setselectService] = useState('');
+    const [filter, setfilter] = useState();
+
+
+    const [grooming, setgrooming] = useState();
+    const [vet, setvet] = useState();
+    const [hospitality, sethospitality] = useState();
+    const [creche, setcreche] = useState();
+    const [escola, setescola] = useState();
+
     useEffect(() => {
         const fecthData = async () => {
             setloading(true)
             try {
                 const res = await listServices(page)
-                console.log(res)
-                setdata(res)
+                console.log(res.dadospethospitalities?.data)
+                setgrooming(res.dadosgroomings?.data)
+                setvet(res.dadosvet?.data)
+                sethospitality(res.dadospethospitalities?.data)
+                setcreche(res.dadoscreche?.data)
+                setescola(res.dadosescolapacotes?.data)
+
+
             } catch (error) {
                 console.log(error)
             } finally {
@@ -42,46 +56,69 @@ export default function ServicesScreen({ navigation, }) {
             }
         }
         fecthData()
-    }, []);
+    }, [selectService, page,]);
+    const [filteredData, setfilteredData] = useState();
 
-
-
-
-
+    const handleFilter = (item) => {
+        setfilter(item)
+        setfilteredData(data.filter(i => i.id_service == item.id))
+    }
 
     return (
         <Main >
             <Scroll>
-                <TopMenu handleSearch={() =>{}}/>
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 0 }}>
-                    <Column style={{ width: margin.h, }} />
-                    {types.map((item, index) => (
-                        <Button onPress={() => { setfilter(item) }} style={{ backgroundColor: filter == item ? color.primary : 'transparent', }} ph={15} pv={10}>
-                            <LabelBT size={14} style={{ textAlign: 'center', color: filter == item ? '#fff' : color.label, }}>{item}</LabelBT>
-                        </Button>
-                    ))}
-                    <Column style={{ width: margin.h, }} />
-                </ScrollView>
+                <TopMenu back={false} search={false} />
 
-                <Column mh={margin.h} mv={20} >
-                    {loading ? <Loader size={28} /> :
+                {selectService ?
+                    <Column>
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 12 }}>
+                            <Button onPress={() => { setselectService(''); setfilteredData([]) }} ph={1} pv={1} style={{ justifyContent: 'center', alignItems: 'center', width: 40, height: 40, marginLeft: 28, }} bg="#fff">
+                                <ArrowLeft size={20} color={color.label} />
+                            </Button>
+
+
+                            {selectService?.itens?.map((item, index) => (
+                                <Button key={index} onPress={() => { handleFilter(item) }} style={{ backgroundColor: filter?.id == item?.id ? color.sc.sc3 : 'transparent', }} ph={15} pv={10}>
+                                    <LabelBT size={14} style={{ textAlign: 'center', color: filter?.id == item?.id ? '#fff' : color.label, }}>{item.name}</LabelBT>
+                                </Button>
+                            ))}
+                            <Column style={{ width: margin.h, }} />
+                        </ScrollView>
+
+                        <Column mh={margin.h} mv={20} >
+                            {loading ? <Loader size={28} /> :
+                                <FlatList
+                                    data={filteredData ? filteredData : selectService.name == 'Grooming' ? grooming : selectService.name == 'Veterinario' ? vet : selectService.name == 'Hotel' ? hospitality : selectService.name == 'Creche' ? creche : selectService.name == 'Escola' ? escola : []}
+                                    keyExtractor={item => item.id}
+                                    windowSize={4}
+                                    updateCellsBatchingPeriod={100}
+                                    maxToRenderPerBatch={4}
+                                    initialNumToRender={4}
+                                    ListEmptyComponent={() => <Label size={16} style={{ textAlign: 'center', marginVertical: 60 }}>Nenhum resultado encontrado.</Label>}
+                                    renderItem={({ item }) => <Card item={item} navigation={navigation} />}
+                                />}
+                        </Column>
+
+                        <Column style={{ height: 60 }} />
+                    </Column>
+
+                    : <Column mh={margin.h}>
+                        <Title size={26} style={{ marginVertical: 12, }}>Escolha um serviço</Title>
                         <FlatList
-                            data={data}
+                            style={{ marginTop: 6, }}
+                            data={servicesData}
+                            columnWrapperStyle={{  columnGap: 20, }}
+                            contentContainerStyle={{ rowGap: 20, }}
+                            renderItem={({ item }) => <CardService item={item} setselectService={setselectService} />}
                             keyExtractor={item => item.id}
-                            windowSize={4}
-                            updateCellsBatchingPeriod={100}
-                            maxToRenderPerBatch={4}
-                            initialNumToRender={4}
-                            ListEmptyComponent={() => <Label size={16} style={{ textAlign: 'center', marginVertical: 60 }}>Nenhum resultado encontrado.</Label>}
-                            renderItem={({ item }) => <Card item={item} navigation={navigation} />}
-                        />}
-                </Column>
-
-                <Button style={{ backgroundColor: color.pr.pr1, }} pv={16} mh={margin.h} marginTop={0} marginBottom={24}>
-                    <LabelBT style={{ color: color.light, textAlign: 'center' }}>Solicitar novo serviço</LabelBT>
-                </Button>
-
-                <Column style={{ height: 60 }} />
+                            showsVerticalScrollIndicator={false}
+                            numColumns={2}
+                        />
+                        <Button style={{ backgroundColor: color.pr.pr1, }} pv={16} marginTop={24} marginBottom={24}>
+                            <LabelBT style={{ color: color.light, textAlign: 'center' }}>Solicitar novo serviço</LabelBT>
+                        </Button>
+                        <Column style={{ height: 100 }} />
+                    </Column>}
             </Scroll>
             <TabBar />
         </Main >
@@ -90,45 +127,101 @@ export default function ServicesScreen({ navigation, }) {
 
 
 const Card = ({ item, navigation }) => {
-    console.log(item)
     const { color, font, margin } = useTheme()
     const { name, id, img, status, criado_em, entrada, payment, value, pet, } = item
-    return (
-        <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', marginBottom: 12 }}>
-            <Row style={{ alignItems: 'flex-start', }}>
-                <Image
-                    source={{ uri: img, }}
-                    style={{ width: 62, height: 80, borderRadius: 12, borderWidth: 0.8, borderColor: '#ecebeb', objectFit: 'contain' }} />
-                <Column mh={12} >
-                    <Label style={{ fontSize: 14, color: '#434343', fontWeight: 700, marginBottom: 3 }}>{name}</Label>
-                    <Label style={{ fontSize: 10, color: '#858585', fontWeight: 200, marginBottom: 8 }}>Pedido #{id}</Label>
-                    <Label style={{ fontSize: 14, color: '#858585', fontWeight: 600 }}>R$ {value},00</Label>
-                </Column>
-                <Column style={{ backgroundColor: color.sc.sc3, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
-                    <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
-                        Informações
-                    </Title>
-                </Column>
-            </Row>
-            <Column style={{ marginTop: 12 }}>
-                <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
-                <Label size={14} marginBottom={6}>Agendamento: {formatDateTime(entrada)}</Label>
-                <Label size={14} marginBottom={6}>Pagamento: {payment?.type ? payment?.type : 'Não informado'}, {payment?.vezes > 1 ? 'x' + payment?.vezes : 'à vista'}</Label>
-                <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
-            </Column>
-            <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 16 }} >
-                <Row>
 
+    const types = [
+        {
+            name: 'Não iniciado',
+            color: '#788BA4',
+        },
+        {
+            name: 'Em andamento',
+            color: '#EBD269'
+        },
+        {
+            name: 'Concluído',
+            color: '#778428'
+        },
+        {
+            name: 'Cancelado',
+            color: '#C9A9AA'
+        },
+        {
+            name: null,
+            color: '#303030'
+        }
+    ];
+    const selectStatus = types.find(i => i.name == status)
+    return (
+        <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, }) }} radius={2} pv={1} ph={1}>
+            <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', marginBottom: 12 }}>
+                <Row style={{ alignItems: 'flex-start', }}>
+                    <Image
+                        source={{ uri: img, }}
+                        style={{ width: 62, height: 80, borderRadius: 12, borderWidth: 0.8, borderColor: '#ecebeb', objectFit: 'contain' }} />
+                    <Column mh={12} >
+                        <Label style={{ fontSize: 14, color: '#434343', fontWeight: 700, marginBottom: 3 }}>{name}</Label>
+                        <Label style={{ fontSize: 10, color: '#858585', fontWeight: 200, marginBottom: 8 }}>Pedido #{id}</Label>
+                        <Label style={{ fontSize: 14, color: '#858585', fontWeight: 600 }}>R$ {value},00</Label>
+                    </Column>
+                    <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
+                        <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
+                            {status ? status : 'Não informado'}
+                        </Title>
+                    </Column>
                 </Row>
-                <Title style={{ fontSize: 12, lineHeight: 15, color: '#858585', fontWeight: 500 }}>{pet?.item} item: R$ {value},00</Title>
-            </Row>
-        </Column>
+                <Column style={{ marginTop: 12 }}>
+                    <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
+                    <Label size={14} marginBottom={6}>Agendamento: {formatDateTime(entrada)}</Label>
+                    <Label size={14} marginBottom={6}>Pagamento: {payment?.type ? payment?.type : 'Não informado'}, {payment?.vezes > 1 ? 'x' + payment?.vezes : 'à vista'}</Label>
+                    <Row>
+                        <Image source={{ uri: pet?.img }} style={{ width: 54, height: 54, borderRadius: 100, objectFit: 'conver' }} />
+                        <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
+                    </Row>
+                </Column>
+                <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 16 }} >
+                    <Row>
+
+                    </Row>
+                    <Title style={{ fontSize: 12, lineHeight: 15, color: '#858585', fontWeight: 500 }}>{pet?.item} item: R$ {value},00</Title>
+                </Row>
+            </Column>
+        </Button>
+
+    )
+}
+
+const CardService = ({ item, setselectService }) => {
+    const { name, label, price, img } = item
+    return (
+        <Button pv={12} ph={12} radius={12} mh={0} mv={0} style={{ backgroundColor: '#FFF', flexGrow: 1, }} onPress={() => { setselectService(item) }} >
+                <Column>
+                    <Image source={img} style={{ width: 76, height: 76, borderRadius: 8, marginRight: 12, }} />
+                    <Column style={{ justifyContent: 'center', }}>
+                        <Column style={{ height: 12, }} />
+                        <Title size={16}>{name}</Title>
+                        <Column style={{ height: 6, }} />
+                        <Label size={14}>{label}</Label>
+                        <Column style={{ height: 12, }} />
+                    </Column>
+                </Column>
+        </Button>
     )
 }
 
 
 
-const ItemAlternative = ({ item }) => {
+
+
+/**
+ * 
+ * const images = [
+    'https://thoseoldpets.co.uk/wp-content/uploads/2022/08/img_1899-2-1.png',
+    'https://thoseoldpets.co.uk/wp-content/uploads/2022/08/img_1899-2-1.png',
+    'https://thoseoldpets.co.uk/wp-content/uploads/2022/08/img_1899-2-1.png'
+];
+ * const ItemAlternative = ({ item }) => {
     const { color, font, margin } = useTheme()
     const { name } = item
 
@@ -182,16 +275,6 @@ const ItemAlternative = ({ item }) => {
 }
 
 
-
-
-const images = [
-    'https://thoseoldpets.co.uk/wp-content/uploads/2022/08/img_1899-2-1.png',
-    'https://thoseoldpets.co.uk/wp-content/uploads/2022/08/img_1899-2-1.png',
-    'https://thoseoldpets.co.uk/wp-content/uploads/2022/08/img_1899-2-1.png'
-];
-
-/**
- * 
                 <Row style={{ paddingHorizontal: margin.h, justifyContent: 'space-between', alignItems: 'center', paddingVertical: 16, }}>
                     <Pressable onPress={() => { navigation.goBack() }} style={{ backgroundColor: '#fff', width: 70, height: 36, borderRadius: 100, justifyContent: 'center', alignItems: 'center', }}>
                         <ArrowLeft color="#242424" />
