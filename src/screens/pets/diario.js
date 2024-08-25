@@ -17,6 +17,7 @@ export default function PetsDiarioScreen({ navigation, route }) {
     const { color, margin } = useTheme();
     const id = route.params?.id ? route.params?.id : 37;
     const pet = route.params?.pet ? route.params?.pet : { "age": 3, "avatar": "/admin/imagens/pets/pets/1722341553_Imagem_do_.jpg", "banhos": 4, "bio": null, "consultas": 1, "id": 37, "id_pet_raca": 187, "img": "https://app.aocto.com//admin/imagens/pets/pets/1722341553_Imagem_do_.jpg", "name": "Amor", "nascimento": "2021-05-20 00:00:00", "race": "Shih tzu", "tosas": 0 };
+    
     const [loading, setloading] = useState();
     const [data, setdata] = useState();
     const [page, setpage] = useState();

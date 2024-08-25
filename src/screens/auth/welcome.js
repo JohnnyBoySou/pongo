@@ -16,9 +16,13 @@ export default function WelcomeScreen({ navigation, route }) {
                     setTimeout(() => {
                         navigation.navigate('Tabs')
                     }, 3000)
+                }else{
+                    setname('Visitante')
+                    navigation.navigate('Onboarding')
                 }
             } catch (error) {
                 console.log(error)
+                setname('Visitante')
             }
         }
         

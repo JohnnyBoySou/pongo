@@ -13,33 +13,10 @@ export default function VillaPongoScreen({ navigation, }) {
                 <Column>
 
                     <TopMenu />
-                    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ marginTop: 12, }}>
-                        <Column style={{ width: 28, }} />
-                        <Row style={{ backgroundColor: '#FFF',borderRadius: 16, paddingHorizontal: 20, paddingVertical: 20, justifyContent: 'center', alignItems: 'center', }}>
-                            <Column>
-                                <Title>Compre na loja</Title>
-                                <Label>Lorem ipsum</Label>
-                                <Label>Lorem ipsum</Label>
-                                <Label>Lorem ipsum</Label>
-                            </Column>
-                            <Image source={require('@imgs/villa1.png')} style={{ width: 100, height: 100, objectFit: 'contain', marginLeft: 12, }} />
-                        </Row>
-                        <Row style={{  backgroundColor: '#FFF', borderRadius: 16, paddingHorizontal: 20, paddingVertical: 20, marginHorizontal: 12, justifyContent: 'center', alignItems: 'center', }}>
-                            <Image source={require('@imgs/villa2.png')} style={{ width: 100, height: 100, objectFit: 'contain', marginRight: 12, }} />
-                            <Column>
-                                <Title>Compre na loja</Title>
-                                <Label>Lorem ipsum</Label>
-                                <Label>Lorem ipsum</Label>
-                                <Label>Lorem ipsum</Label>
-                            </Column>
-                        </Row>
-                        <Column style={{width: 20, }} />
-                    </ScrollView>
-
                     <Column mh={margin.h} mv={20}>
-                        <Title size={18}>Serviços</Title>
+                        <Title size={26}>Serviços</Title>
                         <FlatList
-                            style={{ marginTop: 6, }}
+                            style={{ marginTop: 20, }}
                             data={data}
                             renderItem={({ item }) => <Card item={item} />}
                             keyExtractor={item => item.id}
@@ -56,17 +33,17 @@ export default function VillaPongoScreen({ navigation, }) {
 
 const Card = ({ item }) => {
     const { color, font, margin } = useTheme();
-    const { name, time, price, img } = item
+    const { name, img } = item
     const navigation = useNavigation()
     return (
-        <Button pv={12} ph={12} radius={12} mh={0} mv={6} style={{  backgroundColor: '#FFF', }} onPress={() => { navigation.navigate(item.screen) }} >
+        <Button pv={12} ph={12} radius={12} mh={0} mv={12} style={{  backgroundColor: '#FFF', }} onPress={() => { navigation.navigate(item.screen) }} >
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
                 <Row>
-                    <Image style={{ width: 46, height: 46, backgroundColor: '#d7d7d7', borderRadius: 8, marginRight: 12, }} />
+                    <Image style={{ width: 72, height: 72, borderRadius: 8, marginRight: 12, }} source={img}/>
                     <Column style={{ justifyContent: 'center', }}>
                         <Title size={16}>{name}</Title>
                         <Column style={{ height: 4, }} />
-                        <Label size={14}>{time}</Label>
+                        <Label size={14}>Clique para visualizar</Label>
                     </Column>
                 </Row>
                 <Column>
@@ -80,22 +57,22 @@ const data = [
     {
         name: 'Hotel',
         time: 'Tempo de duração',
-        id: 2,
-        img: 'Hotel',
+        id: 1,
+        img:  require('@imgs/hotel.png'),
         screen: 'Hotel',
     },
     {
         name: 'Day use',
         time: 'Tempo de duração',
         id: 2,
-        img: '',
+        img:  require('@imgs/day use.png'),
         screen: 'DayUse',
     },
     {
         name: 'Escola',
         time: 'Tempo de duração',
-        id: 2,
-        img: '',
+        id: 3,
+        img:  require('@imgs/escola.png'),
         screen: 'School',
     },
 

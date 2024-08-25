@@ -6,11 +6,10 @@ import { FlatList } from 'react-native-gesture-handler';
 //components
 import TopMenu from '@components/Header/topmenu';
 import TabBar from '@components/TabBar';
-import { formatDateTime } from '@hooks/utils';
+import { formatDateTime, formatCurrency } from '@hooks/utils';
 
 //API
 import { listServices } from '@api/request/services';
-import { useNavigation } from '@react-navigation/native';
 import { servicesData } from '@api/data/services';
 import { ArrowLeft } from 'lucide-react-native';
 
@@ -20,45 +19,48 @@ export default function ServicesScreen({ navigation, }) {
 
     const [loading, setloading] = useState();
     const [page, setpage] = useState(1);
-    const [selectService, setselectService] = useState('');
+    const [selectService, setselectService] = useState();
 
     const [grooming, setgrooming] = useState();
     const [vet, setvet] = useState();
     const [hospitality, sethospitality] = useState();
     const [escola, setescola] = useState();
+    const [creche, setcreche] = useState();
 
     const [groomingTypes, setgroomingTypes] = useState();
     const [vetTypes, setvetTypes] = useState();
     const [hotelTypes, sethotelTypes] = useState();
     const [escolaTypes, setescolaTypes] = useState();
+    const [crecheTypes, setcrecheTypes] = useState();
 
     useEffect(() => {
         const fecthData = async () => {
             setloading(true)
             try {
                 const res = await listServices(page)
+                const extractAndFormatData = (data) => {
+                    return data ? Array.from(new Set(data.map(item => `${item.id_service}-${item.name}`)))
+                        .map(key => ({ id: parseInt(key.split('-')[0]), name: key.split('-')[1] }))
+                        : [];
+                };
 
-                const dataGrooming = res.dadosgroomings?.data
-                const typesGrooming = Array.from(new Set(dataGrooming.map(item => `${item.id_service}-${item.name}`))).map(key => ({ id: parseInt(key.split('-')[0]), name: key.split('-')[1] }));
+                const dataGrooming = res.dadosgroomings?.data;
+                const dataVet = res.dadosvet?.data;
+                const dataHotel = res.dadospethospitalities?.data;
+                const dataEscola = res.dadosescolapacotes?.data;
+                const dataCreche = res.dadoscreche?.data;
 
-                const dataVet = res.dadosvet?.data
-                const typesVet = Array.from(new Set(dataVet.map(item => `${item.id_service}-${item.name}`))).map(key => ({ id: parseInt(key.split('-')[0]), name: key.split('-')[1] }));
+                setgrooming(dataGrooming);
+                setvet(dataVet);
+                sethospitality(dataHotel);
+                setescola(dataEscola);
+                setcreche(dataCreche);
 
-                const dataHotel = res.dadospethospitalities?.data
-                const typesHotel = Array.from(new Set(dataHotel.map(item => `${item.id_service}-${item.name}`))).map(key => ({ id: parseInt(key.split('-')[0]), name: key.split('-')[1] }));
-
-                const dataEscola = res.dadosescolapacotes?.data
-                const typesEscola = Array.from(new Set(dataEscola.map(item => `${item.id_service}-${item.name}`))).map(key => ({ id: parseInt(key.split('-')[0]), name: key.split('-')[1] }));
-
-                setgrooming(dataGrooming)
-                setvet(dataVet)
-                sethospitality(dataHotel)
-                setescola(dataEscola)
-
-                setgroomingTypes(typesGrooming)
-                setvetTypes(typesVet)
-                sethotelTypes(typesHotel)
-                setescolaTypes(typesEscola)
+                setcrecheTypes(extractAndFormatData(dataCreche));
+                setgroomingTypes(extractAndFormatData(dataGrooming));
+                setvetTypes(extractAndFormatData(dataVet));
+                sethotelTypes(extractAndFormatData(dataHotel));
+                setescolaTypes(extractAndFormatData(dataEscola));
 
             } catch (error) {
                 console.log(error)
@@ -72,7 +74,7 @@ export default function ServicesScreen({ navigation, }) {
 
     const handleFilter = (item) => {
         if (item == 'tudo') {
-            setfilter({name: 'Tudo', id: 0,})
+            setfilter({ name: 'Tudo', id: 0, })
             setfilteredData()
             return
         }
@@ -80,10 +82,9 @@ export default function ServicesScreen({ navigation, }) {
         const data = selectService?.name == 'Grooming' ? grooming : selectService?.name == 'Veterinario' ? vet : selectService?.name == 'Hotel' ? hospitality : selectService?.name == 'Escola' ? escola : []
         setfilteredData(data.filter(i => i.id_service == item.id))
     }
-
-    const data = filteredData ? filteredData : selectService?.name == 'Grooming' ? grooming : selectService?.name == 'Veterinario' ? vet : selectService?.name == 'Hotel' ? hospitality : selectService?.name == 'Escola' ? escola : []
-    const types = selectService?.name == 'Grooming' ? groomingTypes : selectService?.name == 'Veterinario' ? vetTypes : selectService?.name == 'Hotel' ? hotelTypes : selectService?.name == 'Escola' ? escolaTypes : []
-    const [filter, setfilter] = useState({name: 'Tudo', id: 0,});
+    const data = filteredData ? filteredData : selectService?.name == 'Grooming' ? grooming : selectService?.name == 'Veterinario' ? vet : selectService?.name == 'Hotel' ? hospitality : selectService?.name == 'Escola' ? escola : selectService?.name == 'Day use' ? creche : []
+    const types = selectService?.name == 'Grooming' ? groomingTypes : selectService?.name == 'Veterinario' ? vetTypes : selectService?.name == 'Hotel' ? hotelTypes : selectService?.name == 'Escola' ? escolaTypes : selectService?.name == 'Day use' ? crecheTypes : []
+    const [filter, setfilter] = useState({ name: 'Tudo', id: 0, });
 
     return (
         <Main >
@@ -93,16 +94,16 @@ export default function ServicesScreen({ navigation, }) {
                 {selectService ?
                     <Column>
 
-                        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 6 }}>
-                            <Button onPress={() => { setselectService(); }} ph={1} pv={1} style={{ justifyContent: 'center', alignItems: 'center', width: 40, height: 40, marginLeft: 28, marginRight: 8,}} bg="#fff">
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 12 }}>
+                            <Button onPress={() => { setselectService(); handleFilter('tudo'); }} ph={1} pv={1} style={{ justifyContent: 'center', alignItems: 'center', width: 40, height: 40, marginLeft: 28, }} bg="#fff">
                                 <ArrowLeft size={20} color={color.label} />
                             </Button>
 
-                            <Button onPress={() => { handleFilter('tudo');}} style={{ backgroundColor: filter?.id == 0 ? color.sc.sc3 : 'transparent', }} ph={15} pv={10}>
+                            <Button onPress={() => { handleFilter('tudo'); }} style={{ backgroundColor: filter?.id == 0 ? color.sc.sc3 : color.off, }} ph={15} pv={10}>
                                 <LabelBT size={14} style={{ textAlign: 'center', color: filter?.id == 0 ? '#fff' : color.label, }}>Tudo</LabelBT>
                             </Button>
                             {types?.map((item, index) => (
-                                <Button key={index} onPress={() => { handleFilter(item) }} style={{ backgroundColor: filter?.id == item?.id ? color.sc.sc3 : 'transparent', }} ph={15} pv={10}>
+                                <Button key={index} onPress={() => { handleFilter(item) }} style={{ backgroundColor: filter?.id == item?.id ? color.sc.sc3 : color.off, }} ph={15} pv={10}>
                                     <LabelBT size={14} style={{ textAlign: 'center', color: filter?.id == item?.id ? '#fff' : color.label, }}>{item.name}</LabelBT>
                                 </Button>
                             ))}
@@ -116,10 +117,11 @@ export default function ServicesScreen({ navigation, }) {
                                     keyExtractor={item => item.id}
                                     windowSize={4}
                                     updateCellsBatchingPeriod={100}
+                                    contentContainerStyle={{ rowGap: 12, }}
                                     maxToRenderPerBatch={4}
                                     initialNumToRender={4}
                                     ListEmptyComponent={() => <Label size={16} style={{ textAlign: 'center', marginVertical: 60 }}>Nenhum resultado encontrado.</Label>}
-                                    renderItem={({ item }) => <Card item={item} navigation={navigation} type={selectService.type} />}
+                                    renderItem={({ item }) => <Card item={item} navigation={navigation} type={selectService.type} selectService={selectService} />}
                                 />}
                         </Column>
 
@@ -138,9 +140,7 @@ export default function ServicesScreen({ navigation, }) {
                             showsVerticalScrollIndicator={false}
                             numColumns={2}
                         />
-                        <Button style={{ backgroundColor: color.pr.pr1, }} pv={16} marginTop={24} marginBottom={24}>
-                            <LabelBT style={{ color: color.light, textAlign: 'center' }}>Solicitar novo serviço</LabelBT>
-                        </Button>
+                   
                         <Column style={{ height: 100 }} />
                     </Column>}
             </Scroll>
@@ -150,9 +150,9 @@ export default function ServicesScreen({ navigation, }) {
 }
 
 
-const Card = ({ item, navigation, type }) => {
-    const { color, font, margin } = useTheme()
-    const { name, id, img, status, criado_em, entrada, payment, value, pet, } = item
+const Card = ({ item, navigation, type, selectService }) => {
+    const { margin, color, font } = useTheme()
+    const { name, id, img, status, criado_em, entrada, payment, value, pet, check_in, check_out } = item
 
     const types = [
         {
@@ -177,17 +177,133 @@ const Card = ({ item, navigation, type }) => {
         }
     ];
     const selectStatus = types.find(i => i.name == status)
+
+    if (type == 'escola_pacote') {
+        return (
+            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={2} pv={1} ph={1}>
+                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', marginBottom: 12 }}>
+                    <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
+                        <Image
+                            source={selectService.img}
+                            style={{ width: 62, height: 80, borderRadius: 12, objectFit: 'contain' }} />
+                        <Column mh={12} >
+                            <Title size={14} style={{ marginBottom: 3 }}>{item?.name}</Title>
+                            <Label size={10} style={{ marginBottom: 8 }}>Pedido #{id}</Label>
+                            <Label size={14} >{formatCurrency(value)}</Label>
+                        </Column>
+                        <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
+                            <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
+                                {status ? status : 'Não informado'}
+                            </Title>
+                        </Column>
+                    </Row>
+                    <Column style={{ marginTop: 12 }}>
+                        <Label size={14} marginBottom={6}>Check-in: {formatDateTime(check_in)}</Label>
+                        <Label size={14} marginBottom={6}>Check-out: {formatDateTime(check_out)}</Label>
+                        <Label size={14} marginBottom={6}>Colaborador responsável: {item?.colaborador}</Label>
+                        <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
+                    </Column>
+                </Column>
+            </Button>
+        )
+    }
+    else if (type == 'grooming') {
+        return (
+            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={2} pv={1} ph={1}>
+                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', marginBottom: 12 }}>
+                    <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
+                        <Image
+                            source={selectService.img}
+                            style={{ width: 62, height: 80, borderRadius: 12, objectFit: 'contain' }} />
+                        <Column mh={12} >
+                            <Title size={14} style={{ marginBottom: 3 }}>{item?.name}</Title>
+                            <Label size={10} style={{ marginBottom: 8 }}>Pedido #{id}</Label>
+                            <Label size={14} >{formatCurrency(value)}</Label>
+                        </Column>
+                        <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
+                            <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
+                                {status ? status : 'Não informado'}
+                            </Title>
+                        </Column>
+                    </Row>
+                    <Column style={{ marginTop: 12 }}>
+                        <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
+                        <Label size={14} marginBottom={6}>Agendamento: {formatDateTime(entrada)}</Label>
+                        <Label size={14} marginBottom={6}>Colaborador responsável: {item?.colaborador}</Label>
+                        <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
+                    </Column>
+                </Column>
+            </Button>
+        )
+    }
+    else if (type == 'vet') {
+        return (
+            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={2} pv={1} ph={1}>
+                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', marginBottom: 12 }}>
+                    <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
+                        <Image
+                            source={selectService.img}
+                            style={{ width: 62, height: 80, borderRadius: 12, objectFit: 'contain' }} />
+                        <Column mh={12} >
+                            <Title size={14} style={{ marginBottom: 3 }}>{item?.name}</Title>
+                            <Label size={10} style={{ marginBottom: 8 }}>Pedido #{id}</Label>
+                            <Label size={14} >{formatCurrency(value)}</Label>
+                        </Column>
+                        <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
+                            <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
+                                {status ? status : 'Não informado'}
+                            </Title>
+                        </Column>
+                    </Row>
+                    <Column style={{ marginTop: 12 }}>
+                        <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
+                        <Label size={14} marginBottom={6}>Agendamento: {formatDateTime(entrada)}</Label>
+                        <Label size={14} marginBottom={6}>Colaborador responsável: {item?.colaborador}</Label>
+                        <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
+                    </Column>
+                </Column>
+            </Button>
+        )
+    }
+    else if (type == 'hospitalitie') {
+        return (
+            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={2} pv={1} ph={1}>
+                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', marginBottom: 12 }}>
+                    <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
+                        <Image
+                            source={selectService.img}
+                            style={{ width: 62, height: 80, borderRadius: 12, objectFit: 'contain' }} />
+                        <Column mh={12} >
+                            <Title size={14} style={{ marginBottom: 3 }}>{item?.name}</Title>
+                            <Label size={10} style={{ marginBottom: 8 }}>Pedido #{id}</Label>
+                            <Label size={14} >{formatCurrency(value)}</Label>
+                        </Column>
+                        <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
+                            <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
+                                {status ? status : 'Não informado'}
+                            </Title>
+                        </Column>
+                    </Row>
+                    <Column style={{ marginTop: 12 }}>
+                        <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
+                        <Label size={14} marginBottom={6}>Check-in: {formatDateTime(check_in)}</Label>
+                        <Label size={14} marginBottom={6}>Check-out: {formatDateTime(check_out)}</Label>
+                    </Column>
+                </Column>
+            </Button>
+        )
+    }
     return (
-        <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, }) }} radius={2} pv={1} ph={1}>
+        <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={2} pv={1} ph={1}>
             <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', marginBottom: 12 }}>
-                <Row style={{ alignItems: 'flex-start', }}>
+                <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
                     <Image
-                        source={{ uri: img, }}
-                        style={{ width: 62, height: 80, borderRadius: 12, borderWidth: 0.8, borderColor: '#ecebeb', objectFit: 'contain' }} />
+                        source={selectService.img}
+                        style={{ width: 62, height: 80, borderRadius: 12, objectFit: 'contain' }} />
                     <Column mh={12} >
-                        <Label style={{ fontSize: 14, color: '#434343', fontWeight: 700, marginBottom: 3 }}>{name}</Label>
-                        <Label style={{ fontSize: 10, color: '#858585', fontWeight: 200, marginBottom: 8 }}>Pedido #{id}</Label>
-                        <Label style={{ fontSize: 14, color: '#858585', fontWeight: 600 }}>R$ {value},00</Label>
+                        <Title size={14} style={{ marginBottom: 3 }}>{item?.name}</Title>
+                        <Label size={10} style={{ marginBottom: 8 }}>Pedido #{id}</Label>
+                        <Label size={14} >{formatCurrency(value)}</Label>
                     </Column>
                     <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
                         <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
@@ -198,18 +314,11 @@ const Card = ({ item, navigation, type }) => {
                 <Column style={{ marginTop: 12 }}>
                     <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
                     <Label size={14} marginBottom={6}>Agendamento: {formatDateTime(entrada)}</Label>
-                    <Label size={14} marginBottom={6}>Pagamento: {payment?.type ? payment?.type : 'Não informado'}, {payment?.vezes > 1 ? 'x' + payment?.vezes : 'à vista'}</Label>
-                    <Row>
-                        <Image source={{ uri: pet?.img }} style={{ width: 54, height: 54, borderRadius: 100, objectFit: 'conver' }} />
-                        <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
-                    </Row>
+                    <Label size={14} marginBottom={6}>Check-in: {formatDateTime(check_in)}</Label>
+                    <Label size={14} marginBottom={6}>Check-out: {formatDateTime(check_out)}</Label>
+                    <Label size={14} marginBottom={6}>Colaborador responsável: {item?.colaborador}</Label>
+                    <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
                 </Column>
-                <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 16 }} >
-                    <Row>
-
-                    </Row>
-                    <Title style={{ fontSize: 12, lineHeight: 15, color: '#858585', fontWeight: 500 }}>{pet?.item} item: R$ {value},00</Title>
-                </Row>
             </Column>
         </Button>
 
