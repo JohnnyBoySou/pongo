@@ -218,7 +218,7 @@ export default function AccountDetailsScreen({ navigation }) {
                     </Button>
 
                 </Column>
-                <Column style={{ height: 120, }} />
+                <Column style={{ height: 160, }} />
             </Scroll>
             <TabBar />
             <Button onPress={handleSave} disabled={loading} style={{ height: 52, borderRadius: 100, position: 'absolute', alignSelf: 'center', bottom: 100, paddingHorizontal: 16, backgroundColor: color.sc.sc1, justifyContent: 'center', alignItems: 'center', }}>

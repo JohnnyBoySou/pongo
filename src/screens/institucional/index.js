@@ -1,11 +1,8 @@
-import React, { useContext, useState } from 'react';
-import { ScrollView, Image, Pressable } from 'react-native';
-import { Main, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT } from '@theme/global';
+import React, { useContext } from 'react';
+import { Image } from 'react-native';
+import { Main, Scroll, Column, Title, Row, Button } from '@theme/global';
 import { ThemeContext } from 'styled-components/native';
-import { Apple } from 'lucide-react-native';
-import Header from '@components/Header';
 import Swiper from 'react-native-swiper';
-import Input from '@components/Forms/input';
 import TopMenu from '@components/Header/topmenu';
 import TabBar from '@components/TabBar';
 
@@ -13,57 +10,52 @@ export default function InstitucionalScreen({ navigation, }) {
 
     const { color, font, margin } = useContext(ThemeContext);
 
-    const [name, setname] = useState();
-    const [tel, settel] = useState();
-    const [type, settype] = useState('Pongo');
-
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
                 <TopMenu title="Conheça mais" />
                 <Column style={{ height: 12, }} />
                 <Carrossel data={imgs} />
-                <Column mh={margin.h}>
-                    <Column style={{ height: 20, }} />
-                    <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => { navigation.navigate('InstitucionalVisita') }} >
+                <Column mh={margin.h} mv={30} style={{ rowGap: 24, }}>
+                    <Button radius={16} bg="#fff" pv={10} ph={10} onPress={() => { navigation.navigate('InstitucionalVisita') }} >
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-solicitar-visita.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
                             <Title>Solicitar Visita</Title>
                         </Row>
-                    </Pressable>
+                    </Button>
 
-                    <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => { navigation.navigate('InstitucionalAbout') }} >
+                    <Button radius={16} bg="#fff" pv={10} ph={10} onPress={() => { navigation.navigate('InstitucionalAbout') }} >
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-sobre-nos.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
                             <Title>Sobre nós</Title>
                         </Row>
-                    </Pressable>
+                    </Button>
 
-                    <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => { navigation.navigate('InstitucionalRealizacoes') }} >
+                    <Button radius={16} bg="#fff" onPress={() => { navigation.navigate('InstitucionalRealizacoes') }}  pv={10} ph={10}>
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-realizacoes.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
                             <Title>Realizações</Title>
                         </Row>
-                    </Pressable>
+                    </Button>
 
-                    <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => { navigation.navigate('InstitucionalLocal') }} >
+                    <Button radius={16} bg="#fff" pv={10} ph={10} onPress={() => { navigation.navigate('InstitucionalLocal') }} >
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-onde-estamos.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
                             <Title>Onde estamos</Title>
                         </Row>
-                    </Pressable>
+                    </Button>
 
-                    <Pressable style={{ backgroundColor: '#fff', borderRadius: 20, borderWidth: 1, borderColor: '#D9D9D9', marginBottom: 8 }} onPress={() => { navigation.navigate('InstitucionalGaleria') }} >
+                    <Button radius={16} bg="#fff" pv={10} ph={10} onPress={() => { navigation.navigate('InstitucionalGaleria') }} >
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-galeria.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
                             <Title>Galeria</Title>
                         </Row>
-                    </Pressable>
+                    </Button>
 
 
 
                 </Column>
-                <Column style={{ height: 50 }} />
+                <Column style={{ height: 120 }} />
             </Scroll>
             <TabBar />
         </Main>

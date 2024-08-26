@@ -1,40 +1,78 @@
-import React, { useContext, } from 'react';
-import { Main, Scroll, Title, Row, Column, useTheme, Label, Image, Button, ButtonPrimary, LabelBT } from '@theme/global';
+import React, { useContext, useEffect, useState } from 'react';
+import { Main, Scroll, Title, Row, Column, useTheme, Label, Image, Button, Loader, LabelBT, ButtonPR, ButtonPrimary } from '@theme/global';
 import TopMenu from '@components/Header/topmenu';
-import { Linking, Text } from 'react-native';
+import { listUser } from '@api/request/auth';
+import { formatDateTime } from '@hooks/utils';
+import { getPreferences } from '@hooks/preferences';
 
 export default function AccountScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
 
-    const user = {
-        name: 'Maria da Silva',
-        email: 'wSb0A@example.com',
-        pets: 2,
-        day_use: '1 dia',
-        desconto: '5%'
+
+    const [user, setuser] = useState();
+    const [loading, setloading] = useState();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setloading(true)
+            try {
+                const res = await listUser();
+                setuser(res);
+            } catch (error) {
+
+            } finally {
+                setloading(false)
+            }
+        }
+        fetchData()
+    }, [])
+
+    const handleChat = async () => {
+        try {
+            const res = await getPreferences()
+            if (res?.token) {
+                navigation.navigate('ChatNew')
+            }
+            else {
+                navigation.navigate('AuthLogin')
+            }
+        } catch (error) {
+            return
+        }
     }
 
     return (
         <Main >
 
             <Scroll>
-                <TopMenu search={false} back={false}/>
-                <Column mh={margin.h} mv={24} style={{ paddingVertical: 24, paddingHorizontal: 20, borderRadius: 18, backgroundColor: color.light, }}>
-                    <Title>Olá, {user?.name}</Title>
-                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 12, }}>
-                        <Label size={14}>Pets cadastrados:</Label>
-                        <Label size={14}>{user?.pets}</Label>
-                    </Row>
-                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 4, }}>
-                        <Label size={14}>Day use disponíveis:</Label>
-                        <Label size={14}>{user?.day_use}</Label>
-                    </Row>
+                <TopMenu search={false} back={false} />
 
-                    {user?.desconto && (
-                        <Label size={14} style={{ marginTop: 12, }}>Desconto de {user?.desconto} em todos os produtos PONGO.</Label>
-                    )}
+                {loading ? <Loader /> : user ? <Column mh={margin.h} mv={24} style={{ paddingVertical: 24, paddingHorizontal: 20, borderRadius: 18, backgroundColor: color.light, }}>
+                    <Title>Olá, {user?.nome}</Title>
+                    <Column style={{ rowGap: 6, marginTop: 10, }}>
+                        <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                            <Label size={14}>Pets cadastrados: </Label>
+                            <Label size={14}>{user?.pets?.length}</Label>
+                        </Row>
+                        <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                            <Label size={14}>Quantidade de serviços utilizados: </Label>
+                            <Label size={14}>{user?.totalservico}</Label>
+                        </Row>
+                        <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                            <Label size={14}>Data de cadastro: </Label>
+                            <Label size={14}>{formatDateTime(user?.criado_em)}</Label>
+                        </Row>
+                    </Column>
+                </Column> :
+                    <Column mh={margin.h} mv={24} style={{ paddingVertical: 24, paddingHorizontal: 20, borderRadius: 18, backgroundColor: color.light, }}>
+                        <Title>Olá, Visitante!</Title>
+                        <Column style={{ height: 6, }} />
+                        <Label>Faça login para acessar a sua conta.</Label>
+                        <Column style={{ height: 12, }} />
+                        <ButtonPrimary label="Fazer login" onPress={() => { navigation.navigate('AuthLogin') }} />
+                    </Column>
 
-                </Column>
+                }
 
                 <Column mh={margin.h} style={{ rowGap: 22, marginVertical: 22, }}>
 
@@ -63,11 +101,14 @@ export default function AccountScreen({ navigation, }) {
                         </Row>
                     </Button>
                 </Column>
-                <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor: '#918C8B', }}  pv={16} ph={1} mh={margin.h}>
-                    <LabelBT color="#918C8B" style={{ textAlign: 'center',}}>Iniciar conversa</LabelBT>
+                <Button onPress={handleChat} style={{ borderWidth: 2, borderColor: '#918C8B', }} pv={16} ph={1} mh={margin.h}>
+                    <LabelBT color="#918C8B" style={{ textAlign: 'center', }}>Iniciar conversa</LabelBT>
+                </Button>
+                <Button onPress={() => navigation.navigate('AuthLogin')} bg={color.red+10} pv={16} ph={1} mh={margin.h} mv={25}>
+                    <LabelBT color={color.red} style={{ textAlign: 'center', }}>Sair</LabelBT>
                 </Button>
 
-                <Column style={{height: 30, }} />
+                <Column style={{ height: 30, }} />
             </Scroll>
         </Main>
     )

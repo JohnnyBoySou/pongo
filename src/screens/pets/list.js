@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { Main, Scroll, Column, Label, Title, Row, useTheme, Image, Button, Back, Loader, } from '@theme/global'
+import { Main, Scroll, Column, Label, Title, Row, useTheme, Image, Button, Back, Loader, LabelBT } from '@theme/global'
 import { FlatList } from 'react-native-gesture-handler';
 //components
 import TopMenu from '@components/Header/topmenu';
@@ -9,7 +9,6 @@ import { listPets } from '@api/request/pets';
 import TabBar from '@components/TabBar';
 
 export default function PetsListScreen({ navigation, }) {
-    const { color, font, margin } = useTheme();
 
     const [data, setdata] = useState([]);
     const [loading, setloading] = useState();
@@ -29,23 +28,36 @@ export default function PetsListScreen({ navigation, }) {
         fecthData()
     }, []);
 
+    const [filteredData, setfilteredData] = useState();
+
+    const [value, setvalue] = useState();
+
+    const handleSearch = () => {
+        const values = data.filter((item) => {
+            if (item.name.toLowerCase().includes(value.toLowerCase())) {
+                return item
+            }
+        })
+        setfilteredData(values)
+    }
 
     return (
         <Main>
-            <TopMenu />
-            <Title align="center" style={{ marginVertical: 30, }}>Selecione o perfil do Pet</Title>
-            {loading ? <Loader /> :
-                <FlatList
-                    data={data}
-                    renderItem={({ item }) => <Pet pet={item} navigation={navigation} />}
-                    keyExtractor={item => item.id}
-                    showsVerticalScrollIndicator={false}
-                    numColumns={2}
-                    ListEmptyComponent={() => <Label align="center" style={{ marginVertical: 50, }}>Nenhum pet encontrado.</Label>}
-                    columnWrapperStyle={{alignSelf: 'center', }}
-                    contentContainerStyle={{ marginTop: 20, }}
-                />}
+            <Scroll>
 
+                <TopMenu handleSearch={handleSearch} value={value} setvalue={setvalue}/>
+                <Title align="center" style={{ marginVertical: 30, }}>Escolha o perfil do Pet</Title>
+                {loading ? <Loader /> :
+                    <FlatList
+                        data={filteredData ? filteredData : data}
+                        renderItem={({ item }) => <Pet pet={item} navigation={navigation} />}
+                        keyExtractor={item => item.id}
+                        showsVerticalScrollIndicator={false}
+                        ListEmptyComponent={() => <Label align="center" style={{ marginVertical: 50, }}>Nenhum pet encontrado.</Label>}
+                        contentContainerStyle={{rowGap: 20, }}
+                    />}
+
+            </Scroll>
             <TabBar />
         </Main>
     )
@@ -53,14 +65,22 @@ export default function PetsListScreen({ navigation, }) {
 
 
 const Pet = ({ pet, navigation }) => {
+    const { color } = useTheme()
     const avatar = pet?.img ? { uri: pet?.img } : require('@imgs/img_default.png')
     return (
-        <Button onPress={() => { navigation.navigate('PetsProfile', { id: pet?.id, }) }} radius={12} pv={12} ph={12}>
-            <Column style={{}}>
-                <Image source={avatar} bg="#fff" style={{ width: 110, height: 110, objectFit: 'cover', marginTop: 10, borderRadius: 100, }} />
-                <Title size={18} align="center" style={{ marginTop: 10, }}>{pet?.name}</Title>
-                <Label size={16} align="center" style={{ marginTop: 2, }}>{pet?.age} ano{pet?.age > 1 ? 's' : ''}</Label>
-            </Column>
+        <Button onPress={() => { navigation.navigate('PetsProfile', { id: pet?.id, }) }} radius={12} pv={12} ph={18} bg="#fff" mh={28}>
+                <Row style={{ justifyContent: 'space-between', alignItems: 'center',  }}>
+                    <Row style={{ justifyContent: 'center', alignItems: 'center',  }}>
+                    <Image source={avatar} bg="#fff" style={{ width: 64, height: 64, objectFit: 'cover',  borderRadius: 100, }} />
+                    <Column style={{ marginLeft: 14, }}>
+                        <Title size={18} >{pet?.name}</Title>
+                        <Label size={16} style={{ marginTop: 4, }}>{pet?.age} ano{pet?.age > 1 ? 's' : ''}</Label>
+                    </Column>
+                    </Row>
+                    <Button bg={color.sc.sc3+30} pv={8}>
+                        <LabelBT size={16} color={color.sc.sc3}>Escolher</LabelBT>
+                    </Button>
+                </Row>
         </Button>
     )
 }

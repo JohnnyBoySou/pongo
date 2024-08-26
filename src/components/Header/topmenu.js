@@ -1,4 +1,4 @@
-import { CalendarCheck, CircleHelp, CircleUserRound, FileClock, Heart, Hotel, Menu, PackageCheck, School, Search, Settings, ShoppingCart, Store, X } from 'lucide-react-native';
+import { Bell, CalendarCheck, CircleHelp, CircleUserRound, FileClock, Heart, Hotel, Menu, PackageCheck, School, Search, Settings, ShoppingCart, Store, X } from 'lucide-react-native';
 import { Column, Row, Title, SCREEN_WIDTH, useTheme, Button, SCREEN_HEIGHT, SubLabel, Image } from '@theme/global';
 import { useNavigation } from '@react-navigation/native';
 import { Pressable, Text, StyleSheet, TextInput } from 'react-native';
@@ -6,11 +6,12 @@ import { useEffect, useRef, useState } from 'react';
 import SideBar from './sidebar';
 import Back from '@components/Back';
 import Animated, { FadeInRight, FadeInUp, FadeOutRight } from 'react-native-reanimated';
+import { getPreferences } from '@hooks/preferences';
 
-export default function TopMenu({ search = true, cart = false, back = true, handleSearch }) {
+export default function TopMenu({ search = true, cart = false, back = true, handleSearch, value, setvalue }) {
     const { color, margin, font } = useTheme();
     const navigation = useNavigation();
-
+    const [user, setuser] = useState();
     const [isOpen, setisOpen] = useState(true);
 
     const sidebar = useRef()
@@ -24,7 +25,6 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
         }
     }
 
-
     const getSearch = () => {
         if(handleSearch){
             searchRef.current.focus()
@@ -33,6 +33,18 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
             navigation.navigate('Search') 
         }
     }
+
+    const getAvatar = async () => {
+        try {
+            const res = await getPreferences()
+            setuser(res)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    useEffect(() => {
+        getAvatar() 
+    }, []);
 
     const [focusSearch, setfocusSearch] = useState();
     const searchRef = useRef()
@@ -44,11 +56,13 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
                         <Menu size={32} color={color.icons} strokeWidth={2} />
                     </Button>
                     <Row style={{ alignItems: 'center', columnGap: 12, }}>
-                        {cart && <Button pv={1} ph={1} onPress={() => { navigation.navigate('Cart') }} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }}>
-                            <ShoppingCart size={32} color={color.icons} strokeWidth={1.5} />
-                        </Button>}
+                        <Button pv={1} ph={1} onPress={() => { navigation.navigate('Notifications') }} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }}>
+                            <Bell size={24} color={color.icons} strokeWidth={1.5} />
+                        </Button>
                         <Button pv={1} ph={1} onPress={() => { navigation.navigate('Tabs', { screen: 'Account' }) }} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }}>
-                            <CircleUserRound size={32} color={color.icons} strokeWidth={1.5} />
+                            <Row>
+                                {user?.avatar ? <Image source={{ uri: user?.avatar }} style={{ width: 38, height: 38, borderRadius: 100, }} /> : <CircleUserRound size={32} color={color.icons} strokeWidth={1.5} />}
+                            </Row>
                         </Button>
                     </Row>
                 </Row>
@@ -66,6 +80,10 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
                                 <TextInput ref={searchRef} 
                                 onFocus={() => { setfocusSearch(true) }}
                                 onBlur={() => { setfocusSearch(false) }}
+                                disabled={handleSearch ? false : true}
+                                onChangeText={e => setvalue(e)}
+                                value={value}
+                                onSubmitEditing={handleSearch}
                                 placeholder="Pesquisar" style={{ flex: 1, fontFamily: 'Font_Medium', fontSize: 16, color: color.label, marginLeft: 12, }} />
                             </Row>
                         </Button>

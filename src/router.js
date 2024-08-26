@@ -20,6 +20,7 @@ import SearchScreen from '@screens/search/index';
 import AuthLoginScreen from '@screens/auth/login';
 import AuthRegisterScreen from '@screens/auth/register';
 import WelcomeScreen from '@screens/auth/welcome';
+import AuthLoginColaboradorScreen from '@screens/auth/login_colaborador';
 
 //INSTITUCIONAL
 import InstitucionalScreen from '@screens/institucional/index';
@@ -39,11 +40,13 @@ import PetsProfileScreen from '@screens/pets/profile';
 import PetsDiarioScreen from '@screens/pets/diario';
 import PetsStoryScreen from '@screens/pets/story';
 import AddPetScreen from '@screens/auth/addpet';
+import PetsSingleGaleriaScreen from '@screens/pets/singe_galeria';
 
 //CHAT
 import ChatListScreen from '@screens/chat/list';
 import ChatNewScreen from '@screens/chat/new';
 import ChatDetailsScreen from '@screens/chat/details';
+import ChatColaboradorListScreen from '@screens/colaborador/list';
 
 //TABS SCREEN
 import HomeScreen from '@screens/tabs/home';
@@ -82,21 +85,26 @@ import DayUseRegisterScreen from '@screens/day-use/register';
 import HotelScreen from '@screens/hotel/index';
 import HotelRegisterScreen from '@screens/hotel/register';
 
+import NotificationsScreen from '@screens/notifications/index';
+import FaqScreen from '@screens/faq/index';
+
 export default function Router() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='PetsList'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Welcome'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="ChatList" component={ChatListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatDetails" component={ChatDetailsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatNew" component={ChatNewScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="ChatColaboradorList" component={ChatColaboradorListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="PetsList" component={PetsListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="PetsProfile" component={PetsProfileScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="PetsDiario" component={PetsDiarioScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="PetsStory" component={PetsStoryScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="PetsSingleGaleria" component={PetsSingleGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="SchoolRegister" component={SchoolRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="SchoolFinish" component={SchoolFinishScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -110,7 +118,7 @@ export default function Router() {
         <Stack.Screen name="InstitucionalLocal" component={InstitucionalLocalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="InstitucionalRealizacoes" component={InstitucionalRealizacoesScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="InstitucionalGaleria" component={InstitucionalGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-        <Stack.Screen name="IntistucionalSingleGaleria" component={InstitucionalSingleGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="InstitucionalSingleGaleria" component={InstitucionalSingleGaleriaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Shop" component={ShopScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ShopSingleProduct" component={ShopSingleProductScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -119,7 +127,7 @@ export default function Router() {
         <Stack.Screen name="VillaPongo" component={VillaPongoScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Services" component={ServicesScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-        <Stack.Screen name="ServicesSingle" component={ServicesSingleScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="ServicesSingle" component={ServicesSingleScreen} options={{ ...TransitionPresets.ModalPresentationIOS , }} />
 
         <Stack.Screen name="MeusPedidos" component={MeusPedidosScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="PedidoProdutoIndividual" component={PedidoProdutoIndividualScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -127,6 +135,7 @@ export default function Router() {
         <Stack.Screen name="AuthLogin" component={AuthLoginScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="AuthRegister" component={AuthRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="AddPet" component={AddPetScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="AuthLoginColaborador" component={AuthLoginColaboradorScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Async" component={AsyncStaticScreen} options={{ ...TransitionPresets.FadeFromBottomAndroid, }} />
         <Stack.Screen name="Onboarding" component={OnboardingScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -140,6 +149,9 @@ export default function Router() {
 
         <Stack.Screen name="Hotel" component={HotelScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="HotelRegister" component={HotelRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+
+        <Stack.Screen name="Notifications" component={NotificationsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="Faq" component={FaqScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
       </Stack.Navigator>
     </NavigationContainer>

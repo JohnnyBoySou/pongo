@@ -40,7 +40,6 @@ export default function StepsRastreioServico() {
 
     return (
         <View style={styles.container}>
-            <View style={styles.stepIndicator}>
                 <StepIndicator
                     customStyles={stepIndicatorStyles}
                     stepCount={3}
@@ -48,7 +47,6 @@ export default function StepsRastreioServico() {
                     renderStepIndicator={() => <Column></Column>}
                     currentPosition={0}
                 />
-            </View>
             <FlatList
                 style={{ flexGrow: 1 }}
                 data={dummyData.data.reverse()}

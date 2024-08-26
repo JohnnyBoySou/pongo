@@ -12,23 +12,22 @@ export const listServices = async (page = 1) => {
                 Authorization: `Bearer ${token}`,
             },
         });
-        return res.data.data
+        return res.data
     } catch (error) {
         const err = JSON.parse(error.request.response);
         throw new Error(err.message)
     }
 }
 
-export const singleService = async (id) => {
+export const singleService = async (id, tipo) => {
     const BASE_URL = await getBaseURL();
     const token = await getToken();
     try {
-        const res = await axios.get(`${BASE_URL}/servico-single/${id}`, {
+        const res = await axios.get(`${BASE_URL}/servico-single/${id}/${tipo}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
-        console.log(res.data)
         return res.data
     } catch (error) {
         const err = JSON.parse(error.request.response);

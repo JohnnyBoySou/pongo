@@ -1,14 +1,11 @@
 import React from 'react';
-import { Image, View, Text } from 'react-native';
-import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, } from '@theme/global';
+import { Image } from 'react-native';
+import { Main, Scroll, Column, Label, Title, useTheme, } from '@theme/global';
 
-import { MoveRight } from 'lucide-react-native';
 
 //Components
 import Header from '@components/Header';
 import TopMenu from '@components/Header/topmenu';
-import Swiper from 'react-native-swiper';
-import PlanosList from '@components/Planos';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -35,32 +32,31 @@ export default function InstitucionalRealizacoesScreen() {
                     <Image source={require('@imgs/extensao-da-sua-casa.png')} style={{ width: '100%', height: 270, borderRadius: 20 }} />
                 </Column>
 
+                <Column mh={margin.h} mv={margin.h} style={{ rowGap: 12, }}>
 
+                    <Title >Realizações</Title>
 
-
-                <Column mh={margin.h} mv={margin.h}>
-
-                    <Title style={{ marginBottom: 24 }}>Realizações</Title>
-
-                    <Text style={{ color: '#979797', marginBottom: 12 }}>
+                    <Label style={{ lineHeight: 18, fontSize: 14,  }}>
                         Tombado pelo Patrimônio Histórico Nacional, O Copacabana Palace é símbolo do glamour carioca.
-                    </Text>
+                    </Label>
 
-                    <Text style={{ color: '#979797', marginBottom: 12 }}>
+                    <Label style={{ lineHeight: 18, fontSize: 14,}}>
                         Localizado em frente à Praia de Copacabana, na cidade do Rio de Janeiro o hotel já foi eleito diversas vezes como o melhor hotel da América do Sul e os mais importantes prêmios mundiais de turismo.
-                    </Text>
+                    </Label>
 
-                    <Text style={{ color: '#979797', marginBottom: 12 }}>
+                    <Label style={{ lineHeight: 18, fontSize: 14, }}>
                         Pet Friendly, o Copa agora oferece nossos produtos para seus hóspedes pets!
-                    </Text>
+                    </Label>
                 </Column>
 
 
 
-                <Column mh={margin.h} style={{ marginBottom: 24 }}>
+                <Column  style={{ marginBottom: 54 }}>
                     <FlatList
                         data={images.slice(0, 4)}
                         horizontal
+                        ListHeaderComponent={() => <Column style={{ width: 28, }}/>}
+                        showsHorizontalScrollIndicator={false}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item, index }) => (
                             <Column style={{ position: 'relative', marginRight: 20 }}>

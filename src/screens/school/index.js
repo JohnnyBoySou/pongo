@@ -1,6 +1,6 @@
 import React from 'react';
-import { Image, View, Text } from 'react-native';
-import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, } from '@theme/global';
+import { Image, View } from 'react-native';
+import { Main, Scroll, Column, Label, Title, Row, useTheme, } from '@theme/global';
 
 import { MoveRight } from 'lucide-react-native';
 

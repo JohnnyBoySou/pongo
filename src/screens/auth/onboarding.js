@@ -72,7 +72,7 @@ const Screen0 = ({ color }) => {
     return (
         <Column style={{ flex: 1, marginHorizontal: 30, justifyContent: 'center', }}>
             <MotiImage from={{ opacity: 0, scale: 0, rotate: '12deg' }} animate={{ opacity: 1, scale: 1, rotate: '0deg' }} source={require('@imgs/onboarding_1.png')} style={{ width: '100%', height: 400, objectFit: 'contain', }} />
-            <Title style={{ letterSpacing: -1, fontSize: 32, lineHeight: 34, textAlign: 'center', }}>A primeira rede {'\n'}social <C color={color.sc.sc1}>para Pets</C> {'\n'}do Brasil!</Title>
+            <Title style={{ letterSpacing: -1, fontSize: 32, lineHeight: 34, textAlign: 'center', }}>Acompanhe o diário do seu Pet na Villa Pongo</Title>
         </Column>
 
     )
@@ -82,17 +82,17 @@ const Screen1 = ({ color }) => {
     return (
         <Column style={{ flex: 1, marginHorizontal: 30, justifyContent: 'center', }}>
             <MotiImage from={{ opacity: 0, scale: 0, rotate: '-12deg' }} animate={{ opacity: 1, scale: 1, rotate: '0deg' }} source={require('@imgs/onboarding_2.png')} style={{ width: '100%', height: 400, objectFit: 'contain', }} />
-            <Title style={{ letterSpacing: -1, fontSize: 32, lineHeight: 34, textAlign: 'center', }}><C color="#91A6C4">Acompanhe o {'\n'}diário</C> do seu pet {'\n'}e de pets amigos!</Title>
+            <Title style={{ letterSpacing: -1, fontSize: 32, lineHeight: 34, textAlign: 'center', }}>Acesso rápido a produtos e novidades Pongo</Title>
         </Column>
     )
-}
+}   
 
 const Screen2 = ({ color, navigation }) => {
     return (
         <Column style={{ flex: 1, marginHorizontal: 30, justifyContent: 'center', }}>
             <Animated.Image entering={FadeInDown} source={require('@imgs/onboarding_3.png')} style={{ width: '100%', height: 300, objectFit: 'contain', }} />
-            <Title style={{ letterSpacing: -1, fontSize: 28, lineHeight: 32, textAlign: 'center', }}>Monitore a <C color="#E5C8C9">agenda e {'\n'}boletim</C> do seu Pet a qualquer momento!</Title>
-            <Label style={{ letterSpacing: -0.5, fontSize: 18, lineHeight: 22, textAlign: 'center', marginTop: 10, }}>Seja bem vindo ao app da Villa Pongo, utilize seu acesso para fazer login</Label>
+            <Title style={{ letterSpacing: -1, fontSize: 28, lineHeight: 32, textAlign: 'center', }}>Atendimento em tempo real com a equipe Pongo e Villa Pongo</Title>
+            <Label style={{ letterSpacing: -0.5, fontSize: 18, lineHeight: 22, textAlign: 'center', marginTop: 10, }}>Utilize seu acesso para entrar no app ou entre como visitante.</Label>
             <Column style={{ justifyContent: 'center', alignItems: 'center', columnGap: 20, zIndex: 99, }}>
                 <Button onPress={() => { navigation.navigate('AuthLogin') }} mtop={20} bg='#918C8B' style={{ width: 240, }}>
                     <LabelBT color="#fff" align="center">Acessar conta</LabelBT>

@@ -1,15 +1,37 @@
-import { Main, Button, Column, Label, Title, Row, Image, useTheme, useNavigate } from '@theme/global';
-import { FlatList } from 'react-native-gesture-handler';
+import { useState } from 'react';
+import { Main, Button, Column, Label, Title, Row, Image, useTheme, useNavigate, LabelBT } from '@theme/global';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import TopMenu from '@components/Header/topmenu';
-import { Plus } from 'lucide-react-native';
 
-export default function ChatListScreen({ navigation, }) {
+export default function ChatColaboradorListScreen({ navigation,  route}) {
     const { color, font, margin } = useTheme();
+    const user = route.params?.user ? route.params?.user : { name: 'Carol', avatar: 'https://i.pravatar.cc/300', }
+    const filter = ['Em aberto', 'Concluídos', 'Cancelados', 'Todos']
+    const [selectFilter, setselectFilter] = useState('Em aberto');
     return (
         <Main>
-            <TopMenu search={false} cart={false}/>
             <Column mh={margin.h} mv={20}>
-                <Title size={32}>Atendimento</Title>
+                <Row style={{ justifyContent: 'space-between', alignItems: 'center',  }}>
+
+                <Title size={32}>Chats</Title>
+
+                <Row>
+                    <Column style={{ justifyContent: 'center',   }}>
+                        <Title>{user?.name}</Title>
+                        <Button pv={1} mtop={-4} onPress={() => {navigation.navigate('AuthLoginColaborador')}} >
+                            <LabelBT size={14} color={color.red}>Sair</LabelBT>
+                        </Button>
+                    </Column>
+                    <Image source={{uri: user?.avatar}} style={{width: 54, borderRadius: 100, height: 54, objectFit: 'contain'}} />
+                </Row>
+                </Row>
+            </Column>
+            <Column>
+            <ScrollView horizontal style={{  marginBottom: 20, }} contentContainerStyle={{ columnGap: 12,  }} showsHorizontalScrollIndicator={false}>
+                <Column style={{width: 10, }} />
+                {filter.map((item, index) => <Button key={index} onPress={() => { setselectFilter(item) }} radius={100} style={{ paddingHorizontal: 16, justifyContent: 'center', alignItems: 'center',  paddingVertical: 12, backgroundColor: selectFilter === item ? color.sc.sc3 : color.sc.sc3 + 20, }}><Label style={{ color: selectFilter === item ? "#fff" : color.sc.sc3, fontFamily: 'Font_Bold', }}>{item}</Label></Button>)}
+                <Column style={{width: 28, }} />
+            </ScrollView>
             </Column>
             <FlatList
                 data={chats}
@@ -20,12 +42,6 @@ export default function ChatListScreen({ navigation, }) {
         </Main>
     )
 }
-/*
-
-            <Button bg={color.blue} style={{ justifyContent: 'center', alignItems: 'center', position: 'absolute', bottom: 30, right: 30, width: 56, height: 56, }}>
-                <Plus size={32} color="#fff" strokeWidth={3} />
-            </Button>
-*/
 
 const Chat = ({ item }) => {
     const { color } = useTheme();

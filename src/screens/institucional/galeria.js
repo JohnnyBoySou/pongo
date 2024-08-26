@@ -1,12 +1,8 @@
-import React, { useContext, useState } from 'react';
-import { ScrollView, Image, Pressable, View } from 'react-native';
-import { Main, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT } from '@theme/global';
+import React, { useContext } from 'react';
+import { Image, Pressable, View } from 'react-native';
+import { Main, Scroll, Column, Label, Title, Row } from '@theme/global';
 import { ThemeContext } from 'styled-components/native';
-import { Apple } from 'lucide-react-native';
 import Header from '@components/Header';
-import Swiper from 'react-native-swiper';
-import Input from '@components/Forms/input';
-import Modal from '@components/Modal';
 import { useNavigation } from '@react-navigation/native';
 import TopMenu from '@components/Header/topmenu';
 import TabBar from '@components/TabBar';
@@ -14,10 +10,6 @@ import TabBar from '@components/TabBar';
 export default function InstitucionalGaleriaScreen({ navigation, }) {
 
     const { color, font, margin } = useContext(ThemeContext);
-
-    const [name, setname] = useState();
-    const [tel, settel] = useState();
-    const [type, settype] = useState('Pongo');
 
     const data = {
         grid: {
@@ -33,7 +25,6 @@ export default function InstitucionalGaleriaScreen({ navigation, }) {
     }
 
 
-
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
@@ -44,7 +35,8 @@ export default function InstitucionalGaleriaScreen({ navigation, }) {
                     <Galeria data={data} />
 
                 </Column>
-                <Column style={{ height: 50 }} />
+                
+                <Column style={{ height: 120 }} />
             </Scroll>
             <TabBar />
         </Main>
@@ -54,9 +46,7 @@ export default function InstitucionalGaleriaScreen({ navigation, }) {
 
 
 const Galeria = ({ data }) => {
-
     const { grid } = data
-
     const Grid = ({ item }) => {
         const { imgs, videos } = item
         return (
@@ -108,7 +98,6 @@ const VideoCard = () => {
 
 
 const ImageCard = () => {
-
     const navigation = useNavigation();
     return (
         <View style={{ width: 150 }}>
