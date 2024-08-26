@@ -6,7 +6,7 @@ import { formatDateTime, formatCurrency } from '@hooks/utils';
 
 export default function CardVet({ item, navigation, service }) {
     const { color, font, margin } = useTheme()
-    const { name, criado_em, check_in, check_out, status, id_pet_pet, tutor, entrada, value, id, pet } = item
+    const { name, criado_em, check_in, check_out, value, status, id_pet_pet, tutor, entrada, nomecolaborador, id, pet } = item
     const types = [
         {
             name: 'Não iniciado',
@@ -51,7 +51,7 @@ export default function CardVet({ item, navigation, service }) {
                     <Column mh={12} >
                         <Title size={16} style={{ marginBottom: 3 }}>{name}</Title>
                         <Label size={10} style={{ marginBottom: 8 }}>Pedido #{id}</Label>
-                        <Label size={14}></Label>
+                        <Label size={14}>{formatCurrency(value)}</Label>
                     </Column>
                 </Row>
                 <Column style={{ backgroundColor: selectStatus.color, borderRadius: 8, position: 'absolute', right: 12, bottom: 12, }}>
@@ -64,7 +64,7 @@ export default function CardVet({ item, navigation, service }) {
             <Column style={{ marginVertical: 12, }} mh={margin.h}>
                 <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
                 <Label size={14} marginBottom={6}>Agendamento: {formatDateTime(entrada)}</Label>
-                <Label size={14} marginBottom={6}>Colaborador responsável: {item?.colaborador}</Label>
+                <Label size={14} marginBottom={6}>Colaborador responsável: {nomecolaborador}</Label>
             </Column>
             <Column style={{ marginVertical: 12, }} mh={margin.h}>
                 <Title style={{ fontWeight: 'bold', fontSize: 15, marginBottom: 6 }} marginBottom={6}>Dados gerais</Title>

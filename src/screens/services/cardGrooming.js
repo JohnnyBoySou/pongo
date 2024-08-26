@@ -6,7 +6,7 @@ import { formatDateTime, formatCurrency } from '@hooks/utils';
 
 export default function CardGrooming({ item, navigation, service }) {
     const { color, margin } = useTheme()
-    const { name, criado_em, status, id_pet_pet, tutor, entrada, value, id, pet } = item
+    const { name, criado_em, status, id_pet_pet, tutor, entrada, value, id, pet, nomecolaborador } = item
     const types = [
         {
             name: 'Não iniciado',
@@ -57,7 +57,7 @@ export default function CardGrooming({ item, navigation, service }) {
             <Column style={{ marginVertical: 12, }} mh={margin.h}>
                 <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
                 <Label size={14} marginBottom={6}>Agendamento: {formatDateTime(entrada)}</Label>
-                <Label size={14} marginBottom={6}>Colaborador responsável: {item?.colaborador}</Label>
+                <Label size={14} marginBottom={6}>Colaborador responsável: {nomecolaborador}</Label>
             </Column>
             <Column style={{ marginVertical: 12, }} mh={margin.h}>
                 <Title style={{ fontWeight: 'bold', fontSize: 15, marginBottom: 6 }} marginBottom={6}>Dados gerais</Title>

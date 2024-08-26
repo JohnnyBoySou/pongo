@@ -8,7 +8,7 @@ import { Check } from 'lucide-react-native';
 
 export default function CardEscola({ item, navigation, service }) {
     const { color, font, margin } = useTheme()
-    const { name, criado_em, check_in, check_out, status, id_pet_pet, tutor, payment, value, id, pet } = item
+    const { name, criado_em, check_in, check_out, status, id_pet_pet, tutor, nomecolaborador, value, id, pet } = item
     const types = [
         {
             name: 'Não iniciado',
@@ -67,7 +67,7 @@ export default function CardEscola({ item, navigation, service }) {
             <Column style={{ marginVertical: 12, }} mh={margin.h}>
                 <Label size={14} marginBottom={6}>Check-in: {formatDateTime(check_in)}</Label>
                 <Label size={14} marginBottom={6}>Check-out: {formatDateTime(check_out)}</Label>
-                <Label size={14} marginBottom={6}>Colaborador responsável: {item?.colaborador}</Label>
+                <Label size={14} marginBottom={6}>Colaborador responsável: {nomecolaborador}</Label>
             </Column>
             <Column style={{ marginVertical: 12, }} mh={margin.h}>
                 <Title style={{ fontWeight: 'bold', fontSize: 15, marginBottom: 6 }} marginBottom={6}>Dados gerais</Title>

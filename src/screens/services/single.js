@@ -14,7 +14,7 @@ export default function ServiceSingleScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
     const id = route.params.id
     const service = route.params.service
-    console.log(service.name)
+
 
     const [data, setdata] = useState([]);
     const [loading, setloading] = useState(true);
@@ -23,6 +23,7 @@ export default function ServiceSingleScreen({ navigation, route }) {
             setloading(true)
             try {
                 const res = await singleService(id, service?.type)
+                console.log(res)
                 setdata(res)
             } catch (error) {
                 console.log(error)
@@ -31,7 +32,6 @@ export default function ServiceSingleScreen({ navigation, route }) {
         }
         fetchData()
     }, [])
-
 
     const Card = () => {
         switch (service?.name) {
@@ -42,7 +42,7 @@ export default function ServiceSingleScreen({ navigation, route }) {
                 return <CardGrooming item={data} navigation={navigation} service={service} />
                 break;
             case 'Veterinario':
-              //  return <CardVet item={data} navigation={navigation} service={service} />
+                return <CardVet item={data} navigation={navigation} service={service} />
                 break;
             case 'Hotel':
               return <CardHotel item={data} navigation={navigation} service={service} />

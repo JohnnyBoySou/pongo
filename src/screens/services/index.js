@@ -153,7 +153,6 @@ export default function ServicesScreen({ navigation, }) {
 const Card = ({ item, navigation, type, selectService }) => {
     const { margin, color, font } = useTheme()
     const { name, id, img, status, criado_em, entrada, payment, value, pet, check_in, check_out } = item
-
     const types = [
         {
             name: 'Não iniciado',
@@ -180,8 +179,8 @@ const Card = ({ item, navigation, type, selectService }) => {
 
     if (type == 'escola_pacote') {
         return (
-            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={2} pv={1} ph={1}>
-                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', marginBottom: 12 }}>
+            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}>
+                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
                     <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
                         <Image
                             source={selectService.img}
@@ -200,7 +199,6 @@ const Card = ({ item, navigation, type, selectService }) => {
                     <Column style={{ marginTop: 12 }}>
                         <Label size={14} marginBottom={6}>Check-in: {formatDateTime(check_in)}</Label>
                         <Label size={14} marginBottom={6}>Check-out: {formatDateTime(check_out)}</Label>
-                        <Label size={14} marginBottom={6}>Colaborador responsável: {item?.colaborador}</Label>
                         <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
                     </Column>
                 </Column>
@@ -209,8 +207,8 @@ const Card = ({ item, navigation, type, selectService }) => {
     }
     else if (type == 'grooming') {
         return (
-            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={2} pv={1} ph={1}>
-                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', marginBottom: 12 }}>
+            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}>
+                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
                     <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
                         <Image
                             source={selectService.img}
@@ -229,7 +227,6 @@ const Card = ({ item, navigation, type, selectService }) => {
                     <Column style={{ marginTop: 12 }}>
                         <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
                         <Label size={14} marginBottom={6}>Agendamento: {formatDateTime(entrada)}</Label>
-                        <Label size={14} marginBottom={6}>Colaborador responsável: {item?.colaborador}</Label>
                         <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
                     </Column>
                 </Column>
@@ -238,8 +235,8 @@ const Card = ({ item, navigation, type, selectService }) => {
     }
     else if (type == 'vet') {
         return (
-            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={2} pv={1} ph={1}>
-                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', marginBottom: 12 }}>
+            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}  >
+                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
                     <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
                         <Image
                             source={selectService.img}
@@ -258,7 +255,6 @@ const Card = ({ item, navigation, type, selectService }) => {
                     <Column style={{ marginTop: 12 }}>
                         <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
                         <Label size={14} marginBottom={6}>Agendamento: {formatDateTime(entrada)}</Label>
-                        <Label size={14} marginBottom={6}>Colaborador responsável: {item?.colaborador}</Label>
                         <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
                     </Column>
                 </Column>
@@ -267,8 +263,8 @@ const Card = ({ item, navigation, type, selectService }) => {
     }
     else if (type == 'hospitalitie') {
         return (
-            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={2} pv={1} ph={1}>
-                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', marginBottom: 12 }}>
+            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}>
+                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
                     <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
                         <Image
                             source={selectService.img}
