@@ -31,21 +31,34 @@ export default class CarrosselRotinaEscola extends Component {
                 <View style={styles.slide}>
                     <Image
                         style={styles.image}
-                        source={{ uri: 'https://lh6.googleusercontent.com/VAViVE0QG6wpW2yeSzQA7tPOrNFf3hlmUrwr7mogM3oShMFGVVNPRpKFs6Sf23tL_c6tITmB5glV2WSR3O1a4Zxd4zj9o7sb39WLMpaA0n20IG3EK-JkeEvA8-OmWF6GeuLB3qwrUsDbALDzrQm27BZJqIdqTTEHXt-TTsaUKem2jwyQKWehdB8vPJtEdw' }}
+                        source={require('@imgs/day-use1.jpg')}
                     />
                 </View>
                 <View style={styles.slide}>
                     <Image
                         style={styles.image}
-                        source={{ uri: 'https://s2-g1.glbimg.com/AjCheGSkmh-QkcBw00ttWUBROtk=/0x0:1600x1200/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/n/d/zQ8s7VQtajoP3ePt9dIg/whatsapp-image-2022-07-19-at-17.40.44.jpeg' }}
+                        source={require('@imgs/day-use2.jpg')}
                     />
                 </View>
                 <View style={styles.slide}>
                     <Image
                         style={styles.image}
-                        source={{ uri: 'https://www.melhoresdestinos.com.br/wp-content/uploads/2021/04/cachorro-hotel-capa.jpg' }}
+                        source={require('@imgs/day-use3.jpg')}
                     />
                 </View>
+                <View style={styles.slide}>
+                    <Image
+                        style={styles.image}
+                        source={require('@imgs/day-use4.jpg')}
+                    />
+                </View>
+                <View style={styles.slide}>
+                    <Image
+                        style={styles.image}
+                        source={require('@imgs/day-use5.jpg')}
+                    />
+                </View>
+
             </Swiper>
         );
     }
