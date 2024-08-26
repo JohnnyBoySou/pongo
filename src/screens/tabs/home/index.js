@@ -6,6 +6,7 @@ import { MotiView, MotiText } from 'moti'
 import { Linking, Text } from 'react-native';
 import { listUser } from '@api/request/auth';
 import { getPreferences, excludePreferences } from '@hooks/preferences';
+import { tiposServices } from '../../../api/request/services';
 
 export default function HomeScreen({ navigation, }) {
     const { color, font, margin, } = useTheme();

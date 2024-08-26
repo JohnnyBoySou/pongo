@@ -3,8 +3,7 @@ import { Main, Scroll, Title, Row, Column, useTheme, Label, Image, Button, Loade
 import TopMenu from '@components/Header/topmenu';
 import { listUser } from '@api/request/auth';
 import { formatDateTime } from '@hooks/utils';
-import { getPreferences } from '@hooks/preferences';
-import { excludePreferences } from '@hooks/preferences';
+import { getPreferences, excludePreferences } from '@hooks/preferences'; 
 import { useIsFocused } from '@react-navigation/native';
 
 export default function AccountScreen({ navigation, }) {
@@ -18,7 +17,7 @@ export default function AccountScreen({ navigation, }) {
         const fetchData = async () => {
             setloading(true)
             try {
-                const pref = await getPreferences()
+                const pref = await getPreferences() 
                 if (pref?.token) {
                     const res = await listUser();
                     setuser(res)
@@ -34,7 +33,7 @@ export default function AccountScreen({ navigation, }) {
             }
         }
         fetchData()
-    }, [isFocused])
+    }, [isFocused == true])
 
     const handleChat = async () => {
         try {
@@ -51,7 +50,7 @@ export default function AccountScreen({ navigation, }) {
     }
 
     const handleExit = () => {
-        navigation.navigate('Onboarding')
+        navigation.navigate('AuthLogin')
         excludePreferences()
     }
 

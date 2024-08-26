@@ -52,8 +52,8 @@ import ChatColaboradorListScreen from '@screens/colaborador/list';
 import HomeScreen from '@screens/tabs/home';
 import AccountScreen from '@screens/tabs/account';
 import AccountDetailsScreen from '@screens/tabs/account/details';
-import CartScreen from '@screens/tabs/cart';
-import NotifyScreen from '@screens/tabs/notify';
+import VeterinarioScreen from '@screens/veterinario';
+import GroomingScreen from '@screens/grooming';
 
 //TEST
 import TestScreen from '@screens/test';
@@ -150,6 +150,10 @@ export default function Router() {
 
         <Stack.Screen name="Hotel" component={HotelScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="HotelRegister" component={HotelRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+
+        <Stack.Screen name="Veterinario" component={VeterinarioScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="Grooming" component={GroomingScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+
 
         <Stack.Screen name="Notifications" component={NotificationsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="Faq" component={FaqScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
