@@ -1,12 +1,14 @@
-import React from 'react';
-import { Image, } from 'react-native';
+import React, { useEffect } from 'react';
+import { FlatList, Image, } from 'react-native';
 import { Column, Label, Title, Row, Button, LabelBT, useTheme, } from '@theme/global';
+import StepIndicator from 'react-native-step-indicator';
 import Header from '@components/Header';
 import { formatDateTime, formatCurrency } from '@hooks/utils';
+import { Check } from 'lucide-react-native';
 
-export default function CardGrooming({ item, navigation, service }) {
-    const { color, margin } = useTheme()
-    const { name, criado_em, status, id_service, id_pet_pet, tutor, entrada, value, id, pet, nomecolaborador } = item
+export default function CardDayUse({ item, navigation, service }) {
+    const { color, font, margin } = useTheme()
+    const { name, criado_em, check_in, check_out, id_service, status, id_pet_pet, tutor, nomecolaborador, value, id, pet } = item
     const types = [
         {
             name: 'Não iniciado',
@@ -30,7 +32,14 @@ export default function CardGrooming({ item, navigation, service }) {
         }
     ];
     const selectStatus = types.find(i => i?.name == status)
-  
+    const data = [{
+        title: 'Check-in ',
+        label: 'Realizou o check-in no estabelecimento ' + formatDateTime(check_in),
+    }, {
+        title: 'Check-out ',
+        label: 'Realizou o check-out no estabelecimento ' + formatDateTime(check_out),
+    },
+    ]
 
     if (!item) return null
     return (
@@ -56,7 +65,8 @@ export default function CardGrooming({ item, navigation, service }) {
 
             <Column style={{ marginVertical: 12, }} mh={margin.h}>
                 <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
-                <Label size={14} marginBottom={6}>Agendamento: {formatDateTime(entrada)}</Label>
+                <Label size={14} marginBottom={6}>Check-in: {formatDateTime(check_in)}</Label>
+                <Label size={14} marginBottom={6}>Check-out: {formatDateTime(check_out)}</Label>
                 <Label size={14} marginBottom={6}>Colaborador responsável: {nomecolaborador}</Label>
             </Column>
             <Column style={{ marginVertical: 12, }} mh={margin.h}>
@@ -65,11 +75,7 @@ export default function CardGrooming({ item, navigation, service }) {
                     <Column>
                         <Label size={14} marginBottom={6}>Nome: {tutor.name}</Label>
                         <Label size={14} marginBottom={6}>Endereço: {tutor?.endereco}</Label>
-                        <Label size={14} marginBottom={6}>Nome do pet: {pet?.name}</Label>
                     </Column>
-                    <Button onPress={() => { navigation.navigate('PetsProfile', { id: id_pet_pet }) }} pv={1} ph={1} radius={6}>
-                        <Image source={{ uri: pet?.img }} style={{ width: 64, height: 64, borderRadius: 12, objectFit: 'cover', }} />
-                    </Button>
                 </Row>
             </Column>
 
@@ -83,10 +89,58 @@ export default function CardGrooming({ item, navigation, service }) {
             </Row>
 
 
+            <Steps data={data} status={status} />
+       
             <Column mh={margin.h} mv={30}>
-                <Button onPress={() => { navigation.navigate('ServicesDiario', { id: id_service, pet: pet, tipo: 'grooming' }) }} style={{ width: '100%', backgroundColor: color.sc.sc3, }}><LabelBT style={{ color: color.light, textAlign: 'center' }}>Diário do pet</LabelBT></Button>
+                <Button onPress={() => { navigation.navigate('ServicesDiario', { id: id_service, pet: pet, tipo: 'creche' }) }} style={{ width: '100%', backgroundColor: color.sc.sc3, }}><LabelBT style={{ color: color.light, textAlign: 'center' }}>Diário do pet</LabelBT></Button>
             </Column>
             <Column style={{ height: 120, }} />
         </Column>
     )
+}
+
+function Steps({ data, status }) {
+    const { font, color } = useTheme()
+    const Indicator = ({ item }) => {
+        return (
+            <Column mv={12}>
+                <Title size={14}>{item?.title}</Title>
+                <Label size={12} style={{ maxWidth: 250, lineHeight: 16, marginTop: 2, }}>{item?.label}</Label>
+            </Column>
+        );
+    };
+
+    const stepIndicatorStyles = {
+        stepIndicatorSize: 30,
+        stepStrokeWidth: 0,
+        currentStepIndicatorSize: 30,
+        currentStepStrokeWidth: 0,
+        separatorStrokeWidth: 3,
+
+        separatorFinishedColor: '#37CB84',
+        separatorUnFinishedColor: '#c3cfe3',
+
+        stepIndicatorUnFinishedColor: '#dce5f2',
+        stepIndicatorFinishedColor: '#37CB84',
+        stepIndicatorCurrentColor: '#91A6C4',
+    };
+    const step = status === 'Concluído' ? 2 : status === 'Em andamento' ? 1 : status === 'Não iniciado' ? 0 : status == null ? 0 : 3
+    return (
+        <Row style={{ marginHorizontal: 28, }}>
+            <StepIndicator
+                customStyles={stepIndicatorStyles}
+                stepCount={2}
+                direction="vertical"
+                currentPosition={2}
+                renderStepIndicator={({ position, stepStatus, }) => <Column style={{ alignItems: 'center', }}>{stepStatus === 'finished' ? <Check size={18} color="#fff" /> : <Label style={{ lineHeight: 18, fontFamily: font.bold, color: stepStatus === 'current' ? "#fff" : color.sc.sc3, }} >{position + 1}</Label>}</Column>}
+                renderLabel={({ stepStatus, label }) => <Label style={{ fontSize: 12, fontFamily: font.medium, color: stepStatus === 'current' ? color.sc.sc3 : stepStatus === 'finished' ? color.green : color.label, }}>{label}</Label>}
+            />
+            <FlatList
+                style={{ flexGrow: 1 }}
+                data={data}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => <Indicator item={item} />}
+            />
+        </Row>
+    );
 }

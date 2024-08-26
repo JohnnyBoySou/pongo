@@ -67,18 +67,25 @@ export const singlePet = async (id) => {
     }
 }
 
-export const listDiario = async (page = 1, id) => {
+export const listDiario = async (id, tipo) => {
     const BASE_URL = await getBaseURL();
     const token = await getToken();
+  //  const id = 757
+  //  const tipo = 'escola_pacote'
     try {
-        const res = await axios.post(`${BASE_URL}/getdiario/${id}?page=${page}`, {}, {
+        const res = await axios.post(`${BASE_URL}/getdiario-servico/${id}/${tipo}`, {}, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
-        return res.data.diario.data
+        return res.data.data
     } catch (error) {
-        const err = JSON.parse(error.request.response);
-        throw new Error(err.message)
+        console.log('Error:', error.message);
+        if (error.request) {
+            console.log('Request data:', error.request);
+        } else {
+            console.log('Error message:', error.message);
+        }
+        throw new Error(error.message);
     }
 }

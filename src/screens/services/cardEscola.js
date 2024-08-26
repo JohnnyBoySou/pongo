@@ -8,7 +8,7 @@ import { Check } from 'lucide-react-native';
 
 export default function CardEscola({ item, navigation, service }) {
     const { color, font, margin } = useTheme()
-    const { name, criado_em, check_in, check_out, status, id_pet_pet, tutor, nomecolaborador, value, id, pet } = item
+    const { name, criado_em, check_in, check_out, id_service, status, id_pet_pet, tutor, nomecolaborador, value, id, pet } = item
     const types = [
         {
             name: 'Não iniciado',
@@ -41,11 +41,10 @@ export default function CardEscola({ item, navigation, service }) {
     },
     ]
 
-    console.log(item)
-    if(!item) return null
+    if (!item) return null
     return (
         <Column>
-            <Header title={name}/>
+            <Header title={name} />
             <Row style={{ alignItems: 'flex-start', justifyContent: 'space-between', backgroundColor: '#fff', borderRadius: 12, marginBottom: 20, }} mh={margin.h} pv={14} ph={14} >
                 <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                     <Image
@@ -71,14 +70,14 @@ export default function CardEscola({ item, navigation, service }) {
             </Column>
             <Column style={{ marginVertical: 12, }} mh={margin.h}>
                 <Title style={{ fontWeight: 'bold', fontSize: 15, marginBottom: 6 }} marginBottom={6}>Dados gerais</Title>
-                <Row style={{ justifyContent: 'space-between', alignItems: 'center',  }}>
+                <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
                     <Column>
                         <Label size={14} marginBottom={6}>Nome: {tutor.name}</Label>
                         <Label size={14} marginBottom={6}>Endereço: {tutor?.endereco}</Label>
                         <Label size={14} marginBottom={6}>Nome do pet: {pet?.name}</Label>
                     </Column>
-                    <Button onPress={() => {navigation.navigate('PetsProfile', { id: id_pet_pet })}} pv={1} ph={1} radius={6}>
-                        <Image source={{ uri: pet?.img }} style={{ width: 64, height: 64, borderRadius: 12, objectFit: 'cover',  }} />
+                    <Button onPress={() => { navigation.navigate('PetsProfile', { id: id_pet_pet }) }} pv={1} ph={1} radius={6}>
+                        <Image source={{ uri: pet?.img }} style={{ width: 64, height: 64, borderRadius: 12, objectFit: 'cover', }} />
                     </Button>
                 </Row>
             </Column>
@@ -95,9 +94,9 @@ export default function CardEscola({ item, navigation, service }) {
 
             <Steps data={data} status={status} />
             <Column mh={margin.h}>
-                <Button onPress={() => { navigation.navigate('PetsDiario', { id: id_pet_pet, pet: pet, }) }} style={{ width: '100%', backgroundColor: color.sc.sc3, }}><LabelBT style={{ color: color.light, textAlign: 'center' }}>Diário do pet</LabelBT></Button>
+                <Button onPress={() => { navigation.navigate('ServicesDiario', { id: id_service, pet: pet, tipo: 'escola_pacote' }) }} style={{ width: '100%', backgroundColor: color.sc.sc3, }}><LabelBT style={{ color: color.light, textAlign: 'center' }}>Diário do pet</LabelBT></Button>
             </Column>
-            <Column style={{height: 120, }} />
+            <Column style={{ height: 120, }} />
         </Column>
     )
 }
@@ -135,8 +134,8 @@ function Steps({ data, status }) {
                 stepCount={2}
                 direction="vertical"
                 currentPosition={2}
-                renderStepIndicator={({ position, stepStatus, }) =><Column style={{ alignItems: 'center', }}>{stepStatus === 'finished' ? <Check size={18} color="#fff" /> : <Label style={{ lineHeight: 18, fontFamily: font.bold, color: stepStatus === 'current' ? "#fff" : color.sc.sc3, }} >{position + 1}</Label>}</Column>}
-                renderLabel={({ stepStatus, label }) =><Label style={{ fontSize: 12, fontFamily: font.medium, color: stepStatus === 'current' ? color.sc.sc3 : stepStatus === 'finished' ? color.green : color.label, }}>{label}</Label>}
+                renderStepIndicator={({ position, stepStatus, }) => <Column style={{ alignItems: 'center', }}>{stepStatus === 'finished' ? <Check size={18} color="#fff" /> : <Label style={{ lineHeight: 18, fontFamily: font.bold, color: stepStatus === 'current' ? "#fff" : color.sc.sc3, }} >{position + 1}</Label>}</Column>}
+                renderLabel={({ stepStatus, label }) => <Label style={{ fontSize: 12, fontFamily: font.medium, color: stepStatus === 'current' ? color.sc.sc3 : stepStatus === 'finished' ? color.green : color.label, }}>{label}</Label>}
             />
             <FlatList
                 style={{ flexGrow: 1 }}

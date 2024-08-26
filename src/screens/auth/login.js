@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Main, Scroll, Title, Row, Column, Label, Button, SubLabel, U, useTheme, Loader, LabelBT, SCREEN_HEIGHT, Back, } from '@theme/global';
-import { X, Mail, CircleX, CircleCheck, } from 'lucide-react-native';
+import { X, Mail, CircleX, CircleCheck, ArrowLeft, } from 'lucide-react-native';
 
 //Components
 import Input from '@components/Forms/input';
@@ -64,7 +64,6 @@ export default function AuthLoginScreen({ navigation, }) {
                 //     }
                 const preferences = await createPreferences(saveUser)
                 if (preferences) {
-                    console.log(saveUser)
                     setTimeout(() => {
                         navigation.navigate('Welcome', { name: res?.nome, })
                     }, 600);
@@ -83,65 +82,67 @@ export default function AuthLoginScreen({ navigation, }) {
         <Main style={{}}>
             <Scroll>
 
-                {type === 'ConfirmEmail' ? <ConfirmEmail navigation={navigation} email={email} name={name}/> : 
-                <Column ph={28}>
-                    <Back />
-                    <Title size={26} style={{ marginTop: 20, marginBottom: 4, }}>Olá! Acesse sua conta utilizando seu e-mail e senha.</Title>
+                {type === 'ConfirmEmail' ? <ConfirmEmail navigation={navigation} email={email} name={name} /> :
+                    <Column ph={28}>
+                        <Button onPress={() => { navigation.navigate('Onboarding') }} pv={0} ph={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg='#FFFFFF'>
+                            <ArrowLeft size={20} color='#858585' />
+                        </Button>
+                        <Title size={26} style={{ marginTop: 20, marginBottom: 4, }}>Olá! Acesse sua conta utilizando seu e-mail e senha.</Title>
 
-                    <Column style={{ height: 16, }} />
-                    <Input
-                        label="E-mail *"
-                        placeholder="Email"
-                        value={email}
-                        onSubmitEditing={() => { passRef.current.focus() }}
-                        setValue={setemail}
-                    />
-                    <Column style={{ height: 16, }} />
-                    <Input
-                        label="Senha *"
-                        placeholder="Senha"
-                        value={password}
-                        ref={passRef}
-                        pass={true}
-                        setValue={setpassword}
-                        onSubmitEditing={handleLogin}
-                    />
-                    <Button pv={12} radius={8} ph={8} mv={8} onPress={() => { modalForget.current.expand() }}>
-                        <U><LabelBT color={color.title} style={{ fontSize: 16, }}>Recuperar senha</LabelBT></U>
-                    </Button>
+                        <Column style={{ height: 16, }} />
+                        <Input
+                            label="E-mail *"
+                            placeholder="Email"
+                            value={email}
+                            onSubmitEditing={() => { passRef.current.focus() }}
+                            setValue={setemail}
+                        />
+                        <Column style={{ height: 16, }} />
+                        <Input
+                            label="Senha *"
+                            placeholder="Senha"
+                            value={password}
+                            ref={passRef}
+                            pass={true}
+                            setValue={setpassword}
+                            onSubmitEditing={handleLogin}
+                        />
+                        <Button pv={12} radius={8} ph={8} mv={8} onPress={() => { modalForget.current.expand() }}>
+                            <U><LabelBT color={color.title} style={{ fontSize: 16, }}>Recuperar senha</LabelBT></U>
+                        </Button>
 
-                    <Row style={{ alignItems: 'center', marginBottom: 32, }}>
-                        <CheckBox status={terms} setstatus={setterms} />
-                        <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de uso e Privacidade</U></Label>
-                    </Row>
-
-                    {success ? <Success msg={success} /> : error ? <Error msg={error} /> : null}
-
-                    <Button bg='#918C8B' disabled={loading} onPress={handleLogin}>
-                        <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
-                            {loading ?
-                                <Loader color="#fff" /> :
-                                <LabelBT color='#FFFFFF' align='center'>Continuar</LabelBT>}
+                        <Row style={{ alignItems: 'center', marginBottom: 32, }}>
+                            <CheckBox status={terms} setstatus={setterms} />
+                            <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de uso e Privacidade</U></Label>
                         </Row>
-                    </Button>
 
-                    <Button radius={12} onPress={() => { navigation.navigate('AuthRegister') }} mv={12}>
-                        <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
-                            <Label size={14} color={color.sc.sc3} align="center">Ainda não tem uma conta?</Label>
-                            <LabelBT size={14} color={color.sc.sc3} align="center" >Clique aqui para criar</LabelBT>
-                        </Column>
-                    </Button>
+                        {success ? <Success msg={success} /> : error ? <Error msg={error} /> : null}
 
-                    <Label size={14} align='center' >Ao continuar, você concorda em receber chamadas e mensagens SMS ou pelo WhatsApp, inclusive automáticas, da Villa Pongo e de suas afiliadas, no número informado.</Label>
+                        <Button bg='#918C8B' disabled={loading} onPress={handleLogin}>
+                            <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
+                                {loading ?
+                                    <Loader color="#fff" /> :
+                                    <LabelBT color='#FFFFFF' align='center'>Continuar</LabelBT>}
+                            </Row>
+                        </Button>
+
+                        <Button radius={12} onPress={() => { navigation.navigate('AuthRegister') }} mv={12}>
+                            <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
+                                <Label size={14} color={color.sc.sc3} align="center">Ainda não tem uma conta?</Label>
+                                <LabelBT size={14} color={color.sc.sc3} align="center" >Clique aqui para criar</LabelBT>
+                            </Column>
+                        </Button>
+
+                        <Label size={14} align='center' >Ao continuar, você concorda em receber chamadas e mensagens SMS ou pelo WhatsApp, inclusive automáticas, da Villa Pongo e de suas afiliadas, no número informado.</Label>
 
 
-                    <Button radius={12} onPress={() => { navigation.navigate('AuthLoginColaborador') }} mv={12} bg={color.label+20}>
-                        <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
-                            <Label size={14} align="center">Entrar como</Label>
-                            <LabelBT size={14}  align="center" >Colaborador</LabelBT>
-                        </Column>
-                    </Button>
-                </Column>}
+                        <Button radius={12} onPress={() => { navigation.navigate('AuthLoginColaborador') }} mv={12} bg={color.label + 20}>
+                            <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
+                                <Label size={14} align="center">Entrar como</Label>
+                                <LabelBT size={14} align="center" >Colaborador</LabelBT>
+                            </Column>
+                        </Button>
+                    </Column>}
             </Scroll>
 
             <Modal ref={modalForget} snapPoints={[0.1, SCREEN_HEIGHT]} bg={color.bg}>

@@ -22,8 +22,7 @@ export const servicesData = [
         img:  require('@imgs/vet.png'),
         screen: 'dadosvet',
         type: 'vet',
-        itens: [ 
-        ]
+       
     },
     {
         name: 'Hotel',

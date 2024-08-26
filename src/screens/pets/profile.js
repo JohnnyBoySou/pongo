@@ -32,11 +32,11 @@ export default function PetsProfileScreen({ navigation, route }) {
 
 
 
-
+    //alterar tabbar light
     return (
         <Main style={{ paddingTop: 0, }}>
             <Pet pet={data} />
-            <TabBar />
+            <TabBar theme="light"/>
         </Main>
     )
 }
@@ -72,21 +72,34 @@ const Pet = ({ pet }) => {
 
                     <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginHorizontal: margin.h, marginVertical: 20, columnGap: 20, }}>
                         <Column style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', borderRadius: 8, paddingHorizontal: 14, paddingVertical: 12, }}>
-                            <Title >Banhos</Title>
-                            <Label >{pet?.banhos}</Label>
+                            <Title size={16}>Banhos</Title>
+                            <Label style={{  marginTop: 4, }}>{pet?.banhos}</Label>
                         </Column>
                         <Column style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', borderRadius: 8, paddingHorizontal: 14, paddingVertical: 12, }}>
-                            <Title >Tosas</Title>
-                            <Label >{pet?.tosas}</Label>
+                            <Title size={16}>Tosas</Title>
+                            <Label style={{  marginTop: 4, }}>{pet?.tosas}</Label>
                         </Column>
                         <Column style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff', borderRadius: 8, paddingHorizontal: 14, paddingVertical: 12, }}>
-                            <Title >Consultas</Title>
-                            <Label >{pet?.consultas}</Label>
+                            <Title size={16} >Consultas</Title>
+                            <Label style={{  marginTop: 4, }}>{pet?.consultas}</Label>
                         </Column>
                     </Row>
 
+                </Column>
 
-                    <Row style={{ justifyContent: 'space-evenly', alignItems: 'center', }}>
+            </Column>
+        </Scroll>
+    )
+}
+
+/*
+ <Button ph={4} pv={4} radius={6}>
+                            <Column style={{ justifyContent: 'center', alignItems: 'center', }}>
+                                <Image source={require("@imgs/pr4.png")} style={{ width: 50, height: 50, marginBottom: 6, }} />
+                                <Title size={16} color="#fff">Novo</Title>
+                            </Column>
+                        </Button>
+                           <Row style={{ justifyContent: 'space-evenly', alignItems: 'center', }}>
                         <Button ph={4} pv={4} radius={6}>
                             <Column style={{ justifyContent: 'center', alignItems: 'center', }}>
                                 <Image source={require("@imgs/pr1.png")} style={{ width: 50, height: 50, marginBottom: 6, borderRadius: 100, }} />
@@ -106,21 +119,6 @@ const Pet = ({ pet }) => {
                             </Column>
                         </Button>
                     </Row>
-
-                </Column>
-
-            </Column>
-        </Scroll>
-    )
-}
-
-/*
- <Button ph={4} pv={4} radius={6}>
-                            <Column style={{ justifyContent: 'center', alignItems: 'center', }}>
-                                <Image source={require("@imgs/pr4.png")} style={{ width: 50, height: 50, marginBottom: 6, }} />
-                                <Title size={16} color="#fff">Novo</Title>
-                            </Column>
-                        </Button>
 */
 
 

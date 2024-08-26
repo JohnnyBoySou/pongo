@@ -15,6 +15,7 @@ import { ArrowLeft } from 'lucide-react-native';
 
 export default function ServicesScreen({ navigation, }) {
 
+    //diario do pet service
     const { color, font, margin } = useTheme();
 
     const [loading, setloading] = useState();

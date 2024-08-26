@@ -34,7 +34,7 @@ export default function WelcomeScreen({ navigation, route }) {
 
 
             <Animated.View entering={FadeInDown.delay(500)}>
-                <Title color="#fff" align="center" font='Voyage_Medium' style={{ lineHeight: 42, fontSize: 32, marginHorizontal: 20, }}>Seja bem-vindo, {'\n'}{name}!</Title>
+                <Title color="#fff" align="center" font='Voyage_Medium' style={{ lineHeight: 42, fontSize: 32, marginHorizontal: 20, }}>Seja bem-vindo!</Title>
             </Animated.View>
             <Animated.View entering={FadeInDown.delay(800)}>
                 <Label color="#fff" style={{ lineHeight: 20, marginTop: 30, }}>É um prazer ter você conosco!</Label>

@@ -91,7 +91,7 @@ export default function CardVet({ item, navigation, service }) {
 
 
             <Column mh={margin.h} mv={30}>
-                <Button onPress={() => { navigation.navigate('PetsDiario', { id: id_pet_pet, pet: pet, }) }} style={{ width: '100%', backgroundColor: color.sc.sc3, }}><LabelBT style={{ color: color.light, textAlign: 'center' }}>Diário do pet</LabelBT></Button>
+                <Button onPress={() => { navigation.navigate('ServicesDiario', { id: id_pet_pet, pet: pet, tipo: 'vet' }) }} style={{ width: '100%', backgroundColor: color.sc.sc3, }}><LabelBT style={{ color: color.light, textAlign: 'center' }}>Diário do pet</LabelBT></Button>
             </Column>
             <Column style={{ height: 120, }} />
         </Column>
