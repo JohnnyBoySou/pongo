@@ -36,11 +36,11 @@ export default function InstitucionalRealizacoesScreen() {
 
                     <Title >Realizações</Title>
 
-                    <Label style={{ lineHeight: 18, fontSize: 14,  }}>
+                    <Label style={{ lineHeight: 18, fontSize: 14, }}>
                         Tombado pelo Patrimônio Histórico Nacional, O Copacabana Palace é símbolo do glamour carioca.
                     </Label>
 
-                    <Label style={{ lineHeight: 18, fontSize: 14,}}>
+                    <Label style={{ lineHeight: 18, fontSize: 14, }}>
                         Localizado em frente à Praia de Copacabana, na cidade do Rio de Janeiro o hotel já foi eleito diversas vezes como o melhor hotel da América do Sul e os mais importantes prêmios mundiais de turismo.
                     </Label>
 
@@ -51,16 +51,16 @@ export default function InstitucionalRealizacoesScreen() {
 
 
 
-                <Column  style={{ marginBottom: 54 }}>
+                <Column style={{ marginBottom: 54 }}>
                     <FlatList
                         data={images.slice(0, 4)}
                         horizontal
-                        ListHeaderComponent={() => <Column style={{ width: 28, }}/>}
+                        ListHeaderComponent={() => <Column style={{ width: 28, }} />}
                         showsHorizontalScrollIndicator={false}
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item, index }) => (
                             <Column style={{ position: 'relative', marginRight: 20 }}>
-                                <Image source={{ uri: item }} style={{ width: 260, height: 300, borderRadius: 12 }} />
+                                <Image source={item} style={{ width: 260, height: 300, borderRadius: 12 }} />
                             </Column>
                         )}
                     />
@@ -75,10 +75,9 @@ export default function InstitucionalRealizacoesScreen() {
 }
 
 const images = [
-    'https://img.freepik.com/free-photo/top-view-pet-accessories_23-2150930406.jpg?size=626&ext=jpg&ga=GA1.1.2113030492.1720483200&semt=ais_hybrid',
-    'https://img.freepik.com/free-photo/top-view-pet-accessories_23-2150930406.jpg?size=626&ext=jpg&ga=GA1.1.2113030492.1720483200&semt=ais_hybrid',
-    'https://img.freepik.com/free-photo/top-view-pet-accessories_23-2150930406.jpg?size=626&ext=jpg&ga=GA1.1.2113030492.1720483200&semt=ais_hybrid',
-    'https://img.freepik.com/free-photo/top-view-pet-accessories_23-2150930406.jpg?size=626&ext=jpg&ga=GA1.1.2113030492.1720483200&semt=ais_hybrid',
-    'https://img.freepik.com/free-photo/top-view-pet-accessories_23-2150930406.jpg?size=626&ext=jpg&ga=GA1.1.2113030492.1720483200&semt=ais_hybrid',
-    'https://img.freepik.com/free-photo/top-view-pet-accessories_23-2150930406.jpg?size=626&ext=jpg&ga=GA1.1.2113030492.1720483200&semt=ais_hybrid'
+    require('@imgs/realizacoes1.jpg'),
+    require('@imgs/realizacoes2.jpg'),
+    require('@imgs/realizacoes3.jpg'),
+    require('@imgs/realizacoes4.jpg'),
+
 ];

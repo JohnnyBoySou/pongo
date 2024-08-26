@@ -63,9 +63,10 @@ export default function InstitucionalScreen({ navigation, }) {
 }
 
 const imgs = [
-    require('@imgs/villa-pongo-carousel1.png'),
-    require('@imgs/villa1.png'),
-    require('@imgs/villa2.png')
+    require('@imgs/carrousel-institucional1.jpg'),
+    require('@imgs/carrousel-institucional2.jpg'),
+    require('@imgs/carrousel-institucional3.jpg'),
+    require('@imgs/carrousel-institucional4.jpg'),
 ]
 
 function Carrossel({ data }) {
