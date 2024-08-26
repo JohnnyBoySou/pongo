@@ -198,32 +198,33 @@ export default function SchoolPongoScreen() {
     );
 }
 
-const imgs = [
-    'https://caninablog.wordpress.com/wp-content/uploads/2013/10/dia-das-bruxas-pet_escola_075-1.jpg',
-    'https://www.decao.com.br/adestramento-de-cao/imagens/daycare-para-caes-de-raca.jpg',
-    'https://www.decao.com.br/adestramento-de-cao/imagens/quanto-custa-escola-para-caes.jpg',
-]
 const imgs2 = [
     'https://lh6.googleusercontent.com/VAViVE0QG6wpW2yeSzQA7tPOrNFf3hlmUrwr7mogM3oShMFGVVNPRpKFs6Sf23tL_c6tITmB5glV2WSR3O1a4Zxd4zj9o7sb39WLMpaA0n20IG3EK-JkeEvA8-OmWF6GeuLB3qwrUsDbALDzrQm27BZJqIdqTTEHXt-TTsaUKem2jwyQKWehdB8vPJtEdw',
     'https://s2-g1.glbimg.com/AjCheGSkmh-QkcBw00ttWUBROtk=/0x0:1600x1200/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/n/d/zQ8s7VQtajoP3ePt9dIg/whatsapp-image-2022-07-19-at-17.40.44.jpeg',
     'https://www.melhoresdestinos.com.br/wp-content/uploads/2021/04/cachorro-hotel-capa.jpg',
 ]
 
+const imgs = [
+    require('@imgs/escola1.jpg'),
+    require('@imgs/escola2.jpg'),
+    require('@imgs/escola3.jpg'),
+    require('@imgs/escola4.jpg'),
+]
+
 function Carrossel({ data }) {
     return (
-        <Swiper style={{ height: 180, overflow: 'hidden', borderRadius: 20 }} autoplay={true}>
+        <Swiper style={{ height: 180, overflow: 'hidden', borderRadius: 20 }} autoplay={true} loop={false}>
             {data?.map((img, index) => (
                 <Column key={index} style={{ flex: 1, marginHorizontal: 28, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
                     <Image
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        source={{ uri: img }}
+                        source={img}
                     />
                 </Column>
             ))}
         </Swiper>
     );
 }
-
 
 function ListaRotinaEscola() {
     const { color, font, margin } = useTheme();

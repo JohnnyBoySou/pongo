@@ -36,10 +36,10 @@ const Card = ({ item }) => {
     const { name, img } = item
     const navigation = useNavigation()
     return (
-        <Button pv={12} ph={12} radius={12} mh={0} mv={12} style={{  backgroundColor: '#FFF', }} onPress={() => { navigation.navigate(item.screen) }} >
+        <Button pv={12} ph={12} radius={12} mh={0} mv={12} style={{ backgroundColor: '#FFF', }} onPress={() => { navigation.navigate(item.screen) }} >
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
                 <Row>
-                    <Image style={{ width: 72, height: 72, borderRadius: 8, marginRight: 12, }} source={img}/>
+                    <Image style={{ width: 72, height: 72, borderRadius: 8, marginRight: 12, }} source={img} />
                     <Column style={{ justifyContent: 'center', }}>
                         <Title size={16}>{name}</Title>
                         <Column style={{ height: 4, }} />
@@ -58,22 +58,37 @@ const data = [
         name: 'Hotel',
         time: 'Tempo de duração',
         id: 1,
-        img:  require('@imgs/hotel.png'),
+        img: require('@imgs/hotel.png'),
         screen: 'Hotel',
     },
     {
         name: 'Day use',
         time: 'Tempo de duração',
         id: 2,
-        img:  require('@imgs/day use.png'),
+        img: require('@imgs/day use.png'),
         screen: 'DayUse',
     },
     {
         name: 'Escola',
         time: 'Tempo de duração',
         id: 3,
-        img:  require('@imgs/escola.png'),
+        img: require('@imgs/escola.png'),
         screen: 'School',
+    },
+    {
+        name: 'Vet',
+        time: 'Tempo de duração',
+        id: 4,
+        img: require('@imgs/vet.png'),
+        screen: 'Veterinario',
+    },
+
+    {
+        name: 'Grooming',
+        time: 'Tempo de duração',
+        id: 5,
+        img: require('@imgs/grooming.png'),
+        screen: 'Grooming',
     },
 
 ]

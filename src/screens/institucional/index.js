@@ -31,7 +31,7 @@ export default function InstitucionalScreen({ navigation, }) {
                         </Row>
                     </Button>
 
-                    <Button radius={16} bg="#fff" onPress={() => { navigation.navigate('InstitucionalRealizacoes') }}  pv={10} ph={10}>
+                    <Button radius={16} bg="#fff" onPress={() => { navigation.navigate('InstitucionalRealizacoes') }} pv={10} ph={10}>
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-realizacoes.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
                             <Title>Realizações</Title>
@@ -63,9 +63,9 @@ export default function InstitucionalScreen({ navigation, }) {
 }
 
 const imgs = [
-    'https://caninablog.wordpress.com/wp-content/uploads/2013/10/dia-das-bruxas-pet_escola_075-1.jpg',
-    'https://www.decao.com.br/adestramento-de-cao/imagens/daycare-para-caes-de-raca.jpg',
-    'https://www.decao.com.br/adestramento-de-cao/imagens/quanto-custa-escola-para-caes.jpg',
+    require('@imgs/villa-pongo-carousel1.png'),
+    require('@imgs/villa1.png'),
+    require('@imgs/villa2.png')
 ]
 
 function Carrossel({ data }) {
@@ -75,7 +75,7 @@ function Carrossel({ data }) {
                 <Column key={index} style={{ flex: 1, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', marginHorizontal: 28, }}>
                     <Image
                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        source={{ uri: img }}
+                        source={img}
                     />
                 </Column>
             ))}
