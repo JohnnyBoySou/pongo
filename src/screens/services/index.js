@@ -12,6 +12,7 @@ import { formatDateTime, formatCurrency } from '@hooks/utils';
 import { listServices } from '@api/request/services';
 import { servicesData } from '@api/data/services';
 import { ArrowLeft } from 'lucide-react-native';
+import ButtonPrimary from './../../components/Buttons/index';
 
 export default function ServicesScreen({ navigation, }) {
 
@@ -22,34 +23,34 @@ export default function ServicesScreen({ navigation, }) {
     const [page, setpage] = useState(1);
     const [selectService, setselectService] = useState();
 
-    const [grooming, setgrooming] = useState();
-    const [vet, setvet] = useState();
-    const [hospitality, sethospitality] = useState();
-    const [escola, setescola] = useState();
-    const [creche, setcreche] = useState();
+    const [grooming, setgrooming] = useState([]);
+    const [vet, setvet] = useState([]);
+    const [hospitality, sethospitality] = useState([]);
+    const [escola, setescola] = useState([]);
+    const [creche, setcreche] = useState([]);
 
     const [groomingTypes, setgroomingTypes] = useState();
     const [vetTypes, setvetTypes] = useState();
     const [hotelTypes, sethotelTypes] = useState();
     const [escolaTypes, setescolaTypes] = useState();
     const [crecheTypes, setcrecheTypes] = useState();
-
+    
     useEffect(() => {
         const fecthData = async () => {
             setloading(true)
             try {
-                const res = await listServices(page)
+                const res = await listServices(page, filter?.name)
                 const extractAndFormatData = (data) => {
                     return data ? Array.from(new Set(data.map(item => `${item.id_service}-${item.name}`)))
                         .map(key => ({ id: parseInt(key.split('-')[0]), name: key.split('-')[1] }))
                         : [];
                 };
 
-                const dataGrooming = res.dadosgroomings?.data;
-                const dataVet = res.dadosvet?.data;
-                const dataHotel = res.dadospethospitalities?.data;
-                const dataEscola = res.dadosescolapacotes?.data;
-                const dataCreche = res.dadoscreche?.data;
+                const dataGrooming = res.dadosgroomings?.data.length > 0 ? res.dadosgroomings?.data : grooming;
+                const dataVet = res.dadosvet?.data.length > 0 ? res.dadosvet?.data : vet;
+                const dataHotel = res.dadospethospitalities?.data.length > 0 ? res.dadospethospitalities?.data : hospitality;
+                const dataEscola = res.dadosescolapacotes?.data.length > 0 ? res.dadosescolapacotes?.data : escola;
+                const dataCreche = res.dadoscreche?.data.length > 0 ? res.dadoscreche?.data : creche;
 
                 setgrooming(dataGrooming);
                 setvet(dataVet);
@@ -70,7 +71,7 @@ export default function ServicesScreen({ navigation, }) {
             }
         }
         fecthData()
-    }, [page,]);
+    }, [page]);
     const [filteredData, setfilteredData] = useState();
 
     const handleFilter = (item) => {
@@ -118,15 +119,18 @@ export default function ServicesScreen({ navigation, }) {
                                     keyExtractor={item => item.id}
                                     windowSize={4}
                                     updateCellsBatchingPeriod={100}
-                                    contentContainerStyle={{ rowGap: 12, }}
+                                    contentContainerStyle={{ rowGap: 24, }}
                                     maxToRenderPerBatch={4}
                                     initialNumToRender={4}
                                     ListEmptyComponent={() => <Label size={16} style={{ textAlign: 'center', marginVertical: 60 }}>Nenhum resultado encontrado.</Label>}
                                     renderItem={({ item }) => <Card item={item} navigation={navigation} type={selectService.type} selectService={selectService} />}
+                                    ListFooterComponent={() => <Column style={{ height: 60 }} >
+                                        <ButtonPrimary label="Mostrar mais" onPress={() => { setpage(page + 1)}} />
+                                    </Column>}
                                 />}
                         </Column>
 
-                        <Column style={{ height: 60 }} />
+                        <Column style={{ height: 120 }} />
                     </Column>
 
                     : <Column mh={margin.h}>
@@ -142,7 +146,7 @@ export default function ServicesScreen({ navigation, }) {
                             numColumns={2}
                         />
                    
-                        <Column style={{ height: 100 }} />
+                        <Column style={{ height: 120 }} />
                     </Column>}
             </Scroll>
             <TabBar />
