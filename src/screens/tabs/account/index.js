@@ -4,11 +4,13 @@ import TopMenu from '@components/Header/topmenu';
 import { listUser } from '@api/request/auth';
 import { formatDateTime } from '@hooks/utils';
 import { getPreferences } from '@hooks/preferences';
+import { excludePreferences } from '@hooks/preferences';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function AccountScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
 
-
+    const isFocused = useIsFocused();
     const [user, setuser] = useState();
     const [loading, setloading] = useState();
 
@@ -16,16 +18,23 @@ export default function AccountScreen({ navigation, }) {
         const fetchData = async () => {
             setloading(true)
             try {
-                const res = await listUser();
-                setuser(res);
+                const pref = await getPreferences()
+                if (pref?.token) {
+                    const res = await listUser();
+                    setuser(res)
+                }
+                else {
+                    navigation.navigate('AuthLogin')
+                }
             } catch (error) {
-
+                navigation.navigate('AuthLogin')
+                console.log(error)
             } finally {
                 setloading(false)
             }
         }
         fetchData()
-    }, [])
+    }, [isFocused])
 
     const handleChat = async () => {
         try {
@@ -41,6 +50,13 @@ export default function AccountScreen({ navigation, }) {
         }
     }
 
+    const handleExit = () => {
+        navigation.navigate('Onboarding')
+        excludePreferences()
+    }
+
+    if(!user){
+        return null}
     return (
         <Main >
 
@@ -91,20 +107,20 @@ export default function AccountScreen({ navigation, }) {
                     <Button style={{ backgroundColor: color.light, }} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('Services') }}>
                         <Row style={{ alignItems: 'center', }}>
                             <Image source={require('@imgs/ac3.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
-                            <Title size={20}>Histórico de serviços</Title>
+                            <Title size={20}>Meus serviços</Title>
                         </Row>
                     </Button>
                     <Button style={{ backgroundColor: color.light, }} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('ChatList') }}>
                         <Row style={{ alignItems: 'center', }}>
                             <Image source={require('@imgs/chat.png')} style={{ width: 80, height: 80, marginRight: 12, objectFit: 'contain', }} />
-                            <Title size={20}>Histórico de conversas</Title>
+                            <Title size={20}>Minhas conversas</Title>
                         </Row>
                     </Button>
                 </Column>
                 <Button onPress={handleChat} style={{ borderWidth: 2, borderColor: '#918C8B', }} pv={16} ph={1} mh={margin.h}>
                     <LabelBT color="#918C8B" style={{ textAlign: 'center', }}>Iniciar conversa</LabelBT>
                 </Button>
-                <Button onPress={() => navigation.navigate('AuthLogin')} bg={color.red+10} pv={16} ph={1} mh={margin.h} mv={25}>
+                <Button onPress={handleExit} bg={color.red+10} pv={16} ph={1} mh={margin.h} mv={25}>
                     <LabelBT color={color.red} style={{ textAlign: 'center', }}>Sair</LabelBT>
                 </Button>
 

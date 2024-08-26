@@ -32,6 +32,7 @@ export default function ServiceSingleScreen({ navigation, route }) {
     }, [])
 
     const Card = () => {
+        console.log(service)
         switch (service?.name) {
             case 'Escola':
                 return <CardEscola item={data} navigation={navigation} service={service} />
@@ -43,7 +44,7 @@ export default function ServiceSingleScreen({ navigation, route }) {
                 return <CardVet item={data} navigation={navigation} service={service} />
                 break;
             case 'Hotel':
-              return <CardHotel item={data} navigation={navigation} service={service} />
+                return <CardHotel item={data} navigation={navigation} service={service} />
                 break;
             default:
                 return <Column />
@@ -54,7 +55,7 @@ export default function ServiceSingleScreen({ navigation, route }) {
     return (
         <Main style={{ backgroundColor: '#ECEBEB', paddingTop: 0, }}>
             <Scroll>
-                {loading ? <Column mv={150}><Loader size={32}/></Column> : data  ? <Card /> : null}
+                {loading ? <Column mv={150}><Loader size={32} /></Column> : data ? <Card /> : null}
             </Scroll>
             <TabBar />
         </Main >

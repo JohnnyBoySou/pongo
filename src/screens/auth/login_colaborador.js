@@ -8,6 +8,7 @@ import Error from '@components/Forms/error';
 //API
 
 import { loginColaborador } from '@api/request/colaborador';
+import { createPreferences } from '@hooks/colaborador';
 
 export default function AuthLoginColaboradorScreen({ navigation, }) {
     const [loading, setloading] = useState(false);
@@ -25,7 +26,19 @@ export default function AuthLoginColaboradorScreen({ navigation, }) {
         try {
             const res = await loginColaborador(email, password)
             setsuccess('Conectado com sucesso!')
-            navigation.navigate('ChatColaboradorList', { name: res?.nome, })
+            const saveUser = {
+                "avatar": res?.avatar,
+                "name": res?.nome,
+                "email": res?.email,
+                "token": res?.token,
+            };
+            const preferences = await createPreferences(saveUser)
+            if(preferences){
+                setTimeout(() => {
+                    navigation.navigate('ChatColaboradorList', { name: res?.nome, user: res, })
+                }, 1000);
+
+            }
         } catch (error) {
             seterror(error.message)
         } finally {

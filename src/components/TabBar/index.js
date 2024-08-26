@@ -3,9 +3,11 @@ import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, SCREEN_WIDTH
 import { useNavigation } from '@react-navigation/native';
 import Octicons from '@expo/vector-icons/Octicons';
 import { Bell, CircleUserRound, GraduationCap, Hotel, ShoppingCart } from 'lucide-react-native';
-export default function TabBar({ }) {
+export default function TabBar({ theme = 'dark'}) {
     const { color, font, } = useTheme();
     const navigation = useNavigation();
+
+
     return (
         <Row style={{
             width: SCREEN_WIDTH,
@@ -13,7 +15,7 @@ export default function TabBar({ }) {
             borderTopRightRadius: 20,
             position: 'absolute',
             bottom: 0, zIndex: 99,
-            backgroundColor: '#918C8B',
+            backgroundColor: theme === 'dark' ? '#918C8B' : '#fff',
             height: 80,
         }}>
 
@@ -33,9 +35,3 @@ export default function TabBar({ }) {
         </Row>
     )
 }
-
-/*
-     <Button ph={0} pv={0} style={{flexGrow: 1, justifyContent: 'center', alignItems: 'center', }}  radius={6} onPress={() => {navigation.navigate('Tabs', { screen: 'Cart',})}} >
-                <ShoppingCart size={24} color="#C3C3C3" />
-            </Button>
-            */

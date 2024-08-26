@@ -5,7 +5,7 @@ import TopMenu from '@components/Header/topmenu';
 import { MotiView, MotiText } from 'moti'
 import { Linking, Text } from 'react-native';
 import { listUser } from '@api/request/auth';
-import { getPreferences } from '@hooks/preferences';
+import { getPreferences, excludePreferences } from '@hooks/preferences';
 
 export default function HomeScreen({ navigation, }) {
     const { color, font, margin, } = useTheme();

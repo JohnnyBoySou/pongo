@@ -5,11 +5,16 @@ import TabBar from '@components/TabBar';
 import { useEffect, useState } from 'react';
 import { listChats } from '@api/request/chat';
 import { formatDateTime } from '@hooks/utils';
+import { TextInput } from 'react-native-gesture-handler';
+import { Search } from 'lucide-react-native';
+import Back from '@components/Back';
+import { searchChats } from '../../api/request/chat';
 
 export default function ChatListScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
     const [loading, setloading] = useState();
     const [data, setdata] = useState();
+    const [search, setsearch] = useState();
 
     useEffect(() => {
         const fecthData = async () => {
@@ -26,13 +31,43 @@ export default function ChatListScreen({ navigation, }) {
         fecthData();
     }, [])
 
+
+    const handleSearch = async () => {
+        if (search?.length > 1) {
+            try {
+                const res = await searchChats(search)
+                setdata(res)
+            } catch (error) {
+                
+            }
+        } else { return }
+    }
+
+
+
+
     return (
         <Main>
             <Scroll>
 
-                <TopMenu cart={false} />
-                <Column mh={margin.h} mv={24}>
+                <TopMenu cart={false} search={false} back={false} />
+                <Column mh={margin.h} mv={12}>
                     <Title>Suas conversas</Title>
+                    <Row style={{ justifyContent: 'center', alignItems: 'center', flex: 1, marginHorizontal: 28, marginTop: 10,   }}>
+                        <Back />
+                        <Row style={{ backgroundColor: '#fff', paddingRight: 8, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginLeft: 8, }}>
+                            <TextInput
+                                value={search}
+                                onChangeText={(e) => setsearch(e)}
+                                placeholder='Pesquisar'
+                                onSubmitEditing={handleSearch}
+                                style={{ paddingHorizontal: 20, paddingVertical: 14, fontSize: 16, fontFamily: font.medium, flex: 1 }}
+                            />
+                            <Button bg={color.title} ph={1} pv={1} onPress={handleSearch} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} radius={8}>
+                                <Search size={18} color="#fff" />
+                            </Button>
+                        </Row>
+                    </Row>
                 </Column>
                 {loading ? <Loader /> :
                     <Column>

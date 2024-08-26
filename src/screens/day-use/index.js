@@ -9,7 +9,6 @@ import TabBar from '@components/TabBar';
 import Swiper from 'react-native-swiper';
 
 
-
 export default function DayUseScreen() {
 
     const { color, font, margin } = useTheme();

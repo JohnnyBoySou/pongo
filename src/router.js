@@ -69,7 +69,7 @@ import VillaPongoScreen from '@screens/villapongo';
 //SERVICES
 import ServicesScreen from '@screens/services';
 import ServicesSingleScreen from '@screens/services/single';
-
+import ServiceDiarioScreen from '@screens/services/diario';
 //SCHOOL
 import SchoolRegisterScreen from '@screens/school/register';
 import SchoolFinishScreen from '@screens/school/finish';
@@ -128,6 +128,7 @@ export default function Router() {
 
         <Stack.Screen name="Services" component={ServicesScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ServicesSingle" component={ServicesSingleScreen} options={{ ...TransitionPresets.ModalPresentationIOS , }} />
+        <Stack.Screen name="ServicesDiario" component={ServiceDiarioScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="MeusPedidos" component={MeusPedidosScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="PedidoProdutoIndividual" component={PedidoProdutoIndividualScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -193,6 +194,7 @@ function Tabs() {
         tabBarIcon: ({ color, size }) => (<Hotel size={routeName === 'Notify' ? size + 3 : size} color={color} />),
       }} />
       <Tab.Screen name="Account" component={AccountScreen} options={{
+        backBehavior: 'none', 
         tabBarIcon: ({ color, size }) => (<CircleUserRound size={routeName === 'Account' ? size + 3 : size} color={color} />),
       }} />
     </Tab.Navigator>

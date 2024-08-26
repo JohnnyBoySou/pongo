@@ -8,7 +8,7 @@ import { Check } from 'lucide-react-native';
 
 export default function CardHotel({ item, navigation, service }) {
     const { color, font, margin } = useTheme()
-    const { name, criado_em, check_in, check_out, status, id_pet_pet, tutor, nomecolaborador, value, id, pet } = item
+    const { name, criado_em, check_in, check_out, status, id_service, tutor, nomecolaborador, value, id, pet } = item
     const types = [
         {
             name: 'Não iniciado',
@@ -88,9 +88,11 @@ export default function CardHotel({ item, navigation, service }) {
                 </Column>
             </Row>
 
-
             <Steps data={data} status={status} />
        
+            <Column mh={margin.h} mv={30}>
+                <Button onPress={() => { navigation.navigate('ServicesDiario', { id: id_service, pet: pet, tipo: 'hospitalitie' }) }} style={{ width: '100%', backgroundColor: color.sc.sc3, }}><LabelBT style={{ color: color.light, textAlign: 'center' }}>Diário do pet</LabelBT></Button>
+            </Column>
             <Column style={{ height: 120, }} />
         </Column>
     )

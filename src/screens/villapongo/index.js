@@ -7,6 +7,8 @@ import TabBar from '@components/TabBar';
 import Back from '@components/Back';
 export default function VillaPongoScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
+
+    //grooming e vet
     return (
         <Main>
             <Scroll>
@@ -22,7 +24,6 @@ export default function VillaPongoScreen({ navigation, }) {
                             keyExtractor={item => item.id}
                             showsVerticalScrollIndicator={false}
                         />
-
                     </Column>
 
                 </Column>
