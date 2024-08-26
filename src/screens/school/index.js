@@ -27,7 +27,7 @@ export default function SchoolPongoScreen() {
                 <TopMenu search={false} back={false} />
 
                 <Header title="Escola Pongo" />
-                <Carrossel data={imgs} />
+
 
                 <Column mh={margin.h}>
                     <Image source={require('@imgs/img-escola-banner3.png')} style={{ width: '100%', height: 223, marginVertical: 24 }} />
@@ -91,7 +91,7 @@ export default function SchoolPongoScreen() {
 
                 </Column>
                 <Column mv={margin.v}>
-                    <Carrossel data={imgs2} />
+                    <Carrossel data={imgs} />
                 </Column>
                 <ListaRotinaEscola />
 
@@ -197,12 +197,6 @@ export default function SchoolPongoScreen() {
         </Main>
     );
 }
-
-const imgs2 = [
-    'https://lh6.googleusercontent.com/VAViVE0QG6wpW2yeSzQA7tPOrNFf3hlmUrwr7mogM3oShMFGVVNPRpKFs6Sf23tL_c6tITmB5glV2WSR3O1a4Zxd4zj9o7sb39WLMpaA0n20IG3EK-JkeEvA8-OmWF6GeuLB3qwrUsDbALDzrQm27BZJqIdqTTEHXt-TTsaUKem2jwyQKWehdB8vPJtEdw',
-    'https://s2-g1.glbimg.com/AjCheGSkmh-QkcBw00ttWUBROtk=/0x0:1600x1200/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/n/d/zQ8s7VQtajoP3ePt9dIg/whatsapp-image-2022-07-19-at-17.40.44.jpeg',
-    'https://www.melhoresdestinos.com.br/wp-content/uploads/2021/04/cachorro-hotel-capa.jpg',
-]
 
 const imgs = [
     require('@imgs/escola1.jpg'),
