@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
-import { Pressable, TextInput, ScrollView, Image, FlatList, View, Text } from 'react-native';
-import { Main, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT, useTheme, } from '@theme/global';
+import React from 'react';
+import { Image } from 'react-native';
+import { Main, Scroll, Column, Label, Title, Row, useTheme, } from '@theme/global';
 
 import Header from '@components/Header';
 import TopMenu from '@components/Header/topmenu';
-
 import { MoveRight } from 'lucide-react-native';
-
-import CarrosselRotinaEscola from './CarrosselRotinaEscola';
-import ListaRotinaEscola from './ListaRotinaEscola';
 import TabBar from '@components/TabBar';
-
+import Swiper from 'react-native-swiper';
 
 
 
@@ -18,22 +14,16 @@ export default function DayUseScreen() {
 
     const { color, font, margin } = useTheme();
 
-    const handleRegister = (item) => {
-        navigation.navigate('SchoolRegister', { item: item })
-    }
-
     return (
         <Main style={{ backgroundColor: '#FFFFFF' }}>
             <Scroll>
-                <TopMenu search={false} back={false}/>
+                <TopMenu search={false} back={false} />
 
                 <Header title="Day Use" />
 
                 <Column mh={margin.h}>
-
                     <Image source={require('@imgs/img-escola-banner.png')} style={{ width: '100%', height: 223, marginVertical: 24 }} />
-
-                    <Text style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 6, paddingHorizontal: 40, fontWeight: 700, lineHeight: 16 }}>Tenha todos os benefícios da Escola Pongo por um dia!</Text>
+                    <Title style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 6, paddingHorizontal: 40, lineHeight: 22 }}>Tenha todos os benefícios da Escola Pongo por um dia!</Title>
 
                     { /* <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
                         <Label style={{ textAlign: 'center', color: color.title }}>Contratar Day Use</Label>
@@ -41,8 +31,7 @@ export default function DayUseScreen() {
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
-                    <Title style={{ fontSize: 18, fontWeight: 700, color: '#979797', paddingVertical: 6, marginVertical: 12 }}>Conheça a estrutura da Escola Pongo</Title>
-
+                    <Title style={{ fontSize: 18, paddingVertical: 6, marginVertical: 12 }}>Conheça a estrutura da Escola Pongo</Title>
 
                     <Row alignItems='flex-start' pv={6} style={{ marginRight: 24 }}>
                         <MoveRight size={24} color={'#D9D9D9'} style={{ marginRight: 8 }} />
@@ -85,17 +74,17 @@ export default function DayUseScreen() {
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
-                    <Title style={{ fontSize: 18, fontWeight: 700, color: '#979797', paddingVertical: 6, marginTop: 12, textAlign: 'center' }}>Rotina na escola</Title>
+                    <Title style={{ fontSize: 18, paddingVertical: 6, marginTop: 12, textAlign: 'center' }}>Rotina na escola</Title>
                     <Label style={{ fontSize: 12, color: '#979797', textAlign: 'center' }}>Integral 7:00 ás 19:00</Label>
 
                     <Column mv={margin.v}>
-                        <CarrosselRotinaEscola />
                     </Column>
                 </Column>
+                <Carrossel data={imgs} />
 
                 <ListaRotinaEscola />
 
-                <Column style={{ height: 80 }} />
+                <Column style={{ height: 120 }} />
 
                 { /* <Column mh={margin.h} mv={margin.v}>
                     <Button style={{ width: '100%', backgroundColor: color.pr.pr2 }}>
@@ -108,5 +97,72 @@ export default function DayUseScreen() {
             </Scroll>
             <TabBar />
         </Main>
+    );
+}
+
+
+
+const items = [
+    "7:00 - Entrada e acompanhamento veterinário",
+    "8:00 - Café da Manhã | Banho de Sol | Hora do Conto",
+    "9:00 - Passeio no Parque Ibirapuera",
+    "10:00 - Descanso | Musicoterapia",
+    "11:00 - Almoço",
+    "12:00 - Hora do Sono",
+    "13:00 - Adestramento",
+    "14:00 - Atividade do dia da semana",
+    "15:00 - Atividades internas",
+    "16:00 - Recreio",
+    "17:00 - Passeio Parque",
+    "18:00 - Higienização",
+    "19:00 - Saída",
+];
+
+function ListaRotinaEscola() {
+    const { color, font, margin } = useTheme();
+    return (
+        <Column mv={24}>
+            {items.map((item, index) => (
+                <Row
+                    key={index}
+                    style={{
+                        paddingHorizontal: margin.h,
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        paddingVertical: 5,
+                        borderRadius: 8,
+                        backgroundColor: index % 2 === 0 ? '#ffffff' : '#ECEBEB', 
+                    }}
+                >
+                    <MoveRight size={24} color={'#D9D9D9'} style={{ marginRight: 8 }} />
+                    <Label style={{ fontSize: 11, fontWeight: 500, color: '#979797' }}>
+                        {item}
+                    </Label>
+                </Row>
+            ))}
+        </Column>
+    );
+}
+
+
+
+
+const imgs = ['https://lh6.googleusercontent.com/VAViVE0QG6wpW2yeSzQA7tPOrNFf3hlmUrwr7mogM3oShMFGVVNPRpKFs6Sf23tL_c6tITmB5glV2WSR3O1a4Zxd4zj9o7sb39WLMpaA0n20IG3EK-JkeEvA8-OmWF6GeuLB3qwrUsDbALDzrQm27BZJqIdqTTEHXt-TTsaUKem2jwyQKWehdB8vPJtEdw',
+    'https://s2-g1.glbimg.com/AjCheGSkmh-QkcBw00ttWUBROtk=/0x0:1600x1200/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/n/d/zQ8s7VQtajoP3ePt9dIg/whatsapp-image-2022-07-19-at-17.40.44.jpeg',
+    'https://www.melhoresdestinos.com.br/wp-content/uploads/2021/04/cachorro-hotel-capa.jpg',
+]
+
+function Carrossel({ data }) {
+    return (
+        <Swiper style={{ height: 180, overflow: 'hidden', borderRadius: 20 }} autoplay={true} loop={false}>
+            {data?.map((img, index) => (
+                <Column key={index} style={{ flex: 1, marginHorizontal: 28, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
+                    <Image
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        source={{ uri: img }}
+                    />
+                </Column>
+            ))}
+        </Swiper>
     );
 }

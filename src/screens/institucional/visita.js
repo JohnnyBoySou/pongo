@@ -107,6 +107,7 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
                     </Button>
                 </Column>
 
+                <Column style={{ height: 120 }} />
             </Scroll>
             <TabBar />
 

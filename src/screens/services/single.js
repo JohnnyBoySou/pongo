@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Pressable, TextInput, ScrollView, Image, } from 'react-native';
-import { Main, View, Scroll, Column, Label, SubLabel, Title, Row, Button, Loader, useTheme, } from '@theme/global';
+import { Main, Scroll, Column, Loader, useTheme, } from '@theme/global';
 
 import TabBar from '@components/TabBar';
 import CardEscola from './cardEscola';
@@ -23,7 +22,6 @@ export default function ServiceSingleScreen({ navigation, route }) {
             setloading(true)
             try {
                 const res = await singleService(id, service?.type)
-                console.log(res)
                 setdata(res)
             } catch (error) {
                 console.log(error)

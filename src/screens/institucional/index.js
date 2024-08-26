@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
-import { ScrollView, Image, Pressable } from 'react-native';
-import { Main, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT } from '@theme/global';
+import React, { useContext } from 'react';
+import { Image } from 'react-native';
+import { Main, Scroll, Column, Title, Row, Button } from '@theme/global';
 import { ThemeContext } from 'styled-components/native';
 import Swiper from 'react-native-swiper';
 import TopMenu from '@components/Header/topmenu';
@@ -9,10 +9,6 @@ import TabBar from '@components/TabBar';
 export default function InstitucionalScreen({ navigation, }) {
 
     const { color, font, margin } = useContext(ThemeContext);
-
-    const [name, setname] = useState();
-    const [tel, settel] = useState();
-    const [type, settype] = useState('Pongo');
 
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
