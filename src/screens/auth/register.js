@@ -145,10 +145,13 @@ export default function AuthRegisterScreen({ navigation, route, }) {
                     {err ? <Error msg={err} /> : success ? <Success msg={success} /> : null}
 
 
-                    <Row style={{ alignItems: 'center', marginBottom: 32, }}>
-                        <CheckBox status={terms} setstatus={setterms} />
-                        <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de {'\n'}uso e Privacidade</U></Label>
-                    </Row>
+                    <Button onPress={() => {navigation.navigate('Privacidade')}} pv={8} ph={8} radius={4} style={{ marginBottom: 32,  }}>
+                        <Row style={{ alignItems: 'center', }}>
+                            <CheckBox status={terms} setstatus={setterms} />
+                            <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de uso e Privacidade</U></Label>
+                        </Row>
+                        </Button>
+
 
 
                     <Button bg='#918C8B' onPress={handleRegister} disabled={loading}>

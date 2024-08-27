@@ -25,6 +25,19 @@ export default function HomeScreen({ navigation, }) {
                 return
         }
     }
+    const handleAccount = async () => {
+        try {
+            const res = await getPreferences()
+            if (res?.token) {
+                    navigation.navigate('Tabs',{ screen: 'Account'} )
+                }
+            else {
+                navigation.navigate('AuthLogin')
+            }
+            } catch (error) {
+                return
+        }
+    }
 
     return (
         <Main >
@@ -77,7 +90,7 @@ export default function HomeScreen({ navigation, }) {
                             }}
                             style={{ flexGrow: 1 }}
                         >
-                            <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Tabs', { screen: 'Account' }) }}>
+                            <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={handleAccount}>
                                 <Column>
                                     <MotiImage source={require('@imgs/home_3.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
                                     <Title align="center" size={18}>Minha conta</Title>

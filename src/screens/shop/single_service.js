@@ -101,6 +101,9 @@ const Gallery = ({ imgs }) => {
                 </Row>}
                 pagingEnabled
                 keyExtractor={item => item}
+                initialNumToRender={10}
+                maxToRenderPerBatch={10}
+                removeClippedSubviews
                 showsHorizontalScrollIndicator={false}
                 onScroll={Animated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], { useNativeDriver: false, })}
                 renderItem={({ item }) => (

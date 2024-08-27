@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { } from 'react';
 import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Image } from '@theme/global';
 import TopMenu from '@components/Header/topmenu';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import TabBar from '@components/TabBar';
-import Back from '@components/Back';
 export default function VillaPongoScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
 
@@ -23,6 +21,9 @@ export default function VillaPongoScreen({ navigation, }) {
                             renderItem={({ item }) => <Card item={item} />}
                             keyExtractor={item => item.id}
                             showsVerticalScrollIndicator={false}
+                            initialNumToRender={10}
+                            maxToRenderPerBatch={10}
+                            removeClippedSubviews
                         />
                     </Column>
 

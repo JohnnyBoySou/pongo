@@ -21,6 +21,9 @@ export default function HomeScreen({ navigation, }) {
                         data={services}
                         renderItem={({ item }) => <Card item={item} />}
                         keyExtractor={item => item.id}
+                        initialNumToRender={10}
+                        maxToRenderPerBatch={10}
+                        removeClippedSubviews
                         showsVerticalScrollIndicator={false}
                     />
                     <Button onPress={() => { navigation.navigate('ChatList') }} style={{ backgroundColor: '#918C8B', marginTop: 24, }} radius={50} pv={16} ph={1} mh={margin.h}>

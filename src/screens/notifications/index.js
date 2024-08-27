@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Image, View, ScrollView } from 'react-native';
 import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, LabelBT } from '@theme/global';
 
@@ -6,6 +6,7 @@ import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, LabelBT } fr
 import TopMenu from '@components/Header/topmenu';
 
 import TabBar from '@components/TabBar';
+import { getNotifications } from '@api/request/notifications';
 
 export default function NotificationsScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
@@ -30,6 +31,23 @@ export default function NotificationsScreen({ navigation, }) {
                 break;
         }
     }
+
+    const [data, setdata] = useState([]);
+    const [loading, setloading] = useState(false);
+    useEffect(() => {
+        const fetchData = () => {
+            setloading(true)
+            try {
+               const res = getNotifications();
+               setdata(res); 
+            } catch (error) {
+                console.log(error)
+            } finally{
+                setloading(false)
+            }
+        }
+        fetchData()
+    }, [])
 
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>

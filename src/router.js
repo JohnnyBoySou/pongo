@@ -87,6 +87,7 @@ import HotelRegisterScreen from '@screens/hotel/register';
 
 import NotificationsScreen from '@screens/notifications/index';
 import FaqScreen from '@screens/faq/index';
+import Privacidade from '@screens/privacidade/index';
 
 export default function Router() {
   return (
@@ -127,7 +128,7 @@ export default function Router() {
         <Stack.Screen name="VillaPongo" component={VillaPongoScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Services" component={ServicesScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-        <Stack.Screen name="ServicesSingle" component={ServicesSingleScreen} options={{ ...TransitionPresets.ModalPresentationIOS , }} />
+        <Stack.Screen name="ServicesSingle" component={ServicesSingleScreen} options={{ ...TransitionPresets.ModalPresentationIOS, }} />
         <Stack.Screen name="ServicesDiario" component={ServiceDiarioScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="MeusPedidos" component={MeusPedidosScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -157,6 +158,7 @@ export default function Router() {
 
         <Stack.Screen name="Notifications" component={NotificationsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="Faq" component={FaqScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="Privacidade" component={Privacidade} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
       </Stack.Navigator>
     </NavigationContainer>
@@ -189,7 +191,7 @@ function Tabs() {
         tabBarIcon: ({ color, size }) => (<Octicons name="home" size={routeName === 'Home' ? size + 3 : size} color={color} />),
       }} />
 
-    
+
       <Tab.Screen name="Shop" component={ShopScreen} options={{
         tabBarIcon: ({ color, size }) => (<ShoppingCart size={routeName === 'School' ? size + 6 : size + 2} color={color} />),
       }} />
@@ -198,7 +200,7 @@ function Tabs() {
         tabBarIcon: ({ color, size }) => (<Hotel size={routeName === 'Notify' ? size + 3 : size} color={color} />),
       }} />
       <Tab.Screen name="Account" component={AccountScreen} options={{
-        backBehavior: 'none', 
+        backBehavior: 'none',
         tabBarIcon: ({ color, size }) => (<CircleUserRound size={routeName === 'Account' ? size + 3 : size} color={color} />),
       }} />
     </Tab.Navigator>

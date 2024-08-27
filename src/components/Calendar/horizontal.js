@@ -38,6 +38,9 @@ export default function CalendarioHorizontal({ day, setday, }) {
             showsHorizontalScrollIndicator={false}
             ListHeaderComponent={<Column style={{ width: 16, }}></Column>}
             ListFooterComponent={<Column style={{ width: 28, }}></Column>}
+            initialNumToRender={10}
+            maxToRenderPerBatch={10}
+            removeClippedSubviews
             renderItem={({ item, index }) => (
                 <Animated.View entering={FadeInRight.delay(300 * index)}>
                     <Button ph={1} pv={1} radius={1} onPress={() => { setday({ day: item.day, month: item.month, name: item.name }) }} style={{ width: 64, height: 82, justifyContent: 'center', alignItems: 'center', borderWidth: 1, borderStyle: 'dashed', borderColor: '#858585', backgroundColor: day?.day == item?.day ? color.primary : 'transparent', }}>

@@ -83,27 +83,30 @@ export default function ChatDetailsScreen({ navigation, route }) {
                     </Row>
                 }
                 max={<Column>
-                    <Row style={{justifyContent: 'center', alignItems: 'center', }}>
+                    <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                         <Input
                             placeholder="Pesquisar"
                             value={search}
                             label="Pesquisar"
                             setValue={setsearch}
                         />
-                           <Button onPress={closeTopSheet} ph={0} pv={0} mv={12} style={{ width: 42, marginLeft: 12, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
+                        <Button onPress={closeTopSheet} ph={0} pv={0} mv={12} style={{ width: 42, marginLeft: 12, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
                             <X size={22} color={color.sc.sc3} />
                         </Button>
                     </Row>
                     <Label style={{ marginVertical: 12, }}>Resultados</Label>
                     {search.length > 1 &&
-                    <Animated.FlatList
-                        entering={FadeInDown}
-                        exiting={FadeOutDown}
-                        data={searchResult}
-                        renderItem={({ item }) => <Message item={item} />}
-                        keyExtractor={item => item.id}
-                        style={{ backgroundColor: '#f7f7f7', borderRadius: 12, paddingHorizontal: 20, paddingVertical: 12, }}
-                    />}
+                        <Animated.FlatList
+                            entering={FadeInDown}
+                            exiting={FadeOutDown}
+                            data={searchResult}
+                            initialNumToRender={10}
+                            maxToRenderPerBatch={10}
+                            removeClippedSubviews
+                            renderItem={({ item }) => <Message item={item} />}
+                            keyExtractor={item => item.id}
+                            style={{ backgroundColor: '#f7f7f7', borderRadius: 12, paddingHorizontal: 20, paddingVertical: 12, }}
+                        />}
                 </Column>}
                 valueMin={80}
                 valueMax={SCREEN_HEIGHT - 100}
@@ -118,6 +121,9 @@ export default function ChatDetailsScreen({ navigation, route }) {
                     <Label color="#fff">Inicio do chat em 12 de Jun, 2024</Label>
                 </Column>}
                 renderItem={({ item }) => <Message item={item} />}
+                initialNumToRender={10}
+                maxToRenderPerBatch={10}
+                removeClippedSubviews
                 keyExtractor={item => item.id}
                 style={{ paddingHorizontal: margin.h, }}
                 onScroll={(event) => {

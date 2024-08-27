@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
-import { Pressable, TextInput, ScrollView, Image, } from 'react-native';
-import { Main, View, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT, useTheme, } from '@theme/global';
+import { Image, } from 'react-native';
+import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, } from '@theme/global';
 
-import { ArrowLeft } from 'lucide-react-native';
-import { Search } from 'lucide-react-native';
 
 import Header from '@components/Header';
-import HeaderInternal from '@components/HeaderInternal';
 
-import Input from '@components/Forms/input';
-import { Card } from 'react-native-paper';
 import TopMenu from '@components/Header/topmenu';
 import { FlatList } from 'react-native-gesture-handler';
-import WizardForm from './steps';
 import StepsPedido from './stepsPedido';
 import StepsRastreio from './stepsRastreio';
 
@@ -20,19 +14,8 @@ export default function PedidoProdutoIndividualScreen({ navigation, }) {
 
     const { color, font, margin } = useTheme();
 
-    const [name, setname] = useState();
-    const [tel, settel] = useState();
-    const [type, settype] = useState('Pongo');
 
-    const [query, setquery] = useState();
-    const [loading, setloading] = useState(false);
-    const [focus, setfocus] = useState(false);
-    const handleSearch = () => {
-    }
-
-
-    const types = ['Processando', 'Concluído', 'Cancelado', 'Reembolso'];
-    const [filter, setfilter] = useState('Processando');
+    
     return (
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>

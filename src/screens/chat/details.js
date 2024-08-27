@@ -83,7 +83,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
                 ref={topSheetRef}
                 bg={color.bg}
                 min={
-                    <Row style={{ justifyContent: 'space-between', alignItems: 'center',  paddingTop: 30,}}>
+                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', paddingTop: 30, }}>
                         <Row>
                             <Pressable pv={1} ph={1} onPress={() => { navigation.goBack() }} >
                                 <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
@@ -121,15 +121,18 @@ export default function ChatDetailsScreen({ navigation, route }) {
 
                     </Column>
 
-                    {searchResult &&<Label style={{ marginVertical: 12, }}>Resultados</Label>}
+                    {searchResult && <Label style={{ marginVertical: 12, }}>Resultados</Label>}
                     {search.length > 1 &&
                         <Animated.FlatList
                             entering={FadeInDown}
                             exiting={FadeOutDown}
                             data={searchResult}
+                            initialNumToRender={10}
+                            maxToRenderPerBatch={10}
+                            removeClippedSubviews
                             renderItem={({ item }) => <Message item={item} />}
                             keyExtractor={item => item.id}
-                            style={{ }}
+                            style={{}}
                         />}
                 </Column>}
                 valueMin={120}
@@ -146,6 +149,9 @@ export default function ChatDetailsScreen({ navigation, route }) {
                 </Column>}
                 renderItem={({ item }) => <Message item={item} />}
                 keyExtractor={item => item.id}
+                initialNumToRender={10}
+                maxToRenderPerBatch={10}
+                removeClippedSubviews
                 style={{ paddingHorizontal: margin.h, }}
                 onScroll={(event) => {
                     if (event.nativeEvent.contentOffset.y > 200) {

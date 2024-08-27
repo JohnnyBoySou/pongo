@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Pressable, TextInput, ScrollView, Image, FlatList, View, Text } from 'react-native';
-import { Main, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT, useTheme, } from '@theme/global';
+import React from 'react';
+import { Image, Text } from 'react-native';
+import { Main, Scroll, Column, Label, Row, useTheme, } from '@theme/global';
 
 import Header from '@components/Header';
 import TopMenu from '@components/Header/topmenu';
 
-import { BadgeCheck, GraduationCap, MoveRight } from 'lucide-react-native';
+import { BadgeCheck, GraduationCap } from 'lucide-react-native';
 
 import TabBar from '@components/TabBar';
 

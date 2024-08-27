@@ -21,6 +21,9 @@ export default function PlanosList({ destino }) {
                 onScroll={RAnimated.event([{ nativeEvent: { contentOffset: { x: scrollX } } }], { useNativeDriver: false, })}
                 snapToAlignment="center"
                 pagingEnabled
+                initialNumToRender={3}
+                maxToRenderPerBatch={3}
+                removeClippedSubviews
                 snapToEnd={false}
             />
 

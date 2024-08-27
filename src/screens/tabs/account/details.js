@@ -6,7 +6,7 @@ import { Check, Pencil } from 'lucide-react-native';
 import { updateUser, listUser } from '@api/request/auth';
 
 import * as ImagePicker from 'expo-image-picker';
-import { updatePreferences } from '@hooks/preferences';
+import { updatePreferences, excludePreferences } from '@hooks/preferences';
 import Input from '@components/Forms/input';
 import TopMenu from '@components/Header/topmenu';
 import TabBar from '@components/TabBar';
@@ -89,7 +89,7 @@ export default function AccountDetailsScreen({ navigation }) {
                 "email": email,
                 "cpf": cpf,
                 "cep": cep,
-                "complemento":complemento,
+                "complemento": complemento,
                 "bairro": bairro,
                 "cidade": cidade,
                 "rua": rua,
@@ -127,7 +127,10 @@ export default function AccountDetailsScreen({ navigation }) {
 
     }
     const profile = temporaryImg ? { uri: `file://${temporaryImg}` } : avatar ? { uri: avatar } : require('@imgs/user_placeholder.png')
-
+    const handleExit = () => {
+        navigation.navigate('AuthLogin')
+        excludePreferences()
+    }
     return (
         <Main>
             <Scroll>
@@ -216,6 +219,11 @@ export default function AccountDetailsScreen({ navigation }) {
                     <Button onPress={() => { navigation.navigate('AuthLogin',) }} style={{ borderWidth: 2, borderColor: color.label, }} pv={8}>
                         <LabelBT align="center" size={16}>Redefinir minha senha</LabelBT>
                     </Button>
+
+                    <Button onPress={handleExit} bg={color.red + 10} pv={10} ph={1}  mv={25}>
+                        <LabelBT color={color.red} style={{ textAlign: 'center', }}>Sair</LabelBT>
+                    </Button>
+
 
                 </Column>
                 <Column style={{ height: 160, }} />

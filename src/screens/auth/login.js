@@ -111,10 +111,12 @@ export default function AuthLoginScreen({ navigation, }) {
                             <U><LabelBT color={color.title} style={{ fontSize: 16, }}>Recuperar senha</LabelBT></U>
                         </Button>
 
-                        <Row style={{ alignItems: 'center', marginBottom: 32, }}>
+                        <Button onPress={() => {navigation.navigate('Privacidade')}} pv={8} ph={8} radius={4} style={{ marginBottom: 32,  }}>
+                        <Row style={{ alignItems: 'center', }}>
                             <CheckBox status={terms} setstatus={setterms} />
                             <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de uso e Privacidade</U></Label>
                         </Row>
+                        </Button>
 
                         {success ? <Success msg={success} /> : error ? <Error msg={error} /> : null}
 
@@ -136,7 +138,7 @@ export default function AuthLoginScreen({ navigation, }) {
                         <Label size={14} align='center' >Ao continuar, você concorda em receber chamadas e mensagens SMS ou pelo WhatsApp, inclusive automáticas, da Villa Pongo e de suas afiliadas, no número informado.</Label>
 
 
-                        <Button radius={12} onPress={() => { navigation.navigate('AuthLoginColaborador') }} mv={12} bg={color.label + 20}>
+                        <Button radius={12} onPress={() => { navigation.navigate('AuthLoginColaborador') }} mv={18} bg={color.label + 20}>
                             <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
                                 <Label size={14} align="center">Entrar como</Label>
                                 <LabelBT size={14} align="center" >Colaborador</LabelBT>
