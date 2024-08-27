@@ -1,16 +1,10 @@
 import React, { useRef, useState } from 'react';
-import { Image, View, Text, ScrollView } from 'react-native';
-import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Card, SCREEN_WIDTH, SCREEN_HEIGHT, LabelBT } from '@theme/global';
-import { Search } from 'lucide-react-native';
+import { Image, View, ScrollView } from 'react-native';
+import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, LabelBT } from '@theme/global';
 
 //Components
-import InstagramStories from '@birdwingo/react-native-instagram-stories';
 import TopMenu from '@components/Header/topmenu';
-import PagerView from 'react-native-pager-view';
 
-import Chart from '@components/Charts';
-import StarsRate from '@components/StarsRate/index';
-import Calendario from '@components/Calendar';
 import TabBar from '@components/TabBar';
 
 export default function NotificationsScreen({ navigation, }) {
