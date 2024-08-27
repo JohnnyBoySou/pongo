@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Image } from 'react-native';
-import { Main, Scroll, Column, Title, Row, Button } from '@theme/global';
+import { Main, Scroll, Column, Title, Row, Button, Label } from '@theme/global';
 import { ThemeContext } from 'styled-components/native';
 import Swiper from 'react-native-swiper';
 import TopMenu from '@components/Header/topmenu';
@@ -19,36 +19,57 @@ export default function InstitucionalScreen({ navigation, }) {
                 <Column mh={margin.h} mv={30} style={{ rowGap: 24, }}>
                     <Button radius={16} bg="#fff" pv={10} ph={10} onPress={() => { navigation.navigate('InstitucionalVisita') }} >
                         <Row style={{ alignItems: 'center' }}>
-                            <Image source={require('@imgs/btn-solicitar-visita.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
-                            <Title>Solicitar Visita</Title>
+                            <Image source={require('@imgs/btn-solicitar-visita.png')} style={{ width: 81, height: 81, marginRight: 8, borderRadius: 20 }} />
+                            <Column>
+                                <Title size={16}>Solicitar Visita</Title>
+                                <Column style={{ height: 4, }} />
+                                <Label size={14}>Clique para visualizar</Label>
+                            </Column>
+
                         </Row>
                     </Button>
 
                     <Button radius={16} bg="#fff" pv={10} ph={10} onPress={() => { navigation.navigate('InstitucionalAbout') }} >
                         <Row style={{ alignItems: 'center' }}>
-                            <Image source={require('@imgs/btn-sobre-nos.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
-                            <Title>Sobre nós</Title>
+                            <Image source={require('@imgs/btn-sobre-nos.png')} style={{ width: 81, height: 81, marginRight: 8, borderRadius: 20 }} />
+                            <Column>
+                                <Title size={16}>Sobre nós</Title>
+                                <Column style={{ height: 4, }} />
+                                <Label size={14}>Clique para visualizar</Label>
+                            </Column>
                         </Row>
                     </Button>
 
                     <Button radius={16} bg="#fff" onPress={() => { navigation.navigate('InstitucionalRealizacoes') }} pv={10} ph={10}>
                         <Row style={{ alignItems: 'center' }}>
-                            <Image source={require('@imgs/btn-realizacoes.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
-                            <Title>Realizações</Title>
+                            <Image source={require('@imgs/btn-realizacoes.png')} style={{ width: 81, height: 81, marginRight: 8, borderRadius: 20 }} />
+                            <Column>
+                                <Title size={16}>Realizações</Title>
+                                <Column style={{ height: 4, }} />
+                                <Label size={14}>Clique para visualizar</Label>
+                            </Column>
                         </Row>
                     </Button>
 
                     <Button radius={16} bg="#fff" pv={10} ph={10} onPress={() => { navigation.navigate('InstitucionalLocal') }} >
                         <Row style={{ alignItems: 'center' }}>
-                            <Image source={require('@imgs/btn-onde-estamos.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
-                            <Title>Onde estamos</Title>
+                            <Image source={require('@imgs/btn-onde-estamos.png')} style={{ width: 81, height: 81, marginRight: 8, borderRadius: 20 }} />
+                            <Column>
+                                <Title size={16}>Onde estamos</Title>
+                                <Column style={{ height: 4, }} />
+                                <Label size={14}>Clique para visualizar</Label>
+                            </Column>
                         </Row>
                     </Button>
 
                     <Button radius={16} bg="#fff" pv={10} ph={10} onPress={() => { navigation.navigate('InstitucionalGaleria') }} >
                         <Row style={{ alignItems: 'center' }}>
-                            <Image source={require('@imgs/btn-galeria.png')} style={{ width: 81, height: 81, marginRight: 24, borderRadius: 20 }} />
-                            <Title>Galeria</Title>
+                            <Image source={require('@imgs/btn-galeria.png')} style={{ width: 81, height: 81, marginRight: 8, borderRadius: 20 }} />
+                            <Column>
+                                <Title size={16}>Galeria</Title>
+                                <Column style={{ height: 4, }} />
+                                <Label size={14}>Clique para visualizar</Label>
+                            </Column>
                         </Row>
                     </Button>
 
