@@ -45,7 +45,7 @@ const Card = ({ item }) => {
                     <Column style={{ justifyContent: 'center', }}>
                         <Title size={16}>{name}</Title>
                         <Column style={{ height: 4, }} />
-                        <Label size={14}>Clique para visualizar</Label>
+                        <Label size={14}>Clique e saiba mais</Label>
                     </Column>
                 </Row>
                 <Column>
@@ -57,28 +57,28 @@ const Card = ({ item }) => {
 
 const data = [
     {
-        name: 'Hotel',
+        name: 'HOTEL',
         time: 'Tempo de duração',
         id: 1,
         img: require('@imgs/hotel.png'),
         screen: 'Hotel',
     },
     {
-        name: 'Day use',
+        name: 'DAY USE',
         time: 'Tempo de duração',
         id: 2,
         img: require('@imgs/day use.png'),
         screen: 'DayUse',
     },
     {
-        name: 'Escola',
+        name: 'ESCOLA',
         time: 'Tempo de duração',
         id: 3,
         img: require('@imgs/escola.png'),
         screen: 'School',
     },
     {
-        name: 'Vet',
+        name: 'VET',
         time: 'Tempo de duração',
         id: 4,
         img: require('@imgs/vet.png'),
@@ -86,7 +86,7 @@ const data = [
     },
 
     {
-        name: 'Grooming',
+        name: 'GROOMING',
         time: 'Tempo de duração',
         id: 5,
         img: require('@imgs/grooming.png'),

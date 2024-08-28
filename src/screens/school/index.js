@@ -26,15 +26,24 @@ export default function SchoolPongoScreen() {
             <Scroll>
                 <TopMenu search={false} back={false} />
 
-                <Header title="Escola Pongo" />
+                <Header title="ESCOLA VILLA PONGO" />
 
 
                 <Column mh={margin.h}>
                     <Image source={require('@imgs/img-escola-banner3.png')} style={{ width: '100%', height: 223, marginVertical: 24 }} />
-                    <Label style={{ textAlign: 'center', color: '#918C8B', fontStyle: 'italic', fontSize: 18, paddingVertical: 6 }}>Estimule a construção de vínculos, conecte-os com a natureza e mergulhe em experiências multissensoriais.</Label>
+                    <Title style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 6, lineHeight: 22 }}>A proposta da Escola Villa PONGO se ampara no cuidado de cada animal, com consciência de suas possibilidades e limitações. Estimulando a construção de vínculos, conectando-os com a natureza e mergulhando em experiências multissensoriais. </Title>
                     { /* <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
                         <Label style={{ textAlign: 'center', color: color.title }}>Cadastrar pré-matrícula</Label>
                     </Button> */ }
+
+                    <Column style={{ paddingVertical: 20 }}>
+                        <Title align="left" style={{ paddingVertical: 6, }}>Sobre os monitores:</Title>
+
+                        <Label size={14} align="left" style={{ paddingTop: 6 }}>
+                            Com uma equipe formada por profissionais qualificados, com sólidos conhecimentos, unidos pelo objetivo primordial de proporcionar bem estar, diversão num ambiente estimulador, dinâmico, acolhedor, seguro e, acima de tudo, feliz! Ainda conta com duas veterinárias responsáveis que estarão em tempo integral aptas e de prontidão para atender os primeiros socorros em caso de acidente.
+                        </Label>
+
+                    </Column>
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
@@ -84,6 +93,10 @@ export default function SchoolPongoScreen() {
                     <Title style={{ fontSize: 18, fontWeight: 700, color: '#979797', paddingVertical: 6, marginVertical: 12, textAlign: 'center' }}>Planos Oferecidos</Title>
                 </Column>
                 <PlanosList destino={handleRegister} />
+
+                <Column mh={margin.h} mv={margin.v} style={{ paddingTop: 20 }}>
+                    <Title align="center">Cada aluno receberá sua mochila, que conta com uniforme, plaquinha de identificação, agenda, brinquedo, pote hermético para envio da alimentação, toalha e manta, todos itens das coleções PONGO. </Title>
+                </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
                     <Title style={{ fontSize: 18, fontWeight: 700, color: '#979797', paddingVertical: 6, marginTop: 12, textAlign: 'center' }}>Rotina na escola</Title>

@@ -40,7 +40,7 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
             seterror(err)
         } finally {
             setTimeout(() => {
-                setloading(false) 
+                setloading(false)
             }, 1000);
         }
     }
@@ -73,10 +73,10 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
                         <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginVertical: 16, }} >
 
                             <Button bg={type === 'Hotel' ? '#918C8B' : '#ffffff' + 60} style={{ width: '48%' }} radius={12} onPress={() => { settype('Hotel') }} >
-                                <LabelBT align="center" color={type === 'Hotel' ? "#fff" : '#918C8B'}>Pongo</LabelBT>
+                                <LabelBT align="center" size={15} color={type === 'Hotel' ? "#fff" : '#918C8B'}>PONGO</LabelBT>
                             </Button>
                             <Button bg={type === 'Villa Pongo' ? '#918C8B' : '#ffffff' + 60} style={{ width: '48%' }} radius={12} onPress={() => { settype('Villa Pongo') }}  >
-                                <LabelBT align="center" color={type === 'Villa Pongo' ? "#fff" : '#918C8B'}>Villa Pongo</LabelBT>
+                                <LabelBT align="center" size={15} color={type === 'Villa Pongo' ? "#fff" : '#918C8B'}>VILLA PONGO</LabelBT>
                             </Button>
                         </Row>
                     </Column>
@@ -89,7 +89,7 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
                 <CalendarioHorizontal setday={setday} day={day} />
 
                 <Column mh={margin.h} mv={30}>
-                    <Title>Qual horario da visita:</Title>
+                    <Title>Qual horário da visita:</Title>
                     <Button bg={minutos ? color.primary : '#fff'} mbottom={10} pv={16} mtop={20} onPress={() => { timerRef.current.snapToIndex(1) }} radius={8}>
                         <SubLabel align="center" style={{ textAlign: 'center', color: minutos ? '#fff' : color.title, fontSize: 18, }}>{minutos ? hora + ':' + minutos : 'Selecione um horário'}</SubLabel>
                     </Button>
@@ -99,8 +99,8 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
 
 
                     <Button bg={color.sc.sc1} mtop={10} onPress={handleRegister} disabled={loading}>
-                        <Row style={{ justifyContent: 'center', alignItems: 'center',  }}>
-                            {loading ? <Loader color="#fff"/> :
+                        <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
+                            {loading ? <Loader color="#fff" /> :
                                 <LabelBT align="center" style={{ color: "#fff" }}>Agendar visita</LabelBT>
                             }
                         </Row>
@@ -111,7 +111,7 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
             </Scroll>
             <TabBar />
 
-            <Modal ref={timerRef} snapPoints={[0.1, 300]}>
+            <Modal ref={timerRef} snapPoints={[0.1, 380]}>
                 <TimePicker sethora={sethora} setminutos={setminutos} minutos={minutos} hora={hora} timerRef={timerRef} />
             </Modal>
         </Main>
@@ -121,7 +121,7 @@ export default function InstitucionalVisitaScreen({ navigation, }) {
 
 const TimePicker = ({ sethora, setminutos, minutos, hora, timerRef }) => {
 
-    const horas = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,]
+    const horas = [11, 12, 13, 14, 15, 16]
     const mins = ['00', 10, 20, 30, 40, 50,]
 
     const { color } = useTheme()

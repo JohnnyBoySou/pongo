@@ -1,4 +1,4 @@
-import { Bell, CalendarCheck, CircleHelp, CircleUserRound, FileClock, Heart, Hotel, Menu, PackageCheck, School, Search, Settings, ShoppingCart, Store, X } from 'lucide-react-native';
+import { Bell, CalendarCheck, ChevronRight, CircleHelp, CircleUserRound, FileClock, Heart, Hotel, Menu, PackageCheck, School, Search, Settings, ShoppingCart, Store, X } from 'lucide-react-native';
 import { Column, Row, Title, SCREEN_WIDTH, useTheme, Button, SCREEN_HEIGHT, SubLabel, Image } from '@theme/global';
 import { useNavigation } from '@react-navigation/native';
 import { Pressable, Text, StyleSheet, TextInput } from 'react-native';
@@ -26,11 +26,11 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
     }
 
     const getSearch = () => {
-        if(handleSearch){
+        if (handleSearch) {
             searchRef.current.focus()
             handleSearch()
-        }else{
-            navigation.navigate('Search') 
+        } else {
+            navigation.navigate('Search')
         }
     }
 
@@ -43,7 +43,7 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
         }
     }
     useEffect(() => {
-        getAvatar() 
+        getAvatar()
     }, []);
 
     const [focusSearch, setfocusSearch] = useState();
@@ -67,7 +67,7 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
                     </Row>
                 </Row>
 
-                <Row style={{ marginHorizontal: margin.h,  alignItems: 'center', marginTop: 4, }}>
+                <Row style={{ marginHorizontal: margin.h, alignItems: 'center', marginTop: 4, }}>
                     {back &&
                         <Column style={{ marginRight: 12, }}>
                             <Back />
@@ -75,16 +75,16 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
                     }
                     {search &&
                         <Button mv={14} style={{ backgroundColor: color.light, flex: 1, borderWidth: 2, borderColor: focusSearch ? color.label : 'transparent', }} onPress={getSearch} pv={10}>
-                            <Row style={{ justifyContent: 'center', alignItems: 'center',  }}>
+                            <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                                 <Search size={24} color={color.label} strokeWidth={2} />
-                                <TextInput ref={searchRef} 
-                                onFocus={() => { setfocusSearch(true) }}
-                                onBlur={() => { setfocusSearch(false) }}
-                                disabled={handleSearch ? false : true}
-                                onChangeText={e => setvalue(e)}
-                                value={value}
-                                onSubmitEditing={handleSearch}
-                                placeholder="Pesquisar" style={{ flex: 1, fontFamily: 'Font_Medium', fontSize: 16, color: color.label, marginLeft: 12, }} />
+                                <TextInput ref={searchRef}
+                                    onFocus={() => { setfocusSearch(true) }}
+                                    onBlur={() => { setfocusSearch(false) }}
+                                    disabled={handleSearch ? false : true}
+                                    onChangeText={e => setvalue(e)}
+                                    value={value}
+                                    onSubmitEditing={handleSearch}
+                                    placeholder="Pesquisar" style={{ flex: 1, fontFamily: 'Font_Medium', fontSize: 16, color: color.label, marginLeft: 12, }} />
                             </Row>
                         </Button>
                     }
@@ -94,16 +94,21 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
                 {!isOpen &&
                     <Column style={{ marginHorizontal: 28, borderRadius: 12, marginTop: 12 }}>
                         <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                            <Animated.Image entering={FadeInUp.delay(100)} exiting={FadeOutRight} source={require('@imgs/icon.png')} style={{ width: 82, height: 92, borderRadius: 120, }} />
+                            <Animated.Image entering={FadeInUp.delay(100)} exiting={FadeOutRight} source={require('@imgs/icon.png')} style={{ width: 42, height: 52, borderRadius: 120, }} />
                             <Button onPress={toggleSide} ph={0} pv={0} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.secundary}>
                                 <X size={22} color={color.primary} />
                             </Button>
                         </Row>
                         {screens.map((screen, index) => (
                             <Animated.View key={index} entering={FadeInRight.delay(index * 150)} exiting={FadeOutRight} style={{ marginTop: 8 }}>
-                                <Button mleft={-20} style={{}} onPress={() => { navigation.navigate(screen?.screen) }} >
-                                    <SubLabel style={{ color: color.pr.pr3, fontFamily: font.medium, fontSize: 16, letterSpacing: - 0.6, }}>{screen?.name}</SubLabel>
-                                </Button>
+                                <Row style={{ alignItems: 'center', justifyContent: 'space-between' }}>
+                                    <Button mleft={-20} style={{}} onPress={() => { navigation.navigate(screen?.screen) }} >
+                                        <SubLabel style={{ color: color.pr.pr3, fontFamily: font.medium, fontSize: 16, letterSpacing: - 0.6, }}>{screen?.name}</SubLabel>
+                                    </Button>
+
+                                    <ChevronRight size={24} color={color.title} />
+                                </Row>
+
                             </Animated.View>
                         ))}
                     </Column>}
@@ -115,40 +120,36 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
 
 
 const screens = [
-  
+
     {
-        id: 3,
-        name: 'Loja Pongo',
+        id: 1,
+        name: 'LOJA PONGO',
+        screen: 'Shop',
+    },
+    {
+        id: 2,
+        name: 'VILLA PONGO',
         screen: 'VillaPongo',
     },
     {
-        id: 4,
-        name: 'Escola Pongo',
-        screen: 'SchoolPongo',
-    },
-    {
-        id: 5,
-        name: 'Day Use',
-        screen: 'DayUse',
-    },
-    {
-        id: 6,
-        name: 'Hotel Pongo',
-        screen: 'HotelPongo',
-    }, {
-        id: 7,
-        name: 'Historico de serviços',
-        screen: 'Services',
-    },
-    {
-        id: 9,
-        name: 'Minha Conta',
+        id: 3,
+        name: 'MINHA CONTA',
         screen: 'Account',
     },
     {
-        id: 10,
-        name: 'Dúvidas frequentes',
-        screen: 'Help',
+        id: 5,
+        name: 'INICIAR CONVERSA',
+        screen: 'ChatNew',
+    },
+    {
+        id: 6,
+        name: 'CONHEÇA MAIS',
+        screen: 'Institucional',
+    },
+    {
+        id: 7,
+        name: 'F.A.Q',
+        screen: 'Faq',
     },
 ]
 

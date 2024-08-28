@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class CarrosselTopo extends Component {
+export default class CarrosselHotel extends Component {
 
 
     render() {
@@ -31,21 +31,16 @@ export default class CarrosselTopo extends Component {
                 <View style={styles.slide}>
                     <Image
                         style={styles.image}
-                        source={{ uri: 'https://caninablog.wordpress.com/wp-content/uploads/2013/10/dia-das-bruxas-pet_escola_075-1.jpg' }}
+                        source={require('@imgs/hotel1.png')}
                     />
                 </View>
                 <View style={styles.slide}>
                     <Image
                         style={styles.image}
-                        source={{ uri: 'https://www.decao.com.br/adestramento-de-cao/imagens/daycare-para-caes-de-raca.jpg' }}
+                        source={require('@imgs/hotel2.png')}
                     />
                 </View>
-                <View style={styles.slide}>
-                    <Image
-                        style={styles.image}
-                        source={{ uri: 'https://www.decao.com.br/adestramento-de-cao/imagens/quanto-custa-escola-para-caes.jpg' }}
-                    />
-                </View>
+
             </Swiper>
         );
     }

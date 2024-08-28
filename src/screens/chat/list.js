@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { listChats } from '@api/request/chat';
 import { formatDateTime } from '@hooks/utils';
 import { TextInput } from 'react-native-gesture-handler';
-import { Search } from 'lucide-react-native';
+import { MessageCircleMore, Search } from 'lucide-react-native';
 import Back from '@components/Back';
 import { searchChats, verifyConect } from '../../api/request/chat';
 
@@ -83,7 +83,7 @@ export default function ChatListScreen({ navigation, socket }) {
                             ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: color.border, marginVertical: 4, borderRadius: 6, }} />}
                         />
                         <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor: '#918C8B', }} pv={16} ph={1} mh={margin.h} mtop={30}>
-                            <LabelBT color="#918C8B" style={{ textAlign: 'center', }}>Iniciar conversa</LabelBT>
+                            <LabelBT color="#918C8B" style={{ textAlign: 'center', fontSize: 20 }}> <MessageCircleMore color={color.title} size={20} /> Iniciar conversa</LabelBT>
                         </Button>
                         <Column style={{ height: 100, width: 20, }}></Column>
                     </Column>

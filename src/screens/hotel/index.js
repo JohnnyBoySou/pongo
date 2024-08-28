@@ -7,6 +7,7 @@ import TopMenu from '@components/Header/topmenu';
 import { MoveRight } from 'lucide-react-native';
 import PlanosList from '@components/Planos';
 import TabBar from '@components/TabBar';
+import CarrosselHotel from './CarrosselHotel';
 
 export default function HotelScreen() {
 
@@ -35,36 +36,46 @@ export default function HotelScreen() {
             <Scroll>
                 <TopMenu search={false} back={false} />
 
-                <Header title="Hotel" />
+                <Header title="HOTEL VILLA PONGO" />
 
                 <Column mh={margin.h}>
 
                     <Image source={require('@imgs/img-escola-banner1.png')} style={{ width: 304, height: 167, marginVertical: 24 }} />
                     <Title align="center" style={{ paddingVertical: 6, }}>Aconchegante e impecável, {'\n'}nossos quartos são únicos.</Title>
-                    <Label size={14} align="center" style={{ paddingVertical: 6, paddingHorizontal: 22 }}>Seu pet irá se hospedar em um dos bairros mais nobres e seguros de São Paulo.</Label>
+                    <Label size={14} align="left" style={{ paddingVertical: 6 }}>Sentir-se em casa.</Label>
+                    <Label size={14} align="left" style={{ paddingVertical: 6 }}>Ao acordar, abrir a janela, sentir a brisa do Parque Ibirapuera. {'\n'} Seu pet irá se hospedar em um dos bairros mais nobres e seguros de São Paulo. </Label>
+                    <Label size={14} align="left" style={{ paddingVertical: 6 }}>Aconchegante e impecável, nossos quartos são únicos. Sofisticados ambientes, decorados com camas da PONGO feitas em ferro e com colchões confortáveis em tecidos nobres, tem luz indireta, televisão, ar condicionado e teto sob nuvens! </Label>
+                    <Label size={14} align="left" style={{ paddingVertical: 6 }}>Durante o dia seu mascote participará de atividades, passeios no parque e piscina.  {'\n'} Ele será recepcionado com muito amor e cuidado e durante toda a sua estadia na Villa PONGO ele será supervisionado por monitores e veterinários. </Label>
                     { /* <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
                         <LabelBT style={{ textAlign: 'center', color: color.title }}>Reservar Hotel</LabelBT>
                     </Button> */ }
                 </Column>
 
-                <Column mh={margin.h} mv={margin.v}>
-                    <Title style={{   paddingVertical: 6, marginVertical: 12 }}>Planos</Title>
+                { /* <Column mh={margin.h} mv={margin.v}>
+                    <Title style={{ paddingVertical: 6, marginVertical: 12 }}>Planos</Title>
                 </Column>
                 <PlanosList destino={handleRegister} />
-
+                    */ }
                 <Column mh={margin.h} mv={24}>
-                    <Title style={{ paddingVertical: 6,  }}>Detalhes e comodidades</Title>
+                    <Title style={{ paddingVertical: 6, }}>Detalhes e comodidades</Title>
 
                     {details?.map((item, index) => (
-                        <Row pv={6} style={{ alignItems: 'center', marginLeft: 4,}}>
+                        <Row pv={6} style={{ alignItems: 'center', marginLeft: 4, }}>
                             <MoveRight size={20} color={'#D9D9D9'} style={{ marginRight: 8 }} />
                             <Label style={{ fontSize: 14 }}>{item?.label}</Label>
                         </Row>
                     ))}
 
+                    <Column style={{ paddingVertical: 20 }}>
+                        <Title align="left" style={{ paddingVertical: 6, }}>Opções de reserva:</Title>
 
+                        <Label size={14} align="left" style={{ paddingVertical: 6 }}>
+                            Baixa Temporada (Fev. Mar. Abr. Maio. Jun. Ago. Set. Out.) | Valor Diária R$ 250
+                        </Label>
+                        <Label size={14} align="left" style={{ paddingVertical: 6 }}>Alta temporada (Feriados, Jan. Jul. Nov. Dez.) | Valor Diária R$ 320</Label>
+                    </Column>
 
-                    <Image source={require('@imgs/detalhes.png')} style={{ width: '100%', height: 200, borderRadius: 20, marginVertical: 20 }} />
+                    <CarrosselHotel />
 
                 </Column>
 

@@ -18,7 +18,7 @@ export default function DayUseScreen() {
             <Scroll>
                 <TopMenu search={false} back={false} />
 
-                <Header title="Day Use" />
+                <Header title="DAY USE VILLA PONGO" />
 
                 <Column mh={margin.h}>
                     <Image source={require('@imgs/img-escola-banner.png')} style={{ width: '100%', height: 223, marginVertical: 24 }} />
