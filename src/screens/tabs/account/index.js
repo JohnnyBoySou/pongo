@@ -3,8 +3,9 @@ import { Main, Scroll, Title, Row, Column, useTheme, Label, Image, Button, Loade
 import TopMenu from '@components/Header/topmenu';
 import { listUser } from '@api/request/auth';
 import { formatDateTime } from '@hooks/utils';
-import { getPreferences, excludePreferences } from '@hooks/preferences'; 
+import { getPreferences, excludePreferences } from '@hooks/preferences';
 import { useIsFocused } from '@react-navigation/native';
+import { MessageCircleMore } from 'lucide-react-native';
 
 export default function AccountScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
@@ -17,7 +18,7 @@ export default function AccountScreen({ navigation, }) {
         const fetchData = async () => {
             setloading(true)
             try {
-                const pref = await getPreferences() 
+                const pref = await getPreferences()
                 if (pref?.token) {
                     const res = await listUser();
                     setuser(res)
@@ -54,8 +55,9 @@ export default function AccountScreen({ navigation, }) {
         excludePreferences()
     }
 
-    if(!user){
-        return null}
+    if (!user) {
+        return null
+    }
     return (
         <Main >
 
@@ -91,35 +93,54 @@ export default function AccountScreen({ navigation, }) {
 
                 <Column mh={margin.h} style={{ rowGap: 22, marginVertical: 22, }}>
 
-                    <Button style={{ backgroundColor: color.light, }} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('PetsList') }} >
+                    <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('PetsList') }} >
                         <Row style={{ alignItems: 'center', }}>
                             <Image source={require('@imgs/ac2.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
-                            <Title size={20}>Meus pets</Title>
+                            <Column>
+                                <Title size={16}>PETS</Title>
+                                <Column style={{ height: 4, }} />
+                                <Label size={14}>Clique para selecionar</Label>
+                            </Column>
+
                         </Row>
                     </Button>
-                    <Button style={{ backgroundColor: color.light, }} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('AccountDetails') }} >
+                    <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('AccountDetails') }} >
                         <Row style={{ alignItems: 'center', }}>
+
                             <Image source={require('@imgs/profile.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
-                            <Title size={20}>Meu perfil</Title>
+                            <Column>
+                                <Title size={16}>PERFIL</Title>
+                                <Column style={{ height: 4, }} />
+                                <Label size={14}>Clique para editar</Label>
+                            </Column>
                         </Row>
                     </Button>
-                    <Button style={{ backgroundColor: color.light, }} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('Services') }}>
+                    <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('Services') }}>
                         <Row style={{ alignItems: 'center', }}>
                             <Image source={require('@imgs/ac3.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
-                            <Title size={20}>Meus serviços</Title>
+                            <Column>
+                                <Title size={16}>SERVIÇOS</Title>
+                                <Column style={{ height: 4, }} />
+                                <Label size={14}>Clique para visualizar</Label>
+                            </Column>
+
                         </Row>
                     </Button>
-                    <Button style={{ backgroundColor: color.light, }} radius={18} pv={1} ph={1} onPress={() => { navigation.navigate('ChatList') }}>
+                    <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('ChatList') }}>
                         <Row style={{ alignItems: 'center', }}>
                             <Image source={require('@imgs/chat.png')} style={{ width: 80, height: 80, marginRight: 12, objectFit: 'contain', }} />
-                            <Title size={20}>Minhas conversas</Title>
+                            <Column>
+                                <Title size={16}>CONVERSAS</Title>
+                                <Column style={{ height: 4, }} />
+                                <Label size={14}>Clique para visualizar</Label>
+                            </Column>
                         </Row>
                     </Button>
                 </Column>
                 <Button onPress={handleChat} style={{ borderWidth: 2, borderColor: '#918C8B', }} pv={16} ph={1} mh={margin.h}>
-                    <LabelBT color="#918C8B" style={{ textAlign: 'center', }}>Iniciar conversa</LabelBT>
+                    <LabelBT color="#918C8B" style={{ textAlign: 'center', fontSize: 20 }}> <MessageCircleMore color={color.title} size={20} /> Iniciar conversa</LabelBT>
                 </Button>
-                <Button onPress={handleExit} bg={color.red+10} pv={16} ph={1} mh={margin.h} mv={25}>
+                <Button onPress={handleExit} bg={color.red + 10} pv={16} ph={1} mh={margin.h} mv={25}>
                     <LabelBT color={color.red} style={{ textAlign: 'center', }}>Sair</LabelBT>
                 </Button>
 

@@ -154,6 +154,6 @@ export const U = styled.Text`
   text-decoration: underline;
 `;
 export const B = styled.Text`
-  font-weight: bold;
+  font-weight: 300;
   font-family: ${props => props.theme.font.bold};
 `;

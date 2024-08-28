@@ -8,9 +8,11 @@ import { AnimatePresence, MotiImage, MotiView, } from 'moti';
 const { width, height } = Dimensions.get('window');
 import PagerView from 'react-native-pager-view';
 
-import Animated, { FadeInDown, useAnimatedStyle, withSpring, withTiming, 
+import Animated, {
+    FadeInDown, useAnimatedStyle, withSpring, withTiming,
     interpolateColor,
-    useSharedValue, } from 'react-native-reanimated';
+    useSharedValue,
+} from 'react-native-reanimated';
 
 export default function OnboardingScreen({ navigation, route, }) {
     const { color, font } = useContext(ThemeContext)
@@ -32,7 +34,7 @@ export default function OnboardingScreen({ navigation, route, }) {
 
 
     return (
-        <Main style={{backgroundColor: '#fff',}}>
+        <Main style={{ backgroundColor: '#fff', }}>
             <Row style={{ position: 'absolute', top: 40, left: 30, right: 30, zIndex: 99, justifyContent: 'space-between', alignItems: 'center', }}>
 
                 <Column></Column>
@@ -72,7 +74,7 @@ const Screen0 = ({ color }) => {
     return (
         <Column style={{ flex: 1, marginHorizontal: 30, justifyContent: 'center', }}>
             <MotiImage from={{ opacity: 0, scale: 0, rotate: '12deg' }} animate={{ opacity: 1, scale: 1, rotate: '0deg' }} source={require('@imgs/onboarding_1.png')} style={{ width: '100%', height: 400, objectFit: 'contain', }} />
-            <Title style={{ letterSpacing: -1, fontSize: 32, lineHeight: 34, textAlign: 'center', }}>Acompanhe o diário do seu Pet na Villa Pongo</Title>
+            <Title style={{ letterSpacing: -1, fontSize: 32, lineHeight: 34, textAlign: 'center', }}>Acompanhe o diário do seu Pet</Title>
         </Column>
 
     )
@@ -82,22 +84,22 @@ const Screen1 = ({ color }) => {
     return (
         <Column style={{ flex: 1, marginHorizontal: 30, justifyContent: 'center', }}>
             <MotiImage from={{ opacity: 0, scale: 0, rotate: '-12deg' }} animate={{ opacity: 1, scale: 1, rotate: '0deg' }} source={require('@imgs/onboarding_2.png')} style={{ width: '100%', height: 400, objectFit: 'contain', }} />
-            <Title style={{ letterSpacing: -1, fontSize: 32, lineHeight: 34, textAlign: 'center', }}>Acesso rápido a produtos e novidades Pongo</Title>
+            <Title style={{ letterSpacing: -1, fontSize: 32, lineHeight: 34, textAlign: 'center', }}>Acesso rápido a produtos e novidades</Title>
         </Column>
     )
-}   
+}
 
 const Screen2 = ({ color, navigation }) => {
     return (
         <Column style={{ flex: 1, marginHorizontal: 30, justifyContent: 'center', }}>
             <Animated.Image entering={FadeInDown} source={require('@imgs/onboarding_3.png')} style={{ width: '100%', height: 300, objectFit: 'contain', }} />
-            <Title style={{ letterSpacing: -1, fontSize: 28, lineHeight: 32, textAlign: 'center', }}>Atendimento em tempo real com a equipe Pongo e Villa Pongo</Title>
+            <Title style={{ letterSpacing: -1, fontSize: 28, lineHeight: 32, textAlign: 'center', }}>Atendimento em tempo real com a nossa equipe</Title>
             <Label style={{ letterSpacing: -0.5, fontSize: 18, lineHeight: 22, textAlign: 'center', marginTop: 10, }}>Utilize seu acesso para entrar no app ou entre como visitante.</Label>
             <Column style={{ justifyContent: 'center', alignItems: 'center', columnGap: 20, zIndex: 99, }}>
                 <Button onPress={() => { navigation.navigate('AuthLogin') }} mtop={20} bg='#918C8B' style={{ width: 240, }}>
                     <LabelBT color="#fff" align="center">Acessar conta</LabelBT>
                 </Button>
-                <Button onPress={() => { navigation.navigate('Tabs', { screen: 'Home'}) }} bg='#ECEBEB' ph={12} radius={100} mtop={12} style={{ width: 240, }}>
+                <Button onPress={() => { navigation.navigate('Tabs', { screen: 'Home' }) }} bg='#ECEBEB' ph={12} radius={100} mtop={12} style={{ width: 240, }}>
                     <LabelBT color='#918C8B' align="center">Entrar como visitante</LabelBT>
                 </Button>
             </Column>
@@ -113,7 +115,7 @@ const PaginationDots = ({ index, numberOfDots, activityColor, disableColor }) =>
     const dotStyle = (dotIndex) => {
         return useAnimatedStyle(() => {
 
-            const width = withTiming(index === dotIndex ? 45 : 20); 
+            const width = withTiming(index === dotIndex ? 45 : 20);
             const bgColor = withTiming(index === dotIndex ? 1 : 0, {
                 duration: 300,
             });

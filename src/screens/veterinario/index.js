@@ -26,7 +26,7 @@ export default function VeterinarioScreen() {
                 <Header title="Veterinario" />
 
                 <Column mv={margin.v} style={{ marginLeft: margin.h }}>
-                    <Image source={require('@imgs/vet1.jpg')} style={{ width: '100%', height: 180, borderTopLeftRadius: 20, borderBottomLeftRadius: 20 }} />
+                    <Image source={require('@imgs/vet1.png')} style={{ width: '100%', height: 180, borderTopLeftRadius: 20, borderBottomLeftRadius: 20 }} />
                 </Column>
 
                 <Column mh={margin.h}>
@@ -103,7 +103,7 @@ export default function VeterinarioScreen() {
                 </Column>
 
                 <Column mv={margin.v} style={{ marginRight: margin.h }}>
-                    <Image source={require('@imgs/vet2.jpg')} style={{ width: '100%', height: 180, borderTopRightRadius: 20, borderBottomRightRadius: 20 }} />
+                    <Image source={require('@imgs/vet2.png')} style={{ width: '100%', height: 180, borderTopRightRadius: 20, borderBottomRightRadius: 20 }} />
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>

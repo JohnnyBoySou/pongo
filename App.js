@@ -29,6 +29,8 @@ export default function App() {
           Font_Black: require('./assets/fonts/Inter_Black.ttf'),
           Voyage_Medium: require('./assets/fonts/Voyage_Medium.otf'),
           Voyage_Book: require('./assets/fonts/Voyage_Book.otf'),
+          TimesNewRoman: require('./assets/fonts/times new roman.ttf'),
+          TimesNewRoman_Bold: require('./assets/fonts/times new roman bold.ttf'),
         });
         setAppIsReady(true);
       } catch (e) {
@@ -49,7 +51,7 @@ export default function App() {
   }
 
   return (
-    <View style={{ flex: 1,  backgroundColor: light.background }} onLayout={onLayoutRootView}>
+    <View style={{ flex: 1, backgroundColor: light.background }} onLayout={onLayoutRootView}>
       <ThemeProvider theme={light}>
         <StatusBar translucent />
         <Router />

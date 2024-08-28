@@ -7,6 +7,7 @@ import { Linking, Text } from 'react-native';
 import { listUser } from '@api/request/auth';
 import { getPreferences, excludePreferences } from '@hooks/preferences';
 import { tiposServices } from '../../../api/request/services';
+import { MessageCircleMore } from 'lucide-react-native';
 
 export default function HomeScreen({ navigation, }) {
     const { color, font, margin, } = useTheme();
@@ -16,26 +17,26 @@ export default function HomeScreen({ navigation, }) {
         try {
             const res = await getPreferences()
             if (res?.token) {
-                    navigation.navigate('ChatNew', )
-                }
+                navigation.navigate('ChatNew',)
+            }
             else {
                 navigation.navigate('AuthLogin')
             }
-            } catch (error) {
-                return
+        } catch (error) {
+            return
         }
     }
     const handleAccount = async () => {
         try {
             const res = await getPreferences()
             if (res?.token) {
-                    navigation.navigate('Tabs',{ screen: 'Account'} )
-                }
+                navigation.navigate('Tabs', { screen: 'Account' })
+            }
             else {
                 navigation.navigate('AuthLogin')
             }
-            } catch (error) {
-                return
+        } catch (error) {
+            return
         }
     }
 
@@ -57,7 +58,7 @@ export default function HomeScreen({ navigation, }) {
                             <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Shop') }}>
                                 <Column>
                                     <MotiImage source={require('@imgs/home_1.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
-                                    <Title align="center" size={18}>Loja Pongo</Title>
+                                    <Title align="center" size={14}>LOJA PONGO</Title>
                                 </Column>
                             </Button>
                         </MotiView>
@@ -74,7 +75,7 @@ export default function HomeScreen({ navigation, }) {
                             <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('VillaPongo') }}>
                                 <Column>
                                     <MotiImage source={require('@imgs/home_2.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
-                                    <Title align="center" size={18}>Villa Pongo</Title>
+                                    <Title align="center" size={14}>VILLA PONGO</Title>
                                 </Column>
                             </Button>
                         </MotiView>
@@ -93,7 +94,7 @@ export default function HomeScreen({ navigation, }) {
                             <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={handleAccount}>
                                 <Column>
                                     <MotiImage source={require('@imgs/home_3.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
-                                    <Title align="center" size={18}>Minha conta</Title>
+                                    <Title align="center" size={14}>MINHA CONTA</Title>
                                 </Column>
                             </Button>
                         </MotiView>
@@ -109,7 +110,7 @@ export default function HomeScreen({ navigation, }) {
                             <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Institucional') }}>
                                 <Column>
                                     <MotiImage source={require('@imgs/home_4.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
-                                    <Title align="center" size={16}>Conheça mais</Title>
+                                    <Title align="center" size={14}>CONHEÇA MAIS</Title>
                                 </Column>
                             </Button>
                         </MotiView>
@@ -124,7 +125,7 @@ export default function HomeScreen({ navigation, }) {
                     }}>
 
                     <Button onPress={handleChat} style={{ borderWidth: 2, borderColor: '#918C8B', marginTop: 32, }} pv={16} ph={1} mh={margin.h}>
-                        <LabelBT color="#918C8B" style={{ textAlign: 'center', }}>Iniciar conversa</LabelBT>
+                        <LabelBT color="#918C8B" style={{ textAlign: 'center', fontSize: 20 }}> <MessageCircleMore color={color.title} size={20} /> Iniciar conversa</LabelBT>
                     </Button>
                 </MotiView>
                 <Column style={{ height: 30, }} />

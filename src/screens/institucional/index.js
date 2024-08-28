@@ -21,7 +21,7 @@ export default function InstitucionalScreen({ navigation, }) {
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-solicitar-visita.png')} style={{ width: 81, height: 81, marginRight: 8, borderRadius: 20 }} />
                             <Column>
-                                <Title size={16}>Solicitar Visita</Title>
+                                <Title size={16}>SOLICITAR VISITA</Title>
                                 <Column style={{ height: 4, }} />
                                 <Label size={14}>Clique para visualizar</Label>
                             </Column>
@@ -33,7 +33,7 @@ export default function InstitucionalScreen({ navigation, }) {
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-sobre-nos.png')} style={{ width: 81, height: 81, marginRight: 8, borderRadius: 20 }} />
                             <Column>
-                                <Title size={16}>Sobre nós</Title>
+                                <Title size={16}>SOBRE NÓS</Title>
                                 <Column style={{ height: 4, }} />
                                 <Label size={14}>Clique para visualizar</Label>
                             </Column>
@@ -44,7 +44,7 @@ export default function InstitucionalScreen({ navigation, }) {
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-realizacoes.png')} style={{ width: 81, height: 81, marginRight: 8, borderRadius: 20 }} />
                             <Column>
-                                <Title size={16}>Realizações</Title>
+                                <Title size={16}>REALIZAÇÕES</Title>
                                 <Column style={{ height: 4, }} />
                                 <Label size={14}>Clique para visualizar</Label>
                             </Column>
@@ -55,7 +55,7 @@ export default function InstitucionalScreen({ navigation, }) {
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-onde-estamos.png')} style={{ width: 81, height: 81, marginRight: 8, borderRadius: 20 }} />
                             <Column>
-                                <Title size={16}>Onde estamos</Title>
+                                <Title size={16}>ONDE ESTAMOS</Title>
                                 <Column style={{ height: 4, }} />
                                 <Label size={14}>Clique para visualizar</Label>
                             </Column>
@@ -66,7 +66,7 @@ export default function InstitucionalScreen({ navigation, }) {
                         <Row style={{ alignItems: 'center' }}>
                             <Image source={require('@imgs/btn-galeria.png')} style={{ width: 81, height: 81, marginRight: 8, borderRadius: 20 }} />
                             <Column>
-                                <Title size={16}>Galeria</Title>
+                                <Title size={16}>GALERIA</Title>
                                 <Column style={{ height: 4, }} />
                                 <Label size={14}>Clique para visualizar</Label>
                             </Column>

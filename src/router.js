@@ -8,7 +8,7 @@ const Tab = createBottomTabNavigator();
 
 //ICONS
 import Octicons from '@expo/vector-icons/Octicons';
-import { Bell, CircleUserRound, GraduationCap, Hotel, ShoppingCart } from 'lucide-react-native';
+import { Bell, CircleUserRound, GraduationCap, Hotel, ShoppingCart, TentTree } from 'lucide-react-native';
 import { useTheme, Button } from '@theme/global';
 
 //STACK SCREEN
@@ -197,7 +197,7 @@ function Tabs() {
       }} />
 
       <Tab.Screen name="VillaPongo" component={VillaPongoScreen} options={{
-        tabBarIcon: ({ color, size }) => (<Hotel size={routeName === 'Notify' ? size + 3 : size} color={color} />),
+        tabBarIcon: ({ color, size }) => (<TentTree size={routeName === 'Notify' ? size + 3 : size} color={color} />),
       }} />
       <Tab.Screen name="Account" component={AccountScreen} options={{
         backBehavior: 'none',
