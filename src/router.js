@@ -47,6 +47,7 @@ import ChatListScreen from '@screens/chat/list';
 import ChatNewScreen from '@screens/chat/new';
 import ChatDetailsScreen from '@screens/chat/details';
 import ChatColaboradorListScreen from '@screens/colaborador/list';
+import ChatDetailsColaboradorScreen from '@screens/colaborador/details';
 
 //TABS SCREEN
 import HomeScreen from '@screens/tabs/home';
@@ -92,7 +93,7 @@ import Privacidade from '@screens/privacidade/index';
 export default function Router({ }) {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='ChatList'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='AuthLogin'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -100,6 +101,7 @@ export default function Router({ }) {
         <Stack.Screen name="ChatDetails" component={ChatDetailsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatNew" component={ChatNewScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatColaboradorList" component={ChatColaboradorListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="ChatDetailsColaborador" component={ChatDetailsColaboradorScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="PetsList" component={PetsListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="PetsProfile" component={PetsProfileScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />

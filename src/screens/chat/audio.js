@@ -3,7 +3,6 @@ import { Audio } from 'expo-av';
 import * as Haptics from 'expo-haptics';
 import Animated, { withSpring, ZoomIn, ZoomOut, SlideInRight, SlideOutRight } from 'react-native-reanimated';
 import { Check, Mic, MicOff, Trash } from 'lucide-react-native';
-import * as FileSystem from 'expo-file-system';
 import { Column, Button, useTheme } from '@theme/global';
 
 const AudioRecord = ({ onAudioRecord }) => {
@@ -39,14 +38,11 @@ const AudioRecord = ({ onAudioRecord }) => {
         setRecordings(allRecordings);
     }
 
-
-
     function clearRecordings() {
         setIsRecording(false);
         setRecordings([])
     }
 
-    //Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     return (
         <Column>
             {isRecording &&

@@ -12,8 +12,8 @@ import { createPreferences } from '@hooks/colaborador';
 
 export default function AuthLoginColaboradorScreen({ navigation, }) {
     const [loading, setloading] = useState(false);
-    const [email, setemail] = useState('cegonhabox@engenhariadigital.net');
-    const [password, setpassword] = useState('123456');
+    const [email, setemail] = useState('villapongo@pongo.com.br');
+    const [password, setpassword] = useState('@Pongo0101');
     const passRef = useRef()
 
     const [success, setsuccess] = useState();
@@ -37,7 +37,6 @@ export default function AuthLoginColaboradorScreen({ navigation, }) {
                 setTimeout(() => {
                     navigation.navigate('ChatColaboradorList', { name: res?.nome, user: res, })
                 }, 1000);
-
             }
         } catch (error) {
             seterror(error.message)

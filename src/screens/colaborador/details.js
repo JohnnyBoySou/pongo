@@ -1,9 +1,8 @@
-import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
-import { Main, Column, Label, Title, Row, Button, useTheme, SCREEN_HEIGHT, Image } from '@theme/global';
+import React, { useState, useRef, useEffect } from 'react';
+import { Main, Column, Label, Title, Row, Button, useTheme, SCREEN_HEIGHT, Image, Loader } from '@theme/global';
 
 //icons
 import { ArrowDown, ArrowLeft, Camera, Search, Send, X, } from 'lucide-react-native';
-
 
 //components
 import { FlatList, TextInput } from 'react-native-gesture-handler';
@@ -16,85 +15,104 @@ import CameraChat from './image';
 import AudioRecord from './audio';
 import AudioPlayer from './player';
 
-
-import Connect from '@api/request/socket/connect';
-import { socket } from '@api/request/socket/socket';
 import TopSheet from '@components/TopSheet/index';
-import { Pressable } from 'react-native';
 import Input from '@components/Forms/input';
+import { formatDateTime } from '@hooks/utils';
+import { enviarMsg, assinarChat, listMessages } from '@api/request/colaborador';
+import socket from '@hooks/socket';
 
-export default function ChatDetailsScreen({ navigation, route }) {
+export default function ChatDetailsColaboradorScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
-    const { user, id } = route.params;
-
-
-    const [messages, setmessages] = useState(msgs);
+    const { user, token, profile } = route.params;
     const flatMsg = useRef();
     const modalCamera = useRef();
+    const topSheetRef = useRef();
+
+    const [chat, setchat] = useState();
     const [msg, setmsg] = useState();
+    const [messages, setmessages] = useState([]);
     const [focusMsg, setfocusMsg] = useState(false);
     const [openCamera, setopenCamera] = useState(false);
 
     const [audioUri, setAudioUri] = useState(null);
     const [showBottom, setshowBottom] = useState();
     const [search, setsearch] = useState('');
-    const topSheetRef = useRef();
 
-    const closeTopSheet = () => {
-        if (topSheetRef.current) {
-            topSheetRef.current.close(); // Chama a função handleClose
+    const [loading, setloading] = useState(true);
+    useEffect(() => {
+        const fecthData = async () => {
+            setloading(true)
+            try {
+                assinarChat(token)
+                const res = await listMessages(token)
+                if (res?.chatconversa) {
+                    setmessages(res?.chatconversa.reverse())
+                    setchat(res?.chat)
+                }
+            } catch (error) {
+                console.log(error)
+            } finally { setloading(false) }
         }
-    };
+        fecthData();
+    }, []);
 
-    const expandTopSheet = () => {
-        if (topSheetRef.current) {
-            topSheetRef.current.expand(); // Chama a função handleExpand
-        }
-    };
+    useEffect(() => {
+        socket.on('chat message', async (dados) => {
+            setmessages((msgs) => [...msgs, dados])
+        });
+        return () => {
+            socket.off('chat message', async (dados) => {
+                setmessages((msgs) => [...msgs, dados])
+            });
+        };
+    }, [socket]);
 
-    const searchResult = msgs.filter((item) => item.message.toLowerCase().includes(search.toLowerCase()));
+    const searchResult = messages?.filter((item) => item?.message?.toLowerCase().includes(search.toLowerCase()));
+    useEffect(() => {
+        flatMsg.current?.scrollToEnd();
+    },[messages])
+
     return (
-        <Main style={{ backgroundColor: color.background, }}>
+        <Main>
             <TopSheet
                 ref={topSheetRef}
-                min={
-                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                        <Row>
-                            <Pressable pv={1} ph={1} onPress={() => { navigation.goBack() }} >
-                                <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
-                                    <ArrowLeft size={28} color={color.sc.sc3} />
-                                    <Column style={{ justifyContent: 'center', alignItems: 'flex-end', }}>
-                                        <Image style={{ width: 52, height: 52, borderRadius: 100, backgroundColor: color.sc.sc3, marginBottom: -12, }} source={{ uri: user?.avatar }} />
-                                        <Connect />
-                                    </Column>
-                                </Row>
-                            </Pressable>
-                            <Column style={{ justifyContent: 'center', marginLeft: 12, }}>
-                                <Title>{user?.name}</Title>
-                                <Label style={{ marginTop: 2, }} size={14}>Visto por último {user?.lastOnline}</Label>
-                            </Column>
-                        </Row>
-                        <Row style={{ columnGap: 8, marginRight: 16, }}>
-                            <Button onPress={expandTopSheet} ph={0} pv={0} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
-                                <Search size={22} color={color.sc.sc3} />
-                            </Button>
-                        </Row>
-
+                bg="#fff"
+                min={<Row style={{ justifyContent: 'space-between', alignItems: 'center', paddingTop: 30, }}>
+                    <Row>
+                        <Button pv={1} ph={1} onPress={() => { navigation.goBack() }} >
+                            <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
+                                <ArrowLeft size={28} color={color.sc.sc3} />
+                                <Column style={{ justifyContent: 'center', alignItems: 'flex-end', width: 52, height: 52, }}>
+                                    <Image style={{ width: 52, height: 52, borderRadius: 100, backgroundColor: color.sc.sc3, }} source={{ uri: user?.avatar }} />
+                                </Column>
+                            </Row>
+                        </Button>
+                        <Column style={{ justifyContent: 'center', marginLeft: 12, }}>
+                            <Title>{chat?.titulo}</Title>
+                            <Label style={{ marginTop: 2, }} size={14}>Visto por último {formatDateTime(chat?.alterado_em).slice(14)}</Label>
+                        </Column>
                     </Row>
+                    <Row style={{ columnGap: 8, marginRight: 16, }}>
+                        <Button onPress={() => { topSheetRef.current?.expand() }} ph={0} pv={0} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
+                            <Search size={22} color={color.sc.sc3} />
+                        </Button>
+                    </Row>
+
+                </Row>
                 }
                 max={<Column>
-                    <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
+                    <Column style={{ marginTop: 20, }}>
+                        <Button onPress={() => { topSheetRef.current.close() }} ph={0} pv={0} mv={12} style={{ width: 42, marginLeft: 12, height: 42, alignSelf: 'flex-end', justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
+                            <X size={22} color={color.sc.sc3} />
+                        </Button>
                         <Input
                             placeholder="Pesquisar"
                             value={search}
                             label="Pesquisar"
                             setValue={setsearch}
                         />
-                        <Button onPress={closeTopSheet} ph={0} pv={0} mv={12} style={{ width: 42, marginLeft: 12, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
-                            <X size={22} color={color.sc.sc3} />
-                        </Button>
-                    </Row>
-                    <Label style={{ marginVertical: 12, }}>Resultados</Label>
+                    </Column>
+                    {searchResult && <Label style={{ marginVertical: 12, }}>Resultados</Label>}
                     {search.length > 1 &&
                         <Animated.FlatList
                             entering={FadeInDown}
@@ -104,36 +122,41 @@ export default function ChatDetailsScreen({ navigation, route }) {
                             maxToRenderPerBatch={10}
                             removeClippedSubviews
                             renderItem={({ item }) => <Message item={item} />}
-                            keyExtractor={item => item.id}
-                            style={{ backgroundColor: '#f7f7f7', borderRadius: 12, paddingHorizontal: 20, paddingVertical: 12, }}
+                            keyExtractor={index => index}
                         />}
                 </Column>}
-                valueMin={80}
-                valueMax={SCREEN_HEIGHT - 100}
+                valueMin={110}
+                valueMax={SCREEN_HEIGHT - 20}
             />
 
             <Column style={{ height: 90, }} />
 
-            <FlatList
-                ref={flatMsg}
-                data={messages}
-                ListHeaderComponent={<Column style={{ alignSelf: 'center', marginTop: 25, backgroundColor: color.sc.sc3, borderRadius: 12, paddingVertical: 12, paddingHorizontal: 20, marginBottom: 20, }}>
-                    <Label color="#fff">Inicio do chat em 12 de Jun, 2024</Label>
-                </Column>}
-                renderItem={({ item }) => <Message item={item} />}
-                initialNumToRender={10}
-                maxToRenderPerBatch={10}
-                removeClippedSubviews
-                keyExtractor={item => item.id}
-                style={{ paddingHorizontal: margin.h, }}
-                onScroll={(event) => {
-                    if (event.nativeEvent.contentOffset.y > 200) {
-                        setshowBottom(false);
-                    } else {
-                        setshowBottom(true);
-                    }
-                }}
-            />
+
+            {loading ?
+                <Column style={{ flex: 1, marginTop: 40, }}>
+                    <Loader size={32} />
+                </Column>
+                :
+                <FlatList
+                    ref={flatMsg}
+                    data={messages}
+                    ListHeaderComponent={<Column style={{ alignSelf: 'center', marginTop: 25, backgroundColor: color.sc.sc3, borderRadius: 12, paddingVertical: 12, paddingHorizontal: 20, marginBottom: 20, }}>
+                        <Label color="#fff">Criado em {formatDateTime(user?.criado_em)}</Label>
+                    </Column>}
+                    renderItem={({ item }) => <Message item={item} />}
+                    keyExtractor={(item, index) => index.toString()}
+                    initialNumToRender={10}
+                    maxToRenderPerBatch={10}
+                    removeClippedSubviews
+                    style={{ paddingHorizontal: margin.h, }}
+                    onScroll={(event) => {
+                        if (event.nativeEvent.contentOffset.y > 200) {
+                            setshowBottom(false);
+                        } else {
+                            setshowBottom(true);
+                        }
+                    }}
+                />}
             {showBottom && <Animated.View entering={ZoomIn} exiting={ZoomOut} style={{ position: 'absolute', bottom: 80, alignSelf: 'center', }}>
                 <Button onPress={() => { flatMsg.current.scrollToEnd({ animated: true }); }} radius={100} ph={0} pv={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', backgroundColor: color.sc.sc3, }}>
                     <ArrowDown size={22} color="#fff" />
@@ -155,42 +178,35 @@ export default function ChatDetailsScreen({ navigation, route }) {
                     textBreakStrategy='highQuality'
                     multiline
                     placeholderTextColor={color.sc.sc3}
-                    style={{ backgroundColor: focusMsg ? color.sc.sc3 + 40 : color.sc.sc3 + 20, color: color.title, width: '68%', marginHorizontal: 12, fontSize: 16, borderRadius: 100, paddingHorizontal: 12, paddingVertical: 8, marginVertical: 12, }}
+                    style={{ fontFamily: font.medium, backgroundColor: focusMsg ? color.sc.sc3 + 40 : color.sc.sc3 + 20, color: color.title, width: '68%', marginHorizontal: 12, fontSize: 16, borderRadius: 100, paddingHorizontal: 12, paddingVertical: 8, marginVertical: 12, }}
                 />
                 <Column style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', marginRight: 12, }}>
                     {msg?.length > 0 ?
-                        <SendButton message={msg} setmessage={setmsg} setmessages={setmessages} messages={messages} />
+                        <SendButton message={msg} setmessage={setmsg} token={token} user={user}  profile={profile}/>
                         :
                         <AudioRecord onAudioRecord={(uri) => setAudioUri(uri)} />
                     }
                 </Column>
             </Row>
-
             <Modal ref={modalCamera} snapPoints={[0.1, SCREEN_HEIGHT]} onClose={() => setopenCamera(false)}>
                 {openCamera && <CameraChat setopenCamera={setopenCamera} modalCamera={modalCamera} />}
             </Modal>
         </Main>
     )
 }
-const SendButton = ({ message, setmessage, setmessages, messages }) => {
+const SendButton = ({ message, setmessage, token, user, profile }) => {
     const { color } = useTheme();
     const handleNewMessage = () => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-
-        const hour = new Date().getHours() < 10 ? `0${new Date().getHours()}` : `${new Date().getHours()}`;
-        const mins = new Date().getMinutes() < 10 ? `0${new Date().getMinutes()}` : `${new Date().getMinutes()}`;
-
-        /*  socket.emit("message", {
-              message: message,
-              chat_id: id,
-              user_id: user.id,
-              timestamp: { hour, mins },
-          });
-          */
+        const params = {
+            message: message,
+            token: token,
+            user: user,
+            profile: profile,
+        }
+        enviarMsg(params)
         setmessage('');
-        setmessages([...messages, { id: messages.length + 1, name: 'João', message: message, time: `${hour}:${mins}`, author: true }]);
     };
-
 
     return (
         <Button onPressIn={handleNewMessage} bg={color.sc.sc3} ph={0} pv={0} style={{ justifyContent: 'center', alignItems: 'center', width: 46, height: 46, }}>
@@ -203,75 +219,18 @@ const SendButton = ({ message, setmessage, setmessages, messages }) => {
 
 const Message = ({ item }) => {
     const { color, font } = useTheme();
-    const { author, time, message, name, } = item;
+    const author = item?.type === 'C' ? true : false;
+    if (!item) return null
     return (
         <Column style={{ alignSelf: author ? 'flex-end' : 'flex-start', marginBottom: 20, }}>
-
-            <Column style={{ backgroundColor: author ? color.off2 : color.sc.sc3 + 30, marginBottom: 6, borderRadius: 12, borderTopLeftRadius: author ? 12 : 0, borderTopRightRadius: author ? 0 : 12 }} ph={12} pv={12}>
-                <Label>{message}</Label>
+            <Column >
+                <Label size={12} lineHeight={16} style={{ alignSelf: author ? 'flex-end' : 'flex-start' }}>{formatDateTime(item?.criado_em)}</Label>
+                {author && <Label size={12} lineHeight={16} style={{ alignSelf: author ? 'flex-end' : 'flex-start' }}>{item.colaborador?.name}</Label>}
+                {!author && <Label size={12} lineHeight={16} style={{ alignSelf: author ? 'flex-end' : 'flex-start' }}>{item.usuario?.name}</Label>}
             </Column>
-            <Column style={{ alignSelf: author ? 'flex-end' : 'flex-start', }}>
-                <Label size={14} lineHeight={16}>{time}</Label>
+            <Column style={{ backgroundColor: author ? color.off2 : color.sc.sc3 + 30,  marginTop: 6, borderRadius: 12, borderTopLeftRadius: author ? 12 : 0, borderTopRightRadius: author ? 0 : 12 }} ph={12} pv={12}>
+                <Label color="#000">{item?.mensagem}</Label>
             </Column>
         </Column>
     )
 }
-
-const msgs = [
-    {
-        id: 1,
-        name: 'João',
-        message: 'Olá, tudo bem?',
-        time: '10:00',
-        author: true,
-    },
-    {
-        id: 2,
-        name: 'Atendente Pongo',
-        message: 'Bom dia, como posso ajudar?',
-        time: '10:02',
-        author: false,
-    },
-    {
-        id: 3,
-        name: 'João',
-        message: 'Estou com um problema no meu pedido, ele ainda não chegou.',
-        time: '10:05',
-        author: true,
-    },
-    {
-        id: 4,
-        name: 'Atendente Pongo',
-        message: 'Entendo. Pode me fornecer o número do pedido para verificarmos?',
-        time: '10:06',
-        author: false,
-    },
-    {
-        id: 5,
-        name: 'João',
-        message: 'Claro, o número do pedido é 123456.',
-        time: '10:08',
-        author: true,
-    },
-    {
-        id: 6,
-        name: 'Atendente Pongo',
-        message: 'Obrigado. Vou verificar o status e já retorno com uma resposta.',
-        time: '10:10',
-        author: false,
-    },
-    {
-        id: 7,
-        name: 'Atendente Pongo',
-        message: 'Verifiquei que o pedido está em trânsito e deve chegar até amanhã.',
-        time: '10:15',
-        author: false,
-    },
-    {
-        id: 8,
-        name: 'João',
-        message: 'Obrigado pela informação. Vou aguardar.',
-        time: '10:17',
-        author: true,
-    }
-];

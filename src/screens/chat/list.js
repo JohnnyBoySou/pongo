@@ -8,20 +8,21 @@ import { formatDateTime } from '@hooks/utils';
 import { TextInput } from 'react-native-gesture-handler';
 import { MessageCircleMore, Search } from 'lucide-react-native';
 import Back from '@components/Back';
-import { searchChats, verifyConect } from '../../api/request/chat';
+import { searchChats, } from '@api/request/chat';
 
-export default function ChatListScreen({ navigation, socket }) {
+export default function ChatListScreen({ navigation }) {
     const { color, font, margin } = useTheme();
     const [loading, setloading] = useState();
-    const [data, setdata] = useState();
+    const [data, setdata] = useState([]);
     const [search, setsearch] = useState();
+    const [page, setpage] = useState(1);
 
     useEffect(() => {
         const fecthData = async () => {
             setloading(true)
             try {
-                const res = await listChats()
-                setdata(res)
+                const res = await listChats(page)
+                setdata((prevdata) => [...prevdata, ...res])
             } catch (error) {
                 console.log(error)
             } finally {
@@ -41,12 +42,11 @@ export default function ChatListScreen({ navigation, socket }) {
             }
         } else { return }
     }
-   
+
 
     return (
         <Main>
             <Scroll>
-
                 <TopMenu cart={false} search={false} back={false} />
                 <Column mh={margin.h} mv={12}>
                     <Title>Suas conversas</Title>
@@ -67,9 +67,6 @@ export default function ChatListScreen({ navigation, socket }) {
                     </Row>
                 </Column>
 
-
-                <ButtonPrimary label="Conectar"  />
-
                 {loading ? <Loader /> :
                     <Column>
                         <FlatList
@@ -79,7 +76,6 @@ export default function ChatListScreen({ navigation, socket }) {
                             windowSize={10}
                             maxToRenderPerBatch={6}
                             ListEmptyComponent={() => <Label size={14} style={{ textAlign: 'center', marginVertical: 80, }}>Nenhum atendimento encontrado</Label>}
-
                             ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: color.border, marginVertical: 4, borderRadius: 6, }} />}
                         />
                         <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor: '#918C8B', }} pv={16} ph={1} mh={margin.h} mtop={30}>
@@ -96,7 +92,7 @@ export default function ChatListScreen({ navigation, socket }) {
 
 const Chat = ({ item }) => {
     const { color } = useTheme();
-    const { avatar, lastMsg, time, name, unread, id, token_chat, criado_em, criado_por, status, titulo } = item
+    const { avatar, unread, token_chat, criado_em, titulo } = item
     const navigation = useNavigate()
     return (
         <Button onPress={() => { navigation.navigate('ChatDetails', { token: token_chat, user: item }) }} radius={4}>
@@ -116,50 +112,4 @@ const Chat = ({ item }) => {
 }
 
 
-const chats = [
-    {
-        name: 'Carol',
-        avatar: 'https://i.pravatar.cc/300',
-        lastMsg: 'Ola, tudo bem?',
-        time: '10:15',
-        lastOnline: '11:40',
-        unread: 2,
-        id: 1,
-    },
-    {
-        name: 'Lucas',
-        avatar: 'https://i.pravatar.cc/301',
-        lastMsg: 'Vamos nos encontrar amanhã?',
-        time: '09:30',
-        lastOnline: '09:40',
-        unread: 0,
-        id: 2,
-    },
-    {
-        name: 'Ana',
-        avatar: 'https://i.pravatar.cc/302',
-        lastMsg: 'Parabéns pelo seu aniversário!',
-        time: '08:20',
-        unread: 1,
-        lastOnline: '09:10',
-        id: 3,
-    },
-    {
-        name: 'Mariana',
-        avatar: 'https://i.pravatar.cc/304',
-        lastMsg: 'Precisamos discutir o projeto.',
-        time: '14:10',
-        lastOnline: '15:10',
-        unread: 3,
-        id: 5,
-    },
-    {
-        name: 'Felipe',
-        avatar: 'https://i.pravatar.cc/305',
-        lastMsg: 'Bom dia!',
-        time: '07:50',
-        lastOnline: '08:40',
-        unread: 0,
-        id: 6,
-    },
-];
+

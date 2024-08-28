@@ -1,27 +1,79 @@
-import axios from 'axios';
-import { io } from "socket.io-client";
-
+import axios from 'axios'; 
 import getToken from '@hooks/getToken';
 import getBaseURL from '@hooks/getBaseUrl';
-
-export const socket = io('https://socket.aocto.com:3001/chat');
+import socket from '@hooks/socket';
+import { getPreferences } from '@hooks/preferences';
 
 export const assinarChat = (token) => {
     socket.emit('entrarsala', {
         room: token,
     })
 }
-export const enviarMsg = (params) => {
-    const { user, message, token } = params
+export const enviarMsg = async (params) => {
+    const profile = await getPreferences()
+    const { user, message, token, } = params
     const id = Math.floor(100000 + Math.random() * 900000)
     socket.emit('chat message', {
         id_empresa: 6,
+        id_pet_colaborador: null,
         id_pet_tutor: user?.id_pet_tutor,
         id_pet_chat: user?.id_pet_chat,
         id_pet_chat_conversa: parseInt(id), 
         mensagem: message,
         type: 'U',
         token: token,
+        type_menssagem: 'texto',
+        criado_em: new Date(),
+        usuario: { 
+            name: profile?.name, 
+            avatar: profile?.avatar,
+        },
+    })
+}
+
+export const enviarImage = (params) => {
+    const { user, imagem, token } = params
+    const id = Math.floor(100000 + Math.random() * 900000)
+    socket.emit('chat message', {
+        id_empresa: 6,
+        id_pet_tutor: user?.id_pet_tutor,
+        id_pet_chat: user?.id_pet_chat,
+        id_pet_chat_conversa: parseInt(id), 
+        type: 'U',
+        mensagem: imagem,
+        token: token,
+        type_menssagem: 'imagem',
+        criado_em: new Date(),
+    })
+}
+
+export const enviarArquivo = (params) => {
+    const { user, arquivo, token } = params
+    const id = Math.floor(100000 + Math.random() * 900000)
+    socket.emit('chat message', {
+        id_empresa: 6,
+        id_pet_tutor: user?.id_pet_tutor,
+        id_pet_chat: user?.id_pet_chat,
+        id_pet_chat_conversa: parseInt(id), 
+        mensagem: arquivo,
+        type: 'U',
+        token: token,
+        type_menssagem: 'arquivo',
+        criado_em: new Date(),
+    })
+}
+
+export const enviarAudio = (params) => {
+    const { user, audio, token } = params
+    const id = Math.floor(100000 + Math.random() * 900000)
+    socket.emit('chat message', {
+        id_empresa: 6,
+        id_pet_tutor: user?.id_pet_tutor,
+        id_pet_chat: user?.id_pet_chat,
+        id_pet_chat_conversa: parseInt(id), 
+        type: 'U',
+        token: token,
+        type_menssagem: 'audio',
         criado_em: new Date(),
     })
 }
@@ -36,7 +88,7 @@ export const createChat = async (titulo) => {
     const token = await getToken();
     try {
         const res = await axios.post(`${BASE_URL}/chats/criarchat`, {
-            titulo: 'teste',
+            titulo: titulo,
         }, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -54,8 +106,6 @@ export const createChat = async (titulo) => {
     }
 }
 
-
-
 export const listChats = async (page = 1) => {
     const BASE_URL = await getBaseURL();
     const token = await getToken();
@@ -71,7 +121,6 @@ export const listChats = async (page = 1) => {
         throw new Error(err.message)
     }
 }
-
 
 export const searchChats = async (search, page = 1) => {
     const BASE_URL = await getBaseURL();
@@ -90,7 +139,6 @@ export const searchChats = async (search, page = 1) => {
         throw new Error(err.message)
     }
 }
-
 
 export const listMessages = async (id) => {
     const BASE_URL = await getBaseURL();

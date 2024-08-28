@@ -1,20 +1,43 @@
 import axios from 'axios';
-import validator from 'validator';
-import { getToken } from '@hooks/colaborador';
+import socket from '@hooks/socket';
+import { getToken, getPreferences } from '@hooks/colaborador';
 const BASE_URL = 'https://app.aocto.com/api/apppongocolaborador'
-//LOGIN/REGISTER APIimport axios from 'axios';
-import io from 'socket.io-client';
 
-const socket = io('http://192.168.0.10:3000'); // change to your server ip
-const API_CHAT = 'http://192.168.0.10:3000/chat';
+
+export const enviarMsg = async (params) => {
+    const profile = await getPreferences()
+    const { user, message, token,  } = params 
+    const id = Math.floor(100000 + Math.random() * 900000)
+    socket.emit('chat message', {
+        id_empresa: 6,
+        id_pet_colaborador: 1,
+        id_pet_tutor: user?.id_pet_tutor,
+        id_pet_chat: user?.id_pet_chat,
+        id_pet_chat_conversa: parseInt(id), 
+        mensagem: message,
+        type: 'C',
+        token: token,
+        type_menssagem: 'texto', //imagem, arquivo, audio
+        colaborador: { 
+            name: profile?.name, 
+            avatar: profile?.avatar,
+        },
+        criado_em: new Date(),
+    })
+}
+
+
+export const assinarChat = (token) => {
+    socket.emit('entrarsala', {
+        room: token,
+    })
+}
 
 export const loginColaborador = async (email, password) => {
-    const sanitizedEmail = validator.normalizeEmail(email);
-    const sanitizedPassword = validator.escape(password);
     try {
         const response = await axios.post(`https://app.aocto.com/api/apppongocolaborador/auth`, {
-            email: sanitizedEmail,
-            password: sanitizedPassword,
+            email: email,
+            password: password,
         });
         return response.data;
     } catch (error) {
@@ -50,12 +73,12 @@ export const getChats = () => {
 export const listChats = async (page = 1) => {
     const token = await getToken();
     try {
-        const res = await axios.get(`${BASE_URL}/chats`, {
+        const res = await axios.get(`${BASE_URL}/chats?page=${page}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
-        return res.data.data
+        return res.data.data || []
     } catch (error) {
         const err = JSON.parse(error.request.response);
         throw new Error(err.message)
@@ -70,8 +93,9 @@ export const listMessages = async (id) => {
                 Authorization: `Bearer ${token}`,
             },
         }); 
-        return res.data.data
+        return res.data
     } catch (error) {
+        console.log(error.request)
         const err = JSON.parse(error.request.response);
         throw new Error(err.message)
     }
