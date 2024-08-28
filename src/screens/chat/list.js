@@ -1,4 +1,4 @@
-import { Main, Button, Column, Label, Title, Row, Image, useTheme, useNavigate, Loader, LabelBT, Scroll } from '@theme/global';
+import { Main, Button, Column, Label, Title, Row, Image, useTheme, useNavigate, Loader, LabelBT, Scroll, ButtonPrimary } from '@theme/global';
 import { FlatList } from 'react-native-gesture-handler';
 import TopMenu from '@components/Header/topmenu';
 import TabBar from '@components/TabBar';
@@ -8,9 +8,9 @@ import { formatDateTime } from '@hooks/utils';
 import { TextInput } from 'react-native-gesture-handler';
 import { Search } from 'lucide-react-native';
 import Back from '@components/Back';
-import { searchChats } from '../../api/request/chat';
+import { searchChats, verifyConect } from '../../api/request/chat';
 
-export default function ChatListScreen({ navigation, }) {
+export default function ChatListScreen({ navigation, socket }) {
     const { color, font, margin } = useTheme();
     const [loading, setloading] = useState();
     const [data, setdata] = useState();
@@ -31,20 +31,17 @@ export default function ChatListScreen({ navigation, }) {
         fecthData();
     }, [])
 
-
     const handleSearch = async () => {
         if (search?.length > 1) {
             try {
                 const res = await searchChats(search)
                 setdata(res)
             } catch (error) {
-                
+
             }
         } else { return }
     }
-
-
-
+   
 
     return (
         <Main>
@@ -53,7 +50,7 @@ export default function ChatListScreen({ navigation, }) {
                 <TopMenu cart={false} search={false} back={false} />
                 <Column mh={margin.h} mv={12}>
                     <Title>Suas conversas</Title>
-                    <Row style={{ justifyContent: 'center', alignItems: 'center', flex: 1, marginHorizontal: 28, marginTop: 10,   }}>
+                    <Row style={{ justifyContent: 'center', alignItems: 'center', flex: 1, marginHorizontal: 28, marginTop: 10, }}>
                         <Back />
                         <Row style={{ backgroundColor: '#fff', paddingRight: 8, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginLeft: 8, }}>
                             <TextInput
@@ -69,6 +66,10 @@ export default function ChatListScreen({ navigation, }) {
                         </Row>
                     </Row>
                 </Column>
+
+
+                <ButtonPrimary label="Conectar"  />
+
                 {loading ? <Loader /> :
                     <Column>
                         <FlatList
@@ -86,10 +87,8 @@ export default function ChatListScreen({ navigation, }) {
                         </Button>
                         <Column style={{ height: 100, width: 20, }}></Column>
                     </Column>
-
                 }
             </Scroll>
-
             <TabBar />
         </Main>
     )
@@ -97,7 +96,6 @@ export default function ChatListScreen({ navigation, }) {
 
 const Chat = ({ item }) => {
     const { color } = useTheme();
-    console.log(item)
     const { avatar, lastMsg, time, name, unread, id, token_chat, criado_em, criado_por, status, titulo } = item
     const navigation = useNavigate()
     return (

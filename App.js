@@ -10,10 +10,14 @@ import Router from './src/router';
 import light from './src/theme/light';
 import dark from './src/theme/dark';
 
+//import { io } from "socket.io-client";
+//const socket = io('https://socket.aocto.com:3001/chat');
+
 preventAutoHideAsync();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
+
 
   const theme = useColorScheme();
   const selectTheme = theme === 'light' ? light : dark;
@@ -36,6 +40,7 @@ export default function App() {
       }
     }
     loadResourcesAndDataAsync();
+    
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
@@ -49,7 +54,7 @@ export default function App() {
   }
 
   return (
-    <View style={{ flex: 1,  backgroundColor: light.background }} onLayout={onLayoutRootView}>
+    <View style={{ flex: 1, backgroundColor: light.background }} onLayout={onLayoutRootView}>
       <ThemeProvider theme={light}>
         <StatusBar translucent />
         <Router />

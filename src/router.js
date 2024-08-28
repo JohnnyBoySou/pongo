@@ -89,10 +89,10 @@ import NotificationsScreen from '@screens/notifications/index';
 import FaqScreen from '@screens/faq/index';
 import Privacidade from '@screens/privacidade/index';
 
-export default function Router() {
+export default function Router({ }) {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Welcome'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='ChatList'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 

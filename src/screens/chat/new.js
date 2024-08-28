@@ -4,17 +4,6 @@ import { createChat } from '@api/request/chat';
 
 export default function ChatNewScreen({ navigation, }) {
     const { color, font, } = useTheme();
-
-    const user = {
-        name: 'Carol',
-        avatar: 'https://i.pravatar.cc/300',
-        lastMsg: 'Ola, tudo bem?',
-        time: '10:15',
-        lastOnline: '11:40',
-        unread: 2,
-        id: 1,
-    }
-
     const [loading, setloading] = useState();    
     const [data, setdata] = useState();
     const [titulo, settitulo] = useState('Preciso de ajuda');
@@ -24,8 +13,9 @@ export default function ChatNewScreen({ navigation, }) {
             setloading(true)
             try {
                 const res = await createChat(titulo)
+                console.log(res)
                 if(res){
-                    navigation.navigate('ChatDetails', { token: res.token,})
+                    navigation.navigate('ChatDetails', { token: res.token, user: res.chat, })
                 }
             } catch (error) {
                 console.log(error)

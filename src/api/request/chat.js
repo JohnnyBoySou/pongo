@@ -1,24 +1,35 @@
 import axios from 'axios';
-import io from 'socket.io-client';
+import { io } from "socket.io-client";
 
 import getToken from '@hooks/getToken';
 import getBaseURL from '@hooks/getBaseUrl';
 
+export const socket = io('https://socket.aocto.com:3001/chat');
 
-const socket = io('http://192.168.0.10:3000'); // change to your server ip
-const API_CHAT = 'http://192.168.0.10:3000/chat';
-
-export const getChat = (id) => {
-    socket.emit("getChat", id);
-    return axios.get(API_CHAT + `/${id}`);
+export const assinarChat = (token) => {
+    socket.emit('entrarsala', {
+        room: token,
+    })
+}
+export const enviarMsg = (params) => {
+    const { user, message, token } = params
+    const id = Math.floor(100000 + Math.random() * 900000)
+    socket.emit('chat message', {
+        id_empresa: 6,
+        id_pet_tutor: user?.id_pet_tutor,
+        id_pet_chat: user?.id_pet_chat,
+        id_pet_chat_conversa: parseInt(id), 
+        mensagem: message,
+        type: 'U',
+        token: token,
+        criado_em: new Date(),
+    })
 }
 
 export const getChats = () => {
     socket.emit("getChats"); // esse request vai para o servidor
     return axios.get(API_CHAT);
 }
-
-
 
 export const createChat = async (titulo) => {
     const BASE_URL = await getBaseURL();
@@ -90,8 +101,9 @@ export const listMessages = async (id) => {
                 Authorization: `Bearer ${token}`,
             },
         }); 
-        return res.data.data
+        return res.data
     } catch (error) {
+        console.log(error.request)
         const err = JSON.parse(error.request.response);
         throw new Error(err.message)
     }

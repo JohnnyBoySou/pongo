@@ -4,7 +4,6 @@ import { Main, Column, Label, Title, Row, Button, useTheme, SCREEN_HEIGHT, Image
 //icons
 import { ArrowDown, ArrowLeft, Camera, Search, Send, X, } from 'lucide-react-native';
 
-
 //components
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 import Animated, { FadeInDown, FadeOutDown, ZoomIn, ZoomOut, } from 'react-native-reanimated';
@@ -17,52 +16,39 @@ import AudioRecord from './audio';
 import AudioPlayer from './player';
 
 
-import Connect from '@api/request/socket/connect';
-import { socket } from '@api/request/socket/socket';
 import TopSheet from '@components/TopSheet/index';
 import { Pressable } from 'react-native';
 import Input from '@components/Forms/input';
 import { listMessages } from '@api/request/chat';
+import { assinarChat, enviarMsg, socket, } from '@api/request/chat';
+import { formatDateTime } from '@hooks/utils';
 
 export default function ChatDetailsScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
     const { user, token } = route.params;
-
-    const [messages, setmessages] = useState(msgs);
     const flatMsg = useRef();
     const modalCamera = useRef();
+    const topSheetRef = useRef();
+
     const [msg, setmsg] = useState();
+    const [messages, setmessages] = useState([]);
     const [focusMsg, setfocusMsg] = useState(false);
     const [openCamera, setopenCamera] = useState(false);
 
     const [audioUri, setAudioUri] = useState(null);
     const [showBottom, setshowBottom] = useState();
     const [search, setsearch] = useState('');
-    const topSheetRef = useRef();
 
-    const closeTopSheet = () => {
-        if (topSheetRef.current) {
-            topSheetRef.current.close(); // Chama a função handleClose
-        }
-    };
-
-    const expandTopSheet = () => {
-        if (topSheetRef.current) {
-            topSheetRef.current.expand(); // Chama a função handleExpand
-        }
-    };
-
-
-
-
-    const [data, setdata] = useState();
     const [loading, setloading] = useState(true);
     useEffect(() => {
         const fecthData = async () => {
             setloading(true)
             try {
+                assinarChat(token)
                 const res = await listMessages(token)
-                setdata(res)
+                if (res?.chatconversa) {
+                    setmessages(res?.chatconversa)
+                }
             } catch (error) {
                 console.log(error)
             } finally { setloading(false) }
@@ -70,15 +56,21 @@ export default function ChatDetailsScreen({ navigation, route }) {
         fecthData();
     }, []);
 
+    useEffect(() => {
+        socket.on('chat message', async (dados) => {
+            setmessages((msgs) => [...msgs, dados])
+        });
+        return () => {
+            socket.off('chat message', async (dados) => {
+                setmessages((msgs) => [...msgs, dados])
+            });
+        };
+    }, [socket]);
 
 
-
-
-
-
-    const searchResult = msgs.filter((item) => item.message.toLowerCase().includes(search.toLowerCase()));
+    const searchResult = messages?.filter((item) => item?.message?.toLowerCase().includes(search.toLowerCase()));
     return (
-        <Main style={{ backgroundColor: color.background, }}>
+        <Main style={{ backgroundColor: '#000', }}>
             <TopSheet
                 ref={topSheetRef}
                 bg={color.bg}
@@ -90,7 +82,6 @@ export default function ChatDetailsScreen({ navigation, route }) {
                                     <ArrowLeft size={28} color={color.sc.sc3} />
                                     <Column style={{ justifyContent: 'center', alignItems: 'flex-end', }}>
                                         <Image style={{ width: 52, height: 52, borderRadius: 100, backgroundColor: color.sc.sc3, marginBottom: -12, }} source={{ uri: user?.avatar }} />
-                                        <Connect />
                                     </Column>
                                 </Row>
                             </Pressable>
@@ -100,7 +91,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
                             </Column>
                         </Row>
                         <Row style={{ columnGap: 8, marginRight: 16, }}>
-                            <Button onPress={expandTopSheet} ph={0} pv={0} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
+                            <Button onPress={() => { topSheetRef.current?.expand() }} ph={0} pv={0} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
                                 <Search size={22} color={color.sc.sc3} />
                             </Button>
                         </Row>
@@ -109,7 +100,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
                 }
                 max={<Column>
                     <Column style={{ marginTop: 30, }}>
-                        <Button onPress={closeTopSheet} ph={0} pv={0} mv={12} style={{ width: 42, marginLeft: 12, height: 42, alignSelf: 'flex-end', justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
+                        <Button onPress={() => { topSheetRef.current.close() }} ph={0} pv={0} mv={12} style={{ width: 42, marginLeft: 12, height: 42, alignSelf: 'flex-end', justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 30}>
                             <X size={22} color={color.sc.sc3} />
                         </Button>
                         <Input
@@ -131,7 +122,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
                             maxToRenderPerBatch={10}
                             removeClippedSubviews
                             renderItem={({ item }) => <Message item={item} />}
-                            keyExtractor={item => item.id}
+                            keyExtractor={index => index}
                             style={{}}
                         />}
                 </Column>}
@@ -148,7 +139,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
                     <Label color="#fff">Inicio do chat em 12 de Jun, 2024</Label>
                 </Column>}
                 renderItem={({ item }) => <Message item={item} />}
-                keyExtractor={item => item.id}
+                keyExtractor={(item, index) => index.toString()}
                 initialNumToRender={10}
                 maxToRenderPerBatch={10}
                 removeClippedSubviews
@@ -186,7 +177,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
                 />
                 <Column style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', marginRight: 12, }}>
                     {msg?.length > 0 ?
-                        <SendButton message={msg} setmessage={setmsg} setmessages={setmessages} messages={messages} />
+                        <SendButton message={msg} setmessage={setmsg} token={token} user={user} />
                         :
                         <AudioRecord onAudioRecord={(uri) => setAudioUri(uri)} />
                     }
@@ -199,23 +190,18 @@ export default function ChatDetailsScreen({ navigation, route }) {
         </Main>
     )
 }
-const SendButton = ({ message, setmessage, setmessages, messages }) => {
+const SendButton = ({ message, setmessage, token, user }) => {
     const { color } = useTheme();
     const handleNewMessage = () => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
 
-        const hour = new Date().getHours() < 10 ? `0${new Date().getHours()}` : `${new Date().getHours()}`;
-        const mins = new Date().getMinutes() < 10 ? `0${new Date().getMinutes()}` : `${new Date().getMinutes()}`;
-
-        /*  socket.emit("message", {
-              message: message,
-              chat_id: id,
-              user_id: user.id,
-              timestamp: { hour, mins },
-          });
-          */
+        const params = {
+            message: message,
+            token: token,
+            user: user,
+        }
+        enviarMsg(params)
         setmessage('');
-        setmessages([...messages, { id: messages.length + 1, name: 'João', message: message, time: `${hour}:${mins}`, author: true }]);
     };
 
 
@@ -230,33 +216,16 @@ const SendButton = ({ message, setmessage, setmessages, messages }) => {
 
 const Message = ({ item }) => {
     const { color, font } = useTheme();
-    const { author, time, message, name, } = item;
+    const author = item?.type === 'U' ? true : false;
+    if (!item) return null
     return (
         <Column style={{ alignSelf: author ? 'flex-end' : 'flex-start', marginBottom: 20, }}>
-
             <Column style={{ backgroundColor: author ? color.off2 : color.sc.sc3 + 30, marginBottom: 6, borderRadius: 12, borderTopLeftRadius: author ? 12 : 0, borderTopRightRadius: author ? 0 : 12 }} ph={12} pv={12}>
-                <Label>{message}</Label>
+                <Label color="#000">{item?.mensagem}</Label>
             </Column>
             <Column style={{ alignSelf: author ? 'flex-end' : 'flex-start', }}>
-                <Label size={14} lineHeight={16}>{time}</Label>
+                <Label size={12} lineHeight={16}>{formatDateTime(item?.criado_em)}</Label>
             </Column>
         </Column>
     )
 }
-
-const msgs = [
-    {
-        id: 1,
-        name: 'João',
-        message: 'Olá, tudo bem?',
-        time: '10:00',
-        type: 'U',
-    },
-    {
-        id: 2,
-        name: 'Atendente Pongo',
-        message: 'Bom dia, como posso ajudar?',
-        time: '10:02',
-        type: 'C',
-    }
-];
