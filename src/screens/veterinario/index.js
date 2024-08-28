@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Text } from 'react-native';
-import { Main, Scroll, Column, Label, Row, useTheme, } from '@theme/global';
+import { Main, Scroll, Column, Label, Row, useTheme, Title } from '@theme/global';
 
 import Header from '@components/Header';
 import TopMenu from '@components/Header/topmenu';
@@ -31,7 +31,7 @@ export default function VeterinarioScreen() {
 
                 <Column mh={margin.h}>
 
-                    <Text style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 6, fontWeight: 700, lineHeight: 22 }}>VET VILLA PONGO </Text>
+                    <Title style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 6, fontWeight: 700, lineHeight: 22 }}>VET VILLA PONGO </Title>
 
                     { /* <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
                         <Label style={{ textAlign: 'center', color: color.title }}>Contratar Day Use</Label>
@@ -48,9 +48,9 @@ export default function VeterinarioScreen() {
                     <Label style={{ fontSize: 14, marginBottom: 8 }}>Faz parte do protocolo dos nossos veterinários, todos os exames preventivos de rotina, vacinações, vermifugaçoes e cuidado com o controle de ectoparasitas (carrapatos e pulgas). </Label>
                     <Label style={{ fontSize: 14, marginBottom: 8 }}>Entendemos que a medicina veterinária é a melhor fonte de informação sobre a saúde do seu animal de estimação, portanto, o hábito de trazer seu Pet para visitas regulares com nossos veterinários não só garante a saúde dele como também a saúde de sua família. </Label>
 
-                    <Text style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 18, fontWeight: 700, lineHeight: 22 }}>NOSSOS PROFISSIONAIS</Text>
+                    <Title style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 18, fontWeight: 700, lineHeight: 22 }}>NOSSOS PROFISSIONAIS</Title>
 
-                    <Text style={{ fontSize: 16, marginBottom: 4, fontWeight: 700, color: color.sc.sc3 }}>Danielle L. Urenha </Text>
+                    <Label style={{ fontSize: 16, marginBottom: 4, fontWeight: 700, color: color.sc.sc3 }}>Danielle L. Urenha </Label>
                     <Label style={{ fontSize: 14, marginBottom: 4, }}>Médica Veterinária</Label>
                     <Label style={{ fontSize: 14, marginBottom: 4, }}>CMRV-SP 39.808 </Label>
 
@@ -76,7 +76,7 @@ export default function VeterinarioScreen() {
 
                     <Column style={{ width: '100%', backgroundColor: color.sc.sc3, height: 1, marginVertical: 12 }} />
 
-                    <Text style={{ fontSize: 16, marginBottom: 4, fontWeight: 700, color: color.sc.sc3 }}>Marianna Nogara  </Text>
+                    <Label style={{ fontSize: 16, marginBottom: 4, fontWeight: 700, color: color.sc.sc3 }}>Marianna Nogara  </Label>
                     <Label style={{ fontSize: 14, marginBottom: 4, }}>Médica Veterinária</Label>
                     <Label style={{ fontSize: 14, marginBottom: 4 }}>CMRV-SP 51.904 </Label>
 
@@ -107,7 +107,7 @@ export default function VeterinarioScreen() {
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
-                    <Text style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 16, fontWeight: 700, lineHeight: 22 }}>Na Villa PONGO você encontrará:</Text>
+                    <Title style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 16, fontWeight: 700, lineHeight: 22 }}>Na VILLA PONGO você encontrará:</Title>
 
                     <Row style={{ paddingVertical: 8 }}>
 
