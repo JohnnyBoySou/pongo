@@ -43,7 +43,7 @@ export default function HomeScreen({ navigation, }) {
     return (
         <Main >
             <Scroll >
-                <TopMenu back={false} />
+                <TopMenu back={false} handleSearch={false}/>
                 <Column ph={margin.h} mv={12}>
                     <Row style={{ columnGap: 16, marginBottom: 8, flex: 1, width: '100%' }}>
                         <MotiView

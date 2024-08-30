@@ -46,6 +46,7 @@ import PetsSingleGaleriaScreen from '@screens/pets/singe_galeria';
 import ChatListScreen from '@screens/chat/list';
 import ChatNewScreen from '@screens/chat/new';
 import ChatDetailsScreen from '@screens/chat/details';
+import ChatSingleImageScreen from '@screens/chat/zoom';
 import ChatColaboradorListScreen from '@screens/colaborador/list';
 import ChatDetailsColaboradorScreen from '@screens/colaborador/details';
 
@@ -93,13 +94,14 @@ import Privacidade from '@screens/privacidade/index';
 export default function Router({ }) {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='AuthLogin'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Welcome'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="ChatList" component={ChatListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatDetails" component={ChatDetailsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatNew" component={ChatNewScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="ChatSingleImage" component={ChatSingleImageScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatColaboradorList" component={ChatColaboradorListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatDetailsColaborador" component={ChatDetailsColaboradorScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 

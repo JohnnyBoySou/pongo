@@ -127,11 +127,6 @@ export const resetPasswordOld = async (params) => {
 };
 
 export const updateUser = async (params) => {
-    
-    console.log(params)
-
-
-
     const BASE_URL = await getBaseURL();
     const token = await getToken();
     try {
@@ -152,7 +147,6 @@ export const updateUser = async (params) => {
                 },
             }
         );
-        console.log(response.data);
         return response.data;
     } catch (error) {
         console.log('Error:', error.message);

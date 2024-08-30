@@ -7,8 +7,7 @@ import { Column, Button, useTheme } from '@theme/global';
 
 const AudioRecord = ({ onAudioRecord }) => {
     const { color } = useTheme();
-    const [recording, setRecording] = React.useState();
-    const [recordings, setRecordings] = React.useState([]);
+    const [recording, setRecording] = useState(null);
     const [isRecording, setIsRecording] = useState(false);
 
     async function startRecording() {
@@ -18,29 +17,50 @@ const AudioRecord = ({ onAudioRecord }) => {
             if (perm.status === "granted") {
                 await Audio.setAudioModeAsync({
                     allowsRecordingIOS: true,
-                    playsInSilentModeIOS: true
+                    playsInSilentModeIOS: true,
                 });
                 onAudioRecord(null);
                 setIsRecording(true);
-                const { recording } = await Audio.Recording.createAsync(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
+                const { recording } = await Audio.Recording.createAsync({
+                    android: {
+                        extension: '.wav',
+                        outputFormat: Audio.RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_DEFAULT,
+                        audioEncoder: Audio.RECORDING_OPTION_ANDROID_AUDIO_ENCODER_DEFAULT,
+                        sampleRate: 44100,
+                        numberOfChannels: 2,
+                        bitRate: 128000,
+                    },
+                    ios: {
+                        extension: '.wav',
+                        audioQuality: Audio.RECORDING_OPTION_IOS_AUDIO_QUALITY_MAX,
+                        sampleRate: 44100,
+                        numberOfChannels: 2,
+                        bitRate: 128000,
+                        linearPCMBitDepth: 16,
+                        linearPCMIsBigEndian: false,
+                        linearPCMIsFloat: false,
+                    },
+                });
                 setRecording(recording);
             }
-        } catch (err) { }
+        } catch (err) {
+            console.error('Failed to start recording:', err);
+        }
     }
 
     async function stopRecording() {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-        setRecording(undefined);
         setIsRecording(false);
-        await recording.stopAndUnloadAsync();
-        let allRecordings = [...recordings];
-        onAudioRecord(recording.getURI());
-        setRecordings(allRecordings);
+        if (recording) {
+            await recording.stopAndUnloadAsync();
+            onAudioRecord(recording.getURI());
+            setRecording(null);
+        }
     }
 
     function clearRecordings() {
         setIsRecording(false);
-        setRecordings([])
+        setRecording(null);
     }
 
     return (

@@ -12,7 +12,7 @@ export default function ChatNewScreen({ navigation, }) {
         try {
             const res = await createChat(titulo)
             if (res) {
-                navigation.navigate('ChatDetails', { token: res.token, user: res.chat, })
+                navigation.replace('ChatDetails', { token: res.token, user: res.chat, type: 'U' })
             }
         } catch (error) {
             console.log(error)

@@ -9,6 +9,8 @@ import { TextInput } from 'react-native-gesture-handler';
 import { MessageCircleMore, Search } from 'lucide-react-native';
 import Back from '@components/Back';
 import { searchChats, } from '@api/request/chat';
+import { RefreshControl } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function ChatListScreen({ navigation }) {
     const { color, font, margin } = useTheme();
@@ -17,25 +19,29 @@ export default function ChatListScreen({ navigation }) {
     const [search, setsearch] = useState();
     const [page, setpage] = useState(1);
 
-    useEffect(() => {
-        const fecthData = async () => {
-            setloading(true)
-            try {
-                const res = await listChats(page)
-                setdata((prevdata) => [...prevdata, ...res])
-            } catch (error) {
-                console.log(error)
-            } finally {
-                setloading(false)
-            }
+    const isFocused = useIsFocused();
+
+    const fecthData = async () => {
+        setloading(true)
+        try {
+            const res = await listChats(page, 'U')
+            setdata(res)
+            //setdata((prevdata) => [...prevdata, ...res])
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setloading(false)
         }
+    }
+
+    useEffect(() => {
         fecthData();
-    }, [])
+    }, [isFocused])
 
     const handleSearch = async () => {
         if (search?.length > 1) {
             try {
-                const res = await searchChats(search)
+                const res = await searchChats(search, 'U')
                 setdata(res)
             } catch (error) {
 
@@ -43,16 +49,15 @@ export default function ChatListScreen({ navigation }) {
         } else { return }
     }
 
-
     return (
         <Main>
             <Scroll>
                 <TopMenu cart={false} search={false} back={false} />
                 <Column mh={margin.h} mv={12}>
                     <Title>Suas conversas</Title>
-                    <Row style={{ justifyContent: 'center', alignItems: 'center', flex: 1, marginHorizontal: 28, marginTop: 10, }}>
+                    <Row style={{ justifyContent: 'center', alignItems: 'center', flex: 1, marginHorizontal: 24, marginTop: 10, }}>
                         <Back />
-                        <Row style={{ backgroundColor: '#fff', paddingRight: 8, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginLeft: 8, }}>
+                        <Row style={{ backgroundColor: '#fff', paddingRight: 8, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginLeft: 12, }}>
                             <TextInput
                                 value={search}
                                 onChangeText={(e) => setsearch(e)}
@@ -75,6 +80,15 @@ export default function ChatListScreen({ navigation }) {
                             keyExtractor={item => item.id}
                             windowSize={10}
                             maxToRenderPerBatch={6}
+                            onRefresh={() => {fecthData()}}
+                            refreshing={loading}
+                            refreshControl={
+                                <RefreshControl
+                                    refreshing={loading} 
+                                    onRefresh={fecthData}  
+                                    colors={[color.sc.sc3]}  
+                                />
+                            }
                             ListEmptyComponent={() => <Label size={14} style={{ textAlign: 'center', marginVertical: 80, }}>Nenhum atendimento encontrado</Label>}
                             ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: color.border, marginVertical: 4, borderRadius: 6, }} />}
                         />
@@ -90,17 +104,20 @@ export default function ChatListScreen({ navigation }) {
     )
 }
 
-const Chat = ({ item }) => {
+const Chat = ({ item, }) => {
     const { color } = useTheme();
-    const { avatar, unread, token_chat, criado_em, titulo } = item
+    const { alterado_em, unread, token_chat, criado_em, titulo, avatarcolaborador } = item
     const navigation = useNavigate()
+
+
+    const img = avatarcolaborador ? { uri: avatarcolaborador } : require('@imgs/btn-onde-estamos.png')
     return (
-        <Button onPress={() => { navigation.navigate('ChatDetails', { token: token_chat, user: item }) }} radius={4}>
+        <Button onPress={() => { navigation.navigate('ChatDetails', { token: token_chat, user: item, type: 'U', }) }} radius={4} ph={28}>
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                <Image style={{ width: 56, height: 56, borderRadius: 100, backgroundColor: '#f7f7f7', }} source={{ uri: avatar }} />
+                <Image style={{ width: 56, height: 56, borderRadius: 100, backgroundColor: '#f7f7f7', }} source={img} />
                 <Column style={{ flexGrow: 1, marginLeft: 12, }}>
                     <Title size={18}>{titulo}</Title>
-                    <Label size={14} style={{ marginTop: 4, }}>{formatDateTime(criado_em).slice(14)} </Label>
+                    <Label size={14} style={{ marginTop: 4, }}>{formatDateTime(alterado_em).slice(14)}</Label>
                 </Column>
                 <Column style={{ alignItems: 'flex-end' }}>
                     <Label size={14}>{formatDateTime(criado_em).slice(0, 10)}</Label>

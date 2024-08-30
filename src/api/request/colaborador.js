@@ -4,6 +4,7 @@ import { getToken, getPreferences } from '@hooks/colaborador';
 const BASE_URL = 'https://app.aocto.com/api/apppongocolaborador'
 
 
+
 export const enviarMsg = async (params) => {
     const profile = await getPreferences()
     const { user, message, token,  } = params 
@@ -17,7 +18,7 @@ export const enviarMsg = async (params) => {
         mensagem: message,
         type: 'C',
         token: token,
-        type_menssagem: 'texto', //imagem, arquivo, audio
+        type_menssagem: 'texto', 
         colaborador: { 
             name: profile?.name, 
             avatar: profile?.avatar,

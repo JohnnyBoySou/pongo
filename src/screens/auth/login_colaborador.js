@@ -31,6 +31,8 @@ export default function AuthLoginColaboradorScreen({ navigation, }) {
                 "name": res?.nome,
                 "email": res?.email,
                 "token": res?.token,
+                "id_pet_colaborador": res?.id_pet_colaborador,
+                "nomecolaborador": res?.nomecolaborador,
             };
             const preferences = await createPreferences(saveUser)
             if(preferences){
@@ -45,15 +47,12 @@ export default function AuthLoginColaboradorScreen({ navigation, }) {
         }
     }
 
-
     return (
-        <Main style={{}}>
+        <Main >
             <Scroll>
-
                     <Column ph={28}>
                         <Back />
                         <Title size={26} style={{ marginTop: 20, marginBottom: 4, }}>Área do Colaborador. Faça login com seu e-mail e senha.</Title>
-
                         <Column style={{ height: 16, }} />
                         <Input
                             label="E-mail *"

@@ -10,8 +10,6 @@ import Router from './src/router';
 import light from './src/theme/light';
 import dark from './src/theme/dark';
 
-//import { io } from "socket.io-client";
-//const socket = io('https://socket.aocto.com:3001/chat');
 
 preventAutoHideAsync();
 
@@ -33,8 +31,8 @@ export default function App() {
           Font_Black: require('./assets/fonts/Inter_Black.ttf'),
           Voyage_Medium: require('./assets/fonts/Voyage_Medium.otf'),
           Voyage_Book: require('./assets/fonts/Voyage_Book.otf'),
-          TimesNewRoman: require('./assets/fonts/times new roman.ttf'),
-          TimesNewRoman_Bold: require('./assets/fonts/times new roman bold.ttf'),
+          TimesNewRoman: require('./assets/fonts/Times_Roman.ttf'),
+          TimesNewRoman_Bold: require('./assets/fonts/Times_Roman_Bold.ttf'),
         });
         setAppIsReady(true);
       } catch (e) {

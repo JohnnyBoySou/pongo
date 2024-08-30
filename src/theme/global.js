@@ -120,14 +120,12 @@ export const Label = styled.Text`
   color: ${props => props.color || props.theme.color.label};
   font-family: ${props => props.theme.font.book};
   text-align: ${props => props.align || 'left'};
-  letter-spacing: -0.6px;
   line-height: ${props => props.lineHeight || props.size || '16px'};
 `;
 export const LabelBT = styled.Text`
   font-size: ${props => props.size || '18px'};
   color: ${props => props.color || props.theme.color.label};
   font-family: ${props => props.theme.font.bold};
-  letter-spacing: -0.6px;
   text-align: ${props => props.align || 'left'};
 `;
 export const SubLabel = styled.Text`
@@ -141,7 +139,6 @@ export const Title = styled.Text`
   color: ${props => props.color || props.theme.color.title};
   font-family: ${props => props.font || props.theme.font.bold};
   text-align: ${props => props.align || 'left'};
-  letter-spacing: -0.6px;
   line-height: ${props => props.lineHeight || props.size + 3 || '20px'};
 `;
 

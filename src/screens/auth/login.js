@@ -111,16 +111,16 @@ export default function AuthLoginScreen({ navigation, }) {
                             <U><LabelBT color={color.title} style={{ fontSize: 16, }}>Recuperar senha</LabelBT></U>
                         </Button>
 
-                        <Button onPress={() => {navigation.navigate('Privacidade')}} pv={8} ph={8} radius={4} style={{ marginBottom: 32,  }}>
+                        <Button onPress={() => {navigation.navigate('Privacidade')}} pv={8} ph={8} radius={4} style={{ marginBottom: 12,  }}>
                         <Row style={{ alignItems: 'center', }}>
                             <CheckBox status={terms} setstatus={setterms} />
-                            <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de uso e Privacidade</U></Label>
+                            <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de uso e Privacidade </U> </Label>
                         </Row>
                         </Button>
 
                         {success ? <Success msg={success} /> : error ? <Error msg={error} /> : null}
 
-                        <Button bg='#918C8B' disabled={loading} onPress={handleLogin}>
+                        <Button bg='#918C8B' disabled={loading} onPress={handleLogin} style={{ marginTop: 12, }}>
                             <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                                 {loading ?
                                     <Loader color="#fff" /> :

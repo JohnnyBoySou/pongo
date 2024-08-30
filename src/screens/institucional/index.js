@@ -62,16 +62,7 @@ export default function InstitucionalScreen({ navigation, }) {
                         </Row>
                     </Button>
 
-                    <Button radius={16} bg="#fff" pv={10} ph={10} onPress={() => { navigation.navigate('InstitucionalGaleria') }} >
-                        <Row style={{ alignItems: 'center' }}>
-                            <Image source={require('@imgs/btn-galeria.png')} style={{ width: 81, height: 81, marginRight: 8, borderRadius: 20 }} />
-                            <Column>
-                                <Title size={16}>GALERIA</Title>
-                                <Column style={{ height: 4, }} />
-                                <Label size={14}>Clique para visualizar</Label>
-                            </Column>
-                        </Row>
-                    </Button>
+                   
 
 
 
@@ -82,6 +73,18 @@ export default function InstitucionalScreen({ navigation, }) {
         </Main>
     )
 }
+
+/* 
+ <Button radius={16} bg="#fff" pv={10} ph={10} onPress={() => { navigation.navigate('InstitucionalGaleria') }} >
+                        <Row style={{ alignItems: 'center' }}>
+                            <Image source={require('@imgs/btn-galeria.png')} style={{ width: 81, height: 81, marginRight: 8, borderRadius: 20 }} />
+                            <Column>
+                                <Title size={16}>GALERIA</Title>
+                                <Column style={{ height: 4, }} />
+                                <Label size={14}>Clique para visualizar</Label>
+                            </Column>
+                        </Row>
+                    </Button>*/
 
 const imgs = [
     require('@imgs/carrousel-institucional1.jpg'),

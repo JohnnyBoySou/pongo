@@ -84,7 +84,7 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
                                     onChangeText={e => setvalue(e)}
                                     value={value}
                                     onSubmitEditing={handleSearch}
-                                    placeholder="Pesquisar" style={{ flex: 1, fontFamily: 'Font_Medium', fontSize: 16, color: color.label, marginLeft: 12, }} />
+                                    placeholder="Pesquisar" style={{ flex: 1, fontFamily: font.medium, fontSize: 16, color: color.label, marginLeft: 12, }} />
                             </Row>
                         </Button>
                     }

@@ -18,7 +18,7 @@ export default function ChatColaboradorListScreen({ navigation }) {
         const fecthData = async () => {
             setloading(true)
             try {
-                const res = await listChats(page)
+                const res = await listChats(page, 'C') 
                 const pref = await getPreferences()
                 setuser(pref)
                 setdata((prevdata) => [...prevdata, ...res])
@@ -33,7 +33,7 @@ export default function ChatColaboradorListScreen({ navigation }) {
     const [search, setsearch] = useState();
     const handleSearch = async () => {
         if (search?.length > 1) {
-            const res = await searchChats(search)
+            const res = await searchChats(search, 'C')
             setdata(res)
         } else { return }
     }
@@ -90,18 +90,17 @@ export default function ChatColaboradorListScreen({ navigation }) {
 }
 
 
-const Chat = ({ item, user }) => {
+const Chat = ({ item,}) => {
     const { color } = useTheme();
-    const { avatar, unread, token_chat, criado_em, titulo } = item
-    const navigation = useNavigate()
-    console.log(item)
+    const { avatarcolaborador, unread, token_chat, criado_em, titulo, nomeusuario } = item
+    const navigation = useNavigate() 
     if (!item) return null
     return (
-        <Button onPress={() => { navigation.navigate('ChatDetailsColaborador', { token: token_chat, user: item, profile: user, }) }} radius={4}>
+        <Button onPress={() => { navigation.navigate('ChatDetails', { token: token_chat, user: item, type: 'C' }) }} radius={4} ph={28}>
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                <Image style={{ width: 56, height: 56, borderRadius: 100, backgroundColor: '#f7f7f7', }} source={{ uri: avatar }} />
+                <Image style={{ width: 56, height: 56, borderRadius: 100, backgroundColor: '#f7f7f7', }} source={{ uri: avatarcolaborador }} />
                 <Column style={{ flexGrow: 1, marginLeft: 12, }}>
-                    <Title size={18}>{titulo}</Title>
+                    <Title size={18}>{titulo} - {nomeusuario.length > 12 ? nomeusuario.slice(0, 12) + '...' : nomeusuario}</Title>
                     <Label size={14} style={{ marginTop: 4, }}>{formatDateTime(criado_em).slice(14)} </Label>
                 </Column>
                 <Column style={{ alignItems: 'flex-end' }}>
