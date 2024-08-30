@@ -35,7 +35,7 @@ export default function OnboardingScreen({ navigation, route, }) {
 
     return (
         <Main style={{ backgroundColor: '#fff', }}>
-            <Row style={{ position: 'absolute', top: 40, left: 30, right: 30, zIndex: 99, justifyContent: 'space-between', alignItems: 'center', }}>
+            <Row style={{ position: 'absolute', top: 60, left: 30, right: 30, zIndex: 99, justifyContent: 'space-between', alignItems: 'center', }}>
 
                 <Column></Column>
                 <Button pv={8} ph={20} bg='#ECEBEB' onPress={() => { setCurrentIndex(2); pagerRef.current.setPage(2) }} >

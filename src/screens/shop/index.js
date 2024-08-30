@@ -12,18 +12,16 @@ export default function ShopScreen({ navigation, }) {
         <Main style={{ backgroundColor: '#f1f1f1', }}>
             <Scroll>
                 <TopMenu search={false} />
-               
+                   <WebView
+                    style={{ flex: 1, }}
+                    source={{ uri: 'https://pongo.com.br/' }}
+                />
             </Scroll>
         </Main>
     )
 }
 
-/*
- <WebView
-                    style={{ flex: 1, }}
-                    source={{ uri: 'https://pongo.com.br/' }}
-                />
-*/
+         
      
 
 

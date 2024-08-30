@@ -174,7 +174,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
                     initialNumToRender={10}
                     maxToRenderPerBatch={10}
                     removeClippedSubviews
-                    style={{ paddingHorizontal: margin.h, }}
+                    style={{ paddingHorizontal: margin.h, paddingBottom: 30,}}
                     onScroll={(event) => {
                         const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
                         const isNearBottom = contentSize.height - (contentOffset.y + layoutMeasurement.height) < 200;
@@ -189,35 +189,41 @@ export default function ChatDetailsScreen({ navigation, route }) {
                 </Button>
             </Animated.View>}
 
-            {audioUri && <AudioPlayer audioUri={audioUri} type={type} token={token} user={user} />}
-
-            <Row style={{ backgroundColor: color.off2, justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 12, zIndex: 99, position: 'absolute', bottom: 0, width: '100%' }}>
-                <Button onPress={() => { modalCamera.current.expand(); setopenCamera(true) }} ph={0} pv={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 20}>
-                    <Camera size={22} color={color.sc.sc3} />
-                </Button>
-                <TextInput
-                    value={msg}
-                    onChangeText={setmsg}
-                    onFocus={() => setfocusMsg(true)}
-                    onBlur={() => setfocusMsg(false)}
-                    placeholder='Escreva uma mensagem'
-                    multiline
-                    placeholderTextColor={color.sc.sc3}
-                    onSubmitEditing={handleNewMessage}
-                    style={{ fontFamily: font.medium, backgroundColor: focusMsg ? "#f7f7f7" : color.sc.sc3 + 20, color: color.title, width: '68%', marginHorizontal: 12, fontSize: 18, borderRadius: 20, paddingHorizontal: 12, paddingVertical: 8, marginVertical: 12, }}
-                />
-                <Column style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', marginRight: 12, }}>
-                    {msg?.length > 0 ?
-                        <Button onPressIn={handleNewMessage} bg={color.sc.sc3} ph={0} pv={0} style={{ justifyContent: 'center', alignItems: 'center', width: 46, height: 46, }}>
-                            <Animated.View entering={ZoomIn} exiting={ZoomOut} >
-                                <Send size={22} color="#fff" />
-                            </Animated.View>
-                        </Button>
-                        :
-                        <AudioRecord onAudioRecord={(uri) => setAudioUri(uri)} />
-                    }
-                </Column>
-            </Row>
+            
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
+                style={{ flex: 1, position: 'absolute', bottom: 20,  }}
+            >
+                {audioUri && <AudioPlayer audioUri={audioUri} type={type} token={token} user={user} />}
+                <Row style={{ backgroundColor: color.off2, justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 12, zIndex: 99, }}>
+                    <Button onPress={() => { modalCamera.current.expand(); setopenCamera(true) }} ph={0} pv={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 20}>
+                        <Camera size={22} color={color.sc.sc3} />
+                    </Button>
+                    <TextInput
+                        value={msg}
+                        onChangeText={setmsg}
+                        onFocus={() => setfocusMsg(true)}
+                        onBlur={() => setfocusMsg(false)}
+                        placeholder='Escreva uma mensagem'
+                        multiline
+                        placeholderTextColor={color.sc.sc3}
+                        onSubmitEditing={handleNewMessage}
+                        style={{ fontFamily: font.medium, backgroundColor: focusMsg ? "#f7f7f7" : color.sc.sc3 + 20, color: color.title, width: '68%', marginHorizontal: 12, fontSize: 18, borderRadius: 20, paddingHorizontal: 12, paddingVertical: 8, marginVertical: 12, }}
+                    />
+                    <Column style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', marginRight: 12, }}>
+                        {msg?.length > 0 ?
+                            <Button onPressIn={handleNewMessage} bg={color.sc.sc3} ph={0} pv={0} style={{ justifyContent: 'center', alignItems: 'center', width: 46, height: 46, }}>
+                                <Animated.View entering={ZoomIn} exiting={ZoomOut} >
+                                    <Send size={22} color="#fff" />
+                                </Animated.View>
+                            </Button>
+                            :
+                            <AudioRecord onAudioRecord={(uri) => setAudioUri(uri)} />
+                        }
+                    </Column>
+                </Row>
+            </KeyboardAvoidingView>
             <Modal ref={modalCamera} snapPoints={[0.1, SCREEN_HEIGHT - 76]} onClose={() => setopenCamera(false)} bg={color.bg}>
                 {openCamera && <CameraChat token={token} user={user} setopenCamera={setopenCamera} modalCamera={modalCamera} type={type} />}
             </Modal>
