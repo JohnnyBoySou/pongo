@@ -53,7 +53,7 @@ export default function SearchScreen({ navigation, route }) {
 const ItensFlat = ({ type }) => {
 
     const [loading, setloading] = useState(true);
-    const [data, setdata] = useState(exp);
+    const [data, setdata] = useState([]);
 
     useEffect(() => {
         const fecthData = async () => {
@@ -99,37 +99,3 @@ const ItensFlat = ({ type }) => {
         />
     )
 }
-
-const exp = [
-    {
-        id: 1,
-        name: 'Teste',
-        img: 'https://i.pinimg.com/736x/2e/ab/9b/2eab9b19d939a71a3dad72678c83d9f1.jpg',
-        price: 'R$ 150,00',
-    },
-    {
-        id: 2,
-        name: 'Teste',
-        img: 'https://i.pinimg.com/736x/2e/ab/9b/2eab9b19d939a71a3dad72678c83d9f1.jpg',
-        price: 'R$ 150,00',
-    },
-    {
-        id: 3,
-        name: 'Teste',
-        img: 'https://i.pinimg.com/736x/2e/ab/9b/2eab9b19d939a71a3dad72678c83d9f1.jpg',
-        price: 'R$ 100,00',
-    },
-    {
-        id: 4,
-        name: 'Teste',
-        img: 'https://i.pinimg.com/736x/2e/ab/9b/2eab9b19d939a71a3dad72678c83d9f1.jpg',
-        price: 'R$ 150,00',
-    },
-    {
-        id: 5,
-        name: 'Teste',
-        img: 'https://i.pinimg.com/736x/2e/ab/9b/2eab9b19d939a71a3dad72678c83d9f1.jpg',
-        price: 'R$ 100,00',
-    },
-
-]

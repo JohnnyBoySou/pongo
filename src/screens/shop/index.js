@@ -9,20 +9,18 @@ import { WebView } from 'react-native-webview';
 export default function ShopScreen({ navigation, }) {
     const { color, font, } = useTheme();
     return (
-        <Main style={{ backgroundColor: '#f1f1f1', }}>
-            <Scroll>
-                <TopMenu search={false} />
-                   <WebView
-                    style={{ flex: 1, }}
-                    source={{ uri: 'https://pongo.com.br/' }}
-                />
-            </Scroll>
+        <Main style={{ backgroundColor: '#fff', }}>
+            <TopMenu search={false} />
+            <WebView
+                style={{ flex: 1, }}
+                source={{ uri: 'https://pongo.com.br/' }}
+            />
         </Main>
     )
 }
 
-         
-     
+
+
 
 
 const CatsFlat = ({ }) => {

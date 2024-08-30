@@ -60,7 +60,8 @@ export default function AudioPlayerDownloaded({ audioUri }) {
                 onPlaybackStatusUpdate
             );
     
-            console.log('Som criado', status);
+            await newSound.setVolumeAsync(1.5);
+
             setSound(newSound);
             setIsPlaying(true);
     
