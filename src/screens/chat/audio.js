@@ -35,7 +35,7 @@ const AudioRecord = ({ onAudioRecord }) => {
                         audioQuality: Audio.RECORDING_OPTION_IOS_AUDIO_QUALITY_MAX,
                         sampleRate: 44100,
                         numberOfChannels: 2,
-                        bitRate: 128000,
+                        bitRate: 200000,
                         linearPCMBitDepth: 16,
                         linearPCMIsBigEndian: false,
                         linearPCMIsFloat: false,

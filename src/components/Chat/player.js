@@ -8,7 +8,7 @@ import * as FileSystem from 'expo-file-system';
 import { ArrowDownToLine } from 'lucide-react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-export default function AudioPlayerDownloaded({ audioUri = 'https://rr3---sn-a5msenes.googlevideo.com/videoplayback?expire=1724960199&ei=Z3nQZoz1DseWsfIPzYziiQU&ip=13.57.224.30&id=o-ADshwOu27QA9haFm6mCAGGkH7tRp72oKrewCr3xuJGEt&itag=139&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&siu=1&vprv=1&svpuc=1&xtags=drc%3D1&mime=audio%2Fmp4&rqh=1&gir=yes&clen=39353&dur=6.269&lmt=1656600972427094&keepalive=yes&c=IOS&txp=6311224&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Csiu%2Cvprv%2Csvpuc%2Cxtags%2Cmime%2Crqh%2Cgir%2Cclen%2Cdur%2Clmt&sig=AJfQdSswRQIgMK2RSLIMeFTNZY5anrSNEvYE6VfeXNkxueKKZEWUCy4CIQCTVUcxFaeJYW_k1B0Je_XI9y9KnQuVJ7uOC7ST5U5uRA%3D%3D&title=Pato%20maloqueiro%F0%9F%A6%86&redirect_counter=1&cm2rm=sn-o09sk7z&rrc=80&req_id=1de99e301c46a3ee&cms_redirect=yes&cmsv=e&mh=rp&mip=2804:5344:500b:f700:c53f:887:9383:1bdb&mm=34&mn=sn-a5msenes&ms=ltu&mt=1724938208&mv=u&mvi=3&pl=32&lsparams=mh,mip,mm,mn,ms,mv,mvi,pl&lsig=AGtxev0wRQIgBohFQX6KSXT-lwtbUo6tCO4-L0vY_n50bbp8i78PxPACIQDCkO2YqLcg34OHA0UKE88h2cgz-WQ3TQGLQncnoeTpYQ%3D%3D' }) {
+export default function AudioPlayerDownloaded({ audioUri }) {
     const [uri, setUri] = useState(audioUri);
     const { color } = useTheme();
     const [sound, setSound] = useState(null);

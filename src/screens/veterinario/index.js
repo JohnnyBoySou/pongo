@@ -23,7 +23,7 @@ export default function VeterinarioScreen() {
             <Scroll>
                 <TopMenu search={false} back={false} />
 
-                <Header title="Veterinario" />
+                <Header title="VET VILLA PONGO" />
 
                 <Column mv={margin.v} style={{ marginLeft: margin.h }}>
                     <Image source={require('@imgs/vet1.png')} style={{ width: '100%', height: 180, borderTopLeftRadius: 20, borderBottomLeftRadius: 20 }} />

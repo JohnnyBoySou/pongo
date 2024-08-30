@@ -22,7 +22,7 @@ export default function GroomingScreen() {
             <Scroll>
                 <TopMenu search={false} back={false} />
 
-                <Header title="Grooming" />
+                <Header title="GROOMIN VILLA PONGO" />
 
                 <Column mv={margin.v} style={{ marginLeft: margin.h }}>
                     <Image source={{ uri: 'https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147569900/images/8a0f66d-c653-c22-a52b-fb3b3c3f4717_dog-groomer-pomeranian-GettyImages-1383177683.jpg' }} style={{ width: '100%', height: 180, borderTopLeftRadius: 20, borderBottomLeftRadius: 20 }} />

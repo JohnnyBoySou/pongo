@@ -65,17 +65,19 @@ export default function NotificationsScreen({ navigation, }) {
 
                 </ScrollView>
 
-                <Column pv={20}>
-                    {type == 'Serviços' && <CardServicos />}
-                    {type == 'Sistema' && <CardSistema />}
-                </Column>
+               
             </Scroll>
             <TabBar />
         </Main>
     );
 }
 
-
+/*
+ <Column pv={20}>
+                    {type == 'Serviços' && <CardServicos />}
+                    {type == 'Sistema' && <CardSistema />}
+                </Column>
+*/
 
 const CardSistema = () => {
     const { color, font, margin } = useTheme();

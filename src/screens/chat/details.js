@@ -182,19 +182,20 @@ export default function ChatDetailsScreen({ navigation, route }) {
                     }}
 
                 />}
+            <Column style={{height: 52,}}/>
 
             {showBottom && <Animated.View entering={ZoomIn} exiting={ZoomOut} style={{ position: 'absolute', bottom: 80, alignSelf: 'center', }}>
                 <Button onPress={() => { flatMsg.current.scrollToEnd({ animated: true }); }} radius={100} ph={0} pv={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', backgroundColor: color.sc.sc3, }}>
                     <ArrowDown size={22} color="#fff" />
                 </Button>
             </Animated.View>}
-
             
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
                 style={{ flex: 1, position: 'absolute', bottom: 20,  }}
             >
+                
                 {audioUri && <AudioPlayer audioUri={audioUri} type={type} token={token} user={user} />}
                 <Row style={{ backgroundColor: color.off2, justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 12, zIndex: 99, }}>
                     <Button onPress={() => { modalCamera.current.expand(); setopenCamera(true) }} ph={0} pv={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 20}>

@@ -21,7 +21,7 @@ export default function ChatNewScreen({ navigation, }) {
         }
     }
 
-    const helps = ['Planos', 'Day Use', 'Grooming', 'Veterinario', 'Outros']
+    const helps = ['Loja', 'Escola', 'Hotel', 'Vet', 'Grooming','Outros']
 
     return (
         <Main style={{ justifyContent: 'center', }}>
@@ -36,7 +36,7 @@ export default function ChatNewScreen({ navigation, }) {
                     </Column> :
                     <Column style={{ backgroundColor: '#fff', borderRadius: 24, marginTop: 20, justifyContent: 'center', alignItems: 'center', }} pv={20} ph={20}>
                         <Title>Qual é o motivo do contato?</Title>
-                        <Row style={{ flexWrap: 'wrap', rowGap: 6, columnGap: 6, justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
+                        <Row style={{ flexWrap: 'wrap', rowGap: 8, columnGap: 8, justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
                         {helps?.map((item, index) => (
                             <Button key={index} onPress={() => {settitulo(item)}} style={{ backgroundColor: item == titulo ? color.sc.sc3 : color.sc.sc3+30, }} pv={8} ph={16}>
                                 <LabelBT style={{ color: item == titulo ? '#fff' : color.sc.sc3, fontSize: 16, }}>{item}</LabelBT>

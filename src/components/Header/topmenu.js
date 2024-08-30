@@ -1,7 +1,6 @@
 import { Bell, CalendarCheck, ChevronRight, CircleHelp, CircleUserRound, FileClock, Heart, Hotel, Menu, PackageCheck, School, Search, Settings, ShoppingCart, Store, X } from 'lucide-react-native';
-import { Column, Row, Title, SCREEN_WIDTH, useTheme, Button, SCREEN_HEIGHT, SubLabel, Image } from '@theme/global';
+import { Column, Row, Title, SCREEN_WIDTH, useTheme, Button, Label, SubLabel, Image } from '@theme/global';
 import { useNavigation } from '@react-navigation/native';
-import { Pressable, Text, StyleSheet, TextInput } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import SideBar from './sidebar';
 import Back from '@components/Back';
@@ -26,12 +25,7 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
     }
 
     const getSearch = () => {
-        if (handleSearch) {
-            searchRef.current.focus()
-            handleSearch()
-        } else {
-            navigation.navigate('Search')
-        }
+        navigation.navigate('Search')
     }
 
     const getAvatar = async () => {
@@ -75,16 +69,9 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
                     }
                     {search &&
                         <Button mv={14} style={{ backgroundColor: color.light, flex: 1, borderWidth: 2, borderColor: focusSearch ? color.label : 'transparent', }} onPress={getSearch} pv={10}>
-                            <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
+                            <Row style={{alignItems: 'center', }}>
                                 <Search size={24} color={color.label} strokeWidth={2} />
-                                <TextInput ref={searchRef}
-                                    onFocus={() => { setfocusSearch(true) }}
-                                    onBlur={() => { setfocusSearch(false) }}
-                                    disabled={handleSearch ? false : true}
-                                    onChangeText={e => setvalue(e)}
-                                    value={value}
-                                    onSubmitEditing={handleSearch}
-                                    placeholder="Pesquisar" style={{ flex: 1, fontFamily: font.medium, fontSize: 16, color: color.label, marginLeft: 12, }} />
+                                <Label style={{marginLeft: 12,}}>Pesquisar</Label>
                             </Row>
                         </Button>
                     }

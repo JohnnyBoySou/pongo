@@ -16,7 +16,7 @@ export const servicesData = [
         type: 'escola_pacote'
     },
     {
-        name: 'Veterinario',
+        name: 'Veterinário',
         label: 'Clique para ver',
         id: 3,
         img:  require('@imgs/vet.png'),
