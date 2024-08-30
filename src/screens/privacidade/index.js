@@ -1,5 +1,5 @@
 import { Main,  Column} from '@theme/global';
-import { WebView } from 'react-native-webview';
+//import { WebView } from 'react-native-webview';
 import { StatusBar } from 'expo-status-bar';
 import Header from '@components/Header';
 
@@ -8,10 +8,12 @@ export default function PrivacidadeScreen({ navigation, }) {
         <Main style={{ backgroundColor: '#fff', }}>
             <StatusBar style="dark" backgroundColor='#fff' />
             <Header rose title="Termos de Uso" />
-            <WebView
-                style={{ flex: 1,}}
-                source={{ uri: 'https://www.iubenda.com/privacy-policy/92173065' }}
-            />
+          
         </Main>
     )
 }
+/*
+  <WebView
+                style={{ flex: 1,}}
+                source={{ uri: 'https://www.iubenda.com/privacy-policy/92173065' }}
+            /> */

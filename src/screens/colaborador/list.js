@@ -5,7 +5,8 @@ import { Search } from 'lucide-react-native';
 import { listChats, searchChats } from '@api/request/colaborador';
 import { formatDateTime } from '@hooks/utils';
 import { getPreferences } from '@hooks/colaborador';
-
+import { RefreshControl } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function ChatColaboradorListScreen({ navigation }) {
     const { color, font, margin } = useTheme();
@@ -13,23 +14,27 @@ export default function ChatColaboradorListScreen({ navigation }) {
     const [loading, setloading] = useState(true);
     const [data, setdata] = useState([]);
     const [page, setpage] = useState(1);
+    const isFocused = useIsFocused();
+
+    const fecthData = async () => {
+        setloading(true)
+        try {
+            const res = await listChats(page, 'C')
+            const pref = await getPreferences()
+            setuser(pref)
+            setdata(res)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setloading(false)
+        }
+    }
 
     useEffect(() => {
-        const fecthData = async () => {
-            setloading(true)
-            try {
-                const res = await listChats(page, 'C') 
-                const pref = await getPreferences()
-                setuser(pref)
-                setdata((prevdata) => [...prevdata, ...res])
-            } catch (error) {
-                console.log(error)
-            } finally {
-                setloading(false)
-            }
-        }
         fecthData();
-    }, [page])
+    }, [isFocused])
+
+
     const [search, setsearch] = useState();
     const handleSearch = async () => {
         if (search?.length > 1) {
@@ -79,9 +84,18 @@ export default function ChatColaboradorListScreen({ navigation }) {
                     keyExtractor={item => item.id}
                     ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: color.border, marginVertical: 4, borderRadius: 6, }} />}
                     windowSize={10}
+                    onRefresh={() => { fecthData() }}
+                    refreshing={loading}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={loading}
+                            onRefresh={fecthData}
+                            colors={[color.sc.sc3]}
+                        />
+                    }
                     maxToRenderPerBatch={6}
                     ListFooterComponent={() => <Column>{data?.length > 1 &&
-                        <Button mv={20} mh={28} onPress={() => { setpage(parseInt(page) + 1) }} bg={color.label} style={{ justifyContent: 'center', alignItems: 'center',  }}><LabelBT color="#fff">Mostrar mais chats</LabelBT></Button>}</Column>}
+                        <Button mv={20} mh={28} onPress={() => { setpage(parseInt(page) + 1) }} bg={color.label} style={{ justifyContent: 'center', alignItems: 'center', }}><LabelBT color="#fff">Mostrar mais chats</LabelBT></Button>}</Column>}
                     ListEmptyComponent={() => <Label size={14} style={{ textAlign: 'center', marginVertical: 80, }}>Nenhum atendimento encontrado</Label>}
                 />
             </Scroll>
@@ -90,10 +104,10 @@ export default function ChatColaboradorListScreen({ navigation }) {
 }
 
 
-const Chat = ({ item,}) => {
+const Chat = ({ item, }) => {
     const { color } = useTheme();
     const { avatarcolaborador, unread, token_chat, criado_em, titulo, nomeusuario } = item
-    const navigation = useNavigate() 
+    const navigation = useNavigate()
     if (!item) return null
     return (
         <Button onPress={() => { navigation.navigate('ChatDetails', { token: token_chat, user: item, type: 'C' }) }} radius={4} ph={28}>
