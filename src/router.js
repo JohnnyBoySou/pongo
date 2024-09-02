@@ -3,6 +3,7 @@ import React from 'react';
 import { createStackNavigator, TransitionPresets, } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { getFocusedRouteNameFromRoute, NavigationContainer, useRoute } from '@react-navigation/native';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -91,9 +92,45 @@ import NotificationsScreen from '@screens/notifications/index';
 import FaqScreen from '@screens/faq/index';
 import Privacidade from '@screens/privacidade/index';
 
+
+const linking = {
+  prefixes: ['pongo://'],
+  config: {
+    screens: {
+      Notifications: {
+        path: 'Notifications',
+        parse: {
+          message: (message) => `${message}`,
+        },
+      },
+    },
+  },
+};
+
+
 export default function Router({ }) {
+  const routeNameRef = React.useRef();
+  const navigationRef = React.useRef();
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}
+      ref={navigationRef}
+      onReady={() => {
+        routeNameRef.current = navigationRef.current.getCurrentRoute().name;
+      }}
+      onStateChange={async () => {
+        const previousRouteName = routeNameRef.current;
+        const currentRouteName = navigationRef.current.getCurrentRoute().name;
+
+        if (previousRouteName !== currentRouteName) {
+          await analytics().logScreenView({
+            screen_name: currentRouteName,
+            screen_class: currentRouteName,
+          });
+        }
+        routeNameRef.current = currentRouteName;
+      }}
+    >
+      
       <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Welcome'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />

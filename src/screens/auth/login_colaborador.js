@@ -9,13 +9,13 @@ import Error from '@components/Forms/error';
 
 import { loginColaborador } from '@api/request/colaborador';
 import { createPreferences } from '@hooks/colaborador';
+import { oneSignalColaborador } from '@hooks/notifications';
+
 
 export default function AuthLoginColaboradorScreen({ navigation, }) {
     const [loading, setloading] = useState(false);
     const [email, setemail] = useState('villapongo@pongo.com.br');
     const [password, setpassword] = useState('@Pongo0101');
-    const passRef = useRef()
-
     const [success, setsuccess] = useState();
     const [error, seterror] = useState();
 
@@ -35,10 +35,14 @@ export default function AuthLoginColaboradorScreen({ navigation, }) {
                 "nomecolaborador": res?.nomecolaborador,
             };
             const preferences = await createPreferences(saveUser)
+            if(res?.uiid){
+                OneSignal.login(res?.uiid);
+                OneSignal.User.addTag("tipo", "colaborador");
+            }
             if(preferences){
                 setTimeout(() => {
                     navigation.navigate('ChatColaboradorList', { name: res?.nome, user: res, })
-                }, 1000);
+                }, 600);
             }
         } catch (error) {
             seterror(error.message)
@@ -58,7 +62,6 @@ export default function AuthLoginColaboradorScreen({ navigation, }) {
                             label="E-mail *"
                             placeholder="Email"
                             value={email}
-                            onSubmitEditing={() => { passRef.current.focus() }}
                             setValue={setemail}
                         />
                         <Column style={{ height: 16, }} />
@@ -66,7 +69,6 @@ export default function AuthLoginColaboradorScreen({ navigation, }) {
                             label="Senha *"
                             placeholder="Senha"
                             value={password}
-                            ref={passRef}
                             pass={true}
                             setValue={setpassword}
                             onSubmitEditing={handleLogin}

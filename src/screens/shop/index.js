@@ -4,24 +4,20 @@ import { FlatList } from 'react-native';
 import TopMenu from '@components/Header/topmenu';
 import { BedSingle, Shapes } from 'lucide-react-native';
 import { useNavigation } from '@react-navigation/native';
-import { WebView } from 'react-native-webview';
 
-export default function ShopScreen({ navigation, }) {
-    const { color, font, } = useTheme();
+import WebView from '@components/WebView';
+
+export default function ShopScreen() {
+
     return (
         <Main style={{ backgroundColor: '#fff', }}>
             <TopMenu search={false} />
-            <WebView
-                style={{ flex: 1, }}
-                source={{ uri: 'https://pongo.com.br/' }}
-            />
+            <WebView source='https://pongo.com.br/' />
         </Main>
     )
 }
 
-
-
-
+/*
 const CatsFlat = ({ }) => {
 
     const [loading, setloading] = useState(true);
@@ -217,3 +213,4 @@ const exp = [
     },
 
 ]
+*/

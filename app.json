@@ -3,6 +3,7 @@
     "name": "Pongo",
     "slug": "pongo",
     "version": "2.3.0",
+    "scheme": "pongo",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -12,7 +13,7 @@
       "backgroundColor": "#AEB0AF"
     },
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "com.engd.villapongo",
       "buildNumber": "2.3.0",
       "infoPlist": {
@@ -45,15 +46,29 @@
     },
     "plugins": [
       [
+        "onesignal-expo-plugin",
+        {
+          "mode": "production",
+          "smallIcons": [
+            "./assets/small_icon.png"
+          ],
+          "largeIcons": [
+            "./assets/large_icon.png"
+          ],
+          "smallIconAccentColor": "#AEB0AF"
+        }
+      ],
+      [
         "expo-camera",
         {
-          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
-          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone",
+          "cameraPermission": "Permita que a Pongo acesse sua câmera.",
+          "microphonePermission": "Permita que a Pongo acesse sua câmera.",
           "recordAudioAndroid": true
         }
       ]
     ],
     "extra": {
+      "oneSignalAppId": "a972b3c3-b43c-4468-9aef-298babfece52",
       "eas": {
         "projectId": "c9747e9a-3ac6-4a79-a1fd-b3c992d47f11"
       }

@@ -4,23 +4,20 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { ThemeProvider } from 'styled-components/native';
 import { preventAutoHideAsync, hideAsync } from 'expo-splash-screen';
 import * as Font from 'expo-font';
-import { View, LogBox, useColorScheme, } from 'react-native';
+import { View, LogBox, } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import Router from './src/router';
 import light from './src/theme/light';
-import dark from './src/theme/dark';
 
+import Constants from 'expo-constants';
+import * as Notifications from 'expo-notifications';
+import { OneSignal } from 'react-native-onesignal';
 
 preventAutoHideAsync();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-
-
-  const theme = useColorScheme();
-  const selectTheme = theme === 'light' ? light : dark;
   useEffect(() => {
-    LogBox.ignoreAllLogs(true);
 
     async function loadResourcesAndDataAsync() {
       try {
@@ -40,7 +37,26 @@ export default function App() {
       }
     }
     loadResourcesAndDataAsync();
-    
+
+    const handlePermission = async () => {
+      LogBox.ignoreAllLogs(true);
+      const key = process.env.EXPO_PUBLIC_KEY || Constants.expoConfig.extra.oneSignalAppId || 'a972b3c3-b43c-4468-9aef-298babfece52';
+      if (key != null) {
+        OneSignal.initialize(key);
+      }
+
+      let { status } = await Notifications.getPermissionsAsync();
+      if (status !== 'granted') {
+        const { status: newStatus } = await Notifications.requestPermissionsAsync();
+        status = newStatus;
+        console.log('status', status)
+      }
+      if (status !== 'granted') {
+        console.log('permitido')
+      }
+    }
+
+    handlePermission()
   }, []);
 
   const onLayoutRootView = useCallback(async () => {

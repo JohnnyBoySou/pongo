@@ -77,6 +77,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
         socket.on('chat message', async (dados) => {
             setmessages((msgs) => [...msgs, dados])
         });
+        
         return () => {
             socket.off('chat message', async (dados) => {
                 setmessages((msgs) => [...msgs, dados])

@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Main, Scroll, Title, Row, Column, Label, Button, SubLabel, U, useTheme, Loader, LabelBT, SCREEN_HEIGHT, Back, } from '@theme/global';
-import { X, Mail, CircleX, CircleCheck, ArrowLeft, } from 'lucide-react-native';
+import React, { useState, useRef } from 'react';
+import { Main, Scroll, Title, Row, Column, Label, Button, U, useTheme, Loader, LabelBT, SCREEN_HEIGHT, } from '@theme/global';
+import { X, CircleX, CircleCheck, ArrowLeft, } from 'lucide-react-native';
 
 //Components
 import Input from '@components/Forms/input';
@@ -13,20 +13,21 @@ import { loginUser, resetPasswordCode, resetPassword, resetPasswordNew } from '@
 import { createPreferences } from '@hooks/preferences';
 import { TextInput } from 'react-native';
 
-import Animated, { FadeInDown, SlideInRight, SlideOutRight } from 'react-native-reanimated';
+import Animated, {  } from 'react-native-reanimated';
 import { ConfirmEmail } from './register';
+import { oneSignalLogin } from '@hooks/notifications';
+import { OneSignal } from 'react-native-onesignal';
 
 export default function AuthLoginScreen({ navigation, }) {
     const { color, margin, } = useTheme()
 
     const [loading, setloading] = useState(false);
-    const [email, setemail] = useState('admin@admin.com');
-    const [password, setpassword] = useState('123456');
+    const [email, setemail] = useState('');
+    const [password, setpassword] = useState('');
     const [name, setname] = useState();
     const [terms, setterms] = useState(true);
 
     const modalForget = useRef()
-    const passRef = useRef()
 
     const [success, setsuccess] = useState();
     const [error, seterror] = useState();
@@ -59,9 +60,9 @@ export default function AuthLoginScreen({ navigation, }) {
                     "email": res?.email,
                     "token": res?.token,
                 };
-                //  if (res.uiid) {
-                //       OneSignal.login(res.uiid)
-                //     }
+                if(res?.uiid){
+                    OneSignal.login(res?.uiid)
+                }
                 const preferences = await createPreferences(saveUser)
                 if (preferences) {
                     setTimeout(() => {
@@ -94,7 +95,6 @@ export default function AuthLoginScreen({ navigation, }) {
                             label="E-mail *"
                             placeholder="Email"
                             value={email}
-                            onSubmitEditing={() => { passRef.current.focus() }}
                             setValue={setemail}
                         />
                         <Column style={{ height: 16, }} />
@@ -102,7 +102,6 @@ export default function AuthLoginScreen({ navigation, }) {
                             label="Senha *"
                             placeholder="Senha"
                             value={password}
-                            ref={passRef}
                             pass={true}
                             setValue={setpassword}
                             onSubmitEditing={handleLogin}
@@ -111,11 +110,11 @@ export default function AuthLoginScreen({ navigation, }) {
                             <U><LabelBT color={color.title} style={{ fontSize: 16, }}>Recuperar senha</LabelBT></U>
                         </Button>
 
-                        <Button onPress={() => {navigation.navigate('Privacidade')}} pv={8} ph={8} radius={4} style={{ marginBottom: 12,  }}>
-                        <Row style={{ alignItems: 'center', }}>
-                            <CheckBox status={terms} setstatus={setterms} />
-                            <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de uso e Privacidade </U> </Label>
-                        </Row>
+                        <Button onPress={() => { navigation.navigate('Privacidade') }} pv={8} ph={8} radius={4} style={{ marginBottom: 12, }}>
+                            <Row style={{ alignItems: 'center', }}>
+                                <CheckBox status={terms} setstatus={setterms} />
+                                <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de uso e Privacidade </U> </Label>
+                            </Row>
                         </Button>
 
                         {success ? <Success msg={success} /> : error ? <Error msg={error} /> : null}

@@ -12,21 +12,23 @@ import { searchChats, } from '@api/request/chat';
 import { RefreshControl } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 
+import socket from '@hooks/socket';
+
+
 export default function ChatListScreen({ navigation }) {
     const { color, font, margin } = useTheme();
     const [loading, setloading] = useState();
     const [data, setdata] = useState([]);
     const [search, setsearch] = useState();
     const [page, setpage] = useState(1);
-
     const isFocused = useIsFocused();
+
 
     const fecthData = async () => {
         setloading(true)
         try {
             const res = await listChats(page, 'U')
             setdata(res)
-            //setdata((prevdata) => [...prevdata, ...res])
         } catch (error) {
             console.log(error)
         } finally {
@@ -37,6 +39,13 @@ export default function ChatListScreen({ navigation }) {
     useEffect(() => {
         fecthData();
     }, [isFocused])
+
+
+    useEffect(() => {
+    //    socket.on('chat message', async (dados) => {
+        //    setmessages((msgs) => [...msgs, dados])
+     //   });
+    }, [socket]);
 
     const handleSearch = async () => {
         if (search?.length > 1) {
