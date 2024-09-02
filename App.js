@@ -40,7 +40,7 @@ export default function App() {
 
     const handlePermission = async () => {
       LogBox.ignoreAllLogs(true);
-      const key = process.env.EXPO_PUBLIC_KEY || Constants.expoConfig.extra.oneSignalAppId || 'a972b3c3-b43c-4468-9aef-298babfece52';
+      const key = process.env.EXPO_PUBLIC_KEY || Constants.expoConfig.extra.oneSignalAppId
       if (key != null) {
         OneSignal.initialize(key);
       }
