@@ -13,6 +13,7 @@ export default function SearchScreen({ navigation, route }) {
     const [query, setquery] = useState();
     const [loading, setloading] = useState(false);
     const [focus, setfocus] = useState(false);
+    const [data, setdata] = useState([]);
     const handleSearch = () => {
     }
     return (
@@ -39,9 +40,9 @@ export default function SearchScreen({ navigation, route }) {
                 </Row>
 
                 <Column style={{ marginHorizontal: margin.h, marginTop: margin.h, flex: 1, }}>
-                    <Title color='#858585'>Recentes</Title>
+                   {data?.length > 1 && <Title color='#858585'>Recentes</Title>}
                 </Column>
-                <ItensFlat type="Produtos" />
+                <ItensFlat type="Produtos" data={data} />
             </Scroll>
             <TabBar />
         </Main>

@@ -10,6 +10,7 @@ import { updatePreferences, excludePreferences } from '@hooks/preferences';
 import Input from '@components/Forms/input';
 import TopMenu from '@components/Header/topmenu';
 import TabBar from '@components/TabBar';
+import { editNotifications } from '../../../api/request/auth';
 
 export default function AccountDetailsScreen({ navigation }) {
     const { color, font, margin } = useContext(ThemeContext);
@@ -25,19 +26,17 @@ export default function AccountDetailsScreen({ navigation }) {
     const [complemento, setcomplemento] = useState('.....');
     const [rua, setrua] = useState('...');
 
-    const [date, setdate] = useState();
     const [loading, setloading] = useState(true);
 
     const [avatar, setavatar] = useState();
     const [old_avatar, setold_avatar] = useState();
-    const [disabled, setdisabled] = useState(true);
+    const [notify, setnotify] = useState();
 
     useEffect(() => {
         const fecthData = async () => {
             try {
                 const res = await listUser();
                 setavatar(res.avatar);
-                setdate(res);
                 setold_avatar(res.avatar);
                 setname(res.nome);
                 settel(res.telefone);
@@ -48,7 +47,7 @@ export default function AccountDetailsScreen({ navigation }) {
                 setbairro(res.bairro);
                 setcidade(res.cidade);
                 setcomplemento(res.complemento);
-
+                setnotify(false);
             } catch (error) {
                 console.log(error)
             } finally {
@@ -64,7 +63,6 @@ export default function AccountDetailsScreen({ navigation }) {
         if (!responsey.canceled) {
             setavatar(responsey.assets[0].base64);
             settemporaryImg(responsey.assets[0].uri);
-            setdisabled(false);
         } else {
             setavatar(old_avatar?.length > 0 ? old_avatar : null)
         }
@@ -115,13 +113,11 @@ export default function AccountDetailsScreen({ navigation }) {
             const preferences = await updatePreferences(pr);
             if (preferences) {
                 setloading(false);
-                setdisabled(true);
             }
         } catch (error) {
             console.log(error)
         } finally {
             setloading(false);
-            setdisabled(true);
         }
 
 
@@ -131,6 +127,17 @@ export default function AccountDetailsScreen({ navigation }) {
         navigation.navigate('AuthLogin')
         excludePreferences()
     }
+
+
+    const toggleNotification = async () => {
+        try {
+           const res = await editNotifications(notify)
+        } catch (error) {
+            
+        } finally{
+            setnotify(!notify)
+        }
+    };
     return (
         <Main>
             <Scroll>
@@ -216,11 +223,14 @@ export default function AccountDetailsScreen({ navigation }) {
 
                     </Column>
 
-                    <Button onPress={() => { navigation.navigate('AuthLogin',) }} style={{ borderWidth: 2, borderColor: color.label, }} pv={8}>
+                    <Button onPress={toggleNotification} style={{ borderWidth: 2, borderColor: color.label, }} pv={8}>
+                        <LabelBT align="center" size={16}>{notify ? 'Ativar' : 'Desativar'} notificações</LabelBT>
+                    </Button>
+                    <Button onPress={() => { navigation.navigate('AuthLogin',) }} style={{ borderWidth: 2, borderColor: color.label, }} pv={8} mv={18}>
                         <LabelBT align="center" size={16}>Redefinir minha senha</LabelBT>
                     </Button>
 
-                    <Button onPress={handleExit} bg={color.red + 10} pv={10} ph={1}  mv={25}>
+                    <Button onPress={handleExit} bg={color.red + 10} pv={10} ph={1} >
                         <LabelBT color={color.red} style={{ textAlign: 'center', }}>Sair</LabelBT>
                     </Button>
 

@@ -193,3 +193,23 @@ export const excludeUser = async (password, message) => {
     }
 };
 
+
+
+export const editNotifications = async (status) => {
+    const token = await getToken();
+    const BASE_URL = await getBaseURL();
+    try {
+        const res = await axios.post(`${BASE_URL}/mudarstatus`, {
+            tipo: 'U',
+            status: status ? 1 : 0
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return true
+    } catch (error) {
+        const err = JSON.parse(error.request.response);
+        throw new Error(err.message)
+    }
+}

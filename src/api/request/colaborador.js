@@ -3,8 +3,6 @@ import socket from '@hooks/socket';
 import { getToken, getPreferences } from '@hooks/colaborador';
 const BASE_URL = 'https://app.aocto.com/api/apppongocolaborador'
 
-
-
 export const enviarMsg = async (params) => {
     const profile = await getPreferences()
     const { user, message, token,  } = params 
@@ -26,7 +24,6 @@ export const enviarMsg = async (params) => {
         criado_em: new Date(),
     })
 }
-
 
 export const assinarChat = (token) => {
     socket.emit('entrarsala', {
@@ -113,6 +110,24 @@ export const searchChats = async (search, ) => {
             },
         });
         return res.data.data
+    } catch (error) {
+        const err = JSON.parse(error.request.response);
+        throw new Error(err.message)
+    }
+}
+
+export const editNotifications = async (status) => {
+    const token = await getToken();
+    try {
+        const res = await axios.post(`${BASE_URL}/mudarstatus`, {
+            tipo: 'C',
+            status: status ? 1 : 0
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return true
     } catch (error) {
         const err = JSON.parse(error.request.response);
         throw new Error(err.message)

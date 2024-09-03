@@ -9,8 +9,7 @@ import Error from '@components/Forms/error';
 
 import { loginColaborador } from '@api/request/colaborador';
 import { createPreferences } from '@hooks/colaborador';
-import { oneSignalColaborador } from '@hooks/notifications';
-
+import { OneSignal } from 'react-native-onesignal';
 
 export default function AuthLoginColaboradorScreen({ navigation, }) {
     const [loading, setloading] = useState(false);
@@ -34,11 +33,11 @@ export default function AuthLoginColaboradorScreen({ navigation, }) {
                 "id_pet_colaborador": res?.id_pet_colaborador,
                 "nomecolaborador": res?.nomecolaborador,
             };
-            const preferences = await createPreferences(saveUser)
             if(res?.uiid){
                 OneSignal.login(res?.uiid);
                 OneSignal.User.addTag("tipo", "colaborador");
             }
+            const preferences = await createPreferences(saveUser)
             if(preferences){
                 setTimeout(() => {
                     navigation.navigate('ChatColaboradorList', { name: res?.nome, user: res, })

@@ -6,6 +6,7 @@ import { formatDateTime } from '@hooks/utils';
 import { getPreferences, excludePreferences } from '@hooks/preferences';
 import { useIsFocused } from '@react-navigation/native';
 import { MessageCircleMore } from 'lucide-react-native';
+import Card from '../../../components/Card';
 
 export default function AccountScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
@@ -92,50 +93,57 @@ export default function AccountScreen({ navigation, }) {
                 }
 
                 <Column mh={margin.h} style={{ rowGap: 22, marginVertical: 22, }}>
+                    <Card bg={color.bg}>
+                        <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('PetsList') }} >
+                            <Row style={{ alignItems: 'center', }}>
+                                <Image source={require('@imgs/ac2.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
+                                <Column>
+                                    <Title size={16}>PETS</Title>
+                                    <Column style={{ height: 4, }} />
+                                    <Label size={14}>Clique para selecionar</Label>
+                                </Column>
 
-                    <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('PetsList') }} >
-                        <Row style={{ alignItems: 'center', }}>
-                            <Image source={require('@imgs/ac2.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
-                            <Column>
-                                <Title size={16}>PETS</Title>
-                                <Column style={{ height: 4, }} />
-                                <Label size={14}>Clique para selecionar</Label>
-                            </Column>
+                            </Row>
+                        </Button>
+                    </Card>
+                    <Card>
+                        <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('AccountDetails') }} >
+                            <Row style={{ alignItems: 'center', }}>
 
-                        </Row>
-                    </Button>
-                    <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('AccountDetails') }} >
-                        <Row style={{ alignItems: 'center', }}>
+                                <Image source={require('@imgs/profile.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
+                                <Column>
+                                    <Title size={16}>PERFIL</Title>
+                                    <Column style={{ height: 4, }} />
+                                    <Label size={14}>Clique para editar</Label>
+                                </Column>
+                            </Row>
+                        </Button>
+                    </Card>
+                    <Card>
+                        <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('Services') }}>
+                            <Row style={{ alignItems: 'center', }}>
+                                <Image source={require('@imgs/ac3.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
+                                <Column>
+                                    <Title size={16}>SERVIÇOS</Title>
+                                    <Column style={{ height: 4, }} />
+                                    <Label size={14}>Clique para visualizar</Label>
+                                </Column>
 
-                            <Image source={require('@imgs/profile.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
-                            <Column>
-                                <Title size={16}>PERFIL</Title>
-                                <Column style={{ height: 4, }} />
-                                <Label size={14}>Clique para editar</Label>
-                            </Column>
-                        </Row>
-                    </Button>
-                    <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('Services') }}>
-                        <Row style={{ alignItems: 'center', }}>
-                            <Image source={require('@imgs/ac3.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
-                            <Column>
-                                <Title size={16}>SERVIÇOS</Title>
-                                <Column style={{ height: 4, }} />
-                                <Label size={14}>Clique para visualizar</Label>
-                            </Column>
-
-                        </Row>
-                    </Button>
-                    <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('ChatList') }}>
-                        <Row style={{ alignItems: 'center', }}>
-                            <Image source={require('@imgs/chat.png')} style={{ width: 80, height: 80, marginRight: 12, objectFit: 'contain', }} />
-                            <Column>
-                                <Title size={16}>CONVERSAS</Title>
-                                <Column style={{ height: 4, }} />
-                                <Label size={14}>Clique para visualizar</Label>
-                            </Column>
-                        </Row>
-                    </Button>
+                            </Row>
+                        </Button>
+                    </Card>
+                    <Card>
+                        <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('ChatList') }}>
+                            <Row style={{ alignItems: 'center', }}>
+                                <Image source={require('@imgs/chat.png')} style={{ width: 80, height: 80, marginRight: 12, objectFit: 'contain', }} />
+                                <Column>
+                                    <Title size={16}>CONVERSAS</Title>
+                                    <Column style={{ height: 4, }} />
+                                    <Label size={14}>Clique para visualizar</Label>
+                                </Column>
+                            </Row>
+                        </Button>
+                    </Card>
                 </Column>
                 <Button onPress={handleChat} style={{ borderWidth: 2, borderColor: '#918C8B', }} pv={16} ph={1} mh={margin.h}>
                     <LabelBT color="#918C8B" style={{ textAlign: 'center', fontSize: 20 }}> <MessageCircleMore color={color.title} size={20} /> Iniciar conversa</LabelBT>
@@ -146,7 +154,7 @@ export default function AccountScreen({ navigation, }) {
 
                 <Column style={{ height: 30, }} />
             </Scroll>
-        </Main>
+        </Main >
     )
 }
 /**

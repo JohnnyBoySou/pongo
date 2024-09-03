@@ -1,8 +1,9 @@
 import React, { } from 'react';
-import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Image } from '@theme/global';
+import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Image,  } from '@theme/global';
 import TopMenu from '@components/Header/topmenu';
 import { FlatList } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import Card from '@components/Card';
 export default function VillaPongoScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
 
@@ -18,7 +19,7 @@ export default function VillaPongoScreen({ navigation, }) {
                         <FlatList
                             style={{ marginTop: 20, }}
                             data={data}
-                            renderItem={({ item }) => <Card item={item} />}
+                            renderItem={({ item }) => <CardServices item={item} />}
                             keyExtractor={item => item.id}
                             showsVerticalScrollIndicator={false}
                             initialNumToRender={10}
@@ -33,25 +34,27 @@ export default function VillaPongoScreen({ navigation, }) {
     )
 }
 
-const Card = ({ item }) => {
+const CardServices = ({ item }) => {
     const { color, font, margin } = useTheme();
     const { name, img } = item
     const navigation = useNavigation()
     return (
-        <Button pv={12} ph={12} radius={12} mh={0} mv={12} style={{ backgroundColor: '#FFF', }} onPress={() => { navigation.navigate(item.screen) }} >
-            <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                <Row>
-                    <Image style={{ width: 72, height: 72, borderRadius: 8, marginRight: 12, }} source={img} />
-                    <Column style={{ justifyContent: 'center', }}>
-                        <Title size={16}>{name}</Title>
-                        <Column style={{ height: 4, }} />
-                        <Label size={14}>Clique e saiba mais</Label>
+        <Card>
+            <Button pv={12} ph={12} radius={12} mh={0} mv={12} style={{ backgroundColor: '#FFF', }} onPress={() => { navigation.navigate(item.screen) }} >
+                <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                    <Row>
+                        <Image style={{ width: 72, height: 72, borderRadius: 8, marginRight: 12, }} source={img} />
+                        <Column style={{ justifyContent: 'center', }}>
+                            <Title size={16}>{name}</Title>
+                            <Column style={{ height: 4, }} />
+                            <Label size={14}>Clique e saiba mais</Label>
+                        </Column>
+                    </Row>
+                    <Column>
                     </Column>
                 </Row>
-                <Column>
-                </Column>
-            </Row>
-        </Button>
+            </Button>
+        </Card>
     )
 }
 

@@ -1,17 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Main, Scroll, Column, Row, Title, Button, useTheme, LabelBT } from '@theme/global';
 import { MotiImage } from 'moti';
 import TopMenu from '@components/Header/topmenu';
-import { MotiView, MotiText } from 'moti'
-import { Linking, Text } from 'react-native';
-import { listUser } from '@api/request/auth';
-import { getPreferences, excludePreferences } from '@hooks/preferences';
-import { tiposServices } from '../../../api/request/services';
+import { MotiView, } from 'moti'
+import { getPreferences, } from '@hooks/preferences';
 import { MessageCircleMore } from 'lucide-react-native';
+import Card from '../../../components/Card';
 
 export default function HomeScreen({ navigation, }) {
     const { color, font, margin, } = useTheme();
-
 
     const handleChat = async () => {
         try {
@@ -43,7 +40,7 @@ export default function HomeScreen({ navigation, }) {
     return (
         <Main >
             <Scroll >
-                <TopMenu back={false} handleSearch={false}/>
+                <TopMenu back={false} handleSearch={false} />
                 <Column ph={margin.h} mv={12}>
                     <Row style={{ columnGap: 16, marginBottom: 8, flex: 1, width: '100%' }}>
                         <MotiView
@@ -55,12 +52,14 @@ export default function HomeScreen({ navigation, }) {
                             }}
                             style={{ flexGrow: 1 }}
                         >
-                            <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Shop') }}>
-                                <Column>
-                                    <MotiImage source={require('@imgs/home_1.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
-                                    <Title align="center" size={14}>LOJA PONGO</Title>
-                                </Column>
-                            </Button>
+                            <Card>
+                                <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Shop') }}>
+                                    <Column>
+                                        <MotiImage source={require('@imgs/home_1.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
+                                        <Title align="center" size={14}>LOJA PONGO</Title>
+                                    </Column>
+                                </Button>
+                            </Card>
                         </MotiView>
 
                         <MotiView
@@ -72,12 +71,14 @@ export default function HomeScreen({ navigation, }) {
                             }}
                             style={{ flexGrow: 1 }}
                         >
-                            <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('VillaPongo') }}>
-                                <Column>
-                                    <MotiImage source={require('@imgs/home_2.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
-                                    <Title align="center" size={14}>VILLA PONGO</Title>
-                                </Column>
-                            </Button>
+                            <Card>
+                                <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('VillaPongo') }}>
+                                    <Column>
+                                        <MotiImage source={require('@imgs/home_2.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
+                                        <Title align="center" size={14}>VILLA PONGO</Title>
+                                    </Column>
+                                </Button>
+                            </Card>
                         </MotiView>
 
                     </Row>
@@ -91,12 +92,14 @@ export default function HomeScreen({ navigation, }) {
                             }}
                             style={{ flexGrow: 1 }}
                         >
-                            <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={handleAccount}>
-                                <Column>
-                                    <MotiImage source={require('@imgs/home_3.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
-                                    <Title align="center" size={14}>MINHA CONTA</Title>
-                                </Column>
-                            </Button>
+                            <Card>
+                                <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={handleAccount}>
+                                    <Column>
+                                        <MotiImage source={require('@imgs/home_3.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
+                                        <Title align="center" size={14}>MINHA CONTA</Title>
+                                    </Column>
+                                </Button>
+                            </Card>
                         </MotiView>
                         <MotiView
                             from={{ translateX: 55, opacity: 0 }}
@@ -107,12 +110,15 @@ export default function HomeScreen({ navigation, }) {
                             }}
                             style={{ flexGrow: 1 }}
                         >
-                            <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Institucional') }}>
-                                <Column>
-                                    <MotiImage source={require('@imgs/home_4.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
-                                    <Title align="center" size={14}>CONHEÇA MAIS</Title>
-                                </Column>
-                            </Button>
+                            <Card>
+
+                                <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Institucional') }}>
+                                    <Column>
+                                        <MotiImage source={require('@imgs/home_4.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
+                                        <Title align="center" size={14}>CONHEÇA MAIS</Title>
+                                    </Column>
+                                </Button>
+                            </Card>
                         </MotiView>
                     </Row>
                 </Column>
@@ -128,7 +134,7 @@ export default function HomeScreen({ navigation, }) {
                         <LabelBT color="#918C8B" style={{ textAlign: 'center', fontSize: 20 }}> <MessageCircleMore color={color.title} size={20} /> Iniciar conversa</LabelBT>
                     </Button>
                 </MotiView>
-                <Column style={{ height: 30, }} />
+                <Column style={{ height: 200, }} />
             </Scroll>
         </Main>
     )

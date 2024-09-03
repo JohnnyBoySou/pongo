@@ -55,29 +55,24 @@ export default function NotificationsScreen({ navigation, }) {
                 <TopMenu search={false} back={false} />
 
 
-                <ScrollView ref={ScrollButtons} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 0, marginTop: 20, paddingHorizontal: margin.h, width: '100%', justifyContent: 'center' }}>
-
+                <Row >
                     {types.map((item, index) => (
-                        <Button onPress={() => { handleScreen(index) }} style={{ opacity: type == item ? 1 : 0.5, backgroundColor: type == item ? '#fff' : 'transparent', }} ph={16} pv={10}>
+                        <Button onPress={() => { handleScreen(index) }} style={{ borderBottomWidth: 2, borderBottomColor: type == item ? color.sc.sc3 : color.border, flexGrow: 1,}} ph={16} pv={10} radius={1}>
                             <LabelBT style={{ textAlign: 'center', color: color.title, fontSize: 14, }}>{item}</LabelBT>
                         </Button>
                     ))}
+                </Row>
 
-                </ScrollView>
-
-               
+                <Column pv={20}>
+                    {type == 'Serviços' && <CardServicos />}
+                    {type == 'Sistema' && <CardSistema />}
+                </Column>
             </Scroll>
             <TabBar />
         </Main>
     );
 }
 
-/*
- <Column pv={20}>
-                    {type == 'Serviços' && <CardServicos />}
-                    {type == 'Sistema' && <CardSistema />}
-                </Column>
-*/
 
 const CardSistema = () => {
     const { color, font, margin } = useTheme();
@@ -112,11 +107,20 @@ const CardSistema = () => {
 
 const CardServicos = () => {
     const { color, font, margin } = useTheme();
+
+    const data = [
+        {
+            name: 'Atualização',
+            img: 'https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            status: 'agendado 12/07',
+            date: '13 minutos atrás',
+        }
+    ]
     return (
         <>
             <Row mh={margin.h} pv={12} ph={12}>
                 <Column>
-                    <Image source={{ uri: 'https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' }} style={{ width: 40, height: 40, borderRadius: 40, objectFit: 'cover' }} />
+                    <Image source={{ uri: '' }} style={{ width: 40, height: 40, borderRadius: 40, objectFit: 'cover' }} />
                 </Column>
 
                 <View style={{ width: 250, marginLeft: 12 }}>

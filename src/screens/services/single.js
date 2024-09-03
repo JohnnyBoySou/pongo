@@ -32,7 +32,6 @@ export default function ServiceSingleScreen({ navigation, route }) {
     }, [])
 
     const Card = () => {
-        console.log(service)
         switch (service?.name) {
             case 'Escola':
                 return <CardEscola item={data} navigation={navigation} service={service} />

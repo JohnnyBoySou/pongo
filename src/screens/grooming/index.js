@@ -22,7 +22,7 @@ export default function GroomingScreen() {
             <Scroll>
                 <TopMenu search={false} back={false} />
 
-                <Header title="GROOMIN VILLA PONGO" />
+                <Header title="GROOMING VILLA PONGO" />
 
                 <Column mv={margin.v} style={{ marginLeft: margin.h }}>
                     <Image source={{ uri: 'https://kajabi-storefronts-production.kajabi-cdn.com/kajabi-storefronts-production/file-uploads/blogs/2147569900/images/8a0f66d-c653-c22-a52b-fb3b3c3f4717_dog-groomer-pomeranian-GettyImages-1383177683.jpg' }} style={{ width: '100%', height: 180, borderTopLeftRadius: 20, borderBottomLeftRadius: 20 }} />
@@ -30,7 +30,7 @@ export default function GroomingScreen() {
 
                 <Column mh={margin.h}>
 
-                    <Text style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 6, fontWeight: 700, lineHeight: 22 }}>O banho e a tosa regular do seu Pet, mantém o pelo e pelagem saudáveis. </Text>
+                    <Title style={{ textAlign: 'right',  paddingVertical: 6, }}>O banho e a tosa regular do seu Pet, mantém o pelo e pelagem saudáveis. </Title>
 
                     { /* <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
                         <Label style={{ textAlign: 'center', color: color.title }}>Contratar Day Use</Label>
@@ -57,14 +57,14 @@ export default function GroomingScreen() {
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
-                    <Title style={{ fontSize: 16, fontWeight: 700, color: '#979797', paddingVertical: 6, marginTop: 12, textAlign: 'center' }}>
+                    <Title style={{ fontSize: 16, color: '#979797', paddingVertical: 6, marginTop: 12, textAlign: 'center' }}>
                         Seu mascote sairá da Villa PONGO com um visual deslumbrante, de laços e gravatas da loja PONGO e com cheirinho do nosso perfume que é tão amado pelos nossos clientes!
                     </Title>
 
 
                 </Column>
 
-                <Column style={{ height: 80 }} />
+                <Column style={{ height: 120 }} />
 
                 { /* <Column mh={margin.h} mv={margin.v}>
                     <Button style={{ width: '100%', backgroundColor: color.pr.pr2 }}>

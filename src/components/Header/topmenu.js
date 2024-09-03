@@ -50,9 +50,7 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
                         <Menu size={32} color={color.icons} strokeWidth={2} />
                     </Button>
                     <Row style={{ alignItems: 'center', columnGap: 12, }}>
-                        <Button pv={1} ph={1} onPress={() => { navigation.navigate('Notifications') }} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }}>
-                            <Bell size={24} color={color.icons} strokeWidth={1.5} />
-                        </Button>
+
                         <Button pv={1} ph={1} onPress={() => { navigation.navigate('Tabs', { screen: 'Account' }) }} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }}>
                             <Row>
                                 {user?.avatar ? <Image source={{ uri: user?.avatar }} style={{ width: 38, height: 38, borderRadius: 100, }} /> : <CircleUserRound size={32} color={color.icons} strokeWidth={1.5} />}
@@ -69,9 +67,9 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
                     }
                     {search &&
                         <Button mv={14} style={{ backgroundColor: color.light, flex: 1, borderWidth: 2, borderColor: focusSearch ? color.label : 'transparent', }} onPress={getSearch} pv={10}>
-                            <Row style={{alignItems: 'center', }}>
+                            <Row style={{ alignItems: 'center', }}>
                                 <Search size={24} color={color.label} strokeWidth={2} />
-                                <Label style={{marginLeft: 12,}}>Pesquisar</Label>
+                                <Label style={{ marginLeft: 12, }}>Pesquisar</Label>
                             </Row>
                         </Button>
                     }
@@ -105,6 +103,10 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
     )
 }
 
+/*
+ <Button pv={1} ph={1} onPress={() => { navigation.navigate('Notifications') }} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }}>
+                            <Bell size={24} color={color.icons} strokeWidth={1.5} />
+                        </Button> */
 
 const screens = [
 

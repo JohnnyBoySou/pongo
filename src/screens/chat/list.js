@@ -55,7 +55,10 @@ export default function ChatListScreen({ navigation }) {
             } catch (error) {
 
             }
-        } else { return }
+        } else {   
+            const res = await listChats(page, 'U')
+            setdata(res)
+        }
     }
 
     return (
@@ -63,7 +66,7 @@ export default function ChatListScreen({ navigation }) {
             <Scroll>
                 <TopMenu cart={false} search={false} back={false} />
                 <Column mh={margin.h} mv={12}>
-                    <Title>Suas conversas</Title>
+                    <Title size={26}>Suas conversas</Title>
                     <Row style={{ justifyContent: 'center', alignItems: 'center', flex: 1, marginHorizontal: 24, marginTop: 10, }}>
                         <Back />
                         <Row style={{ backgroundColor: '#fff', paddingRight: 8, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginLeft: 12, }}>

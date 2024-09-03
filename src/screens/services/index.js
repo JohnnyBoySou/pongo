@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Pressable, TextInput, ScrollView, Image, } from 'react-native';
-import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Loader, LabelBT } from '@theme/global';
+import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Loader, LabelBT, Back } from '@theme/global';
 import { FlatList } from 'react-native-gesture-handler';
 
 //components
@@ -12,11 +12,10 @@ import { formatDateTime, formatCurrency } from '@hooks/utils';
 import { listServices } from '@api/request/services';
 import { servicesData } from '@api/data/services';
 import { ArrowLeft } from 'lucide-react-native';
-import ButtonPrimary from './../../components/Buttons/index';
-
+import ButtonPrimary from '@components/Buttons/index';
+import Card from '@components/Card';
 export default function ServicesScreen({ navigation, }) {
 
-    //diario do pet service
     const { color, font, margin } = useTheme();
 
     const [loading, setloading] = useState();
@@ -34,7 +33,7 @@ export default function ServicesScreen({ navigation, }) {
     const [hotelTypes, sethotelTypes] = useState();
     const [escolaTypes, setescolaTypes] = useState();
     const [crecheTypes, setcrecheTypes] = useState();
-    
+
     useEffect(() => {
         const fecthData = async () => {
             setloading(true)
@@ -123,9 +122,9 @@ export default function ServicesScreen({ navigation, }) {
                                     maxToRenderPerBatch={4}
                                     initialNumToRender={4}
                                     ListEmptyComponent={() => <Label size={16} style={{ textAlign: 'center', marginVertical: 60 }}>Nenhum resultado encontrado.</Label>}
-                                    renderItem={({ item }) => <Card item={item} navigation={navigation} type={selectService.type} selectService={selectService} />}
+                                    renderItem={({ item }) => <CardItem item={item} navigation={navigation} type={selectService.type} selectService={selectService} />}
                                     ListFooterComponent={() => <Column style={{ height: 60 }} >
-                                        <ButtonPrimary label="Mostrar mais" onPress={() => { setpage(page + 1)}} />
+                                        {data.length > 1 && <ButtonPrimary label="Mostrar mais" onPress={() => { setpage(page + 1) }} />}
                                     </Column>}
                                 />}
                         </Column>
@@ -134,6 +133,7 @@ export default function ServicesScreen({ navigation, }) {
                     </Column>
 
                     : <Column mh={margin.h}>
+                        <Back />
                         <Title size={26} style={{ marginVertical: 12, }}>Escolha um serviço</Title>
                         <FlatList
                             style={{ marginTop: 6, }}
@@ -145,7 +145,7 @@ export default function ServicesScreen({ navigation, }) {
                             showsVerticalScrollIndicator={false}
                             numColumns={2}
                         />
-                   
+
                         <Column style={{ height: 120 }} />
                     </Column>}
             </Scroll>
@@ -155,7 +155,7 @@ export default function ServicesScreen({ navigation, }) {
 }
 
 
-const Card = ({ item, navigation, type, selectService }) => {
+const CardItem = ({ item, navigation, type, selectService }) => {
     const { margin, color, font } = useTheme()
     const { name, id, img, status, criado_em, entrada, payment, value, pet, check_in, check_out } = item
     const types = [
@@ -329,18 +329,20 @@ const Card = ({ item, navigation, type, selectService }) => {
 const CardService = ({ item, setselectService, }) => {
     const { name, label, price, img } = item
     return (
-        <Button pv={20} ph={20} radius={12} mh={0} mv={0} style={{ backgroundColor: '#FFF', flexGrow: 1, }} onPress={() => { setselectService(item) }} >
-            <Column>
-                <Image source={img} style={{ width: 76, height: 76, borderRadius: 8, }} />
-                <Column style={{ justifyContent: 'center', }}>
-                    <Column style={{ height: 12, }} />
-                    <Title size={16}>{name}</Title>
-                    <Column style={{ height: 6, }} />
-                    <Label size={14}>{label}</Label>
-                    <Column style={{ height: 12, }} />
+        <Button pv={1} ph={1} radius={12} mh={0} mv={0} style={{  flexGrow: 1, }} onPress={() => { setselectService(item) }} >
+                <Card>
+                <Column style={{ backgroundColor: '#FFF',  flexGrow: 1, paddingVertical: 24, paddingHorizontal: 24,}}>
+                    <Image source={img} style={{ width: 76, height: 76, borderRadius: 8, }} />
+                    <Column style={{ justifyContent: 'center', }}>
+                        <Column style={{ height: 12, }} />
+                        <Title size={16}>{name}</Title>
+                        <Column style={{ height: 6, }} />
+                        <Label size={14}>{label}</Label>
+                        <Column style={{ height: 12, }} />
+                    </Column>
                 </Column>
-            </Column>
-        </Button>
+        </Card>
+            </Button>
     )
 }
 

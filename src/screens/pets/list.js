@@ -60,6 +60,7 @@ export default function PetsListScreen({ navigation, }) {
                                 placeholder='Pesquisar'
                                 onSubmitEditing={handleSearch}
                                 style={{ paddingHorizontal: 20, paddingVertical: 14, fontSize: 16, fontFamily: font.medium, flex: 1 }}
+
                             />
                             <Button bg={color.title} ph={1} pv={1} onPress={handleSearch} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} radius={8}>
                                 <Search size={18} color="#fff" />

@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { Main, Title, useTheme, Label, Image, Column, Button, View } from '@theme/global';
-import { ArrowRight } from 'lucide-react-native';
+import { Main, Title, useTheme, Label, Image, Column, Button, View, SCREEN_WIDTH, SCREEN_HEIGHT } from '@theme/global';
 import Animated, { FadeInDown, FadeInLeft, FadeInUp } from 'react-native-reanimated';
 import { getPreferences } from '@hooks/preferences';
+import { StatusBar } from 'expo-status-bar'
+import { ImageBackground } from 'react-native';
 
 export default function WelcomeScreen({ navigation, route }) {
-
+    const { color, font, margin, } = useTheme();
     const [name, setname] = useState(route.params?.name ? route.params?.name : 'Visitante');
     useEffect(() => {
         const fecthData = async () => {
             try {
                 const res = await getPreferences()
-                if(res?.name){
+                if (res?.name) {
                     setname(res?.name)
                     setTimeout(() => {
                         navigation.navigate('Tabs')
                     }, 3000)
-                }else{
+                } else {
                     setname('Visitante')
                     navigation.navigate('Onboarding')
                 }
@@ -25,26 +26,30 @@ export default function WelcomeScreen({ navigation, route }) {
                 setname('Visitante')
             }
         }
-        
-       fecthData()
+
+        fecthData()
     }, [])
 
     return (
-        <Main style={{ backgroundColor: "#918C8B", flex: 1, justifyContent: 'center', alignItems: 'center', }}>
-
-
-            <Animated.View entering={FadeInDown.delay(500)}>
-                <Title color="#fff" align="center" font='Voyage_Medium' style={{ lineHeight: 42, fontSize: 32, marginHorizontal: 20, }}>Seja bem-vindo!</Title>
-            </Animated.View>
-            <Animated.View entering={FadeInDown.delay(800)}>
-                <Label color="#fff" style={{ lineHeight: 20, marginTop: 30, }}>É um prazer ter você conosco!</Label>
-            </Animated.View>
-
-            <Animated.View entering={FadeInLeft.delay(1200)}>
-                <Button bg="#d9d9d9" mv={32} pv={8} ph={20} style={{ marginTop: 26 }} onPress={() => { navigation.navigate('Tabs') }}  >
-                    <ArrowRight size={24} color="#918C8B" />
-                </Button>
-            </Animated.View>
+        <Main style={{ backgroundColor: "#FFF", flex: 1, justifyContent: 'center', alignItems: 'center', }}>
+            <StatusBar backgroundColor={color.bg} />
+            <ImageBackground source={require('@imgs/bgwelcome.png')} style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT * 1.1, objectFit: 'cover', zIndex: -2, justifyContent: 'center', alignItems: 'center',  }} >
+                <ImageBackground source={require('@imgs/welcomecard.png')} style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT, justifyContent: 'center', alignItems: 'center',   }} imageStyle={{ objectFit: 'contain' }}>
+                    <Column style={{ marginTop: -20, marginHorizontal: 20, justifyContent: 'center', alignItems: 'center', }}>
+                        <Animated.View entering={FadeInDown.delay(500)}>
+                            <Title color="#fff" align="center" style={{ lineHeight: 42, fontSize: 32, marginHorizontal: 20, fontFamily: font.medium, letterSpacing: -.6, }}>SEJA BEM - VINDO!</Title>
+                        </Animated.View>
+                        <Animated.View entering={FadeInDown.delay(800)}>
+                            <Label color="#fff" style={{ lineHeight: 20, marginTop: 20, fontFamily: 'Voyage_Medium' }}>é um prazer ter você conosco!</Label>
+                        </Animated.View>
+                        <Animated.View entering={FadeInLeft.delay(1200)}>
+                            <Button bg="transparent" mv={32} pv={8} ph={20} style={{ marginTop: 26 }} onPress={() => { navigation.navigate('Tabs') }}  >
+                                <Image source={require('@imgs/seta.png')} style={{ width: 72, height: 42, objectFit: 'contain' }} />
+                            </Button>
+                        </Animated.View>
+                    </Column>
+                </ImageBackground>
+            </ImageBackground>
         </Main>
     )
 }

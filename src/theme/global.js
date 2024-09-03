@@ -10,7 +10,7 @@ export function Back() {
   const navigation = useNavigation();
   return (
     <Button onPress={() => { navigation.goBack() }} pv={0} ph={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg='#FFFFFF'>
-      <ArrowLeft size={16} color='#858585' />
+      <ArrowLeft size={20} color='#858585' />
     </Button>
   )
 }
