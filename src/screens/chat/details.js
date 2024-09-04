@@ -24,7 +24,7 @@ import socket from '@hooks/socket';
 import CameraChat from '@components/Chat/image';
 import AudioPlayerDownloaded from '@components/Chat/player';
 
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 
 export default function ChatDetailsScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
@@ -48,46 +48,47 @@ export default function ChatDetailsScreen({ navigation, route }) {
     const searchResult = messages?.filter((item) => item?.mensagem?.toLowerCase().includes(search.toLowerCase()));
 
     const [loading, setloading] = useState(true);
-    useEffect(() => {
-        const fecthData = async () => {
-            setloading(true)
-            try {
-                assinarChat(token)
-                const res = await listMessages(token, type)
-                if (res?.chatconversa) {
-                    setchat(res?.chat)
-                    setshowBottom(res?.chatconversa.length > 10 ? true : false)
-                    const tp = type === 'U' ? 'C' : 'U'
-                    const userObject = res.chatconversa.find(item => item.type == tp);
-                    const colaboradorimg = userObject?.colaborador?.avatar ? { uri: userObject?.colaborador?.avatar } : require('@imgs/btn-onde-estamos.png')
-                    const usuarioimg = userObject?.usuario.avatar ? { uri: userObject?.usuario.avatar } : require('@imgs/btn-onde-estamos.png')
-                    setimagem(type === 'U' ? colaboradorimg : usuarioimg)
-                    setmessages(res?.chatconversa.reverse())
-                }
-            } catch (error) {
-                console.log(error)
-            } finally {
-                setloading(false);
+
+    const fecthData = async () => {
+        setloading(true)
+        try {
+            assinarChat(token)
+            const res = await listMessages(token, type)
+            if (res?.chatconversa) {
+                setchat(res?.chat)
+                setshowBottom(res?.chatconversa.length > 10 ? true : false)
+                const tp = type === 'U' ? 'C' : 'U'
+                const userObject = res.chatconversa.find(item => item.type == tp);
+                const colaboradorimg = userObject?.colaborador?.avatar ? { uri: userObject?.colaborador?.avatar } : require('@imgs/btn-onde-estamos.png')
+                const usuarioimg = userObject?.usuario.avatar ? { uri: userObject?.usuario.avatar } : require('@imgs/btn-onde-estamos.png')
+                setimagem(type === 'U' ? colaboradorimg : usuarioimg)
+                setmessages(res?.chatconversa.reverse())
             }
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setloading(false);
         }
+    }
+
+    const isFocused = useIsFocused();
+    useEffect(() => {
+        console.log('abriu', isFocused)
         fecthData();
-    }, []);
+    }, [isFocused]);
 
     useEffect(() => {
         socket.on('chat message', async (dados) => {
             setmessages((msgs) => [...msgs, dados])
         });
-        
-        return () => {
-            socket.off('chat message', async (dados) => {
-                setmessages((msgs) => [...msgs, dados])
-            });
-        };
+       
     }, [socket]);
 
     useEffect(() => {
         flatMsg.current?.scrollToEnd({ animated: true });
     }, [msg, messages]);
+
+
 
 
     const handleNewMessage = () => {
@@ -101,6 +102,8 @@ export default function ChatDetailsScreen({ navigation, route }) {
         enviarMsg(params, type)
         setmsg('');
     };
+
+
 
 
     return (
@@ -175,7 +178,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
                     initialNumToRender={10}
                     maxToRenderPerBatch={10}
                     removeClippedSubviews
-                    style={{ paddingHorizontal: margin.h, paddingBottom: 30,}}
+                    style={{ paddingHorizontal: margin.h, paddingBottom: 30, }}
                     onScroll={(event) => {
                         const { contentOffset, contentSize, layoutMeasurement } = event.nativeEvent;
                         const isNearBottom = contentSize.height - (contentOffset.y + layoutMeasurement.height) < 200;
@@ -183,20 +186,20 @@ export default function ChatDetailsScreen({ navigation, route }) {
                     }}
 
                 />}
-            <Column style={{height: 52,}}/>
+            <Column style={{ height: 52, }} />
 
             {showBottom && <Animated.View entering={ZoomIn} exiting={ZoomOut} style={{ position: 'absolute', bottom: 80, alignSelf: 'center', }}>
                 <Button onPress={() => { flatMsg.current.scrollToEnd({ animated: true }); }} radius={100} ph={0} pv={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', backgroundColor: color.sc.sc3, }}>
                     <ArrowDown size={22} color="#fff" />
                 </Button>
             </Animated.View>}
-            
+
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
-                style={{ flex: 1, position: 'absolute', bottom: 20,  }}
+                style={{ flex: 1, position: 'absolute', bottom: 20, }}
             >
-                
+
                 {audioUri && <AudioPlayer audioUri={audioUri} type={type} token={token} user={user} />}
                 <Row style={{ backgroundColor: color.off2, justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 12, zIndex: 99, }}>
                     <Button onPress={() => { modalCamera.current.expand(); setopenCamera(true) }} ph={0} pv={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg={color.sc.sc3 + 20}>

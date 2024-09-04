@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Image, Loader, Back, LabelBT } from '@theme/global';
+import { Main, Column, Label, Title, Row, Button, useTheme, Image, Loader, Back, LabelBT } from '@theme/global';
 import { createChat } from '@api/request/chat';
+import socket from '@hooks/socket';
+
 
 export default function ChatNewScreen({ navigation, }) {
     const { color, font, } = useTheme();
@@ -12,6 +14,7 @@ export default function ChatNewScreen({ navigation, }) {
         try {
             const res = await createChat(titulo)
             if (res) {
+                socket.emit('atualizarlista', {});
                 navigation.replace('ChatDetails', { token: res.token, user: res.chat, type: 'U' })
             }
         } catch (error) {
