@@ -92,13 +92,18 @@ import NotificationsScreen from '@screens/notifications/index';
 import FaqScreen from '@screens/faq/index';
 import Privacidade from '@screens/privacidade/index';
 
-
 const linking = {
   prefixes: ['pongo://'],
   config: {
     screens: {
-      Notifications: {
-        path: 'Notifications',
+      ChatList: {
+        path: 'ChatList',
+        parse: {
+          message: (message) => `${message}`,
+        },
+      },
+      ChatColaboradorList: {
+        path: 'ChatColaboradorList',
         parse: {
           message: (message) => `${message}`,
         },
@@ -109,27 +114,9 @@ const linking = {
 
 
 export default function Router({ }) {
-  const routeNameRef = React.useRef();
-  const navigationRef = React.useRef();
+ 
   return (
-    <NavigationContainer linking={linking}
-      ref={navigationRef}
-      onReady={() => {
-        routeNameRef.current = navigationRef.current.getCurrentRoute().name;
-      }}
-      onStateChange={async () => {
-        const previousRouteName = routeNameRef.current;
-        const currentRouteName = navigationRef.current.getCurrentRoute().name;
-
-        if (previousRouteName !== currentRouteName) {
-          await analytics().logScreenView({
-            screen_name: currentRouteName,
-            screen_class: currentRouteName,
-          });
-        }
-        routeNameRef.current = currentRouteName;
-      }}
-    >
+    <NavigationContainer linking={linking}>
       
       <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Welcome'>
 

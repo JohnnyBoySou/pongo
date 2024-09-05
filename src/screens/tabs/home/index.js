@@ -55,7 +55,7 @@ export default function HomeScreen({ navigation, }) {
                             <Card>
                                 <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Shop') }}>
                                     <Column>
-                                        <MotiImage source={require('@imgs/home_1.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
+                                        <MotiImage source={require('@imgs/home_4.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
                                         <Title align="center" size={14}>LOJA PONGO</Title>
                                     </Column>
                                 </Button>
@@ -114,7 +114,7 @@ export default function HomeScreen({ navigation, }) {
 
                                 <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Institucional') }}>
                                     <Column>
-                                        <MotiImage source={require('@imgs/home_4.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
+                                        <MotiImage source={require('@imgs/home_1.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
                                         <Title align="center" size={14}>CONHEÇA MAIS</Title>
                                     </Column>
                                 </Button>

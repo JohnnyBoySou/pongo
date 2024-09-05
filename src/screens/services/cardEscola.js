@@ -58,7 +58,7 @@ export default function CardEscola({ item, navigation, service }) {
                 </Row>
                 <Column style={{ backgroundColor: selectStatus.color, borderRadius: 8, position: 'absolute', right: 12, bottom: 12, }}>
                     <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
-                        {status ? status : 'Não informado'}
+                        {status ? status : 'Não iniciado'}
                     </Title>
                 </Column>
             </Row>
@@ -85,7 +85,7 @@ export default function CardEscola({ item, navigation, service }) {
             <Row style={{ justifyContent: 'space-between', alignItems: 'flex-start' }} mh={margin.h}>
                 <Column style={{ marginTop: 12, }}>
                     <Title style={{ fontWeight: 'bold', fontSize: 15, marginBottom: 6 }} marginBottom={6}>Informações do pedido</Title>
-                    <Label style={{ fontSize: 14 }} marginBottom={6}>Status do pagamento: {status ? status : 'Não informado'}</Label>
+                    <Label style={{ fontSize: 14 }} marginBottom={6}>Status do pagamento: {status ? status : 'Não iniciado'}</Label>
                     <Label size={14} marginBottom={6}>Data da transação: {formatDateTime(criado_em)}</Label>
                     <Label size={14} marginBottom={6}>Número: #{id}</Label>
                 </Column>

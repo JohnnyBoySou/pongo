@@ -1,33 +1,34 @@
 
 import React, { useEffect, useState } from 'react';
 import { Main, Scroll, Column, Label, Title, Row, useTheme, Image, Button, Back, Loader, LabelBT, } from '@theme/global'
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, TextInput, RefreshControl } from 'react-native'
 //components
 import TopMenu from '@components/Header/topmenu';
 //API
 import { listPets } from '@api/request/pets';
 import TabBar from '@components/TabBar';
 
-import { TextInput } from 'react-native-gesture-handler';
 import { Search } from 'lucide-react-native';
 
 export default function PetsListScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
     const [data, setdata] = useState([]);
-    const [loading, setloading] = useState();
-    useEffect(() => {
-        const fecthData = async () => {
-            setloading(true)
-            try {
-                const res = await listPets()
-                setdata(res)
-            } catch (error) {
-                console.log(error)
-            } finally {
-                setloading(false)
-            }
-        }
 
+    const [loading, setloading] = useState(true);
+
+    const fecthData = async () => {
+        setloading(true)
+        try {
+            const res = await listPets()
+            setdata(res)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setloading(false)
+        }
+    }
+
+    useEffect(() => {
         fecthData()
     }, []);
 
@@ -47,42 +48,52 @@ export default function PetsListScreen({ navigation, }) {
 
     return (
         <Main>
-            <Scroll>
-                <TopMenu search={false} back={false} />
 
-                <Column mh={margin.h}>
-                    <Row style={{ justifyContent: 'center', alignItems: 'center', flex: 1, marginHorizontal: 24, marginTop: 10, }}>
-                        <Back />
-                        <Row style={{ backgroundColor: '#fff', paddingRight: 8, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginLeft: 12, }}>
-                            <TextInput
-                                value={value}
-                                onChangeText={(e) => setvalue(e)}
-                                placeholder='Pesquisar'
-                                onSubmitEditing={handleSearch}
-                                style={{ paddingHorizontal: 20, paddingVertical: 14, fontSize: 16, fontFamily: font.medium, flex: 1 }}
+            {loading ? <Loader /> :
+                <FlatList
 
-                            />
-                            <Button bg={color.title} ph={1} pv={1} onPress={handleSearch} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} radius={8}>
-                                <Search size={18} color="#fff" />
-                            </Button>
-                        </Row>
-                    </Row>
-                </Column>
+                    ListHeaderComponent={
+                        <Column>
+                            <TopMenu search={false} back={false} />
+                            <Column mh={margin.h}>
+                                <Row style={{ justifyContent: 'center', alignItems: 'center', flex: 1, marginHorizontal: 24, marginTop: 10, }}>
+                                    <Back />
+                                    <Row style={{ backgroundColor: '#fff', paddingRight: 8, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginLeft: 12, }}>
+                                        <TextInput
+                                            value={value}
+                                            onChangeText={(e) => setvalue(e)}
+                                            placeholder='Pesquisar'
+                                            onSubmitEditing={handleSearch}
+                                            style={{ paddingHorizontal: 20, paddingVertical: 14, fontSize: 16, fontFamily: font.medium, flex: 1 }}
 
+                                        />
+                                        <Button bg={color.title} ph={1} pv={1} onPress={handleSearch} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} radius={8}>
+                                            <Search size={18} color="#fff" />
+                                        </Button>
+                                    </Row>
+                                </Row>
+                            </Column>
 
+                            <Title align="center" size={24} style={{ marginBottom: 10, marginTop: 40, }}>Escolha o perfil do Pet</Title>
 
-                <Title align="center" style={{ marginVertical: 30, }}>Escolha o perfil do Pet</Title>
-                {loading ? <Loader /> :
-                    <FlatList
-                        data={filteredData ? filteredData : data}
-                        renderItem={({ item }) => <Pet pet={item} navigation={navigation} />}
-                        keyExtractor={item => item.id}
-                        showsVerticalScrollIndicator={false}
-                        ListEmptyComponent={() => <Label align="center" style={{ marginVertical: 50, }}>Nenhum pet encontrado.</Label>}
-                        contentContainerStyle={{ rowGap: 20, }}
-                    />}
+                        </Column>
 
-            </Scroll>
+                    }
+
+                    data={filteredData ? filteredData : data}
+                    renderItem={({ item }) => <Pet pet={item} navigation={navigation} />}
+                    keyExtractor={item => item.id}
+                    showsVerticalScrollIndicator={false}
+                    ListEmptyComponent={() => <Label align="center" style={{ marginVertical: 50, }}>Nenhum pet encontrado.</Label>}
+                    contentContainerStyle={{ rowGap: 20, }}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={loading}
+                            onRefresh={fecthData}
+                            colors={[color.sc.sc3]}
+                        />
+                    }
+                />}
             <TabBar />
         </Main>
     )

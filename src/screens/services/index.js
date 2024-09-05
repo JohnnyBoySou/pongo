@@ -197,7 +197,7 @@ const CardItem = ({ item, navigation, type, selectService }) => {
                         </Column>
                         <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
                             <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
-                                {status ? status : 'Não informado'}
+                                {status ? status : 'Não iniciado'}
                             </Title>
                         </Column>
                     </Row>
@@ -225,7 +225,7 @@ const CardItem = ({ item, navigation, type, selectService }) => {
                         </Column>
                         <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
                             <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
-                                {status ? status : 'Não informado'}
+                                {status ? status : 'Não iniciado'}
                             </Title>
                         </Column>
                     </Row>
@@ -253,7 +253,7 @@ const CardItem = ({ item, navigation, type, selectService }) => {
                         </Column>
                         <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
                             <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
-                                {status ? status : 'Não informado'}
+                                {status ? status : 'Não iniciado'}
                             </Title>
                         </Column>
                     </Row>
@@ -281,7 +281,7 @@ const CardItem = ({ item, navigation, type, selectService }) => {
                         </Column>
                         <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
                             <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
-                                {status ? status : 'Não informado'}
+                                {status ? status : 'Não iniciado'}
                             </Title>
                         </Column>
                     </Row>
@@ -308,7 +308,7 @@ const CardItem = ({ item, navigation, type, selectService }) => {
                     </Column>
                     <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
                         <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
-                            {status ? status : 'Não informado'}
+                            {status ? status : 'Não iniciado'}
                         </Title>
                     </Column>
                 </Row>
