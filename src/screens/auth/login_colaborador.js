@@ -13,8 +13,8 @@ import { OneSignal } from 'react-native-onesignal';
 
 export default function AuthLoginColaboradorScreen({ navigation, }) {
     const [loading, setloading] = useState(false);
-    const [email, setemail] = useState('villapongo@pongo.com.br');
-    const [password, setpassword] = useState('@Pongo0101');
+    const [email, setemail] = useState('');
+    const [password, setpassword] = useState('');
     const [success, setsuccess] = useState();
     const [error, seterror] = useState();
 

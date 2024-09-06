@@ -10,7 +10,7 @@ export default function PrivacidadeScreen() {
         <Main style={{ backgroundColor: '#fff', }}>
             <StatusBar style="dark" backgroundColor='#fff' />
             <Header rose title="Termos de Uso" />
-            <WebView style={{ flex: 1, }} source='https://pongo.engenhariadigital.net/termos.html' />
+            <WebView style={{ flex: 1, }} source={{uri: 'https://pongo.engenhariadigital.net/termos.html'}} />
         </Main>
     )
 }
