@@ -72,7 +72,7 @@ export default function App() {
   return (
     <View style={{ flex: 1, backgroundColor: light.background }} onLayout={onLayoutRootView}>
       <ThemeProvider theme={light}>
-        <StatusBar translucent />
+        <StatusBar translucent style="dark"/>
         <Router />
       </ThemeProvider>
     </View>

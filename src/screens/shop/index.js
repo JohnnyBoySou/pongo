@@ -4,15 +4,15 @@ import { FlatList } from 'react-native';
 import TopMenu from '@components/Header/topmenu';
 import { BedSingle, Shapes } from 'lucide-react-native';
 import { useNavigation } from '@react-navigation/native';
-
-import WebView from '@components/WebView';
+import { WebView } from 'react-native-webview';
+//import WebView from '@components/WebView';
 
 export default function ShopScreen() {
 
     return (
         <Main style={{ backgroundColor: '#fff', }}>
             <TopMenu search={false} />
-            <WebView source='https://pongo.com.br/' />
+            <WebView style={{ flex: 1, }} source='https://pongo.com.br/' />
         </Main>
     )
 }
