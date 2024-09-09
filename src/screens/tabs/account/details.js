@@ -1,21 +1,24 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { Main, Scroll, Column, Label, Title, Row, Button, SubLabel, ButtonPrimary, Back, Image, LabelBT } from '@theme/global';
 import { ThemeContext } from 'styled-components/native';
 import { Check, Pencil } from 'lucide-react-native';
-import { updateUser, listUser } from '@api/request/auth';
+import { updateUser, listUser, excludeUser } from '@api/request/auth';
 
 import * as ImagePicker from 'expo-image-picker';
 import { updatePreferences, excludePreferences } from '@hooks/preferences';
-import Input from '@components/Forms/input';
+import Success from '@components/Forms/success';
+import Error from '@components/Forms/error';
 import TopMenu from '@components/Header/topmenu';
+import Input from '@components/Forms/input';
 import TabBar from '@components/TabBar';
-import { editNotifications } from '../../../api/request/auth';
-
+import { editNotifications } from '@api/request/auth';
+import Modal from '@components/Modal';
 export default function AccountDetailsScreen({ navigation }) {
     const { color, font, margin } = useContext(ThemeContext);
     const [error, setError] = useState();
-
+    const [success, setsuccess] = useState();
+    const excludeRef = useRef()
     const [name, setname] = useState('*******');
     const [tel, settel] = useState('*** *******');
     const [cpf, setcpf] = useState('***.***.***-**');
@@ -67,7 +70,7 @@ export default function AccountDetailsScreen({ navigation }) {
             setavatar(old_avatar?.length > 0 ? old_avatar : null)
         }
     }
-
+    const [password, setpassword] = useState();
     const handleSave = async () => {
         setError('')
 
@@ -123,18 +126,28 @@ export default function AccountDetailsScreen({ navigation }) {
 
     }
     const profile = temporaryImg ? { uri: `file://${temporaryImg}` } : avatar ? { uri: avatar } : require('@imgs/user_placeholder.png')
-    const handleExit = () => {
-        navigation.navigate('AuthLogin')
-        excludePreferences()
+    const handleExit = async () => {
+        try {
+            const res = await excludeUser(password)
+            console.log(res)
+            setsuccess(res.message)
+            await excludePreferences()
+            setTimeout(() => {
+                navigation.navigate('AuthLogin')
+            }, 1000);
+        } catch (error) {
+            console.log(error)
+            setError(error.message)
+        }
     }
 
 
     const toggleNotification = async () => {
         try {
-           const res = await editNotifications(notify)
+            const res = await editNotifications(notify)
         } catch (error) {
-            
-        } finally{
+
+        } finally {
             setnotify(!notify)
         }
     };
@@ -218,7 +231,6 @@ export default function AccountDetailsScreen({ navigation }) {
                             setValue={setcep}
                             mask="CEP"
                         />
-
                         <Column style={{ height: 16, }} />
 
                     </Column>
@@ -230,14 +242,30 @@ export default function AccountDetailsScreen({ navigation }) {
                         <LabelBT align="center" size={16}>Redefinir minha senha</LabelBT>
                     </Button>
 
-                    <Button onPress={handleExit} bg={color.red + 10} pv={10} ph={1} >
-                        <LabelBT color={color.red} style={{ textAlign: 'center', }}>Sair</LabelBT>
+                    <Button onPress={() => { excludeRef.current?.expand() }} bg={color.red + 10} pv={10} ph={1} >
+                        <LabelBT color={color.red} style={{ textAlign: 'center', }}>Excluir conta</LabelBT>
                     </Button>
 
 
                 </Column>
                 <Column style={{ height: 160, }} />
             </Scroll>
+            <Modal ref={excludeRef} snapPoints={[0.1, 600]}>
+                <Column style={{ marginHorizontal: margin.h, rowGap: 12, }}>
+                    <Title>Para prosseguir com a exclusão digite sua senha:</Title>
+                    <Input
+                        value={password}
+                        setValue={setpassword}
+                        placeholder="Senha"
+                        label="Senha"
+                        secure
+                    />
+                    {success ? <Success msg={success} /> : error ? <Error msg={error} /> : null}
+                    <Button onPress={handleExit} bg={color.red + 10} pv={10} ph={1} >
+                        <LabelBT color={color.red} style={{ textAlign: 'center', }}>Excluir conta</LabelBT>
+                    </Button>
+                </Column>
+            </Modal>
             <TabBar />
             <Button onPress={handleSave} disabled={loading} style={{ height: 52, borderRadius: 100, position: 'absolute', alignSelf: 'center', bottom: 100, paddingHorizontal: 16, backgroundColor: color.sc.sc1, justifyContent: 'center', alignItems: 'center', }}>
                 <Row>

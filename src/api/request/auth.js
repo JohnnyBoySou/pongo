@@ -173,13 +173,12 @@ export const verifyEmail = async (email, code) => {
     }
 };
 
-export const excludeUser = async (password, message) => {
+export const excludeUser = async (password) => {
     const token = await getToken()
     const BASE_URL = await getBaseURL();
     try {
-        const res = await axios.post(`${BASE_URL}/usuarios/exclusao`, {
+        const res = await axios.post(`${BASE_URL}/user/desativar`, {
             password: password,
-            message: message,
         }, {
             headers: {
                 Authorization: `Bearer ${token}`,
