@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import TopMenu from '@components/Header/topmenu';
 
 import Animated from 'react-native-reanimated';
+import Card from '../../components/Card';
 
 export default function ServicesDiarioScreen({ navigation, route }) {
     const { color, margin } = useTheme();
@@ -80,7 +81,7 @@ const CardDiario = ({ item, index }) => {
     const galeria = [imgs.primary, imgs.secondary, imgs.tertiary, imgs.quaternary,]
     const good = galeria.filter(i => i !== null)
     return (
-        <Animated.View>
+        <Card>
             <Column mv={4} bg="#fff" style={{ paddingBottom: 20, }}>
                 <Row style={{ alignItems: 'center', marginTop: 12, }} mh={margin.h}>
                     <Image source={img} style={{ width: 54, marginRight: 12, height: 54, borderRadius: 8, backgroundColor: '#fff', }} />
@@ -104,7 +105,7 @@ const CardDiario = ({ item, index }) => {
                     <Column style={{ width: 28, }} />
                 </ScrollView>
             </Column>
-        </Animated.View>
+        </Card>
 
     )
 }

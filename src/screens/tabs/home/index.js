@@ -52,7 +52,7 @@ export default function HomeScreen({ navigation, }) {
                             }}
                             style={{ flexGrow: 1 }}
                         >
-                            <Card>
+                            <Card num={16}>
                                 <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Shop') }}>
                                     <Column>
                                         <MotiImage source={require('@imgs/home_4.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
@@ -71,7 +71,7 @@ export default function HomeScreen({ navigation, }) {
                             }}
                             style={{ flexGrow: 1 }}
                         >
-                            <Card>
+                            <Card num={16}>
                                 <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('VillaPongo') }}>
                                     <Column>
                                         <MotiImage source={require('@imgs/home_2.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
@@ -92,7 +92,7 @@ export default function HomeScreen({ navigation, }) {
                             }}
                             style={{ flexGrow: 1 }}
                         >
-                            <Card>
+                            <Card num={16}>
                                 <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={handleAccount}>
                                     <Column>
                                         <MotiImage source={require('@imgs/home_3.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
@@ -110,7 +110,7 @@ export default function HomeScreen({ navigation, }) {
                             }}
                             style={{ flexGrow: 1 }}
                         >
-                            <Card>
+                            <Card num={16}>
 
                                 <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Institucional') }}>
                                     <Column>

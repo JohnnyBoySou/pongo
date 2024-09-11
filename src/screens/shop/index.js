@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Image } from '@theme/global';
 import TopMenu from '@components/Header/topmenu';
 import { WebView } from 'react-native-webview';
+import { StatusBar } from 'expo-status-bar';
 
 export default function ShopScreen() {
 
     return (
-        <Main style={{ backgroundColor: '#fff', }}>
-            <TopMenu search={false} />
-            <WebView style={{ flex: 1, }} source={{uri: 'https://pongo.com.br/'}} />
+        <Main style={{  }}>
+            <StatusBar  backgroundColor='#CCCCCC'/>
+            <WebView style={{ flex: 1,}} source={{uri: 'https://pongo.com.br/'}} />
         </Main>
     )
 }

@@ -93,7 +93,7 @@ export default function AccountScreen({ navigation, }) {
                 }
 
                 <Column mh={margin.h} style={{ rowGap: 22, marginVertical: 22, }}>
-                    <Card bg={color.bg}>
+                    <Card bg={color.bg} num={12}>
                         <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('PetsList') }} >
                             <Row style={{ alignItems: 'center', }}>
                                 <Image source={require('@imgs/ac2.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
@@ -106,7 +106,7 @@ export default function AccountScreen({ navigation, }) {
                             </Row>
                         </Button>
                     </Card>
-                    <Card>
+                    <Card num={12}>
                         <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('AccountDetails') }} >
                             <Row style={{ alignItems: 'center', }}>
 
@@ -119,7 +119,7 @@ export default function AccountScreen({ navigation, }) {
                             </Row>
                         </Button>
                     </Card>
-                    <Card>
+                    <Card num={12}>
                         <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('Services') }}>
                             <Row style={{ alignItems: 'center', }}>
                                 <Image source={require('@imgs/ac3.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
@@ -132,7 +132,7 @@ export default function AccountScreen({ navigation, }) {
                             </Row>
                         </Button>
                     </Card>
-                    <Card>
+                    <Card num={12}>
                         <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('ChatList') }}>
                             <Row style={{ alignItems: 'center', }}>
                                 <Image source={require('@imgs/chat.png')} style={{ width: 80, height: 80, marginRight: 12, objectFit: 'contain', }} />

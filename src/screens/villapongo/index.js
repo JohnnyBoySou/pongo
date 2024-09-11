@@ -6,8 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 import Card from '@components/Card';
 export default function VillaPongoScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
-
-    //grooming e vet
     return (
         <Main>
             <Scroll>
@@ -23,6 +21,7 @@ export default function VillaPongoScreen({ navigation, }) {
                             keyExtractor={item => item.id}
                             showsVerticalScrollIndicator={false}
                             initialNumToRender={10}
+                            contentContainerStyle={{rowGap: 20,}}
                             maxToRenderPerBatch={10}
                             removeClippedSubviews
                         />
@@ -35,12 +34,11 @@ export default function VillaPongoScreen({ navigation, }) {
 }
 
 const CardServices = ({ item }) => {
-    const { color, font, margin } = useTheme();
     const { name, img } = item
     const navigation = useNavigation()
     return (
-        <Card>
-            <Button pv={12} ph={12} radius={12} mh={0} mv={12} style={{ backgroundColor: '#FFF', }} onPress={() => { navigation.navigate(item.screen) }} >
+        <Card num={12}>
+            <Button pv={12} ph={12} radius={12} mh={0} mv={0} style={{ backgroundColor: '#FFF', }} onPress={() => { navigation.navigate(item.screen) }} >
                 <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
                     <Row>
                         <Image style={{ width: 72, height: 72, borderRadius: 8, marginRight: 12, }} source={img} />

@@ -9,6 +9,7 @@ import { listPets } from '@api/request/pets';
 import TabBar from '@components/TabBar';
 
 import { Search } from 'lucide-react-native';
+import Card from '@components/Card';
 
 export default function PetsListScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
@@ -48,14 +49,13 @@ export default function PetsListScreen({ navigation, }) {
 
     return (
         <Main>
+            <TopMenu search={false} back={false} />
 
             {loading ? <Loader /> :
                 <FlatList
-
                     ListHeaderComponent={
                         <Column>
-                            <TopMenu search={false} back={false} />
-                            <Column mh={margin.h}>
+                            <Column>
                                 <Row style={{ justifyContent: 'center', alignItems: 'center', flex: 1, marginHorizontal: 24, marginTop: 10, }}>
                                     <Back />
                                     <Row style={{ backgroundColor: '#fff', paddingRight: 8, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginLeft: 12, }}>
@@ -73,11 +73,8 @@ export default function PetsListScreen({ navigation, }) {
                                     </Row>
                                 </Row>
                             </Column>
-
                             <Title align="center" size={24} style={{ marginBottom: 10, marginTop: 40, }}>Escolha o perfil do Pet</Title>
-
                         </Column>
-
                     }
 
                     data={filteredData ? filteredData : data}
@@ -85,7 +82,7 @@ export default function PetsListScreen({ navigation, }) {
                     keyExtractor={item => item.id}
                     showsVerticalScrollIndicator={false}
                     ListEmptyComponent={() => <Label align="center" style={{ marginVertical: 50, }}>Nenhum pet encontrado.</Label>}
-                    contentContainerStyle={{ rowGap: 20, }}
+                    contentContainerStyle={{ rowGap: 20, marginHorizontal: 28, }}
                     refreshControl={
                         <RefreshControl
                             refreshing={loading}
@@ -104,20 +101,22 @@ const Pet = ({ pet, navigation }) => {
     const { color } = useTheme()
     const avatar = pet?.img ? { uri: pet?.img } : require('@imgs/img_default.png')
     return (
-        <Button onPress={() => { navigation.navigate('PetsProfile', { id: pet?.id, }) }} radius={12} pv={12} ph={18} bg="#fff" mh={28}>
-            <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
-                    <Image source={avatar} bg="#fff" style={{ width: 64, height: 64, objectFit: 'cover', borderRadius: 100, }} />
-                    <Column style={{ marginLeft: 14, }}>
-                        <Title size={18} >{pet?.name}</Title>
-                        <Label size={16} style={{ marginTop: 4, }}>{pet?.age} ano{pet?.age > 1 ? 's' : ''}</Label>
-                    </Column>
+        <Card >
+            <Button onPress={() => { navigation.navigate('PetsProfile', { id: pet?.id, }) }} radius={12} pv={12} ph={18} bg="#fff" >
+                <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                    <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
+                        <Image source={avatar} bg="#fff" style={{ width: 64, height: 64, objectFit: 'cover', borderRadius: 100, }} />
+                        <Column style={{ marginLeft: 14, }}>
+                            <Title size={18} >{pet?.name}</Title>
+                            <Label size={16} style={{ marginTop: 4, }}>{pet?.age} ano{pet?.age > 1 ? 's' : ''}</Label>
+                        </Column>
+                    </Row>
+                    <Button bg={color.sc.sc3 + 30} pv={8}>
+                        <LabelBT size={16} color={color.sc.sc3}>Escolher</LabelBT>
+                    </Button>
                 </Row>
-                <Button bg={color.sc.sc3 + 30} pv={8}>
-                    <LabelBT size={16} color={color.sc.sc3}>Escolher</LabelBT>
-                </Button>
-            </Row>
-        </Button>
+            </Button>
+        </Card>
     )
 }
 

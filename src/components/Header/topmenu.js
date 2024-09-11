@@ -68,7 +68,7 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
                     {search &&
                         <Button mv={14} style={{ backgroundColor: color.light, flex: 1, borderWidth: 2, borderColor: focusSearch ? color.label : 'transparent', }} onPress={getSearch} pv={10}>
                             <Row style={{ alignItems: 'center', }}>
-                                <Search size={24} color={color.label} strokeWidth={2} />
+                                <Image source={require('@imgs/icon.png')} style={{ width: 42, height: 42, borderRadius: 120, }} />
                                 <Label style={{ marginLeft: 12, }}>Pesquisar</Label>
                             </Row>
                         </Button>

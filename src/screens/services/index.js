@@ -184,114 +184,123 @@ const CardItem = ({ item, navigation, type, selectService }) => {
 
     if (type == 'escola_pacote') {
         return (
-            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}>
-                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
-                    <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
-                        <Image
-                            source={selectService.img}
-                            style={{ width: 62, height: 80, borderRadius: 12, objectFit: 'contain' }} />
-                        <Column mh={12} >
-                            <Title size={14} style={{ marginBottom: 3 }}>{item?.name}</Title>
-                            <Label size={10} style={{ marginBottom: 8 }}>Pedido #{id}</Label>
-                            <Label size={14} >{formatCurrency(value)}</Label>
+            <Card num={14}>
+                <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}>
+                    <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
+                        <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
+                            <Image
+                                source={selectService.img}
+                                style={{ width: 62, height: 80, borderRadius: 12, objectFit: 'contain' }} />
+                            <Column mh={12} >
+                                <Title size={14} style={{ marginBottom: 3 }}>{item?.name}</Title>
+                                <Label size={10} style={{ marginBottom: 8 }}>Pedido #{id}</Label>
+                                <Label size={14} >{formatCurrency(value)}</Label>
+                            </Column>
+                            <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
+                                <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
+                                    {status ? status : 'Não iniciado'}
+                                </Title>
+                            </Column>
+                        </Row>
+                        <Column style={{ marginTop: 12 }}>
+                            <Label size={14} marginBottom={6}>Check-in: {formatDateTime(check_in)}</Label>
+                            <Label size={14} marginBottom={6}>Check-out: {formatDateTime(check_out)}</Label>
+                            <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
                         </Column>
-                        <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
-                            <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
-                                {status ? status : 'Não iniciado'}
-                            </Title>
-                        </Column>
-                    </Row>
-                    <Column style={{ marginTop: 12 }}>
-                        <Label size={14} marginBottom={6}>Check-in: {formatDateTime(check_in)}</Label>
-                        <Label size={14} marginBottom={6}>Check-out: {formatDateTime(check_out)}</Label>
-                        <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
                     </Column>
-                </Column>
-            </Button>
+                </Button>
+            </Card>
+
         )
     }
     else if (type == 'grooming') {
         return (
-            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}>
-                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
-                    <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
-                        <Image
-                            source={selectService.img}
-                            style={{ width: 62, height: 80, borderRadius: 12, objectFit: 'contain' }} />
-                        <Column mh={12} >
-                            <Title size={14} style={{ marginBottom: 3 }}>{item?.name}</Title>
-                            <Label size={10} style={{ marginBottom: 8 }}>Pedido #{id}</Label>
-                            <Label size={14} >{formatCurrency(value)}</Label>
+            <Card num={14}>
+                <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}>
+                    <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
+                        <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
+                            <Image
+                                source={selectService.img}
+                                style={{ width: 62, height: 80, borderRadius: 12, objectFit: 'contain' }} />
+                            <Column mh={12} >
+                                <Title size={14} style={{ marginBottom: 3 }}>{item?.name}</Title>
+                                <Label size={10} style={{ marginBottom: 8 }}>Pedido #{id}</Label>
+                                <Label size={14} >{formatCurrency(value)}</Label>
+                            </Column>
+                            <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
+                                <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
+                                    {status ? status : 'Não iniciado'}
+                                </Title>
+                            </Column>
+                        </Row>
+                        <Column style={{ marginTop: 12 }}>
+                            <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
+                            <Label size={14} marginBottom={6}>Agendamento: {formatDateTime(entrada)}</Label>
+                            <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
                         </Column>
-                        <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
-                            <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
-                                {status ? status : 'Não iniciado'}
-                            </Title>
-                        </Column>
-                    </Row>
-                    <Column style={{ marginTop: 12 }}>
-                        <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
-                        <Label size={14} marginBottom={6}>Agendamento: {formatDateTime(entrada)}</Label>
-                        <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
                     </Column>
-                </Column>
-            </Button>
+                </Button>
+            </Card>
         )
     }
     else if (type == 'vet') {
         return (
-            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}  >
-                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
-                    <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
-                        <Image
-                            source={selectService.img}
-                            style={{ width: 62, height: 80, borderRadius: 12, objectFit: 'contain' }} />
-                        <Column mh={12} >
-                            <Title size={14} style={{ marginBottom: 3 }}>{item?.name}</Title>
-                            <Label size={10} style={{ marginBottom: 8 }}>Pedido #{id}</Label>
-                            <Label size={14} >{formatCurrency(value)}</Label>
+            <Card num={14}>
+                <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}  >
+                    <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
+                        <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
+                            <Image
+                                source={selectService.img}
+                                style={{ width: 62, height: 80, borderRadius: 12, objectFit: 'contain' }} />
+                            <Column mh={12} >
+                                <Title size={14} style={{ marginBottom: 3 }}>{item?.name}</Title>
+                                <Label size={10} style={{ marginBottom: 8 }}>Pedido #{id}</Label>
+                                <Label size={14} >{formatCurrency(value)}</Label>
+                            </Column>
+                            <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
+                                <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
+                                    {status ? status : 'Não iniciado'}
+                                </Title>
+                            </Column>
+                        </Row>
+                        <Column style={{ marginTop: 12 }}>
+                            <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
+                            <Label size={14} marginBottom={6}>Agendamento: {formatDateTime(entrada)}</Label>
+                            <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
                         </Column>
-                        <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
-                            <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
-                                {status ? status : 'Não iniciado'}
-                            </Title>
-                        </Column>
-                    </Row>
-                    <Column style={{ marginTop: 12 }}>
-                        <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
-                        <Label size={14} marginBottom={6}>Agendamento: {formatDateTime(entrada)}</Label>
-                        <Label size={14} marginBottom={6}>Pet: {pet?.name}</Label>
                     </Column>
-                </Column>
-            </Button>
+                </Button>
+            </Card>
         )
     }
     else if (type == 'hospitalitie') {
         return (
-            <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}>
-                <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
-                    <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
-                        <Image
-                            source={selectService.img}
-                            style={{ width: 62, height: 80, borderRadius: 12, objectFit: 'contain' }} />
-                        <Column mh={12} >
-                            <Title size={14} style={{ marginBottom: 3 }}>{item?.name}</Title>
-                            <Label size={10} style={{ marginBottom: 8 }}>Pedido #{id}</Label>
-                            <Label size={14} >{formatCurrency(value)}</Label>
+            <Card num={14}>
+                <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}>
+                    <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
+                        <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
+                            <Image
+                                source={selectService.img}
+                                style={{ width: 62, height: 80, borderRadius: 12, objectFit: 'contain' }} />
+                            <Column mh={12} >
+                                <Title size={14} style={{ marginBottom: 3 }}>{item?.name}</Title>
+                                <Label size={10} style={{ marginBottom: 8 }}>Pedido #{id}</Label>
+                                <Label size={14} >{formatCurrency(value)}</Label>
+                            </Column>
+                            <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
+                                <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
+                                    {status ? status : 'Não iniciado'}
+                                </Title>
+                            </Column>
+                        </Row>
+                        <Column style={{ marginTop: 12 }}>
+                            <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
+                            <Label size={14} marginBottom={6}>Check-in: {formatDateTime(check_in)}</Label>
+                            <Label size={14} marginBottom={6}>Check-out: {formatDateTime(check_out)}</Label>
                         </Column>
-                        <Column style={{ backgroundColor: selectStatus.color, borderBottomLeftRadius: 8, position: 'absolute', right: -15, top: -15, }}>
-                            <Title style={{ fontSize: 12, paddingHorizontal: 10, paddingVertical: 4, color: '#fff', fontWeight: 500, TitleAlign: 'center' }}>
-                                {status ? status : 'Não iniciado'}
-                            </Title>
-                        </Column>
-                    </Row>
-                    <Column style={{ marginTop: 12 }}>
-                        <Label size={14} marginBottom={6}>Data da compra: {formatDateTime(criado_em)}</Label>
-                        <Label size={14} marginBottom={6}>Check-in: {formatDateTime(check_in)}</Label>
-                        <Label size={14} marginBottom={6}>Check-out: {formatDateTime(check_out)}</Label>
                     </Column>
-                </Column>
-            </Button>
+                </Button>
+            </Card>
         )
     }
     return (
@@ -329,20 +338,22 @@ const CardItem = ({ item, navigation, type, selectService }) => {
 const CardService = ({ item, setselectService, }) => {
     const { name, label, price, img } = item
     return (
-        <Button pv={1} ph={1} radius={12} mh={0} mv={0} style={{  flexGrow: 1, }} onPress={() => { setselectService(item) }} >
-                <Card>
-                <Column style={{ backgroundColor: '#FFF',  flexGrow: 1, paddingVertical: 24, paddingHorizontal: 24,}}>
-                    <Image source={img} style={{ width: 76, height: 76, borderRadius: 8, }} />
-                    <Column style={{ justifyContent: 'center', }}>
-                        <Column style={{ height: 12, }} />
-                        <Title size={16}>{name}</Title>
-                        <Column style={{ height: 6, }} />
-                        <Label size={14}>{label}</Label>
-                        <Column style={{ height: 12, }} />
+        <Card num={14}>
+            <Button pv={1} ph={1} radius={12} mh={0} mv={0} style={{ flexGrow: 1, }} onPress={() => { setselectService(item) }} >
+                <Card num={12}>
+                    <Column style={{ backgroundColor: '#FFF', flexGrow: 1, paddingVertical: 24, paddingHorizontal: 24, }}>
+                        <Image source={img} style={{ width: 76, height: 76, borderRadius: 8, }} />
+                        <Column style={{ justifyContent: 'center', }}>
+                            <Column style={{ height: 12, }} />
+                            <Title size={16}>{name}</Title>
+                            <Column style={{ height: 6, }} />
+                            <Label size={14}>{label}</Label>
+                            <Column style={{ height: 12, }} />
+                        </Column>
                     </Column>
-                </Column>
-        </Card>
+                </Card>
             </Button>
+        </Card>
     )
 }
 
