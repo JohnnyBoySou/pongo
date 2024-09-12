@@ -184,7 +184,7 @@ const CardItem = ({ item, navigation, type, selectService }) => {
 
     if (type == 'escola_pacote') {
         return (
-            <Card num={14}>
+            <Card num={14} service>
                 <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}>
                     <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
                         <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
@@ -215,7 +215,7 @@ const CardItem = ({ item, navigation, type, selectService }) => {
     }
     else if (type == 'grooming') {
         return (
-            <Card num={14}>
+            <Card num={14} service>
                 <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}>
                     <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
                         <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
@@ -245,7 +245,7 @@ const CardItem = ({ item, navigation, type, selectService }) => {
     }
     else if (type == 'vet') {
         return (
-            <Card num={14}>
+            <Card num={14} service>
                 <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}  >
                     <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
                         <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
@@ -275,7 +275,7 @@ const CardItem = ({ item, navigation, type, selectService }) => {
     }
     else if (type == 'hospitalitie') {
         return (
-            <Card num={14}>
+            <Card num={14} service>
                 <Button onPress={() => { navigation.navigate('ServicesSingle', { pet: item, id: item.id, service: selectService }) }} radius={12} pv={1} ph={1}>
                     <Column pv={15} ph={15} style={{ backgroundColor: '#fff', borderRadius: 12, overflow: 'hidden', }}>
                         <Row style={{ alignItems: 'flex-start', alignItems: 'center', }}>
@@ -338,6 +338,7 @@ const CardItem = ({ item, navigation, type, selectService }) => {
 const CardService = ({ item, setselectService, }) => {
     const { name, label, price, img } = item
     return (
+        <Column style={{ flexGrow: 1, }}>
         <Card num={14}>
             <Button pv={1} ph={1} radius={12} mh={0} mv={0} style={{ flexGrow: 1, }} onPress={() => { setselectService(item) }} >
                 <Card num={12}>
@@ -354,6 +355,7 @@ const CardService = ({ item, setselectService, }) => {
                 </Card>
             </Button>
         </Card>
+        </Column>
     )
 }
 
