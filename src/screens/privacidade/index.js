@@ -1,9 +1,8 @@
-import { Main} from '@theme/global';
+import { Main } from '@theme/global';
 import { StatusBar } from 'expo-status-bar';
 import Header from '@components/Header';
 
 import { WebView } from 'react-native-webview';
-//import WebView from '@components/WebView';
 
 export default function PrivacidadeScreen() {
     return (
@@ -14,3 +13,4 @@ export default function PrivacidadeScreen() {
         </Main>
     )
 }
+//

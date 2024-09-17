@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Main, Scroll, Title, Row, Column, Label, Button, SubLabel, U, LabelBT, Loader, useTheme, Back } from '@theme/global';
 import { TextInput, } from 'react-native';
 //ICONS
-import { CircleCheck, CircleX } from 'lucide-react-native';
+import { CircleCheck, CircleX, X } from 'lucide-react-native';
 
 //FORMS
 import Input from '@components/Forms/input';
@@ -13,7 +13,8 @@ import { registerUser, verifyEmail } from '@api/request/auth';
 
 import Success from '@components/Forms/success';
 import Error from '@components/Forms/error';
- 
+
+import { OneSignal } from 'react-native-onesignal';
 import { createPreferences } from '@hooks/preferences';
 
 export default function AuthRegisterScreen({ navigation, route, }) {
@@ -26,7 +27,7 @@ export default function AuthRegisterScreen({ navigation, route, }) {
     const [password, setpassword] = useState();
     const [password2, setpassword2] = useState();
 
-  
+
 
     const checkPasswordStrength = (password) => {
         const criteria = {
@@ -38,7 +39,7 @@ export default function AuthRegisterScreen({ navigation, route, }) {
         return criteria;
     };
 
-    const passwordCriteria = checkPasswordStrength(password); 
+    const passwordCriteria = checkPasswordStrength(password);
 
     const [terms, setterms] = useState(true);
     const [confirm, setconfirm] = useState(false);
@@ -65,7 +66,13 @@ export default function AuthRegisterScreen({ navigation, route, }) {
         }
     }
 
-    const a = false;
+
+    const cpfRef = useRef()
+    const emailRef = useRef()
+    const telRef = useRef()
+    const passRef = useRef()
+    const pass2Ref = useRef()
+
 
     return (
         <Main style={{}}>
@@ -80,28 +87,38 @@ export default function AuthRegisterScreen({ navigation, route, }) {
                         placeholder="Nome"
                         value={name}
                         setValue={setname}
+                        onSubmitEditing={() => { cpfRef.current?.focus() }}
                     />
                     <Column style={{ height: 16, }} />
                     <Input
                         label="CPF *"
                         placeholder="CPF"
                         value={cpf}
+                        ref={cpfRef}
+                        onSubmitEditing={() => { emailRef.current?.focus() }}
                         setValue={setcpf}
                         mask="CPF"
+                        keyboard="numeric"
                     />
                     <Column style={{ height: 16, }} />
                     <Input
                         label="E-mail *"
                         placeholder="Email"
+                        ref={emailRef}
                         value={email}
+                        onSubmitEditing={() => { telRef.current?.focus() }}
+                        keyboard="email-address"
                         setValue={setemail}
                     />
                     <Column style={{ height: 16, }} />
                     <Input
                         label="Telefone *"
                         placeholder="Telefone"
+                        ref={telRef}
                         value={tel}
+                        onSubmitEditing={() => { passRef.current?.focus() }}
                         setValue={settel}
+                        keyboard="numeric"
                         mask="PHONE"
                     />
                     <Column style={{ height: 16, }} />
@@ -109,7 +126,9 @@ export default function AuthRegisterScreen({ navigation, route, }) {
                     <Input
                         label="Senha *"
                         placeholder="Senha"
+                        ref={passRef}
                         value={password}
+                        onSubmitEditing={() => { pass2Ref.current?.focus() }}
                         setValue={setpassword}
                         pass
                     />
@@ -117,9 +136,11 @@ export default function AuthRegisterScreen({ navigation, route, }) {
                     <Input
                         label="Confirme sua senha *"
                         placeholder="Confirme sua senha"
+                        ref={pass2Ref}
                         value={password2}
                         setValue={setpassword2}
                         pass
+                        onSubmitEditing={handleRegister}
                     />
 
 
@@ -145,12 +166,12 @@ export default function AuthRegisterScreen({ navigation, route, }) {
                     {err ? <Error msg={err} /> : success ? <Success msg={success} /> : null}
 
 
-                    <Button onPress={() => {navigation.navigate('Privacidade')}} pv={8} ph={8} radius={4} style={{ marginBottom: 32,  }}>
+                    <Button onPress={() => { navigation.navigate('Privacidade') }} pv={8} ph={8} radius={4} style={{ marginBottom: 32, }}>
                         <Row style={{ alignItems: 'center', }}>
                             <CheckBox status={terms} setstatus={setterms} />
                             <Label size={14} style={{ color: color.label, lineHeight: 16, marginLeft: 12, }}>Li e aceito os <U>Termos de uso e Privacidade</U></Label>
                         </Row>
-                        </Button>
+                    </Button>
 
 
 
@@ -170,37 +191,44 @@ export default function AuthRegisterScreen({ navigation, route, }) {
                     <Label size={14} style={{ lineHeight: 18, }} align='center' >Ao continuar, você concorda em receber chamadas e mensagens SMS ou pelo WhatsApp, inclusive automáticas, da Villa Pongo e de suas afiliadas, no número informado.</Label>
 
                     <Column style={{ height: 70, }} />
-                </Column> : <ConfirmEmail email={email} name={name} navigation={navigation} />}
+                </Column> : <ConfirmEmail email={email} name={name} navigation={navigation} setconfirm={setconfirm} />}
             </Scroll>
-
-      
         </Main>
     )
 }
 
 
-export const ConfirmEmail = ({ email, name, navigation }) => {
+export const ConfirmEmail = ({ email, name, navigation, setconfirm }) => {
     const { color, font, margin, } = useTheme();
     const [loading, setloading] = useState(false);
     const [error, seterror] = useState();
     const [success, setsuccess] = useState();
 
+    const [code, setCode] = useState(new Array(4).fill(''));
+    const inputs = useRef([]);
+    const handleChange = (text, index) => { if (isNaN(text)) return; const newCode = [...code]; newCode[index] = text; setCode(newCode); if (text !== '' && index < 3) { inputs.current[index + 1].focus(); } };
+    const handleKeyPress = (event, index) => { if (event.nativeEvent.key === 'Backspace' && index > 0 && code[index] === '') { inputs.current[index - 1].focus(); } };
+
     const handleVerify = async () => {
         seterror()
         setsuccess()
         setloading(true)
-        if (digit1?.length === 1 && digit2?.length === 1 && digit3?.length === 1 && digit4?.length === 1) {
+        if (code.join('').length === 4) {
             try {
-                const res = await verifyEmail(email, digit1 + digit2 + digit3 + digit4)
+                const res = await verifyEmail(email, code.join(''))
                 if (res) {
+                    console.log(res)
                     setsuccess('E-mail confirmado! Aguarde um momento...')
                     const saveUser = {
-                        "token": res.token,
+                        "avatar": res?.avatar,
+                        "name": res?.nome,
+                        "email": res?.email,
+                        "token": res?.token,
                     };
-                    // OneSignal.login(res.uiid)
+                    OneSignal.login(res.uiid)
                     const preferences = await createPreferences(saveUser)
                     setTimeout(() => {
-                        navigation.replace('Welcome', { name: name, })
+                        navigation.replace('Tabs')
                     }, 500);
                 }
             } catch (error) {
@@ -214,68 +242,39 @@ export const ConfirmEmail = ({ email, name, navigation }) => {
         }
     }
 
-
-    const [digit1, setdigit1] = useState();
-    const [digit2, setdigit2] = useState();
-    const [digit3, setdigit3] = useState();
-    const [digit4, setdigit4] = useState();
-
-    const [focus1, setfocus1] = useState();
-    const [focus2, setfocus2] = useState();
-    const [focus3, setfocus3] = useState();
-    const [focus4, setfocus4] = useState();
-
-    const fc1 = useRef()
-    const fc2 = useRef()
-    const fc3 = useRef()
-    const fc4 = useRef()
-
     return (
         <Column style={{ marginHorizontal: margin.h, }}>
             <Column style={{ marginTop: 24, }}>
+                <Button onPress={() => { setconfirm(false) }} style={{ backgroundColor: '#fff', alignSelf: 'flex-start', width: 56, height: 56, justifyContent: 'center', alignItems: 'center', marginBottom: 20, }}>
+                    <X size={24} color={color.title} />
+                </Button>
                 <Title size={26} style={{ marginBottom: 8, }}>Confirme seu e-mail</Title>
+                <Label>Digite o código enviado em seu e-mail</Label>
             </Column>
             {success ? <Success msg={success} show={true} /> : error ? <Error msg={error} show={true} /> : null}
 
             <Row style={{ borderRadius: 8, marginTop: 12, justifyContent: 'space-between', alignItems: 'center', columnGap: 16, }}>
-                <TextInput
-                    onFocus={() => setfocus1(true)}
-                    onBlur={() => setfocus1(false)}
-                    value={digit1}
-                    onSubmitEditing={() => { fc2.current?.focus() }}
-                    ref={fc1}
-                    selectionColor='transparent'
-                    onChangeText={(e) => { setdigit1(e); if (e.length === 1) fc2.current?.focus() }}
-                    keyboardType='numeric' style={{ color: color.title, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus1 ? "#fff" : color.secundary, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
-                <TextInput
-                    onFocus={() => setfocus2(true)}
-                    onBlur={() => setfocus2(false)}
-                    value={digit2}
-                    ref={fc2}
-                    onSubmitEditing={() => { fc3.current?.focus() }}
-                    underlineColorAndroid='transparent'
-                    selectionColor='transparent'
-                    onChangeText={(e) => { setdigit2(e); if (e.length === 1) fc3.current?.focus() }}
-                    keyboardType='numeric' style={{ color: color.title, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus2 ? "#fff" : color.secundary, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
-                <TextInput
-                    onFocus={() => setfocus3(true)}
-                    onBlur={() => setfocus3(false)}
-                    value={digit3}
-                    onSubmitEditing={() => { fc4.current?.focus() }}
-                    ref={fc3}
-                    selectionColor='transparent'
-                    onChangeText={(e) => { setdigit3(e); if (e.length === 1) fc4.current?.focus() }}
-                    keyboardType='numeric' style={{ color: color.title, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus3 ? "#fff" : color.secundary, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
-                <TextInput
-                    onFocus={() => setfocus4(true)}
-                    onBlur={() => setfocus4(false)}
-                    value={digit4}
-                    ref={fc4}
-                    selectionColor='transparent'
-                    onSubmitEditing={handleVerify}
-                    onChangeText={(e) => setdigit4(e)}
-                    keyboardType='numeric' style={{ color: color.title, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus4 ? "#fff" : color.secundary, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
-            </Row>
+                {code.map((digit, index) => (
+                    <TextInput
+                        key={index}
+                        value={digit}
+                        onChangeText={(text) => handleChange(text, index)}
+                        onKeyPress={(e) => handleKeyPress(e, index)}
+                        style={{
+                            height: 84,
+                            backgroundColor: digit == index ? '#F7F7F7' : '#FFF',
+                            color: color.title,
+                            fontFamily: font.medium,
+                            borderRadius: 12,
+                            flexGrow: 1,
+                            textAlign: 'center',
+                            fontSize: 32,
+                        }}
+                        keyboardType="number-pad"
+                        maxLength={1}
+                        ref={(input) => (inputs.current[index] = input)}
+                    />
+                ))}</Row>
             <Button disabled={loading} onPress={handleVerify} style={{ marginTop: 20, backgroundColor: color.primary, }} pv={16} ph={24}>
                 <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                     {loading ? <Loader color="#fff" size={26} /> : <Title size={18} color="#fff">Verificar código</Title>}

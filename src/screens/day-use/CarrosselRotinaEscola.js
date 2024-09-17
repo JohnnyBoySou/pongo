@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
 
 const styles = StyleSheet.create({
@@ -64,4 +64,3 @@ export default class CarrosselRotinaEscola extends Component {
     }
 }
 
-AppRegistry.registerComponent('myproject', () => CarrosselTopo);

@@ -11,7 +11,7 @@ export default function InstitucionalLocalScreen({ navigation, }) {
     const { color, font, margin } = useContext(ThemeContext);
 
     const openAppleMaps = (latitude, longitude) => {
-        const url = `http://maps.apple.com/?ll=${latitude},${longitude}`
+        const url = `http://maps.apple.com/?q=${latitude},${longitude}`
 
         Linking.canOpenURL(url)
             .then((supported) => {
@@ -24,7 +24,6 @@ export default function InstitucionalLocalScreen({ navigation, }) {
             .catch((err) => Alert.alert("Erro ao abrir o mapa", err.message));
     };
 
-    // Array de dados das lojas
     const lojas = [
         {
             local: "Shopping Cidade Jardim",
@@ -32,19 +31,18 @@ export default function InstitucionalLocalScreen({ navigation, }) {
             endereco: "Av. Magalhães de Castro, 12000 - 2 Piso - Cidade Jardim, São Paulo - SP, 05502-001",
             horariosSemana: "Segunda a Sábado das 10h às 22:00h",
             horariosFeriado: "Domingos e Feriados das 14:00h às 20:00h",
-            lat: "-23.5981196",
-            long: "-46.6976166"
+            lat: "-23.5987553",
+            long: "-46.6974068,21z"
         },
         {
             local: "Vila Nova Conceição",
             loja: "Villa Pongo",
             endereco: "Av. Antônio Joaquim de Moura Andrade, 80 - Vila Nova Conceição, São Paulo - SP, 04507-000",
-            horariosSemana: "Segunda a Sábado das 90h às 20:00h",
+            horariosSemana: "Segunda a Sábado das 09h às 20:00h",
             horariosFeriado: "Domingos e Feriados Fechado",
-            lat: "-23.5871167",
-            long: "-46.6647227"
+            lat: "-23.5870897",
+            long: "-46.6649326,20z",
         },
-        // Adicione mais lojas conforme necessário
     ];
 
     return (
@@ -52,7 +50,7 @@ export default function InstitucionalLocalScreen({ navigation, }) {
             <Scroll>
                 <TopMenu back={false} search={false} />
                 <Header title="Onde estamos" />
-                <Column mh={margin.h}  style={{ rowGap: 24,  }}>
+                <Column mh={margin.h} style={{ rowGap: 24, }}>
                     {lojas.map((loja, index) => (
                         <Column
                             key={index}
@@ -65,20 +63,20 @@ export default function InstitucionalLocalScreen({ navigation, }) {
                         >
                             <Row style={{ alignItems: 'center' }}>
                                 <Image source={require('@imgs/localizacao.png')} style={{ width: 20, height: 24, marginRight: 14, borderRadius: 20 }} />
-                                <Title style={{  }}>{loja.local}</Title>
+                                <Title style={{}}>{loja.local}</Title>
                             </Row>
 
                             <Column mv={margin.v} style={{ rowGap: 8, }}>
-                                <Label style={{  lineHeight: 18, }}>{loja.loja}</Label>
-                                <Label style={{  lineHeight: 18, }}>{loja.endereco}</Label>
-                                <Label style={{  lineHeight: 18, }}>{loja.horariosSemana}</Label>
-                                <Label style={{  lineHeight: 18, }}>{loja.horariosFeriado}</Label>
+                                <Label style={{ lineHeight: 18, }}>{loja.loja}</Label>
+                                <Label style={{ lineHeight: 18, }}>{loja.endereco}</Label>
+                                <Label style={{ lineHeight: 18, }}>{loja.horariosSemana}</Label>
+                                <Label style={{ lineHeight: 18, }}>{loja.horariosFeriado}</Label>
                             </Column>
 
-                            <ButtonPrimary bg={color.pr.pr2} mtop={12} onPress={() => openAppleMaps(loja.lat, loja.long)} label="Ver no mapa" type="Light"/>
+                            <ButtonPrimary bg={color.pr.pr2} mtop={12} onPress={() => openAppleMaps(loja.lat, loja.long)} label="Ver no mapa" type="Light" />
                         </Column>
                     ))}
-                <Column style={{height: 120, }} />
+                    <Column style={{ height: 120, }} />
 
 
 

@@ -13,9 +13,8 @@ import { loginUser, resetPasswordCode, resetPassword, resetPasswordNew } from '@
 import { createPreferences } from '@hooks/preferences';
 import { TextInput } from 'react-native';
 
-import Animated, {  } from 'react-native-reanimated';
+import Animated, { } from 'react-native-reanimated';
 import { ConfirmEmail } from './register';
-import { oneSignalLogin } from '@hooks/notifications';
 import { OneSignal } from 'react-native-onesignal';
 
 export default function AuthLoginScreen({ navigation, }) {
@@ -60,8 +59,8 @@ export default function AuthLoginScreen({ navigation, }) {
                     "email": res?.email,
                     "token": res?.token,
                 };
-                if(res?.uiid){
-                    OneSignal.login(res?.uiid)
+                if (res?.uiid) {
+                       OneSignal.login(res?.uiid)
                 }
                 const preferences = await createPreferences(saveUser)
                 if (preferences) {
@@ -78,12 +77,13 @@ export default function AuthLoginScreen({ navigation, }) {
         }
     }
 
+    const passwordRef = useRef()
 
     return (
         <Main style={{}}>
             <Scroll>
 
-                {type === 'ConfirmEmail' ? <ConfirmEmail navigation={navigation} email={email} name={name} /> :
+                {type === 'ConfirmEmail' ? <ConfirmEmail navigation={navigation} email={email} name={name} setconfirm={settype}/> :
                     <Column ph={28}>
                         <Button onPress={() => { navigation.navigate('Onboarding') }} pv={0} ph={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg='#FFFFFF'>
                             <ArrowLeft size={20} color='#858585' />
@@ -95,14 +95,18 @@ export default function AuthLoginScreen({ navigation, }) {
                             label="E-mail *"
                             placeholder="Email"
                             value={email}
+                            keyboard='email-address'
                             setValue={setemail}
+                            onSubmitEditing={() => { passwordRef.current?.focus() }}
                         />
                         <Column style={{ height: 16, }} />
                         <Input
                             label="Senha *"
                             placeholder="Senha"
                             value={password}
+                            ref={passwordRef}
                             pass={true}
+                            keyboard='password'
                             setValue={setpassword}
                             onSubmitEditing={handleLogin}
                         />
@@ -169,6 +173,14 @@ const ForgetPassword = ({ handleExit, }) => {
     const [password, setpassword] = useState('');
     const [passwordRepeat, setpasswordRepeat] = useState('');
 
+    
+    const [code, setCode] = useState(new Array(4).fill(''));
+    const inputs = useRef([]);
+    const handleChange = (text, index) => { if (isNaN(text)) return; const newCode = [...code]; newCode[index] = text; setCode(newCode); if (text !== '' && index < 3) { inputs.current[index + 1].focus(); } };
+    const handleKeyPress = (event, index) => { if (event.nativeEvent.key === 'Backspace' && index > 0 && code[index] === '') { inputs.current[index - 1].focus(); } };
+
+
+
     const [step, setstep] = useState(1);
     const handleSend = async () => {
         seterror()
@@ -193,9 +205,9 @@ const ForgetPassword = ({ handleExit, }) => {
         seterror()
         setsuccess()
         setloading(true)
-        if (digit1?.length === 1 && digit2?.length === 1 && digit3?.length === 1 && digit4?.length === 1) {
+        if (code.join('').length < 4) {
             try {
-                const res = await resetPasswordCode(email, digit1 + digit2 + digit3 + digit4)
+                const res = await resetPasswordCode(email, code.join(''))
                 if (res?.codigo) {
                     setcode(res?.codigo)
                     settype('Nova senha')
@@ -233,20 +245,6 @@ const ForgetPassword = ({ handleExit, }) => {
         }
     }
 
-    const [digit1, setdigit1] = useState();
-    const [digit2, setdigit2] = useState();
-    const [digit3, setdigit3] = useState();
-    const [digit4, setdigit4] = useState();
-
-    const [focus1, setfocus1] = useState();
-    const [focus2, setfocus2] = useState();
-    const [focus3, setfocus3] = useState();
-    const [focus4, setfocus4] = useState();
-
-    const fc1 = useRef()
-    const fc2 = useRef()
-    const fc3 = useRef()
-    const fc4 = useRef()
 
     const isPasswordStrong = () => {
         return Object.values(passwordCriteria).every(criterion => criterion);
@@ -294,49 +292,33 @@ const ForgetPassword = ({ handleExit, }) => {
                 {step == 2 && <Column>
                     <Title size={26} style={{ marginBottom: 20, }}>Insira o código de verificação</Title>
                     <Row style={{ borderRadius: 8, justifyContent: 'space-between', alignItems: 'center', marginHorizontal: margin.h, columnGap: 12, marginBottom: 10, }}>
-                        <TextInput
-                            onFocus={() => setfocus1(true)}
-                            onBlur={() => setfocus1(false)}
-                            value={digit1}
-                            onSubmitEditing={() => { fc2.current?.focus() }}
-                            ref={fc1}
-                            selectionColor='transparent'
-                            onChangeText={(e) => { setdigit1(e); if (e.length === 1) fc2.current?.focus() }}
-                            keyboardType='numeric' style={{ color: color.title, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus1 ? "#fff" : color.secundary, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
-                        <TextInput
-                            onFocus={() => setfocus2(true)}
-                            onBlur={() => setfocus2(false)}
-                            value={digit2}
-                            ref={fc2}
-                            onSubmitEditing={() => { fc3.current?.focus() }}
-                            underlineColorAndroid='transparent'
-                            selectionColor='transparent'
-                            onChangeText={(e) => { setdigit2(e); if (e.length === 1) fc3.current?.focus() }}
-                            keyboardType='numeric' style={{ color: color.title, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus2 ? "#fff" : color.secundary, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
-                        <TextInput
-                            onFocus={() => setfocus3(true)}
-                            onBlur={() => setfocus3(false)}
-                            value={digit3}
-                            onSubmitEditing={() => { fc4.current?.focus() }}
-                            ref={fc3}
-                            selectionColor='transparent'
-                            onChangeText={(e) => { setdigit3(e); if (e.length === 1) fc4.current?.focus() }}
-                            keyboardType='numeric' style={{ color: color.title, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus3 ? "#fff" : color.secundary, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
-                        <TextInput
-                            onFocus={() => setfocus4(true)}
-                            onBlur={() => setfocus4(false)}
-                            value={digit4}
-                            ref={fc4}
-                            selectionColor='transparent'
-                            onSubmitEditing={handleVerify}
-                            onChangeText={(e) => setdigit4(e)}
-                            keyboardType='numeric' style={{ color: color.title, fontFamily: font.bold, textAlign: 'center', borderRadius: 12, backgroundColor: focus4 ? "#fff" : color.secundary, fontSize: 32, justifyContent: 'center', alignItems: 'center', flexGrow: 1, height: 74, }} placeholder='*' placeholderTextColor="#11111190" maxLength={1} />
+                        {code.map((digit, index) => (
+                            <TextInput
+                                key={index}
+                                value={digit}
+                                onChangeText={(text) => handleChange(text, index)}
+                                onKeyPress={(e) => handleKeyPress(e, index)}
+                                style={{
+                                    height: 84,
+                                    backgroundColor: digit == index ? '#505050' : '#303030',
+                                    color: "#fff",
+                                    fontFamily: font.medium,
+                                    borderRadius: 12,
+                                    flexGrow: 1,
+                                    textAlign: 'center',
+                                    fontSize: 32,
+                                }}
+                                keyboardType="number-pad"
+                                maxLength={1}
+                                ref={(input) => (inputs.current[index] = input)}
+                            />
+                        ))}
                     </Row>
                     {success ? <Success msg={success} show={true} /> : error ? <Error msg={error} show={true} /> : null}
 
-                    <Button disabled={loading || digit1 == '' || digit2 == '' || digit3 == '' || digit4 == ''} onPress={handleVerify} style={{ marginTop: 10, backgroundColor: digit4 ? color.primary : color.secundary, marginBottom: 20, }}>
+                    <Button disabled={loading || code.join('').length == 0} onPress={handleVerify} style={{ marginTop: 10, backgroundColor: code.join('').length == 4 ? color.primary : color.secundary, marginBottom: 20, }}>
                         <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
-                            {loading ? <Loader color="#fff" size={27} /> : <LabelBT color={digit4 ? '#fff' : color.label} align="center">Verificar código</LabelBT>}
+                            {loading ? <Loader color="#fff" size={27} /> : <LabelBT color={code.join('').length == 4 ? '#fff' : color.label} align="center">Verificar código</LabelBT>}
                         </Row>
                     </Button>
                 </Column>}

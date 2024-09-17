@@ -49,7 +49,7 @@ export default function AuthLoginColaboradorScreen({ navigation, }) {
             setloading(false)
         }
     }
-
+    const passRef = useRef(null)
     return (
         <Main >
             <Scroll>
@@ -62,6 +62,8 @@ export default function AuthLoginColaboradorScreen({ navigation, }) {
                             placeholder="Email"
                             value={email}
                             setValue={setemail}
+                            keyboard="email-address"
+                            onSubmitEditing={() => {passRef.current?.focus()}}
                         />
                         <Column style={{ height: 16, }} />
                         <Input
@@ -69,6 +71,7 @@ export default function AuthLoginColaboradorScreen({ navigation, }) {
                             placeholder="Senha"
                             value={password}
                             pass={true}
+                            ref={passRef}
                             setValue={setpassword}
                             onSubmitEditing={handleLogin}
                         />

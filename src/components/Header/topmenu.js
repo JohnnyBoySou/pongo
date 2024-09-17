@@ -131,6 +131,11 @@ const screens = [
         screen: 'ChatNew',
     },
     {
+        id: 8,
+        name: 'MINHAS CONVERSAS',
+        screen: 'ChatList',
+    },
+    {
         id: 6,
         name: 'CONHEÇA MAIS',
         screen: 'Institucional',

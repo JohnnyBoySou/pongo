@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
 
 const styles = StyleSheet.create({
@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
 
 export default class CarrosselHotel extends Component {
 
-
     render() {
         return (
             <Swiper style={styles.wrapper} autoplay={true}>
@@ -46,4 +45,3 @@ export default class CarrosselHotel extends Component {
     }
 }
 
-AppRegistry.registerComponent('myproject', () => CarrosselTopo);

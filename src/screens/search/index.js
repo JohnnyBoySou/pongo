@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Main, Scroll, Column, Row, Button, Title, Image, Label } from '@theme/global';
+import { Main, Scroll, Column, Row, Button, Title, Image, Label, Loader } from '@theme/global';
 import { FlatList } from 'react-native';
 import { ThemeContext } from 'styled-components/native';
 import { TextInput } from 'react-native';
@@ -15,6 +15,10 @@ export default function SearchScreen({ navigation, route }) {
     const [focus, setfocus] = useState(false);
     const [data, setdata] = useState([]);
     const handleSearch = () => {
+        setloading(true)
+        setTimeout(() => {
+            setloading(false)
+        }, 3000);
     }
     return (
         <Main style={{ backgroundColor: "#ECEBEB", }}>
@@ -39,8 +43,14 @@ export default function SearchScreen({ navigation, route }) {
                     </Row>
                 </Row>
 
+
+
                 <Column style={{ marginHorizontal: margin.h, marginTop: margin.h, flex: 1, }}>
-                   {data?.length > 1 && <Title color='#858585'>Recentes</Title>}
+                    {loading ? <Loader size={32} /> :
+                        <>
+                        {data?.length == 0 && <Title color='#858585' align="center">Não encontramos itens referente a sua pesquisa.</Title>}
+                        </>}
+                    {data?.length > 1 && <Title color='#858585'>Recentes</Title>}
                 </Column>
                 <ItensFlat type="Produtos" data={data} />
             </Scroll>

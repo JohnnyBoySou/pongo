@@ -1,19 +1,23 @@
-import { useRef, useState, useContext, useEffect } from 'react';
+import React, { useRef, useState, useContext, useEffect } from 'react';
 import { useAnimationState, MotiText } from 'moti';
 import { Column, Label } from '@theme/global';
 import { ThemeContext } from 'styled-components/native';
 import { Pressable, TextInput } from 'react-native';
 import { Eye, EyeOff } from 'lucide-react-native';
 
-const Input = ({ value, setValue, disabled, label, mask, props, onSubmitEditing = () => {}, pass = false }) => {
+// Use React.forwardRef e faça o ref opcional
+const Input = React.forwardRef(({ value, setValue, disabled, label, mask, props, onSubmitEditing = () => { }, pass = false, keyboard = 'default' }, ref) => {
   const { font, color } = useContext(ThemeContext);
   const [focus, setFocus] = useState(false);
-  const inputRef = useRef();
-  const [secure, setsecure] = useState(pass);
+  const [secure, setSecure] = useState(pass);
   const inputAnimation = useAnimationState({
-    from: { translateY: 10, fontSize: 18, },
-    to: { translateY: 0, fontSize: 14, },
+    from: { translateY: 10, fontSize: 18 },
+    to: { translateY: 0, fontSize: 14 },
   });
+
+  // Crie uma ref interna caso o ref não seja passado
+  const internalRef = useRef(null);
+  const inputRef = ref || internalRef; // Use o ref passado ou o interno
 
   useEffect(() => {
     if (value?.length > 0) {
@@ -21,19 +25,19 @@ const Input = ({ value, setValue, disabled, label, mask, props, onSubmitEditing 
     } else {
       inputAnimation.transitionTo('from');
     }
-  }, []);
+  }, [value]);
 
   const handleFocus = () => {
-    setFocus(true); inputAnimation.transitionTo('to');
-  }
+    setFocus(true);
+    inputAnimation.transitionTo('to');
+  };
+
   const handleBlur = () => {
     if (!value?.length > 0) {
-      inputAnimation.transitionTo('from'); setFocus(false);
+      inputAnimation.transitionTo('from');
     }
-    else {
-      setFocus(false)
-    }
-  }
+    setFocus(false);
+  };
 
   const handleChangeText = (text) => {
     const { maskFunction, maxLength } = getMaskFunction(mask);
@@ -46,14 +50,31 @@ const Input = ({ value, setValue, disabled, label, mask, props, onSubmitEditing 
     setValue(maskedText);
   };
 
-
   return (
-    <Pressable onPress={() => { inputRef.current.focus() }} >
-
-      <Column style={{ borderColor: disabled ? '#f1f1f1' : focus ? color.label : 'transparent', backgroundColor: '#fff', flexGrow: 1, borderWidth: 2, paddingBottom: 8, paddingTop: 24, paddingHorizontal: 16, borderRadius: 12, }}>
+    <Pressable onPress={() => inputRef?.current?.focus()}>
+      <Column
+        style={{
+          borderColor: disabled ? '#f1f1f1' : focus ? color.label : 'transparent',
+          backgroundColor: '#fff',
+          flexGrow: 1,
+          borderWidth: 2,
+          paddingBottom: 8,
+          paddingTop: 24,
+          paddingHorizontal: 16,
+          borderRadius: 12,
+        }}
+      >
         <MotiText
           state={inputAnimation}
-          style={{ fontFamily: font.medium, color: color.label, letterSpacing: -0.6, position: 'absolute', top: 6, left: 16, zIndex: 1, }}
+          style={{
+            fontFamily: font.medium,
+            color: color.label,
+            letterSpacing: -0.6,
+            position: 'absolute',
+            top: 6,
+            left: 16,
+            zIndex: 1,
+          }}
           transition={{ type: 'timing', duration: 200 }}
         >
           {label}
@@ -61,8 +82,8 @@ const Input = ({ value, setValue, disabled, label, mask, props, onSubmitEditing 
 
         <TextInput
           {...props}
-          style={{ fontSize: 18, fontFamily: font.medium, color: disabled ? color.title + 60 : color.title, }}
-          ref={inputRef}
+          style={{ fontSize: 18, fontFamily: font.medium, color: disabled ? color.title + 60 : color.title }}
+          ref={inputRef} // Ref opcional
           onFocus={handleFocus}
           onBlur={handleBlur}
           editable={!disabled}
@@ -70,23 +91,26 @@ const Input = ({ value, setValue, disabled, label, mask, props, onSubmitEditing 
           value={value}
           onSubmitEditing={onSubmitEditing}
           secureTextEntry={secure}
+          keyboardType={keyboard}
         />
 
-        {pass && <Pressable onPress={() => {setsecure(!secure)}} style={{ position: 'absolute', right: 16, top: 18 }}>
-          {secure ? <Eye
-            size={24}
-            color={color.title}
-          /> : <EyeOff 
-            size={24}
-            color={color.label}
-          />}
-        </Pressable>}
+        {pass && (
+          <Pressable onPress={() => setSecure(!secure)} style={{ position: 'absolute', right: 0, zIndex: 99, width: 54, height: 54, justifyContent: 'center', alignItems: 'center', }}>
+            {secure ? (
+              <Eye size={24} color={color.title} />
+            ) : (
+              <EyeOff size={24} color={color.label} />
+            )}
+          </Pressable>
+        )}
       </Column>
     </Pressable>
   );
-};
+});
 
 export default Input;
+
+
 
 const getMaskFunction = (mask) => {
   switch (mask) {
