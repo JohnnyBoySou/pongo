@@ -41,7 +41,6 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
     }, []);
 
     const [focusSearch, setfocusSearch] = useState();
-    const searchRef = useRef()
     return (
         <>
             <Column>
@@ -87,13 +86,11 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
                         {screens.map((screen, index) => (
                             <Animated.View key={index} entering={FadeInRight.delay(index * 150)} exiting={FadeOutRight} style={{ marginTop: 8 }}>
                                 <Row style={{ alignItems: 'center', justifyContent: 'space-between' }}>
-                                    <Button mleft={-20} style={{}} onPress={() => { navigation.navigate(screen?.screen) }} >
+                                    <Button mleft={-20} style={{}} onPress={() => { if (screen?.private) { if(user?.name){navigation.navigate(screen?.screen)}else{navigation.navigate('AuthLogin')} } else { navigation.navigate(screen?.screen) } }} >
                                         <SubLabel style={{ color: color.pr.pr3, fontFamily: font.medium, fontSize: 16, letterSpacing: - 0.6, }}>{screen?.name}</SubLabel>
                                     </Button>
-
                                     <ChevronRight size={24} color={color.title} />
                                 </Row>
-
                             </Animated.View>
                         ))}
                     </Column>}
@@ -124,16 +121,19 @@ const screens = [
         id: 3,
         name: 'MINHA CONTA',
         screen: 'Account',
+        private: true,
     },
     {
         id: 5,
         name: 'INICIAR CONVERSA',
         screen: 'ChatNew',
+        private: true,
     },
     {
         id: 8,
         name: 'MINHAS CONVERSAS',
         screen: 'ChatList',
+        private: true,
     },
     {
         id: 6,
