@@ -18,12 +18,10 @@ export default function WelcomeScreen({ navigation, route }) {
                       navigation.replace('Tabs')
                     }, 3000)
                 } else {
-                    setname('Visitante')
                     navigation.navigate('Onboarding')
                 }
             } catch (error) {
                 console.log(error)
-                setname('Visitante')
             }
         }
 
@@ -33,8 +31,16 @@ export default function WelcomeScreen({ navigation, route }) {
                 fecthData()
             }, 3000);
         }
-        toggleStep()
+        if(isFocused){
+            toggleStep()
+        }
     }, [isFocused])
+
+
+    const handleNavigate = () => {
+    
+    }
+
     const [step, setstep] = useState(1);
 
     if (step === 1) {

@@ -60,7 +60,7 @@ export default function AuthLoginScreen({ navigation, }) {
                     "token": res?.token,
                 };
                 if (res?.uiid) {
-                       OneSignal.login(res?.uiid)
+                    OneSignal.login(res?.uiid)
                 }
                 const preferences = await createPreferences(saveUser)
                 if (preferences) {
@@ -83,7 +83,7 @@ export default function AuthLoginScreen({ navigation, }) {
         <Main style={{}}>
             <Scroll>
 
-                {type === 'ConfirmEmail' ? <ConfirmEmail navigation={navigation} email={email} name={name} setconfirm={settype}/> :
+                {type === 'ConfirmEmail' ? <ConfirmEmail navigation={navigation} email={email} name={name} setconfirm={settype} /> :
                     <Column ph={28}>
                         <Button onPress={() => { navigation.navigate('Onboarding') }} pv={0} ph={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg='#FFFFFF'>
                             <ArrowLeft size={20} color='#858585' />
@@ -173,7 +173,7 @@ const ForgetPassword = ({ handleExit, }) => {
     const [password, setpassword] = useState('');
     const [passwordRepeat, setpasswordRepeat] = useState('');
 
-    
+
     const [code, setCode] = useState(new Array(4).fill(''));
     const inputs = useRef([]);
     const handleChange = (text, index) => { if (isNaN(text)) return; const newCode = [...code]; newCode[index] = text; setCode(newCode); if (text !== '' && index < 3) { inputs.current[index + 1].focus(); } };
