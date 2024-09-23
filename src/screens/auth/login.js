@@ -65,7 +65,7 @@ export default function AuthLoginScreen({ navigation, }) {
                 const preferences = await createPreferences(saveUser)
                 if (preferences) {
                     setTimeout(() => {
-                        navigation.navigate('Welcome', { name: res?.nome, })
+                        navigation.navigate('Tabs', { name: res?.nome, })
                     }, 600);
                 }
             }

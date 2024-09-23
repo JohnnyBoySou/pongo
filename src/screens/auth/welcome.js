@@ -11,35 +11,30 @@ export default function WelcomeScreen({ navigation, route }) {
     const isFocused = useIsFocused()
     useEffect(() => {
         const fecthData = async () => {
+
             try {
                 const res = await getPreferences()
                 if (res?.name) {
                     setTimeout(() => {
-                      navigation.replace('Tabs')
-                    }, 3000)
+                        setstep(2)
+                    }, 2000);
+                    setTimeout(() => {
+                        navigation.replace('Tabs')
+                    }, 5000)
                 } else {
-                    navigation.navigate('Onboarding')
+                    navigation.replace('Onboarding')
                 }
             } catch (error) {
                 console.log(error)
             }
         }
 
-        const toggleStep = () => {
-            setTimeout(() => {
-                setstep(2)
-                fecthData()
-            }, 3000);
-        }
-        if(isFocused){
-            toggleStep()
+        if (isFocused) {
+            fecthData()
         }
     }, [isFocused])
 
 
-    const handleNavigate = () => {
-    
-    }
 
     const [step, setstep] = useState(1);
 
@@ -65,7 +60,7 @@ export default function WelcomeScreen({ navigation, route }) {
                                     <Label color="#fff" style={{ lineHeight: 20, marginTop: 20, fontFamily: 'Voyage_Medium' }}>é um prazer ter você conosco!</Label>
                                 </Animated.View>
                                 <Animated.View entering={FadeInLeft.delay(2200)}>
-                                    <Button bg="transparent" mv={32} pv={8} ph={20} style={{ marginTop: 26 }} onPress={() => { navigation.navigate('Tabs') }}  >
+                                    <Button bg="transparent" mv={32} pv={8} ph={20} style={{ marginTop: 26 }} >
                                         <Image source={require('@imgs/seta.png')} style={{ width: 72, height: 42, objectFit: 'contain' }} />
                                     </Button>
                                 </Animated.View>
