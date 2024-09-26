@@ -54,7 +54,7 @@ export default function WelcomeScreen({ navigation, route }) {
                         <ImageBackground source={require('@imgs/welcomecard.png')} style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT, justifyContent: 'center', alignItems: 'center', }} imageStyle={{ objectFit: 'contain' }}>
                             <Column style={{ marginTop: -20, marginHorizontal: 20, justifyContent: 'center', alignItems: 'center', }}>
                                 <Animated.View entering={FadeInDown.delay(1500)}>
-                                    <Title color="#fff" align="center" style={{ lineHeight: 42, fontSize: 32, marginHorizontal: 20, fontFamily: font.medium, letterSpacing: -.6, }}>SEJA BEM - VINDO!</Title>
+                                    <Title color="#fff" align="center" style={{ lineHeight: 42, fontSize: 32, marginHorizontal: 20, fontFamily: font.medium, letterSpacing: -.6, }}>SEJA BEM-VINDO!</Title>
                                 </Animated.View>
                                 <Animated.View entering={FadeInDown.delay(1800)}>
                                     <Label color="#fff" style={{ lineHeight: 20, marginTop: 20, fontFamily: 'Voyage_Medium' }}>é um prazer ter você conosco!</Label>

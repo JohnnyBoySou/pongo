@@ -4,7 +4,6 @@ import { Main, Scroll, Column, Label, Title, Row, Button, SubLabel, ButtonPrimar
 import { ThemeContext } from 'styled-components/native';
 import { Check, Pencil } from 'lucide-react-native';
 import { updateUser, listUser, excludeUser } from '@api/request/auth';
-
 import * as ImagePicker from 'expo-image-picker';
 import { updatePreferences, excludePreferences } from '@hooks/preferences';
 import Success from '@components/Forms/success';
@@ -14,6 +13,7 @@ import Input from '@components/Forms/input';
 import TabBar from '@components/TabBar';
 import { editNotifications } from '@api/request/auth';
 import Modal from '@components/Modal';
+
 export default function AccountDetailsScreen({ navigation }) {
     const { color, font, margin } = useContext(ThemeContext);
     const [error, setError] = useState();
