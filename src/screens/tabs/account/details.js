@@ -129,7 +129,6 @@ export default function AccountDetailsScreen({ navigation }) {
     const handleExit = async () => {
         try {
             const res = await excludeUser(password)
-            console.log(res)
             setsuccess(res.message)
             await excludePreferences()
             setTimeout(() => {

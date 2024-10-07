@@ -11,7 +11,7 @@ import light from './src/theme/light';
 
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
-//import { OneSignal } from 'react-native-onesignal';
+import { OneSignal } from 'react-native-onesignal';
 
 preventAutoHideAsync();
 
@@ -42,7 +42,7 @@ export default function App() {
       LogBox.ignoreAllLogs(true);
       const key = process.env.EXPO_PUBLIC_KEY || Constants.expoConfig.extra.oneSignalAppId
       if (key != null) {
-       // OneSignal.initialize(key);
+        OneSignal.initialize(key);
       }
 
       let { status } = await Notifications.getPermissionsAsync();
