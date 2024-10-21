@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Image,  } from '@theme/global';
+import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Image, } from '@theme/global';
 import TopMenu from '@components/Header/topmenu';
 import { FlatList } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
@@ -21,7 +21,7 @@ export default function VillaPongoScreen({ navigation, }) {
                             keyExtractor={item => item.id}
                             showsVerticalScrollIndicator={false}
                             initialNumToRender={10}
-                            contentContainerStyle={{rowGap: 20,}}
+                            contentContainerStyle={{ rowGap: 20, }}
                             maxToRenderPerBatch={10}
                             removeClippedSubviews
                         />
@@ -58,6 +58,13 @@ const CardServices = ({ item }) => {
 
 const data = [
     {
+        name: 'ESCOLA',
+        time: 'Tempo de duração',
+        id: 3,
+        img: require('@imgs/escola.png'),
+        screen: 'School',
+    },
+    {
         name: 'HOTEL',
         time: 'Tempo de duração',
         id: 1,
@@ -72,13 +79,6 @@ const data = [
         screen: 'DayUse',
     },
     {
-        name: 'ESCOLA',
-        time: 'Tempo de duração',
-        id: 3,
-        img: require('@imgs/escola.png'),
-        screen: 'School',
-    },
-    {
         name: 'VET',
         time: 'Tempo de duração',
         id: 4,
@@ -86,12 +86,14 @@ const data = [
         screen: 'Veterinario',
     },
 
-    {
+]
+
+/*
+{
         name: 'GROOMING',
         time: 'Tempo de duração',
         id: 5,
         img: require('@imgs/grooming.png'),
         screen: 'Grooming',
     },
-
-]
+ */

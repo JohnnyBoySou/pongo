@@ -248,11 +248,11 @@ const CardAgenda = () => {
                 </Row>
                 <Row style={{ alignItems: 'center', columnGap: 12, marginVertical: 6, }}>
                     <Column style={{ width: 32, height: 32, borderRadius: 6, backgroundColor: '#E5C8C9', }} />
-                    <Label style={{ fontFamily: font.medium, }}>Escola Pongo</Label>
+                    <Label style={{ fontFamily: font.medium, }}>Escola PONGO</Label>
                 </Row>
                 <Row style={{ alignItems: 'center', columnGap: 12, marginVertical: 6, }}>
                     <Column style={{ width: 32, height: 32, borderRadius: 6, backgroundColor: '#BD9AEC', }} />
-                    <Label style={{ fontFamily: font.medium, }}>Hotel Pongo</Label>
+                    <Label style={{ fontFamily: font.medium, }}>Hotel PONGO</Label>
                 </Row>
                 <Row style={{ alignItems: 'center', columnGap: 12, marginVertical: 6, }}>
                     <Column style={{ width: 32, height: 32, borderRadius: 6, backgroundColor: '#858585', }} />

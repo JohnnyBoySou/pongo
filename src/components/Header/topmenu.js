@@ -192,13 +192,13 @@ const bts = [
     },
     {
         id: 3,
-        title: 'Loja Pongo',
+        title: 'Loja PONGO',
         screen: 'Shop',
         icon: <Store size={20} color="#91A6C4" strokeWidth={2} />,
     },
     {
         id: 4,
-        title: 'Escola Pongo',
+        title: 'Escola PONGO',
         screen: 'School',
         icon: <School size={20} color="#91A6C4" strokeWidth={2} />,
     },
@@ -210,7 +210,7 @@ const bts = [
     },
     {
         id: 6,
-        title: 'Hotel Pongo',
+        title: 'Hotel PONGO',
         screen: 'School',
         icon: <Hotel size={20} color="#91A6C4" strokeWidth={2} />,
     },

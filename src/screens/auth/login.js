@@ -131,22 +131,31 @@ export default function AuthLoginScreen({ navigation, }) {
                             </Row>
                         </Button>
 
-                        <Button radius={12} onPress={() => { navigation.navigate('AuthRegister') }} mv={12}>
+                        <Button radius={12} onPress={() => { navigation.navigate('AuthRegister') }} mv={12} bg={color.sc.sc3 + 20}>
                             <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
                                 <Label size={14} color={color.sc.sc3} align="center">Ainda não tem uma conta?</Label>
                                 <LabelBT size={14} color={color.sc.sc3} align="center" >Clique aqui para criar</LabelBT>
                             </Column>
                         </Button>
 
-                        <Label size={14} align='center' >Ao continuar, você concorda em receber chamadas e mensagens SMS ou pelo WhatsApp, inclusive automáticas, da Villa Pongo e de suas afiliadas, no número informado.</Label>
+                        <Label size={14} align='center' >Ao continuar, você concorda em receber chamadas e mensagens SMS ou pelo WhatsApp, inclusive automáticas, da Villa PONGO e de suas afiliadas, no número informado.</Label>
+
+                        <Row mv={18} style={{ columnGap: 12, }}>
+                            <Button radius={12} onPress={() => { navigation.navigate('AuthLoginColaborador') }} bg={color.label + 20} style={{ flexGrow: 1, }}>
+                                <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
+                                    <Label size={14} align="center">Entrar como</Label>
+                                    <LabelBT size={14} align="center">Colaborador</LabelBT>
+                                </Column>
+                            </Button>
+                            <Button onPress={() => { navigation.navigate('Tabs', { screen: 'Home' }) }} bg={color.label + 20} radius={12} style={{ flexGrow: 1, }}>
+                                <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
+                                    <Label size={14} align="center">Entrar como</Label>
+                                    <LabelBT size={14} align="center">Visitante</LabelBT>
+                                </Column>
+                            </Button>
+                        </Row>
 
 
-                        <Button radius={12} onPress={() => { navigation.navigate('AuthLoginColaborador') }} mv={18} bg={color.label + 20}>
-                            <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
-                                <Label size={14} align="center">Entrar como</Label>
-                                <LabelBT size={14} align="center" >Colaborador</LabelBT>
-                            </Column>
-                        </Button>
                     </Column>}
             </Scroll>
 
@@ -205,7 +214,10 @@ const ForgetPassword = ({ handleExit, }) => {
         seterror()
         setsuccess()
         setloading(true)
-        if (code.join('').length < 4) {
+        console.log('aq')
+        console.log(code.join(''))
+        if (code.join('')?.length === 4) {
+            console.log('parou aq')
             try {
                 const res = await resetPasswordCode(email, code.join(''))
                 if (res?.codigo) {
@@ -222,6 +234,7 @@ const ForgetPassword = ({ handleExit, }) => {
                 setloading(false)
             }
         }
+        setloading(false)
     }
 
     const params = { password: password, password_confirmation: passwordRepeat, email: email, codigo: codigo }
@@ -276,6 +289,7 @@ const ForgetPassword = ({ handleExit, }) => {
                         label="E-mail *"
                         placeholder="Email"
                         value={email}
+                        keyboard='email-address'
                         onSubmitEditing={handleSend}
                         setValue={setemail}
                     />

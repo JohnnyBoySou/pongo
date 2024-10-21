@@ -339,22 +339,22 @@ const CardService = ({ item, setselectService, }) => {
     const { name, label, price, img } = item
     return (
         <Column style={{ flexGrow: 1, }}>
-        <Card num={14}>
-            <Button pv={1} ph={1} radius={12} mh={0} mv={0} style={{ flexGrow: 1, }} onPress={() => { setselectService(item) }} >
-                <Card num={12}>
-                    <Column style={{ backgroundColor: '#FFF', flexGrow: 1, paddingVertical: 24, paddingHorizontal: 24, }}>
-                        <Image source={img} style={{ width: 76, height: 76, borderRadius: 8, }} />
-                        <Column style={{ justifyContent: 'center', }}>
-                            <Column style={{ height: 12, }} />
-                            <Title size={16}>{name}</Title>
-                            <Column style={{ height: 6, }} />
-                            <Label size={14}>{label}</Label>
-                            <Column style={{ height: 12, }} />
+            <Card num={14}>
+                <Button pv={1} ph={1} radius={12} mh={0} mv={0} style={{ flexGrow: 1, }} onPress={() => { setselectService(item) }} >
+                    <Card num={12}>
+                        <Column style={{ backgroundColor: '#FFF', flexGrow: 1, paddingVertical: 24, paddingHorizontal: 24, }}>
+                            <Image source={img} style={{ width: 76, height: 76, borderRadius: 8, }} />
+                            <Column style={{ justifyContent: 'center', }}>
+                                <Column style={{ height: 12, }} />
+                                <Title size={16}>{name}</Title>
+                                <Column style={{ height: 6, }} />
+                                <Label size={14}>{label}</Label>
+                                <Column style={{ height: 12, }} />
+                            </Column>
                         </Column>
-                    </Column>
-                </Card>
-            </Button>
-        </Card>
+                    </Card>
+                </Button>
+            </Card>
         </Column>
     )
 }

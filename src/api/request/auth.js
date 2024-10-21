@@ -6,12 +6,10 @@ import getBaseURL from '@hooks/getBaseUrl';
 //LOGIN/REGISTER API
 export const loginUser = async (email, password) => {
     const BASE_URL = await getBaseURL();
-    const sanitizedEmail = validator.normalizeEmail(email);
-    const sanitizedPassword = validator.escape(password);
     try {
         const response = await axios.post(`${BASE_URL}/auth`, {
-            email: sanitizedEmail,
-            password: sanitizedPassword
+            email: email,
+            password: password
         });
         return response.data;
     } catch (error) {
@@ -39,11 +37,11 @@ export const listUser = async () => {
 export const registerUser = async (params) => {
     const BASE_URL = await getBaseURL();
     const sanitizedParams = {
-        email: validator.normalizeEmail(params.email),
-        password: validator.escape(params.password),
-        nome: validator.escape(params.name),
-        cpf: validator.escape(params.cpf),
-        telefone: validator.escape(params.tel),
+        email: params.email,
+        password: params.password,
+        nome: params.name,
+        cpf: params.cpf,
+        telefone: params.tel,
         id_empresa: 6,
     };
     try {
@@ -60,11 +58,9 @@ export const registerUser = async (params) => {
 //RESET PASSWORD API
 export const resetPassword = async (email) => {
     const BASE_URL = await getBaseURL();
-    const sanitizedEmail = validator.normalizeEmail(email);
-
     try {
-        const response = await axios.post(`${BASE_URL}/esquecisenhaemail `, {
-            email: sanitizedEmail
+        const response = await axios.post(`${BASE_URL}/esquecisenhaemail`, {
+            email: email
         });
         return response.data;
     } catch (error) {
@@ -74,11 +70,9 @@ export const resetPassword = async (email) => {
 };
 export const resetPasswordCode = async (email, code) => {
     const BASE_URL = await getBaseURL();
-    const sanitizedEmail = validator.normalizeEmail(email);
-
     try {
         const response = await axios.post(`${BASE_URL}/esquecisenhacodigo`, {
-            email: sanitizedEmail,
+            email: email,
             codigo: code,
         });
         return response.data;
@@ -110,7 +104,7 @@ export const resetPasswordNew = async (params) => {
 export const resetPasswordOld = async (params) => {
     const BASE_URL = await getBaseURL();
     try {
-        const res = await axios.post(`${BASE_URL}/redefinirsenha `, {
+        const res = await axios.post(`${BASE_URL}/redefinirsenha`, {
             password: params.password,
             oldpassword: params.oldpassword,
         },);
@@ -160,10 +154,9 @@ export const updateUser = async (params) => {
 };
 
 export const verifyEmail = async (email, code) => {
-    const sanitizedEmail = validator.isEmail(email) ? validator.normalizeEmail(email) : undefined;
     try {
         const res = await axios.post(`${await getBaseURL()}/validacodigo`, {
-            email: sanitizedEmail,
+            email: email,
             codigo: code,
         });
         return res.data

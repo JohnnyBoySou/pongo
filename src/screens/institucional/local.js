@@ -27,7 +27,7 @@ export default function InstitucionalLocalScreen({ navigation, }) {
     const lojas = [
         {
             local: "Shopping Cidade Jardim",
-            loja: "Pongo",
+            loja: "PONGO",
             endereco: "Av. Magalhães de Castro, 12000 - 2 Piso - Cidade Jardim, São Paulo - SP, 05502-001",
             horariosSemana: "Segunda a Sábado das 10h às 22:00h",
             horariosFeriado: "Domingos e Feriados das 14:00h às 20:00h",
@@ -36,7 +36,7 @@ export default function InstitucionalLocalScreen({ navigation, }) {
         },
         {
             local: "Vila Nova Conceição",
-            loja: "Villa Pongo",
+            loja: "Villa PONGO",
             endereco: "Av. Antônio Joaquim de Moura Andrade, 80 - Vila Nova Conceição, São Paulo - SP, 04507-000",
             horariosSemana: "Segunda a Sábado das 09h às 20:00h",
             horariosFeriado: "Domingos e Feriados Fechado",

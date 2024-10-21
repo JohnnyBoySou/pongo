@@ -69,43 +69,43 @@ const Card = ({ item }) => {
 
 const faq = [
     {
-        q: 'Quais tipos de produtos a Pongo oferece?',
-        r: 'A Pongo oferece uma variedade de produtos para animais de estimação, incluindo ração, brinquedos, camas, coleiras, produtos de higiene, e muito mais.'
+        q: 'Quais tipos de produtos a PONGO oferece?',
+        r: 'A PONGO oferece uma variedade de produtos para animais de estimação, incluindo ração, brinquedos, camas, coleiras, produtos de higiene, e muito mais.'
     },
     {
-        q: 'A Pongo faz entregas?',
-        r: 'Sim, a Pongo realiza entregas em todo o Brasil. Você pode escolher a opção de entrega ao finalizar a compra.'
+        q: 'A PONGO faz entregas?',
+        r: 'Sim, a PONGO realiza entregas em todo o Brasil. Você pode escolher a opção de entrega ao finalizar a compra.'
     },
     {
-        q: 'Quais são as formas de pagamento aceitas na Pongo?',
+        q: 'Quais são as formas de pagamento aceitas na PONGO?',
         r: 'Aceitamos cartões de crédito, débito, boleto bancário e pagamento por Pix.'
     },
     {
-        q: 'Posso trocar um produto comprado na Pongo?',
-        r: 'Sim, a Pongo permite a troca de produtos dentro de 30 dias após a compra, desde que o produto esteja em sua embalagem original e sem uso.'
+        q: 'Posso trocar um produto comprado na PONGO?',
+        r: 'Sim, a PONGO permite a troca de produtos dentro de 30 dias após a compra, desde que o produto esteja em sua embalagem original e sem uso.'
     },
     {
         q: 'Como posso acompanhar meu pedido?',
         r: 'Após a confirmação da compra, você receberá um código de rastreamento por e-mail para acompanhar o status do seu pedido.'
     },
     {
-        q: 'A Pongo vende produtos para todos os tipos de animais?',
+        q: 'A PONGO vende produtos para todos os tipos de animais?',
         r: 'Sim, oferecemos produtos para cães, gatos, aves, roedores, peixes, e outros animais de estimação.'
     },
     {
-        q: 'Posso fazer compras na Pongo mesmo sem criar uma conta?',
+        q: 'Posso fazer compras na PONGO mesmo sem criar uma conta?',
         r: 'Sim, é possível comprar como visitante, mas recomendamos criar uma conta para facilitar futuras compras e acompanhar seus pedidos.'
     },
     {
-        q: 'A Pongo oferece algum programa de fidelidade?',
-        r: 'Sim, a Pongo possui um programa de fidelidade onde você acumula pontos a cada compra e pode trocar por descontos em futuras compras.'
+        q: 'A PONGO oferece algum programa de fidelidade?',
+        r: 'Sim, a PONGO possui um programa de fidelidade onde você acumula pontos a cada compra e pode trocar por descontos em futuras compras.'
     },
     {
-        q: 'Como entro em contato com o suporte da Pongo?',
-        r: 'Você pode entrar em contato com o suporte da Pongo através do nosso chat online, e-mail ou telefone disponível no nosso site.'
+        q: 'Como entro em contato com o suporte da PONGO?',
+        r: 'Você pode entrar em contato com o suporte da PONGO através do nosso chat online, e-mail ou telefone disponível no nosso site.'
     },
     {
-        q: 'A Pongo vende produtos naturais e orgânicos?',
+        q: 'A PONGO vende produtos naturais e orgânicos?',
         r: 'Sim, temos uma seção dedicada a produtos naturais e orgânicos para animais de estimação, incluindo ração, petiscos e produtos de higiene.'
     }
 ];

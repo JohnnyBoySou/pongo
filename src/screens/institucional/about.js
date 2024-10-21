@@ -20,7 +20,7 @@ export default function InstitucionalAboutScreen() {
         <Main style={{ backgroundColor: '#ECEBEB' }}>
             <Scroll>
                 <TopMenu back={false} search={false} />
-                <Header title="Sobre a Villa Pongo" />
+                <Header title="Sobre a Villa PONGO" />
 
                 <Column mh={margin.h} style={{ rowGap: 18, }}>
                     <Label style={{ fontSize: 14, lineHeight: 18,  }}>

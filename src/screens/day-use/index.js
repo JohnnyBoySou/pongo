@@ -21,8 +21,8 @@ export default function DayUseScreen() {
                 <Header title="DAY USE VILLA PONGO" />
 
                 <Column mh={margin.h}>
-                    <Image source={require('@imgs/img-escola-banner.png')} style={{ width: '100%', height: 223, marginVertical: 24 }} />
-                    <Title style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 6, paddingHorizontal: 40, lineHeight: 22 }}>Tenha todos os benefícios da Escola Pongo por um dia!</Title>
+                    <Image source={require('@imgs/img-escola-banner.png')} style={{ width: '100%', height: 223, marginVertical: 24, objectFit: 'contain' }} />
+                    <Title style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 6, paddingHorizontal: 40, lineHeight: 22 }}>Tenha todos os benefícios da Escola PONGO por um dia!</Title>
 
                     { /* <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
                         <Label style={{ textAlign: 'center', color: color.title }}>Contratar Day Use</Label>
@@ -30,7 +30,7 @@ export default function DayUseScreen() {
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
-                    <Title style={{ fontSize: 18, paddingVertical: 6, marginVertical: 12 }}>Conheça a estrutura da Escola Pongo</Title>
+                    <Title style={{ fontSize: 18, paddingVertical: 6, marginVertical: 12 }}>Conheça a estrutura da Escola PONGO</Title>
 
                     <Row alignItems='flex-start' pv={6} style={{ marginRight: 24 }}>
                         <MoveRight size={24} color={'#D9D9D9'} style={{ marginRight: 8 }} />
@@ -64,7 +64,10 @@ export default function DayUseScreen() {
                         <Label style={{ fontSize: 13 }}>Refeições em ambiente tranquilo com comedouro individual PONGO em acrílico etiquetado com nome.</Label>
                     </Row>
 
-
+                    <Row alignItems='flex-start' pv={6} style={{ marginRight: 24 }}>
+                        <MoveRight size={24} color={'#D9D9D9'} style={{ marginRight: 8 }} />
+                        <Label style={{ fontSize: 13 }}>Obrigatório atestado médico veterinário.</Label>
+                    </Row>
 
                 </Column>
 

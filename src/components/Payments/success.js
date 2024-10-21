@@ -30,7 +30,7 @@ export default function SuccessScreen({ navigation, }) {
                     </Button>
                     <Column style={{ height: 12, }} />
                     <Button  style={{ paddingHorizontal: 24, paddingVertical: 12, borderColor: color.secundary, }}>
-                        <Label style={{ color: color.secundary, fontFamily: font.bold, }}>Ver escola Pongo</Label>
+                        <Label style={{ color: color.secundary, fontFamily: font.bold, }}>Ver escola PONGO</Label>
                     </Button>
                 </Column>
             </Scroll>

@@ -47,7 +47,7 @@ export default function SchoolPongoScreen() {
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
-                    <Title style={{ fontSize: 18, fontWeight: 700, color: '#979797', paddingVertical: 6, marginVertical: 12 }}>Conheça a estrutura da Escola Pongo</Title>
+                    <Title style={{ fontSize: 18, fontWeight: 700, color: '#979797', paddingVertical: 6, marginVertical: 12 }}>Conheça a estrutura da Escola PONGO</Title>
 
                     <Row alignItems='flex-start' pv={6} style={{ marginRight: 24 }}>
                         <MoveRight size={24} color={'#D9D9D9'} style={{ marginRight: 8 }} />
@@ -188,6 +188,8 @@ export default function SchoolPongoScreen() {
                         <Label style={{ color: '#fff', fontSize: 13, marginVertical: 12 }}>Fêmeas não podem estar no cio.</Label>
 
                         <Label style={{ color: '#fff', fontSize: 13, marginVertical: 12 }}>Uso obrigatório do uniforme.</Label>
+
+                        <Label style={{ color: '#fff', fontSize: 13, marginVertical: 12 }}>Obrigatório atestado médico veterinário.</Label>
 
                         <Label style={{ color: '#fff', fontSize: 13, marginVertical: 12 }}>Controle contra pulgas e carrapatos.</Label>
 

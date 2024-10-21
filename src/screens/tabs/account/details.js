@@ -272,7 +272,7 @@ export default function AccountDetailsScreen({ navigation }) {
                         :
                         <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                             <Check size={22} color="#fff" />
-                            <Title style={{ color: "#fff", marginHorizontal: 8, fontSize: 16,  }}>Salvar</Title>
+                            <Title style={{ color: "#fff", marginHorizontal: 8, fontSize: 16, }}>Salvar</Title>
                         </Row>}
                 </Row>
             </Button>

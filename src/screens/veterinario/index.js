@@ -50,29 +50,7 @@ export default function VeterinarioScreen() {
 
                     <Title style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 18, fontWeight: 700, lineHeight: 22 }}>NOSSOS PROFISSIONAIS</Title>
 
-                    <Label style={{ fontSize: 16, marginBottom: 4, fontWeight: 700, color: color.sc.sc3 }}>Danielle L. Urenha </Label>
-                    <Label style={{ fontSize: 14, marginBottom: 4, }}>Médica Veterinária</Label>
-                    <Label style={{ fontSize: 14, marginBottom: 4, }}>CMRV-SP 39.808 </Label>
 
-                    <Row style={{ paddingVertical: 8 }}>
-                        <GraduationCap size={14} color={color.sc.sc1} />
-                        <Label style={{ fontSize: 14, marginLeft: 8 }}>Bacharel em Medicina Veterinaria  </Label>
-                    </Row>
-
-                    <Row style={{ paddingVertical: 8 }}>
-                        <GraduationCap size={14} color={color.sc.sc1} />
-                        <Label style={{ fontSize: 14, marginLeft: 8 }}>Pós graduada em Anestesiologia   </Label>
-                    </Row>
-
-                    <Row style={{ paddingVertical: 8 }}>
-                        <GraduationCap size={14} color={color.sc.sc1} />
-                        <Label style={{ fontSize: 14, marginLeft: 8 }}>Pós graduada em Nutrição   </Label>
-                    </Row>
-
-                    <Row style={{ paddingVertical: 8 }}>
-                        <GraduationCap size={14} color={color.sc.sc1} />
-                        <Label style={{ fontSize: 14, marginLeft: 8 }}>Pós graduanda em Cirurgia e de Tecidos Moles</Label>
-                    </Row>
 
                     <Column style={{ width: '100%', backgroundColor: color.sc.sc3, height: 1, marginVertical: 12 }} />
 

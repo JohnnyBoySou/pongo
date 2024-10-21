@@ -81,7 +81,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
         socket.on('chat message', async (dados) => {
             setmessages((msgs) => [...msgs, dados])
         });
-       
+
     }, [socket]);
 
     useEffect(() => {
@@ -172,7 +172,14 @@ export default function ChatDetailsScreen({ navigation, route }) {
                 <FlatList
                     ref={flatMsg}
                     data={messages}
-                    ListHeaderComponent={<Column style={{ alignSelf: 'center', marginTop: 25, backgroundColor: color.sc.sc3, borderRadius: 12, paddingVertical: 12, paddingHorizontal: 20, marginBottom: 20, }}><Label color="#fff">Criado em {formatDateTime(user?.criado_em)}</Label></Column>}
+                    ListHeaderComponent={
+                        <Column>
+                            <Column style={{ alignSelf: 'center', marginTop: 25, backgroundColor: color.sc.sc3, borderRadius: 12, paddingVertical: 12, paddingHorizontal: 20, marginBottom: 20, }}>
+                                <Label color='#fff' align='center'>Obrigado pelo seu contato, responderemos em breve. Você será notificado ao receber novas mensagens neste chat.</Label>
+                            </Column>
+                            <Column style={{ alignSelf: 'center', marginTop: 25, backgroundColor: color.sc.sc3, borderRadius: 12, paddingVertical: 12, paddingHorizontal: 20, marginBottom: 20, }}><Label color="#fff">Criado em {formatDateTime(user?.criado_em)}</Label></Column>
+                        </Column>
+                    }
                     renderItem={({ item }) => <Message item={item} type={type} />}
                     keyExtractor={(item, index) => index.toString()}
                     initialNumToRender={10}

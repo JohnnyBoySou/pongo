@@ -85,7 +85,7 @@ export default function HotelScreen() {
 
                         <Label style={{ color: '#fff', fontSize: 14, marginVertical: 12 }}>Para maior segurança do seu Pet, dos amigos dele e de nossos profissionais, seguiremos as exigências:</Label>
 
-                        <Label style={{ color: '#fff', fontSize: 13, marginVertical: 12 }}>Triagem de matrícula:</Label>
+                        <Label style={{ color: '#fff', fontSize: 13, marginVertical: 12 }}>Triagem:</Label>
 
                         <Row alignItems='center' >
                             <MoveRight size={24} color={'#707070'} style={{ marginRight: 8 }} />
@@ -111,9 +111,9 @@ export default function HotelScreen() {
 
                         <Label style={{ color: '#fff', fontSize: 13, marginVertical: 12 }}>Fêmeas não podem estar no cio.</Label>
 
-                        <Label style={{ color: '#fff', fontSize: 13, marginVertical: 12 }}>Uso obrigatório do uniforme.</Label>
-
                         <Label style={{ color: '#fff', fontSize: 13, marginVertical: 12 }}>Controle contra pulgas e carrapatos.</Label>
+
+                        <Label style={{ color: '#fff', fontSize: 13, marginVertical: 12 }}>Obrigatório atestado médico veterinário.</Label>
 
                         <Label style={{ color: '#fff', fontSize: 13, marginTop: 12 }}>Respeitar os horários de Check In e Check Out</Label>
                         <Label style={{ color: '#fff', fontSize: 11, marginTop: 6 }}>(Após o horário de Check Out, haverá uma tolerância de 15 minutos, excedido esse tempo será cobrado Late Check Out, no valor da diária contratada)</Label>
