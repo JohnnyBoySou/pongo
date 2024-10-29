@@ -84,7 +84,7 @@ export default function DayUseScreen() {
                     </Column>
                 </Column>
                 <Column mv={margin.v}>
-                    <Carrossel data={imgs} />
+                    <Carrossel />
                 </Column>
 
                 <ListaRotinaEscola />
@@ -151,15 +151,7 @@ function ListaRotinaEscola() {
 
 
 
-
-const imgs = [
-    require('@imgs/pet2.jpeg'),
-    require('@imgs/pet3.jpeg'),
-    require('@imgs/pet4.jpeg'),
-    require('@imgs/pet8.jpeg'),
-]
-
-function Carrossel({ data }) {
+function Carrossel() {
     const navigation = useNavigation();
     return (
         <Swiper style={{ height: 220, }} autoplay={true} loop={false}>

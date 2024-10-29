@@ -13,7 +13,6 @@ import PlanosList from '@components/Planos';
 import { useNavigation } from '@react-navigation/native';
 import TabBar from '@components/TabBar';
 
-
 export default function SchoolPongoScreen() {
     const navigation = useNavigation();
     const { color, font, margin } = useTheme();
@@ -102,7 +101,7 @@ export default function SchoolPongoScreen() {
 
                 </Column>
                 <Column mv={margin.v} >
-                    <Carrossel data={imgs} />
+                    <Carrossel />
                 </Column>
                 <ListaRotinaEscola />
 
@@ -196,9 +195,6 @@ export default function SchoolPongoScreen() {
 
                         <Column style={{ height: 80 }} />
 
-                        { /* <Button style={{ backgroundColor: '#fff', marginVertical: 32 }}>
-                            <Text style={{ fontSize: 12, color: '#434343', textAlign: 'center', fontWeight: 400 }}>Cadastrar pré-matrícula</Text>
-                        </Button> */ }
                     </Column>
 
 
@@ -211,14 +207,7 @@ export default function SchoolPongoScreen() {
     );
 }
 
-const imgs = [
-    require('@imgs/pet5.jpeg'),
-    require('@imgs/pet6.jpeg'),
-    require('@imgs/pet7.jpeg'),
-    require('@imgs/pet1.jpeg'),
-]
-
-function Carrossel({ data }) {
+function Carrossel() {
     const navigation = useNavigation();
     return (
         <Swiper style={{ height: 220, overflow: 'hidden', borderRadius: 20 }} autoplay={true} loop={false}>
