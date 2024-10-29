@@ -1,8 +1,8 @@
 import React from 'react';
 import { Image, View } from 'react-native';
-import { Main, Scroll, Column, Label, Title, Row, useTheme, } from '@theme/global';
+import { Main, Scroll, Column, Label, Title, Row, useTheme, Button} from '@theme/global';
 
-import { MoveRight } from 'lucide-react-native';
+import { MoveRight, Play } from 'lucide-react-native';
 
 //Components
 import Header from '@components/Header';
@@ -81,8 +81,6 @@ export default function SchoolPongoScreen() {
                         <Label style={{ fontSize: 13 }}>Refeições em ambiente tranquilo com comedouro individual PONGO em acrílico etiquetado com nome.</Label>
                     </Row>
 
-
-
                 </Column>
 
                 <Column mv={margin.v} style={{ marginRight: margin.h }}>
@@ -103,7 +101,7 @@ export default function SchoolPongoScreen() {
                     <Label style={{ fontSize: 12, color: '#979797', textAlign: 'center' }}>Integral 7:00 ás 19:00</Label>
 
                 </Column>
-                <Column mv={margin.v}>
+                <Column mv={margin.v} >
                     <Carrossel data={imgs} />
                 </Column>
                 <ListaRotinaEscola />
@@ -214,23 +212,56 @@ export default function SchoolPongoScreen() {
 }
 
 const imgs = [
-    require('@imgs/escola1.jpg'),
-    require('@imgs/escola2.jpg'),
-    require('@imgs/escola3.jpg'),
-    require('@imgs/escola4.jpg'),
+    require('@imgs/pet5.jpeg'),
+    require('@imgs/pet6.jpeg'),
+    require('@imgs/pet7.jpeg'),
+    require('@imgs/pet1.jpeg'),
 ]
 
 function Carrossel({ data }) {
+    const navigation = useNavigation();
     return (
-        <Swiper style={{ height: 180, overflow: 'hidden', borderRadius: 20 }} autoplay={true} loop={false}>
-            {data?.map((img, index) => (
-                <Column key={index} style={{ flex: 1, marginHorizontal: 28, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
+        <Swiper style={{ height: 220, overflow: 'hidden', borderRadius: 20 }} autoplay={true} loop={false}>
+            <Column style={{ marginHorizontal: 28, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
+                <Image
+                    style={{ width: '100%', height: 220, objectFit: 'cover', }}
+                    source={require('@imgs/pet5.jpeg')}
+                />
+            </Column>
+            <Column style={{ marginHorizontal: 28, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
+                <Image
+                    style={{ width: '100%', height: 220, objectFit: 'cover', }}
+                    source={require('@imgs/pet6.jpeg')}
+                />
+            </Column>
+            <Column style={{ marginHorizontal: 28, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
+                <Image
+                    style={{ width: '100%', height: 220, objectFit: 'cover', }}
+                    source={require('@imgs/pet7.jpeg')}
+                />
+            </Column>
+            <Column style={{ marginHorizontal: 28, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
+                <Image
+                    style={{ width: '100%', height: 220, objectFit: 'cover', }}
+                    source={require('@imgs/pet1.jpeg')}
+                />
+            </Column>
+            <Button
+                radius={20}
+                pv={1}
+                ph={1}
+                onPress={() => { navigation.navigate('Video', { video: 2 }) }}
+                style={{ marginHorizontal: 28, height: 220, }}>
+                <Column>
                     <Image
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        source={img}
+                        style={{ width: '100%', height: 220, objectFit: 'cover', }}
+                        source={require('@imgs/video2.png')}
                     />
+                    <Column style={{ position: 'absolute', justifyContent: 'center', alignItems: 'center', alignSelf: 'center', top: 80, width: 64, height: 64, borderRadius: 100, backgroundColor: '#fff', zIndex: 99, }} >
+                        <Play size={24} color='#000' />
+                    </Column>
                 </Column>
-            ))}
+            </Button>
         </Swiper>
     );
 }
@@ -238,21 +269,18 @@ function Carrossel({ data }) {
 function ListaRotinaEscola() {
     const { color, font, margin } = useTheme();
     const rotina = [
-        "7:00 - Entrada e acompanhamento veterinário",
-        "8:00 - Café da Manhã | Banho de Sol | Hora do Conto",
-        "9:00 - Passeio no Parque Ibirapuera",
-        "10:00 - Descanso | Musicoterapia",
-        "11:00 - Almoço",
-        "12:00 - Hora do Sono",
-        "13:00 - Adestramento",
-        "14:00 - Atividade do dia da semana",
-        "15:00 - Atividades internas",
-        "16:00 - Recreio",
-        "17:00 - Passeio Parque",
-        "18:00 - Higienização",
-        "19:00 - Saída",
+        "7:00 - 9:00 | Entrada",
+        "9:00 - 10:00 | Triagem e Passeio",
+        "10:00 - 11:00 | Café da manhã e socialização",
+        "11:00 - 12:00 | Almoço",
+        "12:00 - 13:00 | Musicoterapia",
+        "13:00 - 14:00 | Adestramento",
+        "14:00 - 15:00 | Fisioterapia",
+        "15:00 - 16:00 | Recreio",
+        "16:00 - 17:00 | Jantar e triagem",
+        "17:00 - 18:00 | Atividade do dia",
+        "18:00 - 19:00 | Higienização e saída",
     ];
-
     return (
         <View>
             {rotina.map((item, index) => (
@@ -273,6 +301,7 @@ function ListaRotinaEscola() {
                     </Label>
                 </Row>
             ))}
+            <Label size={14} style={{ marginHorizontal: 20, marginVertical: 12, }}>Alterações nas atividades são previstas em função das diferentes modalidades: Educação Infantil, Ensino Fundamental e Médio.</Label>
         </View>
     );
 }

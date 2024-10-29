@@ -75,11 +75,11 @@ export default function HotelScreen() {
                         <Label size={14} align="left" style={{ paddingVertical: 6 }}>Alta temporada (Feriados, Jan. Jul. Nov. Dez.) | Valor Diária R$ 320</Label>
                     </Column>
 
-                    <CarrosselHotel />
 
                 </Column>
+                    <CarrosselHotel />
 
-                <Column style={{ backgroundColor: '#918C8B', borderTopLeftRadius: 30, borderTopRightRadius: 30 }}>
+                <Column style={{ backgroundColor: '#918C8B', marginTop: 30, borderTopLeftRadius: 30, borderTopRightRadius: 30 }}>
                     <Column mh={margin.h} mv={margin.v} >
                         <Title style={{ color: '#fff', textAlign: 'center', marginTop: 20, marginBottom: 18 }}>Normas</Title>
 

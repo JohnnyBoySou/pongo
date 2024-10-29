@@ -4,7 +4,7 @@ import Swiper from 'react-native-swiper';
 
 const styles = StyleSheet.create({
     wrapper: {
-        height: 160,
+        height: 220,
         overflow: 'hidden',
         borderRadius: 20,
     },
@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        marginHorizontal: 28,
         borderRadius: 20, // Adiciona o borderRadius a cada slide
         overflow: 'hidden', // Garante que o conteúdo dentro do slide respeite o borderRadius
     },

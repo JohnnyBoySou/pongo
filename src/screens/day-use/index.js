@@ -1,12 +1,13 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { Main, Scroll, Column, Label, Title, Row, useTheme, } from '@theme/global';
+import { Main, Scroll, Column, Label, Title, Row, useTheme, Button } from '@theme/global';
 
 import Header from '@components/Header';
 import TopMenu from '@components/Header/topmenu';
-import { MoveRight } from 'lucide-react-native';
+import { MoveRight, Play } from 'lucide-react-native';
 import TabBar from '@components/TabBar';
 import Swiper from 'react-native-swiper';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function DayUseScreen() {
@@ -82,7 +83,9 @@ export default function DayUseScreen() {
                     <Column mv={margin.v}>
                     </Column>
                 </Column>
-                <Carrossel data={imgs} />
+                <Column mv={margin.v}>
+                    <Carrossel data={imgs} />
+                </Column>
 
                 <ListaRotinaEscola />
 
@@ -105,19 +108,17 @@ export default function DayUseScreen() {
 
 
 const items = [
-    "7:00 - Entrada e acompanhamento veterinário",
-    "8:00 - Café da Manhã | Banho de Sol | Hora do Conto",
-    "9:00 - Passeio no Parque Ibirapuera",
-    "10:00 - Descanso | Musicoterapia",
-    "11:00 - Almoço",
-    "12:00 - Hora do Sono",
-    "13:00 - Adestramento",
-    "14:00 - Atividade do dia da semana",
-    "15:00 - Atividades internas",
-    "16:00 - Recreio",
-    "17:00 - Passeio Parque",
-    "18:00 - Higienização",
-    "19:00 - Saída",
+    "7:00 - 9:00 | Entrada",
+    "9:00 - 10:00 | Triagem e Passeio",
+    "10:00 - 11:00 | Café da manhã e socialização",
+    "11:00 - 12:00 | Almoço",
+    "12:00 - 13:00 | Musicoterapia",
+    "13:00 - 14:00 | Adestramento",
+    "14:00 - 15:00 | Fisioterapia",
+    "15:00 - 16:00 | Recreio",
+    "16:00 - 17:00 | Jantar e triagem",
+    "17:00 - 18:00 | Atividade do dia",
+    "18:00 - 19:00 | Higienização e saída",
 ];
 
 function ListaRotinaEscola() {
@@ -142,6 +143,8 @@ function ListaRotinaEscola() {
                     </Label>
                 </Row>
             ))}
+            <Label size={14} style={{ marginHorizontal: 20, marginVertical: 12, }}>Alterações nas atividades são previstas em função das diferentes modalidades: Educação Infantil, Ensino Fundamental e Médio.</Label>
+
         </Column>
     );
 }
@@ -150,24 +153,56 @@ function ListaRotinaEscola() {
 
 
 const imgs = [
-    require('@imgs/day-use1.jpg'),
-    require('@imgs/day-use2.jpg'),
-    require('@imgs/day-use3.jpg'),
-    require('@imgs/day-use4.jpg'),
-    require('@imgs/day-use5.jpg'),
+    require('@imgs/pet2.jpeg'),
+    require('@imgs/pet3.jpeg'),
+    require('@imgs/pet4.jpeg'),
+    require('@imgs/pet8.jpeg'),
 ]
 
 function Carrossel({ data }) {
+    const navigation = useNavigation();
     return (
-        <Swiper style={{ height: 180, overflow: 'hidden', borderRadius: 20 }} autoplay={true} loop={false}>
-            {data?.map((img, index) => (
-                <Column key={index} style={{ flex: 1, marginHorizontal: 28, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
+        <Swiper style={{ height: 220, }} autoplay={true} loop={false}>
+            <Column style={{ marginHorizontal: 28, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
+                <Image
+                    style={{ width: '100%', height: 220, objectFit: 'cover', }}
+                    source={require('@imgs/pet2.jpeg')}
+                />
+            </Column>
+            <Column style={{ marginHorizontal: 28, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
+                <Image
+                    style={{ width: '100%', height: 220, objectFit: 'cover', }}
+                    source={require('@imgs/pet3.jpeg')}
+                />
+            </Column>
+            <Column style={{ marginHorizontal: 28, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
+                <Image
+                    style={{ width: '100%', height: 220, objectFit: 'cover', }}
+                    source={require('@imgs/pet4.jpeg')}
+                />
+            </Column>
+            <Column style={{ marginHorizontal: 28, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
+                <Image
+                    style={{ width: '100%', height: 220, objectFit: 'cover', }}
+                    source={require('@imgs/pet8.jpeg')}
+                />
+            </Column>
+            <Button
+                radius={20}
+                pv={1}
+                ph={1}
+                onPress={() => { navigation.navigate('Video', { video: 1 }) }}
+                style={{ marginHorizontal: 28, height: 220, }}>
+                <Column>
                     <Image
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        source={img}
+                        style={{ width: '100%', height: 220, objectFit: 'cover', }}
+                        source={require('@imgs/video1.png')}
                     />
+                    <Column style={{ position: 'absolute', justifyContent: 'center', alignItems: 'center',  alignSelf: 'center', top: 80, width: 64, height: 64, borderRadius: 100, backgroundColor: '#fff', zIndex: 99, }} >
+                        <Play size={24} color='#000' />
+                    </Column>
                 </Column>
-            ))}
+            </Button>
         </Swiper>
     );
 }

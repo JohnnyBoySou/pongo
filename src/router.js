@@ -91,6 +91,7 @@ import HotelRegisterScreen from '@screens/hotel/register';
 import NotificationsScreen from '@screens/notifications/index';
 import FaqScreen from '@screens/faq/index';
 import Privacidade from '@screens/privacidade/index';
+import VideoScreen from '@screens/video';
 
 const linking = {
   prefixes: ['pongo://'],
@@ -187,6 +188,8 @@ export default function Router({ }) {
         <Stack.Screen name="Notifications" component={NotificationsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="Faq" component={FaqScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="Privacidade" component={Privacidade} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+
+        <Stack.Screen name="Video" component={VideoScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
       </Stack.Navigator>
     </NavigationContainer>
