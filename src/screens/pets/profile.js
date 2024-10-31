@@ -23,6 +23,7 @@ export default function PetsProfileScreen({ navigation, route }) {
             setloading(true)
             try {
                 const res = await singlePet(id)
+
                 setdata(res)
             } catch (error) {
                 console.log(error)
@@ -68,11 +69,6 @@ export default function PetsProfileScreen({ navigation, route }) {
                                 <Title size={16} font={font.bold} color="#fff" style={{ backgroundColor: color.sc.sc3, borderRadius: 100, paddingHorizontal: 12, paddingVertical: 6, alignSelf: 'flex-start' }}>{pet?.age} ano{pet?.age > 1 ? 's' : ''}</Title>
                             </Row>
                         </Animated.View>
-                        <Animated.View entering={FadeInDown.delay(500)} >
-                        <Column style={{ marginHorizontal: margin.h, marginBottom: 12, marginTop: 8, }}>
-                            <Label size={18} lineHeight={22} style={{ letterSpacing: 0.2, textAlign: 'center', }}>{pet?.bio ? pet?.bio : 'Nenhuma descrição informada'}</Label>
-                        </Column>
-                        </Animated.View>
                         <Row style={{ alignItems: 'center', columnGap: 20, marginHorizontal: 20, }}>
                             <Column style={{ paddingHorizontal: 14, marginRight: -12, paddingVertical: 24, flexGrow: 1, justifyContent: 'center', alignItems: 'center', }}>
                                 <Animated.View entering={FadeInLeft.delay(500)} style={{ justifyContent: 'center', alignItems: 'center',  }}>
@@ -101,10 +97,13 @@ export default function PetsProfileScreen({ navigation, route }) {
                                 </Animated.View>
                             </Column>
                             <Column style={{ height: 120, width: 1, backgroundColor: color.border, }} />
-                            <Column style={{ paddingHorizontal: 24, marginLeft: -12, paddingVertical: 24, flexGrow: 1, justifyContent: 'center', alignItems: 'center', }}>
-                                <Image style={{ width: 52, height: 52, objectFit: 'contain' }} />
-                                <Title size={16} color="#fff" >aaaa</Title>
-                                <Title style={{ marginTop: 4, color: '#fff', }}>aaaaaaa</Title>
+                            <Column style={{ paddingHorizontal: 0, marginLeft: -12, paddingVertical: 24, flexGrow: 1, justifyContent: 'center', alignItems: 'center', }}>
+                                <Animated.View entering={FadeInLeft.delay(1000)} style={{ justifyContent: 'center', alignItems: 'center',  }}>
+                                    <Image source={require('@imgs/shop1.png')} style={{ width: 74, height: 74, objectFit: 'contain' }} />
+                                    <Button style={{ backgroundColor: '#91A6C4', }} pv={6} ph={12} onPress={() => {navigation.navigate('Services')}} >
+                                        <Title size={16} color='#fff'>Mais serviços</Title>
+                                    </Button>
+                                </Animated.View>
                             </Column>
                         </Row>
                         <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
