@@ -65,6 +65,7 @@ import TestScreen from '@screens/test';
 import ShopScreen from '@screens/shop';
 import ShopSingleProductScreen from '@screens/shop/single_product';
 import ShopSingleServiceScreen from '@screens/shop/single_service';
+import ShopPaymentScreen from '@screens/shop/payment';
 import ShopCartScreen from '@screens/shop/cart';
 //VILLA PONGO
 import VillaPongoScreen from '@screens/villapongo';
@@ -119,10 +120,9 @@ export default function Router({ }) {
   return (
     <NavigationContainer linking={linking}>
       
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Shop'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='ShopCart'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-
 
         <Stack.Screen name="ChatList" component={ChatListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatDetails" component={ChatDetailsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -155,7 +155,8 @@ export default function Router({ }) {
         <Stack.Screen name="ShopSingleProduct" component={ShopSingleProductScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ShopSingleService" component={ShopSingleServiceScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ShopCart" component={ShopCartScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-
+        <Stack.Screen name="ShopPayment" component={ShopPaymentScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        
         <Stack.Screen name="VillaPongo" component={VillaPongoScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Services" component={ServicesScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />

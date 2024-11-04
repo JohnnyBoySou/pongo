@@ -134,6 +134,7 @@ export const updateUser = async (params) => {
                 complemento: params.complemento,
                 cidade: params.cidade,
                 avatar: params.avatar,
+                rua: params.rua,
             },
             {
                 headers: {
