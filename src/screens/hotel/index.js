@@ -17,7 +17,6 @@ export default function HotelScreen({ navigation}) {
         navigation.navigate('HotelRegister', { item: item })
     }
 
-
     const details = [
         { label: 'Cama Steel King-Size', },
         { label: 'Banheiro com tablado e tapete higiênico individual', },
@@ -46,15 +45,11 @@ export default function HotelScreen({ navigation}) {
                     <Label size={14} align="left" style={{ paddingVertical: 6 }}>Ao acordar, abrir a janela, sentir a brisa do Parque Ibirapuera. {'\n'} Seu pet irá se hospedar em um dos bairros mais nobres e seguros de São Paulo. </Label>
                     <Label size={14} align="left" style={{ paddingVertical: 6 }}>Aconchegante e impecável, nossos quartos são únicos. Sofisticados ambientes, decorados com camas da PONGO feitas em ferro e com colchões confortáveis em tecidos nobres, tem luz indireta, televisão, ar condicionado e teto sob nuvens! </Label>
                     <Label size={14} align="left" style={{ paddingVertical: 6 }}>Durante o dia seu mascote participará de atividades, passeios no parque e piscina.  {'\n'} Ele será recepcionado com muito amor e cuidado e durante toda a sua estadia na Villa PONGO ele será supervisionado por monitores e veterinários. </Label>
-                    <Button onPress={handleRegister} style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
-                        <LabelBT style={{ textAlign: 'center', color: color.title }}>Reservar Hotel</LabelBT>
+                    <Button onPress={handleRegister} style={{ width: '100%', backgroundColor: color.sc.sc3, marginTop: 12 }}>
+                        <Label style={{ textAlign: 'center', color: '#fff' }}>Reservar Hotel</Label>
                     </Button>
                 </Column>
 
-                <Column mh={margin.h} mv={margin.v}>
-                    <Title style={{ paddingVertical: 6, marginVertical: 12 }}>Planos</Title>
-                </Column>
-                <PlanosList destino={handleRegister} />
                     
                 <Column mh={margin.h} mv={24}>
                     <Title style={{ paddingVertical: 6, }}>Detalhes e comodidades</Title>

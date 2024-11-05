@@ -90,10 +90,12 @@ import SchoolPayments from '@screens/school/payments';
 //DAY USE
 import DayUseScreen from '@screens/day-use/index';
 import DayUseRegisterScreen from '@screens/day-use/register';
+import DayUsePayments from '@screens/day-use/payments';
 
 //HOTEL
 import HotelScreen from '@screens/hotel/index';
 import HotelRegisterScreen from '@screens/hotel/register';
+import HotelPayments from '@screens/hotel/payments';
 
 import NotificationsScreen from '@screens/notifications/index';
 import FaqScreen from '@screens/faq/index';
@@ -190,9 +192,11 @@ export default function Router({ }) {
 
         <Stack.Screen name="DayUse" component={DayUseScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="DayUseRegister" component={DayUseRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="DayUsePayments" component={DayUsePayments} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Hotel" component={HotelScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="HotelRegister" component={HotelRegisterScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="HotelPayments" component={HotelPayments} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Veterinario" component={VeterinarioScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="Grooming" component={GroomingScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />

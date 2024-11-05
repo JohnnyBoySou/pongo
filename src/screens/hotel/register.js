@@ -43,7 +43,10 @@ export default function HotelRegisterScreen({ navigation, route }) {
 
     const modalPayment = useRef()
     const handlePay = () => {
-        modalPayment.current.expand()
+        if (!terms && !day.length) return;
+        else {
+            navigation.navigate('HotelPayments', { item: item });    
+        }
     }
 
     return (
