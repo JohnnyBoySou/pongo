@@ -133,6 +133,18 @@ export default function AccountScreen({ navigation, }) {
                         </Button>
                     </Card>
                     <Card num={12}>
+                        <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('Products') }}>
+                            <Row style={{ alignItems: 'center', }}>
+                                <Image source={require('@imgs/ac3.png')} style={{ width: 80, height: 80, marginRight: 12, }} />
+                                <Column>
+                                    <Title size={16}>PRODUTOS</Title>
+                                    <Column style={{ height: 4, }} />
+                                    <Label size={14}>Clique para visualizar</Label>
+                                </Column>
+                            </Row>
+                        </Button>
+                    </Card>
+                    <Card num={12}>
                         <Button style={{ backgroundColor: color.light, }} pv={12} ph={12} radius={12} mh={0} onPress={() => { navigation.navigate('ChatList') }}>
                             <Row style={{ alignItems: 'center', }}>
                                 <Image source={require('@imgs/chat.png')} style={{ width: 80, height: 80, marginRight: 12, objectFit: 'contain', }} />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image } from 'react-native';
-import { Main, Scroll, Column, Label, Title, Row, useTheme, } from '@theme/global';
+import { Main, Scroll, Column, Label, Title, Row, useTheme, Button, LabelBT } from '@theme/global';
 
 import Header from '@components/Header';
 import TopMenu from '@components/Header/topmenu';
@@ -9,12 +9,12 @@ import PlanosList from '@components/Planos';
 import TabBar from '@components/TabBar';
 import CarrosselHotel from './CarrosselHotel';
 
-export default function HotelScreen() {
+export default function HotelScreen({ navigation}) {
 
     const { color, font, margin } = useTheme();
 
     const handleRegister = (item) => {
-        navigation.navigate('SchoolRegister', { item: item })
+        navigation.navigate('HotelRegister', { item: item })
     }
 
 
@@ -46,16 +46,16 @@ export default function HotelScreen() {
                     <Label size={14} align="left" style={{ paddingVertical: 6 }}>Ao acordar, abrir a janela, sentir a brisa do Parque Ibirapuera. {'\n'} Seu pet irá se hospedar em um dos bairros mais nobres e seguros de São Paulo. </Label>
                     <Label size={14} align="left" style={{ paddingVertical: 6 }}>Aconchegante e impecável, nossos quartos são únicos. Sofisticados ambientes, decorados com camas da PONGO feitas em ferro e com colchões confortáveis em tecidos nobres, tem luz indireta, televisão, ar condicionado e teto sob nuvens! </Label>
                     <Label size={14} align="left" style={{ paddingVertical: 6 }}>Durante o dia seu mascote participará de atividades, passeios no parque e piscina.  {'\n'} Ele será recepcionado com muito amor e cuidado e durante toda a sua estadia na Villa PONGO ele será supervisionado por monitores e veterinários. </Label>
-                    { /* <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
+                    <Button onPress={handleRegister} style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
                         <LabelBT style={{ textAlign: 'center', color: color.title }}>Reservar Hotel</LabelBT>
-                    </Button> */ }
+                    </Button>
                 </Column>
 
-                { /* <Column mh={margin.h} mv={margin.v}>
+                <Column mh={margin.h} mv={margin.v}>
                     <Title style={{ paddingVertical: 6, marginVertical: 12 }}>Planos</Title>
                 </Column>
                 <PlanosList destino={handleRegister} />
-                    */ }
+                    
                 <Column mh={margin.h} mv={24}>
                     <Title style={{ paddingVertical: 6, }}>Detalhes e comodidades</Title>
 

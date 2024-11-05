@@ -6,11 +6,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Check, CheckCircle } from 'lucide-react-native';
 import CheckBox from '@components/Forms/checkbox';
 import TextArea from '@components/Forms/textarea';
-import Modal from '@components/Modal/index';
 
 import Animated, { FadeInDown, FadeInLeft, FadeOutLeft, FadeOutUp, SlideInLeft, SlideOutLeft } from 'react-native-reanimated';
 
-import Payment from '@components/Payments';
 
 export default function SchoolRegisterScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
@@ -18,10 +16,7 @@ export default function SchoolRegisterScreen({ navigation, route }) {
     const [month, setmonth] = useState();
     const [day, setday] = useState([]);
     const [desc, setdesc] = useState();
-    //const handleRegister = (item) => {
-    //  navigation.navigate('SchoolRegister', { item: item })
-    //}
-
+   
     const item = {
         id: 1,
         plano: plano,
@@ -32,7 +27,6 @@ export default function SchoolRegisterScreen({ navigation, route }) {
 
     const handleSelect = (item) => {
         setplano(item)
-        console.log(item)
     }
     const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     const days = ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira',]
@@ -44,10 +38,9 @@ export default function SchoolRegisterScreen({ navigation, route }) {
         }
     }
 
-    const modalPayment = useRef()
     const handlePay = () => {
-        if (plano != null) {
-            modalPayment.current.expand()
+        if (plano != null && month != null && day.length > 0) {
+            navigation.navigate('SchoolPayments', { item: item, destino: 'Plano escolar' })
         } else { return }
     }
     return (
@@ -95,12 +88,6 @@ export default function SchoolRegisterScreen({ navigation, route }) {
 
                 </Column>
             </Scroll>
-            <Modal ref={modalPayment} snapPoints={[0.1, SCREEN_HEIGHT]}>
-                {plano && <Payment item={item} destino='Plano escolar' modal={modalPayment} card={
-                    <CardPlano item={plano} destino={handleSelect} />
-                } />
-                }
-            </Modal>
         </Main>
     )
 }
@@ -111,7 +98,7 @@ const CardPlano = ({ item, destino }) => {
     return (
         <Animated.View entering={SlideInLeft} exiting={SlideOutLeft}>
             <Row style={{ marginHorizontal: margin.h, justifyContent: 'center', alignItems: 'center', }}>
-                <Column style={{ width: 260, borderWidth: 1, borderColor: id % 2 != 0 ? 'transparent' : color.border, backgroundColor: id % 2 === 0 ? 'transparent' : '#F7F7F7', borderRadius: 18, paddingHorizontal: 20, }}>
+                <Column style={{ width: 260, backgroundColor: '#F7F7F7', borderRadius: 18, paddingHorizontal: 20, }}>
                     <Row style={{ justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 20, marginBottom: 8, }}>
                         <Title size={17} width={120}>Plano {name}</Title>
                         <Label size={15}>{price}</Label>

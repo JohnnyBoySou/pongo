@@ -31,9 +31,9 @@ export default function SchoolPongoScreen() {
                 <Column mh={margin.h}>
                     <Image source={require('@imgs/img-escola-banner3.png')} style={{ width: '100%', height: 223, marginVertical: 24 }} />
                     <Title style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 6, lineHeight: 22 }}>A proposta da Escola Villa PONGO se ampara no cuidado de cada animal, com consciência de suas possibilidades e limitações. Estimulando a construção de vínculos, conectando-os com a natureza e mergulhando em experiências multissensoriais. </Title>
-                    { /* <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
-                        <Label style={{ textAlign: 'center', color: color.title }}>Cadastrar pré-matrícula</Label>
-                    </Button> */ }
+                   <Button onPress={handleRegister} style={{ width: '100%', backgroundColor: color.sc.sc3, marginTop: 12 }}>
+                        <Label style={{ textAlign: 'center', color: '#fff' }}>Cadastrar pré-matrícula</Label>
+                    </Button>
 
                     <Column style={{ paddingVertical: 20 }}>
                         <Title align="left" style={{ paddingVertical: 6, }}>Sobre os monitores:</Title>

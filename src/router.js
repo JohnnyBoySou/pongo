@@ -74,12 +74,18 @@ import VillaPongoScreen from '@screens/villapongo';
 import ServicesScreen from '@screens/services';
 import ServicesSingleScreen from '@screens/services/single';
 import ServiceDiarioScreen from '@screens/services/diario';
+
+//PRODUCTS
+import ProductsScreen from '@screens/products';
+import ProductSingleScreen from '@screens/products/single';
+
 //SCHOOL
 import SchoolRegisterScreen from '@screens/school/register';
 import SchoolFinishScreen from '@screens/school/finish';
 import SchoolSuccessScreen from '@screens/school/success';
 import SchoolPongoScreen from '@screens/school/index';
 import SchoolBoletimScreen from '@screens/school/boletim';
+import SchoolPayments from '@screens/school/payments';
 
 //DAY USE
 import DayUseScreen from '@screens/day-use/index';
@@ -120,7 +126,7 @@ export default function Router({ }) {
   return (
     <NavigationContainer linking={linking}>
       
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='ShopCart'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Products'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -130,6 +136,9 @@ export default function Router({ }) {
         <Stack.Screen name="ChatSingleImage" component={ChatSingleImageScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatColaboradorList" component={ChatColaboradorListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="ChatDetailsColaborador" component={ChatDetailsColaboradorScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+
+        <Stack.Screen name="Products" component={ProductsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        <Stack.Screen name="ProductSingle" component={ProductSingleScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="PetsList" component={PetsListScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="PetsProfile" component={PetsProfileScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
@@ -142,7 +151,8 @@ export default function Router({ }) {
         <Stack.Screen name="SchoolSuccess" component={SchoolSuccessScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="School" component={SchoolPongoScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="SchoolBoletim" component={SchoolBoletimScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-
+        <Stack.Screen name="SchoolPayments" component={SchoolPayments} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
+        
         <Stack.Screen name="Institucional" component={InstitucionalScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="InstitucionalVisita" component={InstitucionalVisitaScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="InstitucionalAbout" component={InstitucionalAboutScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
