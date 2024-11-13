@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react';
-import { Main, Title, } from '@theme/global';
+import { Main, Title, Loader } from '@theme/global';
 
 export default function AsyncStaticScreen({ navigation, }) {
     //verificacoes e animação
     useEffect(() => {
-        setTimeout(() => {
-            navigation.navigate('Tabs')
-        }, 2000)
+        navigation.navigate('Tabs')
     }, [])
     return (
-        <Main style={{ backgroundColor: "#FE25BD", flex: 1, justifyContent: 'center', alignItems: 'center', }}>
-            <Title>Tela de carregamento</Title>
+        <Main style={{ flex: 1, justifyContent: 'center', alignItems: 'center', }}>
+            <Loader size={24} />
         </Main>
     )
 }

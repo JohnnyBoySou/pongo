@@ -91,9 +91,9 @@ export default function HotelRegisterScreen({ navigation, route }) {
                         <TextArea value={desc} setValue={setdesc} label="Observações" />
 
                         <Button onPress={() => { setterms(!terms) }} pv={1} ph={1} radius={2} mv={12}>
-                            <Row style={{ columnGap: 12, alignItems: 'center', }}>
+                            <Row style={{ columnGap: 12,  }}>
                                 <CheckBox status={terms} setstatus={() => { setterms(!terms) }} />
-                                <Label>Li e estou ciente das normas do{'\n'}estabelecimento</Label>
+                                <Label>Li e estou ciente das normas do{'\n'}estabelecimento.</Label>
                             </Row>
                         </Button>
                         <Button onPress={handlePay} bg={color.sc.sc3} style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 12, }}>

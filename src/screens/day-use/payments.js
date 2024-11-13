@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Column, Label, Title, Row, Button, useTheme, LabelBT, Image } from '@theme/global';
+import { Column, Label, Title, Row, Button, useTheme, LabelBT, Image, Main } from '@theme/global';
 
 //COMPONENTS
 import PaymentCredito from '@components/Payments/credito';
@@ -17,34 +17,28 @@ export default function DayUsePayments({ route, navigation,  modal, card, }) {
 
     const CardPlano = ({ item,  }) => {
         const { color, font, margin } = useTheme();
-        const { id, name, date, price, inclusos } = item
+        const { dias, desc, price, value, inclusos } = item
+        console.log(item)
         return (
             <Animated.View entering={SlideInLeft} exiting={SlideOutLeft}>
-                <Row style={{ marginHorizontal: margin.h, justifyContent: 'center', alignItems: 'center', }}>
-                    <Column style={{ width: 260, backgroundColor: '#F7F7F7', borderRadius: 18, paddingHorizontal: 20, }}>
-                        <Row style={{ justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 20, marginBottom: 8, }}>
-                            <Title size={17} width={120}>Plano {name}</Title>
-                            <Label size={15}>{price}</Label>
-                        </Row>
-                        <Label>{date}</Label>
-                        <Column style={{ height: 20, }}></Column>
-                        <Title size={16}>Inclusos:</Title>
-                        <Column style={{ height: 6, }}></Column>
-                        {inclusos?.map((item, index) => <Label key={index} size={14} style={{ lineHeight: 20, }}>{item}</Label>)}
-                        <Button  style={{ backgroundColor: color.green, marginTop: 20, marginBottom: 20, }} radius={12}>
-                            <Row style={{ justifyContent: 'center', columnGap: 12, alignItems: 'center', }}>
-                                <CheckCircle size={18} color="#fff" />
-                                <Title size={18} align='center' color="#fff" font={font.medium}>Selecionado</Title>
-                            </Row>
-                        </Button>
-                    </Column>
-                </Row>
+                <Column style={{ backgroundColor: '#FFF', borderRadius: 16, marginVertical: 12, paddingVertical: 20, paddingHorizontal: 20, }}>
+                            <Title>R$ {price},00</Title>
+                            <Column style={{ height: 12, }} />
+                            <Title size={16}>Incluso:</Title>
+                            {inclusos?.map((item, index) => (
+                                <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                                    <Label style={{ lineHeight: 24, }}>{item?.name} </Label>
+                                    <Label>{item?.label}</Label>
+                                </Row>))}
+                        </Column>
             </Animated.View>
     
         )
     }
 
     return (
+        <Main>
+
         <Column style={{ marginHorizontal: margin.h, }}>
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
                 <Button onPress={() => { navigation.goBack() }} bg={color.sc.sc3} pv={6} ph={14}>
@@ -73,7 +67,7 @@ export default function DayUsePayments({ route, navigation,  modal, card, }) {
 
             {currentPage === 1 && <Column style={{ marginVertical: 12, }}>
                 <Title align="center" style={{ marginBottom: 12, }}>Confirmação</Title>
-                <CardPlano item={item.plano} />
+                <CardPlano item={item} />
                 <Button onPress={() => { setCurrentPage(2) }} bg={color.sc.sc3} style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 12, }}>
                     <LabelBT color="#fff">Confirmar e continuar</LabelBT>
                 </Button>
@@ -109,8 +103,8 @@ export default function DayUsePayments({ route, navigation,  modal, card, }) {
                     {type === 'Credito' && <PaymentCredito settype={settype} item={item} />}
                     {type === 'Pix' && <PaymentPix settype={settype} item={item} />}
                 </Column>}
-
-        </Column>
+            </Column>
+        </Main>
     )
 }
 

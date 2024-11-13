@@ -7,36 +7,57 @@ import { Search, ShoppingBag, X } from 'lucide-react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
+import { listProducts } from '@api/request/shop';
+
 export default function ShopScreen({navigation}) {
     const { color, margin } = useTheme();
     const [category, setcategory] = useState();
+    const [loading, setloading] = useState();
+    const [data, setdata] = useState();
 
     const cats = [
         {
             name: 'Camas',
-            id: '1',
+            id: 1,
         },
         {
             name: 'Bowls',
-            id: '2',
+            id: 2,
         },
         {
             name: 'Brinquedos',
-            id: '3',
+            id: 3,
         },
         {
             name: 'Passeio',
-            id: '4',
+            id: 4,
         },
         {
             name: 'Mantas',
-            id: '6',
+            id: 6,
         },
         {
             name: 'Pet Care',
-            id: '7',
+            id: 7,
         },
     ]
+
+    const fetchData = async () => {
+        setloading(true)
+        try {
+            const res = await listProducts()
+            setdata(res)
+        } catch (error) {
+            
+        } finally {
+            setloading(false)
+        }
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
     return (
         <Main style={{ backgroundColor: '#ECEBEB', paddingTop: 20 }}>
             <StatusBar backgroundColor='#fff' />
@@ -48,104 +69,55 @@ export default function ShopScreen({navigation}) {
                 <Column style={{ backgroundColor: '#ECEBEB', paddingTop: 20, }}>
                     <Row mh={margin.h}>
 
-                    <Button style={{ backgroundColor: '#fff', flexGrow: 1, }} onPress={() => {navigation.navigate('Search')}} >
+                    <Button style={{ backgroundColor: '#fff', flexGrow: 1, }} radius={6} onPress={() => {navigation.navigate('Search')}} >
                         <Row style={{ columnGap: 12, alignItems: 'center', }}>
                             <Search color={color.label} />
                             <Label>Pesquisar</Label>
                         </Row>
                         </Button>
-                        
-                        <Button bg={color.sc.sc3} style={{ marginLeft: 12, }} onPress={() => {navigation.navigate('ShopCart')}} >
+                        <Button bg={color.sc.sc3} radius={6} style={{ marginLeft: 12, }} onPress={() => {navigation.navigate('ShopCart')}} >
                             <ShoppingBag color='#fff' />
                         </Button>
 
                     </Row>
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 12, }} style={{ marginVertical: 12, }}>
                         <Column style={{ width: 16 }} />
-                        {category && <Button onPress={() => { setcategory(null) }} bg='#fff' style={{ width: 38, justifyContent: 'center', alignItems: 'center', }}>
-                            <X size={16} color={color.label} />
-                        </Button>}
+                  
                         {cats.map((cat, index) =>
-                            <Button bg={cat?.id == category?.id ? color.sc.sc3 : '#fff'} onPress={() => { setcategory(cat) }} >
+                            <Button radius={1} bg={cat?.id == category?.id ? color.sc.sc3 : '#fff'} onPress={() => { navigation.navigate('ShopSingleCategory', { category: cat}) }} >
                                 <Label color={cat?.id == category?.id ? "#FFF" : color.label}>{cat?.name}</Label>
                             </Button>)}
                         <Column style={{ width: margin.h }} />
                     </ScrollView>
-
-
                 </Column>
 
-                {!category && <Column style={{ backgroundColor: '#ecebeb',  }}>
-
-                    <Row style={{ paddingHorizontal: margin.h, justifyContent: 'space-between', alignItems: 'center', }}>
-                        <Title>Novos produtos</Title>
-                        <Button>
-                            <Label>Ver todos</Label>
-                        </Button>
+                <Column style={{ backgroundColor: '#ecebeb',  }}>
+                    <Row style={{ paddingHorizontal: margin.h, marginTop: 12, marginBottom: 12, justifyContent: 'space-between', alignItems: 'center', }}>
+                        <Title size={24}>Novos produtos</Title>
                     </Row>
-                    <Produtcs />
-
-                    <Row style={{ paddingHorizontal: margin.h, justifyContent: 'space-between', alignItems: 'center', }}>
-                        <Title>Explore</Title>
-                        <Button>
-                            <Label>Ver todos</Label>
-                        </Button>
+                    <Produtcs data={data} />
+                    <Row style={{ paddingHorizontal: margin.h, marginTop: 20, marginBottom: 12, justifyContent: 'space-between', alignItems: 'center', }}>
+                        <Title size={24}>Explore</Title>
                     </Row>
-                    <Explore />
-                </Column>}
-
-                {category && <Column style={{ backgroundColor: '#ecebeb', }}>
-                    <Row style={{ paddingHorizontal: margin.h, justifyContent: 'space-between', alignItems: 'center', }}>
-                        <Title>{category?.name}</Title>
-                        <Button>
-                            <Label>Ver todos</Label>
-                        </Button>
-                    </Row>
-                    <Categories />
-                </Column>}
+                    <Explore data={data} />
+                </Column>
+               
             </Scroll>
         </Main>
     )
 }
 
 
-const Produtcs = () => {
+const Produtcs = ({ data }) => {
     const navigation = useNavigation()
-    const data = [
-        {
-            id: 1,
-            img: 'https://i.pinimg.com/564x/cc/97/8a/cc978a648e92eb991131455e07f135e3.jpg',
-            name: 'Teste',
-            price: 'R$ 150,00',
-        },
-        {
-            id: 2,
-            img: 'https://i.pinimg.com/564x/cc/97/8a/cc978a648e92eb991131455e07f135e3.jpg',
-            name: 'Teste',
-            price: 'R$ 150,00',
-        },
-        {
-            id: 3,
-            img: 'https://i.pinimg.com/564x/cc/97/8a/cc978a648e92eb991131455e07f135e3.jpg',
-            name: 'Teste',
-            price: 'R$ 150,00',
-        },
-        {
-            id: 4,
-            img: 'https://i.pinimg.com/564x/cc/97/8a/cc978a648e92eb991131455e07f135e3.jpg',
-            name: 'Teste',
-            price: 'R$ 150,00',
-        },
-    ]
-
     const renderItem = ({ item }) => {
         return (
             <Button pv={1} ph={1} radius={1} style={{ flexGrow: 1, }} onPress={() => { navigation.navigate('ShopSingleProduct', { id: item.id, }) }} >
-                <Column style={{ marginRight: 16, }}>
-                    <Image source={{ uri: item.img }} style={{ height: 100, width: 80, objectFit: 'cover', borderRadius: 12, marginBottom: 6, }} />
-                    <Title size={18}>{item.name}</Title>
+                <Column style={{ marginRight: 16, width: 100, }}>
+                    <Image source={{ uri: item?.img }} style={{ height: 120, width: 120, objectFit: 'cover',  marginBottom: 6, }} />
+                    <Title size={15}>{item?.name?.length > 14 ? item?.name?.slice(0,14) + '...' : item?.name}</Title>
                     <Column style={{ height: 4, }} />
-                    <Label size={14}>{item.price}</Label>
+                    <Title size={15}>{item?.price}</Title>
                 </Column>
             </Button>
         )
@@ -153,11 +125,11 @@ const Produtcs = () => {
     return (
         <FlatList
             data={data}
-            style={{ marginVertical: 6, }}
-            ListHeaderComponent={<Column style={{ width: 28, }}></Column>}
+            ListHeaderComponent={<Column style={{ width: 16, }}></Column>}
             ListFooterComponent={<Column style={{ width: 16, }}></Column>}
             keyExtractor={item => item.id}
             renderItem={renderItem}
+            contentContainerStyle={{ columnGap: 12 }}
             showsHorizontalScrollIndicator={false}
             horizontal
         />
@@ -165,42 +137,17 @@ const Produtcs = () => {
 }
 
 
-const Explore = () => {
-    const data = [
-        {
-            id: 1,
-            img: 'https://i.pinimg.com/564x/cc/97/8a/cc978a648e92eb991131455e07f135e3.jpg',
-            name: 'Teste',
-            price: 'R$ 150,00',
-        },
-        {
-            id: 2,
-            img: 'https://i.pinimg.com/564x/cc/97/8a/cc978a648e92eb991131455e07f135e3.jpg',
-            name: 'Teste',
-            price: 'R$ 150,00',
-        },
-        {
-            id: 3,
-            img: 'https://i.pinimg.com/564x/cc/97/8a/cc978a648e92eb991131455e07f135e3.jpg',
-            name: 'Teste',
-            price: 'R$ 150,00',
-        },
-        {
-            id: 4,
-            img: 'https://i.pinimg.com/564x/cc/97/8a/cc978a648e92eb991131455e07f135e3.jpg',
-            name: 'Teste',
-            price: 'R$ 150,00',
-        },
-    ]
+const Explore = ({data}) => {
+    const navigation = useNavigation()
 
     const renderItem = ({ item }) => {
         return (
-            <Button pv={1} ph={1} radius={1} style={{ flexGrow: 1, }}>
-                <Column style={{ flexGrow: 1, }}>
-                    <Image source={{ uri: item.img }} style={{ height: 150, flexGrow: 1, objectFit: 'cover', borderRadius: 12, marginBottom: 6, }} />
-                    <Title size={18}>{item.name}</Title>
+            <Button pv={1} ph={1} radius={1} style={{ flexGrow: 1, }} onPress={() => { navigation.navigate('ShopSingleProduct', { id: item.id, }) }} >
+                <Column style={{ flexGrow: 1, width: 150, }}>
+                    <Image source={{ uri: item?.img }} style={{ height: 150, width: 150, objectFit: 'cover', marginBottom: 6, }} />
+                    <Title size={15}>{item?.name}</Title>
                     <Column style={{ height: 4, }} />
-                    <Label size={14}>{item.price}</Label>
+                    <Title size={15}>{item?.price}</Title>
                 </Column>
             </Button>
         )
@@ -209,7 +156,6 @@ const Explore = () => {
         <FlatList
             data={data}
             style={{ marginHorizontal: 28, }}
-            ListHeaderComponent={<Column style={{ width: 28, }}></Column>}
             ListFooterComponent={<Column style={{ width: 16, }}></Column>}
             keyExtractor={item => item.id}
             renderItem={renderItem}

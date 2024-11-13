@@ -10,9 +10,13 @@ import Swiper from 'react-native-swiper';
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function DayUseScreen() {
+export default function DayUseScreen({navigation}) {
 
     const { color, font, margin } = useTheme();
+
+    const handleRegister = () => {
+        navigation.navigate('DayUseRegister')
+    }
 
     return (
         <Main style={{ backgroundColor: '#FFFFFF' }}>
@@ -25,9 +29,9 @@ export default function DayUseScreen() {
                     <Image source={require('@imgs/img-escola-banner.png')} style={{ width: '100%', height: 223, marginVertical: 24, objectFit: 'contain' }} />
                     <Title style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 6, paddingHorizontal: 40, lineHeight: 22 }}>Tenha todos os benefícios da Escola PONGO por um dia!</Title>
 
-                    { /* <Button style={{ width: '100%', backgroundColor: color.pr.pr2, marginTop: 12 }}>
-                        <Label style={{ textAlign: 'center', color: color.title }}>Contratar Day Use</Label>
-                    </Button> */ }
+                    <Button onPress={handleRegister} style={{ width: '100%', backgroundColor: color.sc.sc3, marginTop: 12 }}>
+                        <Label style={{ textAlign: 'center', color: '#fff' }}>Contratar Day Use</Label>
+                    </Button>
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
@@ -88,16 +92,12 @@ export default function DayUseScreen() {
                 </Column>
 
                 <ListaRotinaEscola />
-
+                <Button onPress={handleRegister} style={{  backgroundColor: color.sc.sc3, marginTop: 12, marginHorizontal: 28, }}>
+                    <Label style={{ textAlign: 'center', color: '#fff' }}>Contratar Day Use</Label>
+                </Button>
                 <Column style={{ height: 120 }} />
 
-                { /* <Column mh={margin.h} mv={margin.v}>
-                    <Button style={{ width: '100%', backgroundColor: color.pr.pr2 }}>
-                        <Text style={{ textAlign: 'center', color: color.title }}>Contratar Day Use</Text>
-                    </Button>
-                </Column> */ }
-
-
+                
 
             </Scroll>
             <TabBar />

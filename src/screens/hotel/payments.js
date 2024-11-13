@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Column, Label, Title, Row, Button, useTheme, LabelBT, Image } from '@theme/global';
+import { Column, Label, Title, Row, Button, useTheme, LabelBT, Image, Main, School, } from '@theme/global';
 
 //COMPONENTS
 import PaymentCredito from '@components/Payments/credito';
@@ -19,9 +19,15 @@ export default function HotelPayments({ route, navigation,  modal, card, }) {
     
     const Card = ({ item }) => {
         const { dias, desc, value, incluso } = item;
+        const diasformt = dias?.map((item, index) => {
+            const date = new Date(item);
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            return `${day}/${month} `;
+        });
         return (
-            <Column style={{ borderWidth: 1, borderColor: color.border, borderRadius: 16, marginVertical: 12, paddingVertical: 20, paddingHorizontal: 20, }}>
-            <Title>R$ {dias?.length * 250},00</Title>
+            <Column style={{ backgroundColor: '#fff', borderRadius: 16, marginVertical: 12, paddingVertical: 20, paddingHorizontal: 20, }}>
+                <Title>R$ {dias?.length * 250},00 por {diasformt}</Title>
             <Column style={{ height: 12, }} />
             <Title size={16}>Check In: </Title>
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
@@ -37,6 +43,8 @@ export default function HotelPayments({ route, navigation,  modal, card, }) {
         </Column>
     )}
     return (
+        <Main>
+
         <Column style={{ marginHorizontal: margin.h, }}>
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
                 <Button onPress={() => { navigation.goBack() }} bg={color.sc.sc3} pv={6} ph={14}>
@@ -102,7 +110,9 @@ export default function HotelPayments({ route, navigation,  modal, card, }) {
                     {type === 'Pix' && <PaymentPix settype={settype} item={item} />}
                 </Column>}
 
-        </Column>
+            </Column>
+        </Main>
+            
     )
 }
 

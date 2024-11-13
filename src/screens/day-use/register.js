@@ -12,7 +12,7 @@ export default function DayUseRegisterScreen({ navigation, route }) {
     const [terms, setterms] = useState();
     const [day, setday] = useState([]);
     const [desc, setdesc] = useState();
-    const [value, setvalue] = useState('R$ 250,00');
+    const [value, setvalue] = useState(250);
     const [inclusos, setinclusos] = useState([
 
         {
@@ -38,7 +38,8 @@ export default function DayUseRegisterScreen({ navigation, route }) {
         dias: day,
         desc: desc,
         value: value,
-        incluso: inclusos,
+        price: day?.length * value,
+        inclusos: inclusos,
     }
     const days = ['Segunda-feira | Fisioterapia', 'Terça-feira | Agility', 'Quarta-feira | Piquenipe no parque', 'Quinta-feira | Agility', 'Sexta-feira | Piscina',]
     const handleDays = (item) => {
@@ -49,9 +50,8 @@ export default function DayUseRegisterScreen({ navigation, route }) {
         }
     }
 
-    const modalPayment = useRef()
     const handlePay = () => {
-        modalPayment.current.expand()
+        navigation.navigate('DayUsePayments', { item: item });
     }
     return (
         <Main>
@@ -73,8 +73,8 @@ export default function DayUseRegisterScreen({ navigation, route }) {
                             </Button>))}
 
 
-                        <Column style={{ borderWidth: 1, borderColor: color.border, borderRadius: 16, marginVertical: 12, paddingVertical: 20, paddingHorizontal: 20, }}>
-                            <Title>{value}</Title>
+                        <Column style={{ backgroundColor: '#FFF', borderRadius: 16, marginVertical: 12, paddingVertical: 20, paddingHorizontal: 20, }}>
+                            <Title>R$ {day?.length * value},00</Title>
                             <Column style={{ height: 12, }} />
                             <Title size={16}>Incluso:</Title>
                             {inclusos?.map((item, index) => (
@@ -84,11 +84,6 @@ export default function DayUseRegisterScreen({ navigation, route }) {
                                 </Row>))}
                         </Column>
 
-
-
-
-
-
                         <Column style={{ height: 12, }}></Column>
                         <Title size={17} font={font.medium}>Alguma observação?</Title>
                         <Column style={{ height: 12, }}></Column>
@@ -97,7 +92,7 @@ export default function DayUseRegisterScreen({ navigation, route }) {
                         <Button onPress={() => { setterms(!terms) }} pv={1} ph={1} radius={2} mv={12}>
                             <Row style={{ columnGap: 12, }}>
                                 <CheckBox status={terms} setstatus={() => { setterms(!terms) }} />
-                                <Label>Li e estou ciente das normas do estabelecimento</Label>
+                                <Label>Li e estou ciente das normas do {'\n'}estabelecimento</Label>
                             </Row>
                         </Button>
                         <Button onPress={handlePay} bg={color.sc.sc3} style={{ justifyContent: 'center', alignItems: 'center', marginVertical: 12, }}>
@@ -107,20 +102,7 @@ export default function DayUseRegisterScreen({ navigation, route }) {
 
                 </Column>
             </Scroll>
-            <Modal ref={modalPayment} snapPoints={[0.1, SCREEN_HEIGHT]}>
-                <Payment item={item} destino='Day Use' modal={modalPayment} card={
-                    <Column style={{ borderWidth: 1, borderColor: color.border, borderRadius: 16, marginVertical: 12, paddingVertical: 20, paddingHorizontal: 20, }}>
-                        <Title>{value}</Title>
-                        <Column style={{ height: 12, }} />
-                        <Title size={16}>Incluso:</Title>
-                        {inclusos?.map((item, index) => (
-                            <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                                <Label style={{ lineHeight: 24, }}>{item?.name} </Label>
-                                <Label>{item?.label}</Label>
-                            </Row>))}
-                    </Column>
-                } />
-            </Modal>
+          
         </Main>
     )
 }

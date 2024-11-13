@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Column, Label, Title, Row, Button, useTheme, LabelBT, Image } from '@theme/global';
+import { Column, Label, Title, Row, Button, useTheme, LabelBT, Image, Main, Scroll, } from '@theme/global';
 
 //COMPONENTS
 import PaymentCredito from '@components/Payments/credito';
@@ -45,6 +45,8 @@ export default function SchoolPayment({ route, navigation,  modal, card, }) {
     }
 
     return (
+        <Main>
+
         <Column style={{ marginHorizontal: margin.h, }}>
             <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
                 <Button onPress={() => { navigation.goBack() }} bg={color.sc.sc3} pv={6} ph={14}>
@@ -110,7 +112,8 @@ export default function SchoolPayment({ route, navigation,  modal, card, }) {
                     {type === 'Pix' && <PaymentPix settype={settype} item={item} />}
                 </Column>}
 
-        </Column>
+            </Column>
+        </Main>
     )
 }
 

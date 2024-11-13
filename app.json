@@ -61,7 +61,8 @@
           "microphonePermission": "Permita que a Pongo acesse seu microfone.",
           "recordAudioAndroid": true
         }
-      ]
+      ],
+      "expo-font"
     ],
     "extra": {
       "oneSignalAppId": "a972b3c3-b43c-4468-9aef-298babfece52",
