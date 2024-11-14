@@ -46,7 +46,7 @@ export default function SchoolPongoScreen() {
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
-                    <Title style={{ fontSize: 18, fontWeight: 700, color: '#979797', paddingVertical: 6, marginVertical: 12 }}>Conheça a estrutura da Escola PONGO</Title>
+                    <Title style={{ fontSize: 18, color: '#979797', paddingVertical: 6, marginVertical: 12 }}>Conheça a estrutura da Escola PONGO</Title>
 
                     <Row alignItems='flex-start' pv={6} style={{ marginRight: 24 }}>
                         <MoveRight size={24} color={'#D9D9D9'} style={{ marginRight: 8 }} />
@@ -87,7 +87,7 @@ export default function SchoolPongoScreen() {
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
-                    <Title style={{ fontSize: 18, fontWeight: 700, color: '#979797', paddingVertical: 6, marginVertical: 12, textAlign: 'center' }}>Planos Oferecidos</Title>
+                    <Title style={{ fontSize: 18,  color: '#979797', paddingVertical: 6, marginVertical: 12, textAlign: 'center' }}>Planos Oferecidos</Title>
                 </Column>
                 <PlanosList destino={handleRegister} />
 
@@ -96,7 +96,7 @@ export default function SchoolPongoScreen() {
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
-                    <Title style={{ fontSize: 18, fontWeight: 700, color: '#979797', paddingVertical: 6, marginTop: 12, textAlign: 'center' }}>Rotina na escola</Title>
+                    <Title style={{ fontSize: 18,  color: '#979797', paddingVertical: 6, marginTop: 12, textAlign: 'center' }}>Rotina na escola</Title>
                     <Label style={{ fontSize: 12, color: '#979797', textAlign: 'center' }}>Integral 7:00 ás 19:00</Label>
 
                 </Column>
@@ -109,7 +109,7 @@ export default function SchoolPongoScreen() {
                     <Image source={require('@imgs/atividades.png')} style={{ width: 198, height: 264 }} />
 
                     <Column>
-                        <Title style={{ fontSize: 18, fontWeight: 700, color: '#434343', marginVertical: 12 }}>Atividades</Title>
+                        <Title style={{ fontSize: 18, color: '#434343', marginVertical: 12 }}>Atividades</Title>
                         <View style={{ marginBottom: 4 }}>
                             <Label style={{ fontSize: 12 }}>SEGUNDAS-FEIRAS</Label>
                             <Row alignItems='center'>

@@ -9,7 +9,7 @@ import Payment from '@components/Payments';
 
 export default function DayUseRegisterScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
-    const [terms, setterms] = useState();
+    const [terms, setterms] = useState(true);
     const [day, setday] = useState([]);
     const [desc, setdesc] = useState();
     const [value, setvalue] = useState(250);
@@ -51,8 +51,12 @@ export default function DayUseRegisterScreen({ navigation, route }) {
     }
 
     const handlePay = () => {
-        navigation.navigate('DayUsePayments', { item: item });
+        if (!terms || day?.length === 0) return;
+        else {
+            navigation.navigate('DayUsePayments', { item: item });
+        }
     }
+
     return (
         <Main>
             <Scroll>
@@ -73,17 +77,26 @@ export default function DayUseRegisterScreen({ navigation, route }) {
                             </Button>))}
 
 
-                        <Column style={{ backgroundColor: '#FFF', borderRadius: 16, marginVertical: 12, paddingVertical: 20, paddingHorizontal: 20, }}>
-                            <Title>R$ {day?.length * value},00</Title>
-                            <Column style={{ height: 12, }} />
-                            <Title size={16}>Incluso:</Title>
-                            {inclusos?.map((item, index) => (
-                                <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                                    <Label style={{ lineHeight: 24, }}>{item?.name} </Label>
-                                    <Label>{item?.label}</Label>
-                                </Row>))}
+                        <Column style={{ backgroundColor: '#fff', marginVertical: 16, }}>
+                            <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginHorizontal: -16, marginTop: -16, }}>
+                                <Column style={{ width: 32, height: 32, borderRadius: 100, backgroundColor: color.bg, }} />
+                                <Column style={{ width: 32, height: 32, borderRadius: 100, backgroundColor: color.bg, }} />
+                            </Row>
+                            <Column style={{ backgroundColor: '#FFF', borderRadius: 16, paddingVertical: 20, paddingHorizontal: 20, }}>
+                                <Title>R$ {day?.length * value},00</Title>
+                                <Column style={{ height: 12, }} />
+                                <Title size={16}>Incluso:</Title>
+                                {inclusos?.map((item, index) => (
+                                    <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                                        <Label style={{ lineHeight: 24, }}>{item?.name} </Label>
+                                        <Label>{item?.label}</Label>
+                                    </Row>))}
+                            </Column>
+                            <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginHorizontal: -16, marginBottom: -16, }}>
+                                <Column style={{ width: 32, height: 32, borderRadius: 100, backgroundColor: color.bg, }} />
+                                <Column style={{ width: 32, height: 32, borderRadius: 100, backgroundColor: color.bg, }} />
+                            </Row>
                         </Column>
-
                         <Column style={{ height: 12, }}></Column>
                         <Title size={17} font={font.medium}>Alguma observação?</Title>
                         <Column style={{ height: 12, }}></Column>
@@ -102,7 +115,7 @@ export default function DayUseRegisterScreen({ navigation, route }) {
 
                 </Column>
             </Scroll>
-          
+
         </Main>
     )
 }

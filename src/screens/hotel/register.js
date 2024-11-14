@@ -9,7 +9,7 @@ import Calendario from '@components/Calendar';
 
 export default function HotelRegisterScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
-    const [terms, setterms] = useState();
+    const [terms, setterms] = useState(true);
     const [day, setday] = useState([]);
     const [desc, setdesc] = useState();
     const [value, setvalue] = useState();
@@ -41,10 +41,10 @@ export default function HotelRegisterScreen({ navigation, route }) {
         incluso: inclusos,
     }
 
-    const modalPayment = useRef()
     const handlePay = () => {
-        if (!terms && !day.length) return;
+        if (!terms || !day.length === 0) return;
         else {
+            console.log(day.length)
             navigation.navigate('HotelPayments', { item: item });    
         }
     }
@@ -56,7 +56,6 @@ export default function HotelRegisterScreen({ navigation, route }) {
                     <TopMenu search={false} cart={false} />
                     <Column style={{ height: 20, }}></Column>
                     <Title align="center" size={24}>Reservar Hotel</Title>
-
                     <Column mh={margin.h} mv={12}>
                         <Title size={17} font={font.medium}>Selecione qual data você deseja: *</Title>
                         <Column style={{ height: 6, }}></Column>
@@ -101,28 +100,9 @@ export default function HotelRegisterScreen({ navigation, route }) {
                         </Button>
                     </Column>
 
+                    <Column style={{ height: 70, }}></Column>
                 </Column>
             </Scroll>
-
-            <Modal ref={modalPayment} snapPoints={[0.1, SCREEN_HEIGHT]}>
-                <Payment item={item} destino='Hotel' modal={modalPayment} card={
-                    <Column style={{ borderWidth: 1, borderColor: color.border, borderRadius: 16, marginVertical: 12, paddingVertical: 20, paddingHorizontal: 20, }}>
-                        <Title>R$ {day.length * 250},00</Title>
-                        <Column style={{ height: 12, }} />
-                        <Title size={16}>Check In: </Title>
-                        <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                            <Label>14:00h às 20:00h</Label>
-                            <Label align="right">Segunda-feira e{'\n'}Terça-feira</Label>
-                        </Row>
-                        <Column style={{ height: 12, }} />
-                        <Title size={16}>Check Out: </Title>
-                        <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                            <Label>07:00h às 12:00h</Label>
-                            <Label align="right">Dias 12/12/2024 e{'\n'}13/12/2024</Label>
-                        </Row>
-                    </Column>
-                } />
-            </Modal>
         </Main>
     )
 }

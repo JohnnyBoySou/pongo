@@ -21,13 +21,18 @@ export default function AccountScreen({ navigation, }) {
             try {
                 const pref = await getPreferences()
                 if (pref?.token) {
-                    const res = await listUser();
-                    setuser(res)
+                    try {
+                        const res = await listUser();
+                        setuser(res)
+                    } catch (error) {
+                        navigation.navigate('AuthLogin')
+                    }
                 }
                 else {
                     navigation.navigate('AuthLogin')
                 }
             } catch (error) {
+                console.log('aq')
                 navigation.navigate('AuthLogin')
                 console.log(error)
             } finally {

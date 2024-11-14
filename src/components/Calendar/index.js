@@ -79,7 +79,7 @@ export default function Calendario({ day, setday, disabled, }) {
                         marginTop: 2,
                     }}
                 >
-                    {date.day}
+                    {date?.day}
                 </Label>
             </Button>
         );
@@ -90,10 +90,9 @@ export default function Calendario({ day, setday, disabled, }) {
         const month = date.toLocaleString('default', { month: 'long' });
         const year = date.getFullYear();
 
-        console.log(date)
         return (
         <Column style={{ justifyContent: 'center', alignItems: 'center',  height: 50, }}>
-                <Title style={{ fontSize: 18, lineHeight: 24, fontFamily: 'Voyage_Medium', textTransform: 'uppercase',  textAlign: 'center', }}>
+                <Title style={{ fontSize: 18, lineHeight: 24, textTransform: 'uppercase',  textAlign: 'center', }}>
                    {month} {year} 
                 </Title>
         </Column>

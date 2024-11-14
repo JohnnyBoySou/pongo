@@ -58,6 +58,7 @@ export default function ShopSingleProductScreen({ navigation, route }) {
     const handleAdd = async () => {
         setloadingAdd(true);
         try {
+            console.log(itm)
             const res = await addProduct(itm)
             setsuccessAdd(true)
         } catch (error) {
@@ -174,9 +175,19 @@ export default function ShopSingleProductScreen({ navigation, route }) {
                         </Column>
                         {item?.categories && <ScrollView style={{ marginVertical: 10, }} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 12, }}>
                             <Column style={{ width: 16 }} />
-                            {item?.categories?.map((category, index) => (<Button key={index} radius={1} bg="#fff" onPress={() => { navigation.navigate('ShopSingleCategory', { category: category, }) }} >
-                                <Label>{category?.name}</Label>
-                            </Button>))}
+                            {item?.categories?.map((cat, index) => (<Column key={index}>
+                                <Row style={{ marginBottom: -8, zIndex: 99, marginHorizontal: -4, justifyContent: 'space-between', alignItems: 'center', }}>
+                                    <Column style={{ width: 14, height: 14, borderRadius: 100, backgroundColor: color.bg, }}></Column>
+                                    <Column style={{ width: 14, height: 14, borderRadius: 100, backgroundColor: color.bg, }}></Column>
+                                </Row>
+                                <Pressable style={{ paddingHorizontal: 16, backgroundColor: '#fff', paddingVertical: 12, }} bg='#fff' onPress={() => { navigation.navigate('ShopSingleCategory', { category: cat }) }} >
+                                    <Label align='center' color={color.label}>{cat?.name}</Label>
+                                </Pressable>
+                                <Row style={{ marginTop: -8, zIndex: 99, marginHorizontal: -4, justifyContent: 'space-between', alignItems: 'center', }}>
+                                    <Column style={{ width: 14, height: 14, borderRadius: 100, backgroundColor: color.bg, }}></Column>
+                                    <Column style={{ width: 14, height: 14, borderRadius: 100, backgroundColor: color.bg, }}></Column>
+                                </Row>
+                            </Column>))}
                             <Column style={{ width: 16 }} />
                         </ScrollView>}
                         <Column style={{ height: 70, }} />

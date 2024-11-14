@@ -7,8 +7,6 @@ import { Check, CheckCircle } from 'lucide-react-native';
 import CheckBox from '@components/Forms/checkbox';
 import TextArea from '@components/Forms/textarea';
 
-import Animated, { FadeInDown, FadeInLeft, FadeOutLeft, FadeOutUp, SlideInLeft, SlideOutLeft } from 'react-native-reanimated';
-
 
 export default function SchoolRegisterScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
@@ -52,7 +50,7 @@ export default function SchoolRegisterScreen({ navigation, route }) {
                     <Title align="center" size={24}>Cadastrar na escola</Title>
                     <Row mh={margin.h} mv={12} style={{ justifyContent: 'space-between', alignItems: 'center', }}>
                         <Title size={18} font={font.medium}>Selecione o plano: *</Title>
-                        {plano && <Button onPress={() => { setplano(null) }} ph={10} pv={3}><Label><U>Trocar</U></Label></Button>}
+                        {plano && <Button bg={color.sc.sc3+30} radius={4} onPress={() => { setplano(null) }} ph={10} pv={8}><Label color={color.sc.sc3}>Trocar</Label></Button>}
                     </Row>
                     {plano ?
                         <CardPlano item={plano} destino={handleSelect} /> :
@@ -62,7 +60,7 @@ export default function SchoolRegisterScreen({ navigation, route }) {
                     </Column>
                     <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 12, marginHorizontal: margin.h, }}>
                         {months?.map((item, index) => (
-                            <Button onPress={() => { setmonth(item) }} style={{ backgroundColor: month === item ? color.sc.sc3 : '#f7f7f7', borderWidth: 1, borderColor: month === item ? color.sc.sc3 : color.border, justifyContent: 'center', alignItems: 'center', }} radius={12}>
+                            <Button key={index} onPress={() => { setmonth(item) }} style={{ backgroundColor: month === item ? color.sc.sc3 : '#f7f7f7', borderWidth: 1, borderColor: month === item ? color.sc.sc3 : color.border, justifyContent: 'center', alignItems: 'center', }} radius={12}>
                                 <Title font={font.bold} size={16} color={month === item ? '#fff' : color.label}>{item} mês</Title>
                             </Button>))}
                         <Column style={{ width: 38, }}></Column>
@@ -94,9 +92,8 @@ export default function SchoolRegisterScreen({ navigation, route }) {
 
 const CardPlano = ({ item, destino }) => {
     const { color, font, margin } = useTheme();
-    const { id, name, date, price, inclusos } = item
+    const { name, date, price, inclusos } = item
     return (
-        <Animated.View entering={SlideInLeft} exiting={SlideOutLeft}>
             <Row style={{ marginHorizontal: margin.h, justifyContent: 'center', alignItems: 'center', }}>
                 <Column style={{ width: 260, backgroundColor: '#F7F7F7', borderRadius: 18, paddingHorizontal: 20, }}>
                     <Row style={{ justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 20, marginBottom: 8, }}>
@@ -116,7 +113,5 @@ const CardPlano = ({ item, destino }) => {
                     </Button>
                 </Column>
             </Row>
-        </Animated.View>
-
     )
 }

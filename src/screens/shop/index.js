@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Image } from '@theme/global';
 import { StatusBar } from 'expo-status-bar';
 import TopMenu from '@components/Header/topmenu';
-import { FlatList } from 'react-native';
+import { FlatList, Pressable } from 'react-native';
 import { Search, ShoppingBag, X } from 'lucide-react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
 import { listProducts } from '@api/request/shop';
 
-export default function ShopScreen({navigation}) {
+export default function ShopScreen({ navigation }) {
     const { color, margin } = useTheme();
     const [category, setcategory] = useState();
     const [loading, setloading] = useState();
@@ -48,7 +48,7 @@ export default function ShopScreen({navigation}) {
             const res = await listProducts()
             setdata(res)
         } catch (error) {
-            
+
         } finally {
             setloading(false)
         }
@@ -69,30 +69,41 @@ export default function ShopScreen({navigation}) {
                 <Column style={{ backgroundColor: '#ECEBEB', paddingTop: 20, }}>
                     <Row mh={margin.h}>
 
-                    <Button style={{ backgroundColor: '#fff', flexGrow: 1, }} radius={6} onPress={() => {navigation.navigate('Search')}} >
-                        <Row style={{ columnGap: 12, alignItems: 'center', }}>
-                            <Search color={color.label} />
-                            <Label>Pesquisar</Label>
-                        </Row>
+                        <Button style={{ backgroundColor: '#fff', flexGrow: 1, }} radius={100} onPress={() => { navigation.navigate('Search') }} >
+                            <Row style={{ columnGap: 12, alignItems: 'center', }}>
+                                <Image source={require('@imgs/icon.png')} style={{ width: 34, height: 34, borderRadius: 100, }} />
+                                <Label>Pesquisar</Label>
+                            </Row>
                         </Button>
-                        <Button bg={color.sc.sc3} radius={6} style={{ marginLeft: 12, }} onPress={() => {navigation.navigate('ShopCart')}} >
+                        <Button bg={color.sc.sc3} radius={6} style={{ marginLeft: 12, justifyContent: 'center', alignItems: 'center', }} onPress={() => { navigation.navigate('ShopCart') }} >
                             <ShoppingBag color='#fff' />
                         </Button>
 
                     </Row>
                     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 12, }} style={{ marginVertical: 12, }}>
-                        <Column style={{ width: 16 }} />
-                  
+                        <Column style={{ width: 24 }} />
+
                         {cats.map((cat, index) =>
-                            <Button radius={1} bg={cat?.id == category?.id ? color.sc.sc3 : '#fff'} onPress={() => { navigation.navigate('ShopSingleCategory', { category: cat}) }} >
-                                <Label color={cat?.id == category?.id ? "#FFF" : color.label}>{cat?.name}</Label>
-                            </Button>)}
+                            <Column>
+                                <Row style={{ marginBottom: -8, zIndex: 99, marginHorizontal: -4, justifyContent: 'space-between', alignItems: 'center', }}>
+                                    <Column style={{ width: 14, height: 14, borderRadius: 100, backgroundColor: color.bg, }}></Column>
+                                    <Column style={{ width: 14, height: 14, borderRadius: 100, backgroundColor: color.bg, }}></Column>
+                                </Row>
+                                <Pressable style={{ paddingHorizontal: 16, backgroundColor: '#fff', paddingVertical: 12, }} bg={cat?.id == category?.id ? color.sc.sc3 : '#fff'} onPress={() => { navigation.navigate('ShopSingleCategory', { category: cat }) }} >
+                                    <Label align='center' color={cat?.id == category?.id ? "#FFF" : color.label}>{cat?.name}</Label>
+                                </Pressable>
+                                <Row style={{ marginTop: -8, zIndex: 99, marginHorizontal: -4, justifyContent: 'space-between', alignItems: 'center', }}>
+                                    <Column style={{ width: 14, height: 14, borderRadius: 100, backgroundColor: color.bg, }}></Column>
+                                    <Column style={{ width: 14, height: 14, borderRadius: 100, backgroundColor: color.bg, }}></Column>
+                                </Row>
+                            </Column>
+                        )}
                         <Column style={{ width: margin.h }} />
                     </ScrollView>
                 </Column>
 
-                <Column style={{ backgroundColor: '#ecebeb',  }}>
-                    <Row style={{ paddingHorizontal: margin.h, marginTop: 12, marginBottom: 12, justifyContent: 'space-between', alignItems: 'center', }}>
+                <Column style={{ backgroundColor: '#ecebeb', }}>
+                    <Row style={{ paddingHorizontal: margin.h, marginBottom: 12, justifyContent: 'space-between', alignItems: 'center', }}>
                         <Title size={24}>Novos produtos</Title>
                     </Row>
                     <Produtcs data={data} />
@@ -101,7 +112,7 @@ export default function ShopScreen({navigation}) {
                     </Row>
                     <Explore data={data} />
                 </Column>
-               
+
             </Scroll>
         </Main>
     )
@@ -110,14 +121,21 @@ export default function ShopScreen({navigation}) {
 
 const Produtcs = ({ data }) => {
     const navigation = useNavigation()
-    const renderItem = ({ item }) => {
+    const { color } = useTheme()
+    const renderItem = ({ item }) => { 
         return (
             <Button pv={1} ph={1} radius={1} style={{ flexGrow: 1, }} onPress={() => { navigation.navigate('ShopSingleProduct', { id: item.id, }) }} >
-                <Column style={{ marginRight: 16, width: 100, }}>
-                    <Image source={{ uri: item?.img }} style={{ height: 120, width: 120, objectFit: 'cover',  marginBottom: 6, }} />
-                    <Title size={15}>{item?.name?.length > 14 ? item?.name?.slice(0,14) + '...' : item?.name}</Title>
+                <Column style={{  width: 140, }}>
+                    <Image source={{ uri: item?.img }} style={{ height: 140, width: 140, objectFit: 'cover', marginBottom: 6, }} />
+                    <Title style={{ width: 140, }} size={14}>{item?.name?.length > 14 ? item?.name?.slice(0, 14) + '...' : item?.name}</Title>
                     <Column style={{ height: 4, }} />
                     <Title size={15}>{item?.price}</Title>
+                    {item?.descont_percent && <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                        <Title size={12} style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid' }}>{item?.old_price}</Title>
+                        <Column style={{ backgroundColor: color.sc.sc3, paddingVertical: 4, paddingHorizontal: 4, marginRight: 4, marginBottom: 4, }}>
+                            <Label size={10} style={{ color: "#fff" }}>{item?.descont_percent}</Label>
+                        </Column>
+                    </Row>}
                 </Column>
             </Button>
         )
@@ -125,11 +143,11 @@ const Produtcs = ({ data }) => {
     return (
         <FlatList
             data={data}
-            ListHeaderComponent={<Column style={{ width: 16, }}></Column>}
-            ListFooterComponent={<Column style={{ width: 16, }}></Column>}
+            ListHeaderComponent={<Column style={{ width: 12, }}></Column>}
+            ListFooterComponent={<Column style={{ width: 12, }}></Column>}
             keyExtractor={item => item.id}
             renderItem={renderItem}
-            contentContainerStyle={{ columnGap: 12 }}
+            contentContainerStyle={{ columnGap: 16 }}
             showsHorizontalScrollIndicator={false}
             horizontal
         />
@@ -137,9 +155,9 @@ const Produtcs = ({ data }) => {
 }
 
 
-const Explore = ({data}) => {
+const Explore = ({ data }) => {
     const navigation = useNavigation()
-
+    const { color } = useTheme()
     const renderItem = ({ item }) => {
         return (
             <Button pv={1} ph={1} radius={1} style={{ flexGrow: 1, }} onPress={() => { navigation.navigate('ShopSingleProduct', { id: item.id, }) }} >
@@ -148,6 +166,12 @@ const Explore = ({data}) => {
                     <Title size={15}>{item?.name}</Title>
                     <Column style={{ height: 4, }} />
                     <Title size={15}>{item?.price}</Title>
+                    {item?.descont_percent && <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
+                        <Title size={12} style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid' }}>{item?.old_price}</Title>
+                        <Column style={{ backgroundColor: color.sc.sc3, paddingVertical: 4, paddingHorizontal: 4, marginRight: 4, marginBottom: 4, }}>
+                            <Label size={10} style={{  color: "#fff" }}>{item?.descont_percent}</Label>
+                        </Column>
+                    </Row>}
                 </Column>
             </Button>
         )
@@ -168,33 +192,6 @@ const Explore = ({data}) => {
 }
 
 const Categories = () => {
-    const data = [
-        {
-            id: 1,
-            img: 'https://i.pinimg.com/564x/cc/97/8a/cc978a648e92eb991131455e07f135e3.jpg',
-            name: 'Teste',
-            price: 'R$ 150,00',
-        },
-        {
-            id: 2,
-            img: 'https://i.pinimg.com/564x/cc/97/8a/cc978a648e92eb991131455e07f135e3.jpg',
-            name: 'Teste',
-            price: 'R$ 150,00',
-        },
-        {
-            id: 3,
-            img: 'https://i.pinimg.com/564x/cc/97/8a/cc978a648e92eb991131455e07f135e3.jpg',
-            name: 'Teste',
-            price: 'R$ 150,00',
-        },
-        {
-            id: 4,
-            img: 'https://i.pinimg.com/564x/cc/97/8a/cc978a648e92eb991131455e07f135e3.jpg',
-            name: 'Teste',
-            price: 'R$ 150,00',
-        },
-    ]
-
     const renderItem = ({ item }) => {
         return (
             <Button pv={1} ph={1} radius={1} style={{ flexGrow: 1, }}>

@@ -15,7 +15,6 @@ const Input = React.forwardRef(({ value, setValue, disabled, label, mask, props,
     to: { translateY: 0, fontSize: 14 },
   });
 
-  // Crie uma ref interna caso o ref não seja passado
   const internalRef = useRef(null);
   const inputRef = ref || internalRef; // Use o ref passado ou o interno
 
@@ -82,8 +81,8 @@ const Input = React.forwardRef(({ value, setValue, disabled, label, mask, props,
 
         <TextInput
           {...props}
-          style={{ fontSize: 18, fontFamily: font.medium, color: disabled ? color.title + 60 : color.title }}
-          ref={inputRef} // Ref opcional
+          style={{ fontSize: 18, fontFamily: font.medium, color: disabled ? color.title + 60 : color.title, padding: 0, }}
+          ref={inputRef} 
           onFocus={handleFocus}
           onBlur={handleBlur}
           editable={!disabled}

@@ -29,7 +29,8 @@ export const listUser = async () => {
         return res.data;
     } catch (error) {
         console.error("Error revalidating token:", error);
-        return false;
+        const err = JSON.parse(error.request.response);
+        throw new Error(err.message)
     }
 }
 

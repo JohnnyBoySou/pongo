@@ -85,11 +85,10 @@ export default function AuthLoginScreen({ navigation, }) {
 
                 {type === 'ConfirmEmail' ? <ConfirmEmail navigation={navigation} email={email} name={name} setconfirm={settype} /> :
                     <Column ph={28}>
-                        <Button onPress={() => { navigation.navigate('Onboarding') }} pv={0} ph={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg='#FFFFFF'>
+                        <Button onPress={() => { navigation.goBack() }} pv={0} ph={0} style={{ width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }} bg='#FFFFFF'>
                             <ArrowLeft size={20} color='#858585' />
                         </Button>
                         <Title size={26} style={{ marginTop: 20, marginBottom: 4, }}>Olá! Acesse sua conta utilizando seu e-mail e senha.</Title>
-
                         <Column style={{ height: 16, }} />
                         <Input
                             label="E-mail *"

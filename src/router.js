@@ -128,7 +128,7 @@ export default function Router({ }) {
   return (
     <NavigationContainer linking={linking}>
       
-      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Async'>
+      <Stack.Navigator screenOptions={{ headerShown: false, }} initialRouteName='Welcome'>
 
         <Stack.Screen name="Test" component={TestScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
@@ -200,7 +200,6 @@ export default function Router({ }) {
 
         <Stack.Screen name="Veterinario" component={VeterinarioScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="Grooming" component={GroomingScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-
 
         <Stack.Screen name="Notifications" component={NotificationsScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
         <Stack.Screen name="Faq" component={FaqScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />

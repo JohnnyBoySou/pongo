@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import BottomSheet from '@gorhom/bottom-sheet';
 
 const Modal = forwardRef(({ children, bg = '#fbfbfb', snapPoints = [0.1, 300], onClose, ...props }, ref) => {
     return (
@@ -11,9 +11,7 @@ const Modal = forwardRef(({ children, bg = '#fbfbfb', snapPoints = [0.1, 300], o
             backgroundStyle={{ backgroundColor: bg, }}
             handleIndicatorStyle={{ backgroundColor: '#30303030', width: 70, height: 8, }}
         >
-            <BottomSheetScrollView>
                 {children}
-            </BottomSheetScrollView>
         </BottomSheet>
     );
 });
