@@ -5,7 +5,6 @@ import { ThemeContext } from 'styled-components/native';
 import { Pressable, TextInput } from 'react-native';
 import { Eye, EyeOff } from 'lucide-react-native';
 
-// Use React.forwardRef e faça o ref opcional
 const Input = React.forwardRef(({ value, setValue, disabled, label, mask, props, onSubmitEditing = () => { }, pass = false, keyboard = 'default' }, ref) => {
   const { font, color } = useContext(ThemeContext);
   const [focus, setFocus] = useState(false);
@@ -16,15 +15,18 @@ const Input = React.forwardRef(({ value, setValue, disabled, label, mask, props,
   });
 
   const internalRef = useRef(null);
-  const inputRef = ref || internalRef; // Use o ref passado ou o interno
+  const inputRef = ref || internalRef; 
 
   useEffect(() => {
     if (value?.length > 0) {
       inputAnimation.transitionTo('to');
+      if (!focus) {
+        inputRef?.current?.focus();
+      }
     } else {
       inputAnimation.transitionTo('from');
     }
-  }, [value]);
+  }, [value, focus]);
 
   const handleFocus = () => {
     setFocus(true);
