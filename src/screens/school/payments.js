@@ -5,7 +5,6 @@ import { Column, Label, Title, Row, Button, useTheme, LabelBT, Image, Main, Scro
 import PaymentCredito from '@components/Payments/credito';
 import PaymentPix from '@components/Payments/pix';
 import StepIndicator from 'react-native-step-indicator';
-import Animated, { FadeInDown, FadeInLeft, FadeOutLeft, FadeOutUp, SlideInLeft, SlideOutLeft } from 'react-native-reanimated';
 //ICONS
 import { ArrowLeft, Check, CircleHelp, CheckCircle } from 'lucide-react-native';
 
@@ -19,7 +18,7 @@ export default function SchoolPayment({ route, navigation,  modal, card, }) {
         const { color, font, margin } = useTheme();
         const { id, name, date, price, inclusos } = item
         return (
-            <Animated.View entering={SlideInLeft} exiting={SlideOutLeft}>
+            <Column>
                 <Row style={{ marginHorizontal: margin.h, justifyContent: 'center', alignItems: 'center', }}>
                     <Column style={{ width: 260, backgroundColor: '#F7F7F7', borderRadius: 18, paddingHorizontal: 20, }}>
                         <Row style={{ justifyContent: 'space-between', alignItems: 'flex-end', marginTop: 20, marginBottom: 8, }}>
@@ -39,7 +38,7 @@ export default function SchoolPayment({ route, navigation,  modal, card, }) {
                         </Button>
                     </Column>
                 </Row>
-            </Animated.View>
+            </Column>
     
         )
     }

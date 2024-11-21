@@ -5,7 +5,6 @@ import { Column, Label, Title, Row, Button, useTheme, LabelBT, Image, Main, Scho
 import PaymentCredito from '@components/Payments/credito';
 import PaymentPix from '@components/Payments/pix';
 import StepIndicator from 'react-native-step-indicator';
-import Animated, { FadeInDown, FadeInLeft, FadeOutLeft, FadeOutUp, SlideInLeft, SlideOutLeft } from 'react-native-reanimated';
 //ICONS
 import { ArrowLeft, Check, CircleHelp, CheckCircle, Nfc } from 'lucide-react-native';
 

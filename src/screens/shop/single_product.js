@@ -8,11 +8,20 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { addProduct } from '@hooks/cart';
 import { singleProduct } from '@api/request/shop';
 import { Check, ShoppingCart } from 'lucide-react-native';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function ShopSingleProductScreen({ navigation, route }) {
     const { color, font, margin } = useTheme();
 
     const [qtd, setqtd] = useState(1);
+
+
+    const isFocused = useIsFocused();
+    useEffect(() => {
+        if (isFocused) {
+            setsuccessAdd(false)
+        }
+    }, [isFocused])
 
     const [selectColor, setselectColor] = useState();
     const [selectSize, setselectSize] = useState();
