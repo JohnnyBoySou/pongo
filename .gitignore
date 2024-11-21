@@ -2,6 +2,11 @@
 
 # dependencies
 node_modules/
+android/
+ios/
+.vscode/
+/android
+/ios
 
 # Expo
 .expo/
@@ -15,7 +20,7 @@ web-build/
 *.p12
 *.key
 *.mobileprovision
-android/
+
 
 # Metro
 .metro-health-check*

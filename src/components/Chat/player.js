@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Audio } from 'expo-av';
 import { Row, Button, useTheme, Column, Loader } from '@theme/global';
-import { analyzeAudio, scale } from 'react-native-audio-analyzer';
+//import { analyzeAudio, scale } from 'react-native-audio-analyzer';
 import { FontAwesome6 } from '@expo/vector-icons';
 import * as FileSystem from 'expo-file-system';
 import { ArrowDownToLine } from 'lucide-react-native';
@@ -35,7 +35,7 @@ export default function AudioPlayerDownloaded({ audioUri }) {
             );
             setUri(localUri);
             setIsDownloaded(true);
-            fetchWaves(localUri);
+           // fetchWaves(localUri);
         } catch (error) {
             console.error("Error downloading audio:", error);
         } finally {
@@ -43,10 +43,10 @@ export default function AudioPlayerDownloaded({ audioUri }) {
         }
     };
 
-    const fetchWaves = async (audioUri) => {
-        const data = await analyzeAudio(audioUri);
-        setResult(data);
-    };
+ //   const fetchWaves = async (audioUri) => {
+     //   const data = await analyzeAudio(audioUri);
+     //   setResult(data);
+   // };
 
     const playSound = async () => {
         try {
@@ -118,7 +118,14 @@ export default function AudioPlayerDownloaded({ audioUri }) {
                                 <FontAwesome6 name="play" size={18} color={color.sc.sc3} />}
                         </Row>
                     </Button>}
-                <Row style={{ justifyContent: 'center', maxWidth: 100, alignItems: 'center', backgroundColor: color.sc.sc3 + 40, marginHorizontal: 12, borderRadius: 12, overflow: 'hidden' }}>
+                
+            </Row>
+        </Animated.View>
+    );
+};
+
+/*
+<Row style={{ justifyContent: 'center', maxWidth: 100, alignItems: 'center', backgroundColor: color.sc.sc3 + 40, marginHorizontal: 12, borderRadius: 12, overflow: 'hidden' }}>
                     {result?.length > 0 &&
                         scale(result.map((_) => _.amplitude)).map((value, index) => (
                             <View
@@ -132,9 +139,4 @@ export default function AudioPlayerDownloaded({ audioUri }) {
                                 }}
                             />
                         ))}
-                </Row>
-            </Row>
-        </Animated.View>
-    );
-};
-
+                </Row> */

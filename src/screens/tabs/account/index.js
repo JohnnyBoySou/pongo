@@ -7,6 +7,8 @@ import { getPreferences, excludePreferences } from '@hooks/preferences';
 import { useIsFocused } from '@react-navigation/native';
 import { MessageCircleMore } from 'lucide-react-native';
 import Card from '../../../components/Card';
+import { ScrollView } from 'react-native';
+import { RefreshControl } from 'react-native-gesture-handler';
 
 export default function AccountScreen({ navigation, }) {
     const { color, font, margin } = useTheme();
@@ -14,33 +16,32 @@ export default function AccountScreen({ navigation, }) {
     const isFocused = useIsFocused();
     const [user, setuser] = useState();
     const [loading, setloading] = useState();
-
-    useEffect(() => {
-        const fetchData = async () => {
-            setloading(true)
-            try {
-                const pref = await getPreferences()
-                if (pref?.token) {
-                    try {
-                        const res = await listUser();
-                        setuser(res)
-                    } catch (error) {
-                        navigation.navigate('AuthLogin')
-                    }
-                }
-                else {
+    const fetchData = async () => {
+        setloading(true)
+        try {
+            const pref = await getPreferences()
+            if (pref?.token) {
+                try {
+                    const res = await listUser();
+                    setuser(res)
+                } catch (error) {
                     navigation.navigate('AuthLogin')
                 }
-            } catch (error) {
-                console.log('aq')
-                navigation.navigate('AuthLogin')
-                console.log(error)
-            } finally {
-                setloading(false)
             }
+            else {
+                navigation.navigate('AuthLogin')
+            }
+        } catch (error) {
+            console.log('aq')
+            navigation.navigate('AuthLogin')
+            console.log(error)
+        } finally {
+            setloading(false)
         }
+    }
+    useEffect(() => {
         fetchData()
-    }, [isFocused == true])
+    }, [])
 
     const handleChat = async () => {
         try {
@@ -55,21 +56,17 @@ export default function AccountScreen({ navigation, }) {
             return
         }
     }
-
     const handleExit = () => {
         navigation.navigate('AuthLogin')
         excludePreferences()
     }
-
     if (!user) {
         return null
     }
     return (
         <Main >
-
-            <Scroll>
+            <ScrollView refreshControl={<RefreshControl refreshing={loading} onRefresh={fetchData}  />}>
                 <TopMenu search={false} back={false} />
-
                 {loading ? <Loader /> : user ? <Column mh={margin.h} mv={24} style={{ paddingVertical: 24, paddingHorizontal: 20, borderRadius: 18, backgroundColor: color.light, }}>
                     <Title>Olá, {user?.nome}</Title>
                     <Column style={{ rowGap: 6, marginTop: 10, }}>
@@ -170,7 +167,7 @@ export default function AccountScreen({ navigation, }) {
                 </Button>
 
                 <Column style={{ height: 30, }} />
-            </Scroll>
+            </ScrollView>
         </Main >
     )
 }

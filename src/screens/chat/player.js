@@ -4,7 +4,7 @@ import { Audio } from 'expo-av';
 import { Row, Button, useTheme, Loader } from '@theme/global';
 import { Send, Trash } from 'lucide-react-native';
 import Animated, { SlideInDown, SlideOutDown } from 'react-native-reanimated';
-import { analyzeAudio, scale } from 'react-native-audio-analyzer';
+//import { analyzeAudio, scale } from 'react-native-audio-analyzer';
 import { FontAwesome6 } from '@expo/vector-icons';
 import * as FileSystem from 'expo-file-system';
 import * as Haptics from 'expo-haptics';
@@ -28,13 +28,13 @@ const AudioPlayer = ({ audioUri, type, token, user }) => {
     }, [sound]);
 
 
-    useEffect(() => {
-        const fetchWaves = async () => {
-            const data = await analyzeAudio(uri);
-            setResult(data);
-        }
-        fetchWaves();
-    }, [])
+    //useEffect(() => {
+        //const fetchWaves = async () => {
+        //    const data = await analyzeAudio(uri);
+       //     setResult(data);
+      //  }
+      //  fetchWaves();
+   // }, [])
 
 
     const playSound = async () => {
@@ -110,21 +110,7 @@ const AudioPlayer = ({ audioUri, type, token, user }) => {
                             <FontAwesome6 name="play" size={22} color={color.sc.sc3} />}
                     </Row>
                 </Button>
-                <Row style={{ justifyContent: 'center', maxWidth: 100, alignItems: 'center', backgroundColor: color.sc.sc3 + 40, marginHorizontal: 12, borderRadius: 12, overflow: 'hidden', }}>
-                    {result?.length > 0 &&
-                        scale(result.map((_) => _.amplitude)).map((value, index) => (
-                            <View
-                                key={index}
-                                style={{
-                                    height: value * 50, width: 5,
-                                    maxHeight: 100,
-                                    borderRadius: 100,
-                                    backgroundColor: color.sc.sc3,
-                                    marginHorizontal: 2,
-                                }}
-                            />
-                        ))}
-                </Row>
+               
 
                 <Row style={{ columnGap: 8, }}>
                     <Button onPress={excludeSound} radius={100} style={{ backgroundColor: color.red, width: 46, height: 46, justifyContent: 'center', alignItems: 'center', }}>
@@ -145,3 +131,19 @@ const AudioPlayer = ({ audioUri, type, token, user }) => {
 
 export default AudioPlayer;
 
+/*
+ <Row style={{ justifyContent: 'center', maxWidth: 100, alignItems: 'center', backgroundColor: color.sc.sc3 + 40, marginHorizontal: 12, borderRadius: 12, overflow: 'hidden', }}>
+                    {result?.length > 0 &&
+                        scale(result.map((_) => _.amplitude)).map((value, index) => (
+                            <View
+                                key={index}
+                                style={{
+                                    height: value * 50, width: 5,
+                                    maxHeight: 100,
+                                    borderRadius: 100,
+                                    backgroundColor: color.sc.sc3,
+                                    marginHorizontal: 2,
+                                }}
+                            />
+                        ))}
+                </Row> */

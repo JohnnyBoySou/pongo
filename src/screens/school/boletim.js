@@ -4,9 +4,7 @@ import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Card, SCREEN
 import { Search } from 'lucide-react-native';
 
 //Components
-import InstagramStories from '@birdwingo/react-native-instagram-stories';
 import TopMenu from '@components/Header/topmenu';
-import PagerView from 'react-native-pager-view';
 
 import Chart from '@components/Charts';
 import StarsRate from '@components/StarsRate/index';

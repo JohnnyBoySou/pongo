@@ -15,7 +15,7 @@ const Input = React.forwardRef(({ value, setValue, disabled, label, mask, props,
   });
 
   const internalRef = useRef(null);
-  const inputRef = ref || internalRef; 
+  const inputRef = ref || internalRef;
 
   useEffect(() => {
     if (value?.length > 0) {
@@ -26,7 +26,7 @@ const Input = React.forwardRef(({ value, setValue, disabled, label, mask, props,
     } else {
       inputAnimation.transitionTo('from');
     }
-  }, [value, focus]);
+  }, [value]);
 
   const handleFocus = () => {
     setFocus(true);
@@ -84,7 +84,7 @@ const Input = React.forwardRef(({ value, setValue, disabled, label, mask, props,
         <TextInput
           {...props}
           style={{ fontSize: 18, fontFamily: font.medium, color: disabled ? color.title + 60 : color.title, padding: 0, }}
-          ref={inputRef} 
+          ref={inputRef}
           onFocus={handleFocus}
           onBlur={handleBlur}
           editable={!disabled}

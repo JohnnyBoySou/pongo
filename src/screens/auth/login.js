@@ -96,7 +96,7 @@ export default function AuthLoginScreen({ navigation, }) {
                             value={email}
                             keyboard='email-address'
                             setValue={setemail}
-                            onSubmitEditing={() => { passwordRef.current?.focus() }}
+                            onSubmitEditing={() => { passwordRef?.current?.focus() }}
                         />
                         <Column style={{ height: 16, }} />
                         <Input
