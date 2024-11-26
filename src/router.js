@@ -9,7 +9,7 @@ const Tab = createBottomTabNavigator();
 
 //ICONS
 import Octicons from '@expo/vector-icons/Octicons';
-import { Bell, CircleUserRound, GraduationCap, Hotel, ShoppingCart, TentTree } from 'lucide-react-native';
+import { Bell, CircleUserRound, GraduationCap, Hotel, ShoppingBag, ShoppingCart, TentTree } from 'lucide-react-native';
 import { useTheme, Button } from '@theme/global';
 
 //STACK SCREEN
@@ -67,8 +67,9 @@ import ShopSingleProductScreen from '@screens/shop/single_product';
 import ShopSingleCategoryScreen from '@screens/shop/single_category';
 import ShopPaymentScreen from '@screens/shop/payment';
 import ShopCartScreen from '@screens/shop/cart';
+
 //VILLA PONGO
-import VillaPongoScreen from '@screens/villapongo';
+import VillaPongoScreen from '@screens/tabs/villapongo';
 
 //SERVICES
 import ServicesScreen from '@screens/services';
@@ -206,7 +207,6 @@ export default function Router({ }) {
         <Stack.Screen name="Privacidade" component={Privacidade} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
 
         <Stack.Screen name="Video" component={VideoScreen} options={{ ...TransitionPresets.SlideFromRightIOS, }} />
-
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -229,8 +229,8 @@ function Tabs() {
           backgroundColor: '#918C8B',
           height: 80,
           elevation: 0,
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20
+         // borderTopLeftRadius: 20,
+        //  borderTopRightRadius: 20
         },
       }}
     >
@@ -240,7 +240,7 @@ function Tabs() {
 
 
       <Tab.Screen name="Shop" component={ShopScreen} options={{
-        tabBarIcon: ({ color, size }) => (<ShoppingCart size={routeName === 'School' ? size + 6 : size + 2} color={color} />),
+        tabBarIcon: ({ color, size }) => (<ShoppingBag size={routeName === 'School' ? size + 6 : size + 2} color={color} />),
       }} />
 
       <Tab.Screen name="VillaPongo" component={VillaPongoScreen} options={{

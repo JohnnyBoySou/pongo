@@ -82,15 +82,15 @@ export default function ChatListScreen({ navigation }) {
                                 <Title size={26}>Suas conversas</Title>
                                 <Row style={{ justifyContent: 'center', alignItems: 'center', flex: 1, marginHorizontal: 24, marginTop: 10, }}>
                                     <Back />
-                                    <Row style={{ backgroundColor: '#fff', paddingRight: 8, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginLeft: 12, }}>
+                                    <Row style={{ backgroundColor: '#fff', paddingRight: 8, borderRadius: 1, justifyContent: 'center', alignItems: 'center', marginLeft: 12, }}>
                                         <TextInput
                                             value={search}
                                             onChangeText={(e) => setsearch(e)}
                                             placeholder='Pesquisar'
                                             onSubmitEditing={handleSearch}
-                                            style={{ paddingHorizontal: 20, paddingVertical: 14, fontSize: 16, fontFamily: font.medium, flex: 1 }}
+                                            style={{ paddingHorizontal: 20, paddingVertical: 18, fontSize: 16, fontFamily: font.medium, flex: 1 }}
                                         />
-                                        <Button bg={color.title} ph={1} pv={1} onPress={handleSearch} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} radius={8}>
+                                        <Button bg={color.title} ph={1} pv={1} onPress={handleSearch} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} radius={1}>
                                             <Search size={18} color="#fff" />
                                         </Button>
                                     </Row>
@@ -101,7 +101,7 @@ export default function ChatListScreen({ navigation }) {
                         ListEmptyComponent={() => <Label size={14} style={{ textAlign: 'center', marginVertical: 80, }}>Nenhum atendimento encontrado</Label>}
                         ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: color.border, marginVertical: 4, borderRadius: 6, }} />}
                     />
-                    <Button onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor: '#918C8B', }} pv={16} ph={1} mh={margin.h} mtop={30}>
+                    <Button radius={1} bg={color.bg} onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor: '#918C8B', position: 'absolute', bottom: 45, }} pv={16} ph={1} mh={margin.h} >
                         <LabelBT color="#918C8B" style={{ textAlign: 'center', fontSize: 20 }}> <MessageCircleMore color={color.title} size={20} /> Iniciar conversa</LabelBT>
                     </Button>
                     <Column style={{ height: 100, width: 20, }}></Column>

@@ -93,7 +93,7 @@ export default function HomeScreen({ navigation, }) {
                             style={{ flexGrow: 1 }}
                         >
                             <Card num={16}>
-                                <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={handleAccount}>
+                                <Button radius={1} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={handleAccount}>
                                     <Column>
                                         <MotiImage source={require('@imgs/home_3.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
                                         <Title align="center" size={14}>MINHA CONTA</Title>
@@ -112,7 +112,7 @@ export default function HomeScreen({ navigation, }) {
                         >
                             <Card num={16}>
 
-                                <Button radius={24} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Institucional') }}>
+                                <Button radius={1} pv={20} style={{ backgroundColor: color.light, flexGrow: 1, }} onPress={() => { navigation.navigate('Institucional') }}>
                                     <Column>
                                         <MotiImage source={require('@imgs/home_1.png')} style={{ width: '100%', height: 130, objectFit: 'contain' }} />
                                         <Title align="center" size={14}>CONHEÇA MAIS</Title>
@@ -130,7 +130,7 @@ export default function HomeScreen({ navigation, }) {
                         type: 'timing',
                     }}>
 
-                    <Button onPress={handleChat} style={{ borderWidth: 2, borderColor: '#918C8B', marginTop: 32, }} pv={16} ph={1} mh={margin.h}>
+                    <Button onPress={handleChat} radius={1} style={{ borderWidth: 2, borderColor: '#918C8B', marginTop: 32, }} pv={16} ph={1} mh={margin.h}>
                         <LabelBT color="#918C8B" style={{ textAlign: 'center', fontSize: 20 }}> <MessageCircleMore color={color.title} size={20} /> Iniciar conversa</LabelBT>
                     </Button>
                 </MotiView>

@@ -5,7 +5,7 @@ import { ThemeContext } from 'styled-components/native';
 import { Pressable, TextInput } from 'react-native';
 import { Eye, EyeOff } from 'lucide-react-native';
 
-const Input = React.forwardRef(({ value, setValue, disabled, label, mask, props, onSubmitEditing = () => { }, pass = false, keyboard = 'default' }, ref) => {
+const Input = React.forwardRef(({ value, setValue, disabled, label,  mask, props, onSubmitEditing = () => { }, pass = false, keyboard = 'default' }, ref) => {
   const { font, color } = useContext(ThemeContext);
   const [focus, setFocus] = useState(false);
   const [secure, setSecure] = useState(pass);
@@ -62,7 +62,7 @@ const Input = React.forwardRef(({ value, setValue, disabled, label, mask, props,
           paddingBottom: 8,
           paddingTop: 24,
           paddingHorizontal: 16,
-          borderRadius: 12,
+          borderRadius: 1,
         }}
       >
         <MotiText

@@ -84,7 +84,7 @@ export default function ShopCartScreen({ navigation, }) {
                         showsVerticalScrollIndicator={false}
                     />
                     {data.length > 0 && <Column >
-                        <Button onPress={() => { navigation.navigate('ShopPayment', { data: data }) }} style={{ backgroundColor: '#918C8B', marginTop: 24, }} radius={1} pv={16} ph={1}>
+                        <Button onPress={() => { navigation.navigate('ShopPayment', { data: data }) }} style={{ backgroundColor: color.sc.sc1, marginTop: 24, }} radius={1} pv={16} ph={1}>
                             <Title align="center" color="#fff">Finalizar pedido</Title>
                         </Button>
                     </Column>}

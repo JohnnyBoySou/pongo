@@ -1,10 +1,9 @@
 import React from 'react';
 import { Title, Button, useTheme, Column, Label } from '@theme/global';
 import { FlatList } from 'react-native-gesture-handler';
-import Animated, { FadeInRight, FadeOutDown } from 'react-native-reanimated';
+
 export default function CalendarioHorizontal({ day, setday, }) {
     const { color, font, margin } = useTheme();
-    console.log(day)
     const getNextTwoWeeks = () => {
         const weekDays = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SÁB"];
 
@@ -42,15 +41,12 @@ export default function CalendarioHorizontal({ day, setday, }) {
             maxToRenderPerBatch={10}
             removeClippedSubviews
             renderItem={({ item, index }) => (
-                <Animated.View entering={FadeInRight.delay(300 * index)}>
                     <Button ph={1} pv={1} radius={1} onPress={() => { setday({ day: item.day, month: item.month, name: item.name }) }} style={{ width: 64, height: 82, justifyContent: 'center', alignItems: 'center', borderWidth: 1, borderStyle: 'dashed', borderColor: '#858585', backgroundColor: day?.day == item?.day ? color.primary : 'transparent', }}>
                         <Column style={{ justifyContent: 'center', alignItems: 'center', }} >
                             <Title style={{ fontFamily: font.book, color: day?.day == item?.day ? '#fff' : color.title, }}>{item?.day}</Title>
                             <Label style={{ fontFamily: 'Voyage_Medium', fontSize: 18, lineHeight: 24, color: day?.day == item?.day ? '#fff' : color.title, }}>{item?.name}</Label>
                         </Column>
                     </Button>
-                </Animated.View>
-
             )}
         />
     );

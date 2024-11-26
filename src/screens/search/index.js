@@ -35,9 +35,9 @@ export default function SearchScreen({ navigation, route }) {
                             placeholder='Buscar'
                             placeholderTextColor={color.title + 60}
                             onSubmitEditing={handleSearch}
-                            style={{ backgroundColor: '#fff', borderRadius: 12, paddingVertical: 12, paddingHorizontal: 20, marginLeft: 12, flex: 1, fontFamily: font.medium, fontSize: 16, color: color.title, borderWidth: 2, borderColor: focus ? color.sc.sc3 : '#fff' }}
+                            style={{ backgroundColor: '#fff', borderRadius: 1, paddingVertical: 12, paddingHorizontal: 20, marginLeft: 12, flex: 1, fontFamily: font.medium, fontSize: 16, color: color.title, borderWidth: 2, borderColor: focus ? color.sc.sc3 : '#fff' }}
                         />
-                        <Button radius={20} disabled={loading} onPress={handleSearch} ph={8} pv={8} style={{ backgroundColor: color.sc.sc3, borderRadius: 8, position: 'absolute', right: 6, }}>
+                        <Button radius={1} disabled={loading} onPress={handleSearch} ph={8} pv={8} style={{ backgroundColor: color.sc.sc3, borderRadius: 8, position: 'absolute', right: 6, }}>
                             <Search size={24} color="#fff" style={{ zIndex: 99, }} />
                         </Button>
                     </Row>

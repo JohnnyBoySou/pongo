@@ -1,16 +1,16 @@
 import React, { useState, useRef } from 'react';
-import { Main, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT, useTheme, Loader } from '@theme/global';
+import { Main, Scroll, Column, Label, SubLabel, Title, Row, Button, LabelBT, useTheme, Loader, SCREEN_WIDTH } from '@theme/global';
 import Header from '@components/Header';
 import Input from '@components/Forms/input';
 import CalendarioHorizontal from '@components/Calendar/horizontal';
 import Modal from '@components/Modal';
-import { ScrollView, } from 'react-native-gesture-handler';
 import { Check } from 'lucide-react-native';
 import TabBar from '@components/TabBar';
 import TopMenu from '@components/Header/topmenu';
 import { registerVisita } from '@api/request/institucional';
 import Success from '@components/Forms/success';
 import Error from '@components/Forms/error';
+import { ScrollView } from 'react-native';
 
 export default function InstitucionalVisitaScreen({ }) {
 
@@ -18,7 +18,7 @@ export default function InstitucionalVisitaScreen({ }) {
 
     const [name, setname] = useState();
     const [tel, settel] = useState();
-    const [type, settype] = useState('');
+    const [type, settype] = useState('Hotel');
     const timerRef = useRef();
 
     const [success, setsuccess] = useState();
@@ -69,10 +69,10 @@ export default function InstitucionalVisitaScreen({ }) {
                     <Column style={{ marginTop: 30, }}>
                         <Title>Escolha qual deseja visitar:</Title>
                         <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginVertical: 16, }} >
-                            <Button bg={type === 'Hotel' ? '#918C8B' : '#ffffff' + 60} style={{ width: '48%' }} radius={12} onPress={() => { settype('Hotel') }} >
+                            <Button bg={type === 'Hotel' ? '#918C8B' : '#ffffff' + 60} style={{ width: '48%' }} radius={1} onPress={() => { settype('Hotel') }} >
                                 <LabelBT align="center" size={15} color={type === 'Hotel' ? "#fff" : '#918C8B'}>PONGO</LabelBT>
                             </Button>
-                            <Button bg={type === 'Villa Pongo' ? '#918C8B' : '#ffffff' + 60} style={{ width: '48%' }} radius={12} onPress={() => { settype('Villa Pongo') }}  >
+                            <Button bg={type === 'Villa Pongo' ? '#918C8B' : '#ffffff' + 60} style={{ width: '48%' }} radius={1} onPress={() => { settype('Villa Pongo') }}  >
                                 <LabelBT align="center" size={15} color={type === 'Villa Pongo' ? "#fff" : '#918C8B'}>VILLA PONGO</LabelBT>
                             </Button>
                         </Row>
@@ -87,11 +87,11 @@ export default function InstitucionalVisitaScreen({ }) {
 
                 <Column mh={margin.h} mv={30}>
                     <Title>Qual horário da visita:</Title>
-                    <Button bg={minutos ? color.primary : '#fff'} mbottom={10} pv={16} mtop={20} onPress={() => { timerRef.current.snapToIndex(1) }} radius={8}>
+                    <Button bg={minutos ? color.primary : '#fff'} mbottom={10} pv={16} mtop={20} onPress={() => { timerRef.current.snapToIndex(1) }} radius={1}>
                         <SubLabel align="center" style={{ textAlign: 'center', color: minutos ? '#fff' : color.title, fontSize: 18, }}>{minutos ? hora + ':' + minutos : 'Selecione um horário'}</SubLabel>
                     </Button>
                     {success ? <Success msg={success} /> : error ? <Error msg={error} /> : null}
-                    <Button bg={color.sc.sc1} mtop={10} onPress={handleRegister} disabled={loading}>
+                    <Button bg={color.sc.sc1} radius={1} mtop={10} pv={16} onPress={handleRegister} disabled={loading}>
                         <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                             {loading ? <Loader color="#fff" /> :
                                 <LabelBT align="center" style={{ color: "#fff" }}>Agendar visita</LabelBT>
@@ -105,7 +105,10 @@ export default function InstitucionalVisitaScreen({ }) {
             <TabBar />
 
             <Modal ref={timerRef} snapPoints={[0.1, 380]}>
-                <TimePicker sethora={sethora} setminutos={setminutos} minutos={minutos} hora={hora} timerRef={timerRef} />
+                <Column style={{ backgroundColor: 'green', }}>
+                    <Title>re</Title>
+                    <TimePicker sethora={sethora} setminutos={setminutos} minutos={minutos} hora={hora} timerRef={timerRef} />
+                </Column>
             </Modal>
         </Main>
     )
@@ -119,29 +122,31 @@ const TimePicker = ({ sethora, setminutos, minutos, hora, timerRef }) => {
 
     const { color } = useTheme()
     return (
-        <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
-            <ScrollView style={{ height: 260, marginHorizontal: 30, }} showsVerticalScrollIndicator={false}>
-                {horas?.map((h, index) => (
-                    <Button ph={20} pv={10} radius={100} onPress={() => { sethora(h) }} bg={hora == h ? color.primary : 'transparent'} key={index}>
-                        <Label size={42} color={hora == h ? "#fff" : color.title} style={{ textAlign: 'center', lineHeight: 50, }}>{h}</Label>
-                    </Button>
-                ))}
-            </ScrollView>
+        <Row style={{ justifyContent: 'center', alignItems: 'center', width: SCREEN_WIDTH, backgroundColor: 'yellow', height: 200, }}>
+            <Column style={{ backgroundColor: 'pink', flexGrow: 1, }}>
+                <ScrollView style={{ height: 260, marginHorizontal: 30, }} showsVerticalScrollIndicator={false}>
+                    {horas?.map((h, index) => (
+                        <Button ph={20} pv={10} radius={1} onPress={() => { sethora(h) }} bg={hora == h ? color.primary : 'transparent'} key={index}>
+                            <Label size={42} color={hora == h ? "#fff" : color.title} style={{ textAlign: 'center', lineHeight: 50, }}>{h}</Label>
+                        </Button>
+                    ))}
+                </ScrollView>
+            </Column>
             <Column>
                 <Title style={{ justifyContent: 'center', alignItems: 'center', fontSize: 100, lineHeight: 100, }}>:</Title>
-                {minutos && <Button bg={color.primary} ph={8} pv={8} onPress={() => {timerRef.current.snapToIndex(0) }} >
+                {minutos && <Button bg={color.primary} ph={8} pv={8} onPress={() => { timerRef.current.snapToIndex(0) }} >
                     <Check size={30} color="#fff" />
                 </Button>}
             </Column>
-            <ScrollView style={{ height: 260, marginHorizontal: 30, }} showsVerticalScrollIndicator={false}>
-                {mins?.map((h, index) => (
-                    <Button ph={20} pv={10} radius={100} onPress={() => setminutos(h)} bg={minutos == h ? color.primary : 'transparent'} key={index}>
-                        <Label size={42} color={minutos == h ? "#fff" : color.title} style={{ textAlign: 'center', lineHeight: 50, }}>{h}</Label>
-                    </Button>
-                ))}
-            </ScrollView>
-
+            <Column>
+                <ScrollView style={{ height: 260, width: 120, backgroundColor: 'pink', }} showsVerticalScrollIndicator={false}>
+                    {mins?.map((h, index) => (
+                        <Button style={{ width: 48, height: 48, backgroundColor: 'red', }} radius={1} onPress={() => setminutos(h)} bg={minutos == h ? color.primary : 'transparent'} key={index}>
+                            <Label size={42} color={minutos == h ? "#fff" : color.title} style={{ textAlign: 'center', lineHeight: 50, }}>{h}</Label>
+                        </Button>
+                    ))}
+                </ScrollView>
+            </Column>
         </Row>
-
     )
 }

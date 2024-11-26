@@ -49,7 +49,6 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
                         <Menu size={32} color={color.icons} strokeWidth={2} />
                     </Button>
                     <Row style={{ alignItems: 'center', columnGap: 12, }}>
-
                         <Button pv={1} ph={1} onPress={() => { navigation.navigate('Tabs', { screen: 'Account' }) }} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }}>
                             <Row>
                                 {user?.avatar ? <Image source={{ uri: user?.avatar }} style={{ width: 38, height: 38, borderRadius: 100, }} /> : <CircleUserRound size={32} color={color.icons} strokeWidth={1.5} />}
@@ -65,9 +64,9 @@ export default function TopMenu({ search = true, cart = false, back = true, hand
                         </Column>
                     }
                     {search &&
-                        <Button mv={14} style={{ backgroundColor: color.light, flex: 1, borderWidth: 2, borderColor: focusSearch ? color.label : 'transparent', }} onPress={getSearch} pv={10}>
+                        <Button radius={1} mv={14} style={{ backgroundColor: color.light, flex: 1, }} onPress={getSearch} >
                             <Row style={{ alignItems: 'center', }}>
-                                <Image source={require('@imgs/icon.png')} style={{ width: 42, height: 42, borderRadius: 120, }} />
+                                <Image source={require('@imgs/icon.png')} style={{ width: 35, height: 34, borderRadius: 120, }} />
                                 <Label style={{ marginLeft: 12, }}>Pesquisar</Label>
                             </Row>
                         </Button>

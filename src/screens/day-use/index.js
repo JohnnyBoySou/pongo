@@ -18,6 +18,7 @@ export default function DayUseScreen({navigation}) {
         navigation.navigate('DayUseRegister')
     }
 
+    const a = false;
     return (
         <Main style={{ backgroundColor: '#FFFFFF' }}>
             <Scroll>
@@ -29,9 +30,9 @@ export default function DayUseScreen({navigation}) {
                     <Image source={require('@imgs/img-escola-banner.png')} style={{ width: '100%', height: 223, marginVertical: 24, objectFit: 'contain' }} />
                     <Title style={{ textAlign: 'center', color: '#918C8B', fontSize: 18, paddingVertical: 6, paddingHorizontal: 40, lineHeight: 22 }}>Tenha todos os benefícios da Escola PONGO por um dia!</Title>
 
-                    <Button onPress={handleRegister} style={{ width: '100%', backgroundColor: color.sc.sc3, marginTop: 12 }}>
+                    {a && <Button onPress={handleRegister} style={{ width: '100%', backgroundColor: color.sc.sc3, marginTop: 12 }}>
                         <Label style={{ textAlign: 'center', color: '#fff' }}>Contratar Day Use</Label>
-                    </Button>
+                    </Button>}
                 </Column>
 
                 <Column mh={margin.h} mv={margin.v}>
@@ -92,9 +93,10 @@ export default function DayUseScreen({navigation}) {
                 </Column>
 
                 <ListaRotinaEscola />
-                <Button onPress={handleRegister} style={{  backgroundColor: color.sc.sc3, marginTop: 12, marginHorizontal: 28, }}>
-                    <Label style={{ textAlign: 'center', color: '#fff' }}>Contratar Day Use</Label>
-                </Button>
+                {a &&
+                    <Button onPress={handleRegister} style={{ backgroundColor: color.sc.sc3, marginTop: 12, marginHorizontal: 28, }}>
+                        <Label style={{ textAlign: 'center', color: '#fff' }}>Contratar Day Use</Label>
+                    </Button>}
                 <Column style={{ height: 120 }} />
 
                 
@@ -108,17 +110,17 @@ export default function DayUseScreen({navigation}) {
 
 
 const items = [
-    "7:00 - 9:00 | Entrada",
-    "9:00 - 10:00 | Triagem e Passeio",
-    "10:00 - 11:00 | Café da manhã e socialização",
-    "11:00 - 12:00 | Almoço",
-    "12:00 - 13:00 | Musicoterapia",
-    "13:00 - 14:00 | Adestramento",
-    "14:00 - 15:00 | Fisioterapia",
-    "15:00 - 16:00 | Recreio",
-    "16:00 - 17:00 | Jantar e triagem",
-    "17:00 - 18:00 | Atividade do dia",
-    "18:00 - 19:00 | Higienização e saída",
+    "7:00 - 9:00 | Entrada ",
+    "9:00 - 10:00 | Triagem e Passeio ",
+    "10:00 - 11:00 | Café da manhã e socialização ",
+    "11:00 - 12:00 | Almoço ",
+    "12:00 - 13:00 | Musicoterapia ",
+    "13:00 - 14:00 | Adestramento ",
+    "14:00 - 15:00 | Fisioterapia ",
+    "15:00 - 16:00 | Recreio ",
+    "16:00 - 17:00 | Jantar e triagem ",
+    "17:00 - 18:00 | Atividade do dia ",
+    "18:00 - 19:00 | Higienização e saída ",
 ];
 
 function ListaRotinaEscola() {
@@ -138,7 +140,7 @@ function ListaRotinaEscola() {
                     }}
                 >
                     <MoveRight size={24} color={'#D9D9D9'} style={{ marginRight: 8 }} />
-                    <Label style={{ fontSize: 11, fontWeight: 500, color: '#979797' }}>
+                    <Label style={{ fontSize: 11, fontWeight: 500, color: '#979797', textTransform: 'uppercase' }}>
                         {item}
                     </Label>
                 </Row>

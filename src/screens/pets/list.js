@@ -58,7 +58,7 @@ export default function PetsListScreen({ navigation, }) {
                             <Column>
                                 <Row style={{ justifyContent: 'center', alignItems: 'center', flex: 1, marginHorizontal: 24, marginTop: 10, }}>
                                     <Back />
-                                    <Row style={{ backgroundColor: '#fff', paddingRight: 8, borderRadius: 10, justifyContent: 'center', alignItems: 'center', marginLeft: 12, }}>
+                                    <Row style={{ backgroundColor: '#fff', paddingRight: 8, borderRadius: 1, justifyContent: 'center', alignItems: 'center', marginLeft: 12, }}>
                                         <TextInput
                                             value={value}
                                             onChangeText={(e) => setvalue(e)}
@@ -67,7 +67,7 @@ export default function PetsListScreen({ navigation, }) {
                                             style={{ paddingHorizontal: 20, paddingVertical: 14, fontSize: 16, fontFamily: font.medium, flex: 1 }}
 
                                         />
-                                        <Button bg={color.title} ph={1} pv={1} onPress={handleSearch} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} radius={8}>
+                                        <Button bg={color.title} ph={1} pv={1} onPress={handleSearch} style={{ width: 42, height: 42, justifyContent: 'center', alignItems: 'center', }} radius={1}>
                                             <Search size={18} color="#fff" />
                                         </Button>
                                     </Row>

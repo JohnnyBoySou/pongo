@@ -28,6 +28,7 @@ export default function AccountDetailsScreen({ navigation }) {
     const [cep, setcep] = useState('.....-...');
     const [complemento, setcomplemento] = useState('.....');
     const [rua, setrua] = useState('...');
+    const [estado, setestado] = useState('..');
 
     const [loading, setloading] = useState(true);
 
@@ -50,6 +51,7 @@ export default function AccountDetailsScreen({ navigation }) {
                 setbairro(res.bairro);
                 setcidade(res.cidade);
                 setcomplemento(res.complemento);
+                setestado(res.estado);
                 setnotify(false);
             } catch (error) {
                 console.log(error)
@@ -94,6 +96,7 @@ export default function AccountDetailsScreen({ navigation }) {
                 "bairro": bairro,
                 "cidade": cidade,
                 "rua": rua,
+                "estado": estado,
             };
             if (avatar !== old_avatar) {
                 params.avatar = avatar
@@ -111,6 +114,7 @@ export default function AccountDetailsScreen({ navigation }) {
                 "bairro": update.bairro,
                 "cidade": update.cidade,
                 "rua": update.rua,
+                "estado": update.estado,
             };
 
             const preferences = await updatePreferences(pr);
@@ -157,7 +161,7 @@ export default function AccountDetailsScreen({ navigation }) {
                 <Column style={{ paddingHorizontal: margin.h, }}>
                     <Column style={{ justifyContent: 'center', alignItems: 'center', marginBottom: 20, }}>
                         <Image style={{ width: 144, height: 144, borderRadius: 100, alignSelf: 'center', marginBottom: 20, }} contentFit="cover" transition={1000} cachePolicy="disk" source={profile} />
-                        <Button onPress={handleImage} style={{ borderWidth: 2, borderColor: color.label, }} pv={8}>
+                        <Button onPress={handleImage} style={{ borderWidth: 2, borderColor: color.label, }} pv={8} radius={1} >
                             <LabelBT size={16} align="center">Escolher foto de perfil</LabelBT>
                         </Button>
                     </Column>
@@ -196,6 +200,13 @@ export default function AccountDetailsScreen({ navigation }) {
                         />
                         <Column style={{ height: 16, }} />
                         <Input
+                            label="Estado *"
+                            placeholder="Estado"
+                            value={estado}
+                            setValue={setestado}
+                        />
+                        <Column style={{ height: 16, }} />
+                        <Input
                             label="Cidade *"
                             placeholder="Cidade"
                             value={cidade}
@@ -220,6 +231,7 @@ export default function AccountDetailsScreen({ navigation }) {
                             label="Complemento *"
                             placeholder="Complemento"
                             value={complemento}
+                            autoFocus={false}
                             setValue={setcomplemento}
                         />
                         <Column style={{ height: 16, }} />
@@ -234,14 +246,14 @@ export default function AccountDetailsScreen({ navigation }) {
 
                     </Column>
 
-                    <Button onPress={toggleNotification} style={{ borderWidth: 2, borderColor: color.label, }} pv={8}>
+                    <Button onPress={toggleNotification} style={{ borderWidth: 2, borderColor: color.label, }} pv={8} radius={1} >
                         <LabelBT align="center" size={16}>{notify ? 'Ativar' : 'Desativar'} notificações</LabelBT>
                     </Button>
-                    <Button onPress={() => { navigation.navigate('AuthLogin',) }} style={{ borderWidth: 2, borderColor: color.label, }} pv={8} mv={18}>
+                    <Button onPress={() => { navigation.navigate('AuthLogin',) }} style={{ borderWidth: 2, borderColor: color.label, }} pv={8} mv={18} radius={1} >
                         <LabelBT align="center" size={16}>Redefinir minha senha</LabelBT>
                     </Button>
 
-                    <Button onPress={() => { excludeRef.current?.expand() }} bg={color.red + 10} pv={10} ph={1} >
+                    <Button onPress={() => { excludeRef.current?.expand() }} bg={color.red + 10} pv={10} ph={1}  radius={1} >
                         <LabelBT color={color.red} style={{ textAlign: 'center', }}>Excluir conta</LabelBT>
                     </Button>
 
@@ -260,13 +272,13 @@ export default function AccountDetailsScreen({ navigation }) {
                         secure
                     />
                     {success ? <Success msg={success} /> : error ? <Error msg={error} /> : null}
-                    <Button onPress={handleExit} bg={color.red + 10} pv={10} ph={1} >
+                    <Button onPress={handleExit} bg={color.red + 10} pv={10} ph={1} radius={1} >
                         <LabelBT color={color.red} style={{ textAlign: 'center', }}>Excluir conta</LabelBT>
                     </Button>
                 </Column>
             </Modal>
             <TabBar />
-            <Button onPress={handleSave} disabled={loading} style={{ height: 52, borderRadius: 100, position: 'absolute', alignSelf: 'center', bottom: 100, paddingHorizontal: 16, backgroundColor: color.sc.sc1, justifyContent: 'center', alignItems: 'center', }}>
+            <Button onPress={handleSave} disabled={loading} radius={1} style={{ height: 52,  position: 'absolute', alignSelf: 'center', bottom: 100, paddingHorizontal: 16, backgroundColor: color.sc.sc1, justifyContent: 'center', alignItems: 'center', }}>
                 <Row>
                     {loading ? <ActivityIndicator size="small" color="#fff" />
                         :

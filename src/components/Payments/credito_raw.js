@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, } from 'react';
-import { ActivityIndicator, TextInput, Vibration } from 'react-native';
+import { ActivityIndicator, Pressable, TextInput, Vibration } from 'react-native';
 import { Column, Label, Title, Row, Button, LabelBT } from '@theme/global';
 import { payCredito, } from '@api/request/payments';
 
@@ -22,11 +22,13 @@ export default function PaymentCreditoShop({ item, }) {
     const [cvv, setcvv] = useState('');
     const [mes, setmes] = useState('');
     const [numerocartao, setnumerocartao] = useState('');
+    const [cpf, setcpf] = useState('');
 
     const [focusNome, setfocusNome] = useState();
     const [focusCvv, setfocusCvv] = useState();
     const [focusMes, setfocusMes] = useState();
     const [focusNumerocartao, setfocusNumerocartao] = useState();
+    const [focusCPF, setfocusCPF] = useState();
 
     const { color, font } = useContext(ThemeContext);
 
@@ -39,6 +41,7 @@ export default function PaymentCreditoShop({ item, }) {
             cvv: cvv,
             meseano: mes,
             numerocartao: numerocartao,
+            cpf: cpf,
         }
         try {
             const res = await payCredito(params)
@@ -58,29 +61,32 @@ export default function PaymentCreditoShop({ item, }) {
     return (
         <Column >
 
-            <Column style={{ marginTop: 12, marginHorizontal: 26, }}>
-                <Column style={{ backgroundColor: color.blue, borderRadius: 12, flexGrow: 1, paddingVertical: 16, paddingHorizontal: 16, }}>
+            <Column style={{ marginTop: 12, }}>
+                <Column style={{ backgroundColor: color.sc.sc3, borderRadius: 12, flexGrow: 1, paddingVertical: 16, paddingHorizontal: 16, }}>
                     <Title style={{ fontSize: 8, lineHeight: 16, letterSpacing: 1, color: "#fff", }}>NOME COMPLETO</Title>
-                    <Column style={{ width: 180, height: 20, backgroundColor: focusNome ? '#fff' : '#ffffff60', borderRadius: 4, marginBottom: 8, }} />
+                    <Column style={{ width: 180, height: 20, backgroundColor: focusNome ? '#fff' : '#ffffff60', borderRadius: 1, marginBottom: 8, }} />
                     <Title style={{ fontSize: 8, lineHeight: 16, letterSpacing: 1, color: "#fff", }}>NÚMERO DO CARTÃO</Title>
-                    <Column style={{ width: 200, height: 20, backgroundColor: focusNumerocartao ? '#fff' : '#ffffff60', borderRadius: 4, }} />
+                    <Column style={{
+                        width: 200, height: 20, backgroundColor: focusNumerocartao ? '#fff' : '#ffffff60', borderRadius: 1
+                        ,
+                    }} />
                     <Row style={{ marginVertical: 6, }}>
                         <Column style={{ marginRight: 12, }}>
                             <Title style={{ fontSize: 8, lineHeight: 16, letterSpacing: 1, color: "#fff", }}>CVV</Title>
-                            <Column style={{ width: 60, height: 20, backgroundColor: focusCvv ? '#fff' : '#ffffff60', borderRadius: 4, }} />
+                            <Column style={{ width: 60, height: 20, backgroundColor: focusCvv ? '#fff' : '#ffffff60', borderRadius: 1, }} />
                         </Column>
                         <Column>
                             <Title style={{ fontSize: 8, lineHeight: 16, letterSpacing: 1, color: "#fff", }}>VENCIMENTO</Title>
-                            <Column style={{ width: 80, height: 20, backgroundColor: focusMes ? '#fff' : '#ffffff60', borderRadius: 4, }} />
+                            <Column style={{ width: 80, height: 20, backgroundColor: focusMes ? '#fff' : '#ffffff60', borderRadius: 1, }} />
                         </Column>
                     </Row>
                 </Column>
             </Column>
 
             <Column>
-                <Row style={{ borderRadius: 8, marginTop: 24, borderWidth: 2, borderColor: focusNome ? color.blue : color.border, }}>
-                    <Column style={{ justifyContent: 'center', width: 52, height: 52, alignItems: 'center', borderRadius: 100, }}>
-                        <BookUser color={focusNome ? color.blue : "#00000080"} size={22} />
+                <Row style={{ borderRadius: 1, marginTop: 24, borderWidth: 2, borderColor: focusNome ? "#939393" : color.border, }}>
+                    <Column style={{ justifyContent: 'center', width: 52, height: 52, alignItems: 'center', borderRadius: 1, }}>
+                        <BookUser color={focusNome ? '#939393' : '#00000030'} size={22} />
                     </Column>
                     <TextInput
                         onFocus={() => setfocusNome(true)}
@@ -88,12 +94,12 @@ export default function PaymentCreditoShop({ item, }) {
                         onChangeText={(e) => setnome(e)}
                         value={nome}
                         autoFocus={true}
-                        style={{ fontFamily: font.medium, fontSize: 18, color: color.secundary, paddingVertical: 12, width: '78%', }} placeholder='Nome completo' placeholderTextColor="#11111190" />
+                        style={{ fontFamily: font.medium, fontSize: 18, color: color.title, paddingVertical: 12, width: '78%', }} placeholder='Nome completo' placeholderTextColor="#11111190" />
                 </Row>
 
-                <Row style={{ borderRadius: 8, marginTop: 12, borderWidth: 2, borderColor: focusNumerocartao ? color.blue : color.border, }}>
+                <Row style={{ borderRadius: 1, marginTop: 12, borderWidth: 2, borderColor: focusNumerocartao ? "#939393" : color.border, }}>
                     <Column style={{ justifyContent: 'center', width: 52, height: 52, alignItems: 'center', borderRadius: 100, }}>
-                        <CreditCard color={focusNumerocartao ? color.blue : '#00000080'} size={22} />
+                        <CreditCard color={focusNumerocartao ? '#939393' : '#00000030'} size={22} />
                     </Column>
                     <TextInputMask
                         type={'credit-card'}
@@ -102,13 +108,13 @@ export default function PaymentCreditoShop({ item, }) {
                         onChangeText={(e) => setnumerocartao(e)}
                         value={numerocartao}
                         keyboardType='number-pad'
-                        style={{ fontFamily: font.medium, fontSize: 18, color: color.secundary, paddingVertical: 12, width: '78%', }} placeholder='Número do cartão' placeholderTextColor="#11111190" />
+                        style={{ fontFamily: font.medium, fontSize: 18, color: color.title, paddingVertical: 12, width: '78%', }} placeholder='Número do cartão' placeholderTextColor="#11111190" />
                 </Row>
 
                 <Row style={{ justifyContent: 'space-between', alignItems: 'center', }}>
-                    <Row style={{ borderRadius: 8, marginTop: 12, borderWidth: 2, borderColor: focusCvv ? color.blue : color.border, width: '42%', }}>
+                    <Row style={{ borderRadius: 1, marginTop: 12, borderWidth: 2, borderColor: focusCvv ? "#939393" : color.border, width: '42%', }}>
                         <Column style={{ justifyContent: 'center', width: 52, height: 52, alignItems: 'center', borderRadius: 100, }}>
-                            <Lock color={focusCvv ? color.blue : '#00000080'} size={22} />
+                            <Lock color={focusCvv ? '#939393' : '#00000030'} size={22} />
                         </Column>
                         <TextInputMask
                             type={'custom'}
@@ -118,11 +124,11 @@ export default function PaymentCreditoShop({ item, }) {
                             onChangeText={(e) => setcvv(e)}
                             value={cvv}
                             keyboardType='number-pad'
-                            style={{ fontFamily: font.medium, fontSize: 18, color: color.secundary, paddingVertical: 12, flexGrow: 1, }} placeholder='CVV' placeholderTextColor="#11111190" />
+                            style={{ fontFamily: font.medium, fontSize: 18, color: color.title, paddingVertical: 12, flexGrow: 1, }} placeholder='CVV' placeholderTextColor="#11111190" />
                     </Row>
-                    <Row style={{ borderRadius: 8, marginTop: 12, borderWidth: 2, borderColor: focusMes ? color.blue : color.border, width: '52%', }}>
+                    <Row style={{ borderRadius: 1, marginTop: 12, borderWidth: 2, borderColor: focusMes ? "#939393" : color.border, width: '52%', }}>
                         <Column style={{ justifyContent: 'center', width: 52, height: 52, alignItems: 'center', borderRadius: 100, }}>
-                            <Calendar color={focusMes ? color.blue : '#00000080'} size={22} />
+                            <Calendar color={focusMes ? '#939393' : '#00000030'} size={22} />
                         </Column>
                         <TextInputMask
                             type={'custom'}
@@ -132,8 +138,21 @@ export default function PaymentCreditoShop({ item, }) {
                             onChangeText={(e) => setmes(e)}
                             value={mes}
                             keyboardType='number-pad'
-                            style={{ fontFamily: font.medium, fontSize: 18, color: color.secundary, paddingVertical: 12, flexGrow: 1, }} placeholder='Mês/Ano' placeholderTextColor="#11111190" />
+                            style={{ fontFamily: font.medium, fontSize: 18, color: color.title, paddingVertical: 12, flexGrow: 1, }} placeholder='Mês/Ano' placeholderTextColor="#11111190" />
                     </Row>
+                </Row>
+
+                <Row style={{ borderRadius: 1, marginTop: 12, borderWidth: 2, borderColor: focusCPF ? "#939393" : color.border, }}>
+                    <Column style={{ justifyContent: 'center', width: 52, height: 52, alignItems: 'center', borderRadius: 1, }}>
+                        <BookUser color={focusCPF ? '#939393' : '#00000030'} size={22} />
+                    </Column>
+                    <TextInputMask
+                        type={'cpf'}
+                        onFocus={() => setfocusCPF(true)}
+                        onBlur={() => setfocusCPF(false)}
+                        onChangeText={(e) => setcpf(e)}
+                        value={cpf}
+                        style={{ fontFamily: font.medium, fontSize: 18, color: color.title, paddingVertical: 12, width: '78%', }} placeholder='CPF do titular' placeholderTextColor="#11111190" />
                 </Row>
             </Column>
 
@@ -162,7 +181,7 @@ const BuyService = ({ handleBuyService, loading, error, success, disabled }) => 
         } else if (error && !loading) {
             // Erro
             bottomValue.value = withTiming(20, { duration: 300 });
-            widthValue.value = withTiming(284, { duration: 300 });
+            widthValue.value = withTiming('100%', { duration: 300 });
             heightValue.value = withTiming(52, { duration: 300 });
             radiusValue.value = withTiming(100, { duration: 300 });
             backgroundValue.value = withTiming('#f55353');
@@ -176,10 +195,10 @@ const BuyService = ({ handleBuyService, loading, error, success, disabled }) => 
         } else if (!loading && !error && !success) {
             // Normal
             bottomValue.value = withTiming(20, { duration: 300 });
-            widthValue.value = withTiming(214, { duration: 300 });
+            widthValue.value = withTiming('100%', { duration: 300 });
             heightValue.value = withTiming(52, { duration: 300 });
             radiusValue.value = withTiming(100, { duration: 300 });
-            backgroundValue.value = withTiming('#00A3FF', { duration: 300 });
+            backgroundValue.value = withTiming('#778428', { duration: 300 });
         }
     }, [success, error, loading]);
 
@@ -190,21 +209,23 @@ const BuyService = ({ handleBuyService, loading, error, success, disabled }) => 
             height: heightValue.value,
             backgroundColor: backgroundValue.value,
             bottom: bottomValue.value,
-            borderRadius: radiusValue.value,
         };
     });
     return (
-        <Animated.View style={[{ borderRadius: 100, position: 'absolute', bottom: 20, alignSelf: 'center', zIndex: 99, backgroundColor: 'red', }, animatedStyle]}>
-            <Column style={{ justifyContent: 'center', alignItems: 'center', flex: 1, }}>
-                {loading ? <ActivityIndicator size="large" color="#fff" />
-                    : <Label style={{ color: '#fff', textAlign: 'center', fontFamily: 'Font_Medium', }}>{error?.length > 0 ? error : 'Verificar e continuar'}</Label>}
-            </Column>
-            {success &&
-                <MotiView from={{ opacity: 0, }} animate={{ opacity: 1, }} transition={{ type: 'timing', duration: 500, }} delay={500} style={{ justifyContent: 'center', alignItems: 'center', flex: 1, }}>
-                    <MotiView from={{ opacity: 0, scale: 0, }} animate={{ opacity: 1, scale: 1, }} style={{ width: 100, height: 100, borderRadius: 100, backgroundColor: "#ffffff50", justifyContent: 'center', alignItems: 'center', }}>
-                        <Check size={32} color="#fff" />
-                    </MotiView>
-                </MotiView>}
-        </Animated.View>
+        <Pressable onPress={handleBuyService} style={{  alignSelf: 'center', zIndex: 99, width: '100%', marginTop:42, alignSelf: 'center' }}>
+            <Animated.View style={[{ borderRadius: 1, }, animatedStyle]}>
+                <Column style={{ justifyContent: 'center', alignItems: 'center', flex: 1, }}>
+                    {loading ? <ActivityIndicator size="large" color="#fff" />
+                        : <Label style={{ color: '#fff', textAlign: 'center', }}>{error?.length > 0 ? error : 'Verificar e continuar'}</Label>}
+                </Column>
+                {success &&
+                    <MotiView from={{ opacity: 0, }} animate={{ opacity: 1, }} transition={{ type: 'timing', duration: 500, }} delay={500} style={{ justifyContent: 'center', alignItems: 'center', flex: 1, }}>
+                        <MotiView from={{ opacity: 0, scale: 0, }} animate={{ opacity: 1, scale: 1, }} style={{ width: 100, height: 100, borderRadius: 1, backgroundColor: "#ffffff50", justifyContent: 'center', alignItems: 'center', }}>
+                            <Check size={32} color="#fff" />
+                        </MotiView>
+                    </MotiView>}
+            </Animated.View>
+        </Pressable>
+
     );
 };

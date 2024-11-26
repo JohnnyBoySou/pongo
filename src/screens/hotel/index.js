@@ -30,6 +30,8 @@ export default function HotelScreen({ navigation}) {
         { label: 'Café da manhã incluso.', },
     ]
 
+    const a = false;
+
     return (
         <Main style={{ backgroundColor: '#FFFFFF' }}>
             <Scroll>
@@ -45,9 +47,9 @@ export default function HotelScreen({ navigation}) {
                     <Label size={14} align="left" style={{ paddingVertical: 6 }}>Ao acordar, abrir a janela, sentir a brisa do Parque Ibirapuera. {'\n'} Seu pet irá se hospedar em um dos bairros mais nobres e seguros de São Paulo. </Label>
                     <Label size={14} align="left" style={{ paddingVertical: 6 }}>Aconchegante e impecável, nossos quartos são únicos. Sofisticados ambientes, decorados com camas da PONGO feitas em ferro e com colchões confortáveis em tecidos nobres, tem luz indireta, televisão, ar condicionado e teto sob nuvens! </Label>
                     <Label size={14} align="left" style={{ paddingVertical: 6 }}>Durante o dia seu mascote participará de atividades, passeios no parque e piscina.  {'\n'} Ele será recepcionado com muito amor e cuidado e durante toda a sua estadia na Villa PONGO ele será supervisionado por monitores e veterinários. </Label>
-                    <Button onPress={handleRegister} style={{ width: '100%', backgroundColor: color.sc.sc3, marginTop: 12 }}>
+                    {a && <Button onPress={handleRegister} style={{ width: '100%', backgroundColor: color.sc.sc3, marginTop: 12 }}>
                         <Label style={{ textAlign: 'center', color: '#fff' }}>Reservar Hotel</Label>
-                    </Button>
+                    </Button>}
                 </Column>
 
                     
@@ -114,9 +116,7 @@ export default function HotelScreen({ navigation}) {
                         <Label style={{ color: '#fff', fontSize: 11, marginTop: 6 }}>(Após o horário de Check Out, haverá uma tolerância de 15 minutos, excedido esse tempo será cobrado Late Check Out, no valor da diária contratada)</Label>
 
                         <Column style={{ height: 120 }} />
-                        { /* <Button style={{ backgroundColor: '#fff', marginVertical: 32 }}>
-                            <Text style={{ fontSize: 12, color: '#434343', textAlign: 'center', fontWeight: 400 }}>Cadastrar pré-matrícula</Text>
-                        </Button> */ }
+                        
                     </Column>
 
 

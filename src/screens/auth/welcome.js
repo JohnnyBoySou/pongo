@@ -22,7 +22,10 @@ export default function WelcomeScreen({ navigation, route }) {
                         navigation.replace('Tabs')
                     }, 5000)
                 } else {
-                    navigation.replace('AuthLogin')
+                    setstep(2)
+                    setTimeout(() => {
+                        navigation.replace('AuthLogin')
+                    }, 4000);
                 }
             } catch (error) {
                 console.log(error)

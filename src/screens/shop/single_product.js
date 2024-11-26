@@ -147,7 +147,7 @@ export default function ShopSingleProductScreen({ navigation, route }) {
                             </Column>
                         
                             <Row style={{ justifyContent: 'space-between', columnGap: 12, alignItems: 'center', marginTop: 12, }}>
-                                <Row style={{ flexGrow: 1, borderColor: '#868686', borderWidth: 2, }}>
+                                <Row style={{ flexGrow: 1, borderColor: '#868686', borderWidth: 2, justifyContent: 'center', alignItems: 'center',  }}>
                                     <Pressable disabled={qtd == 1} style={{ justifyContent: 'center', alignItems: 'center', paddingHorizontal: 6, }} onPress={() => { setqtd(qtd - 1) }}><AntDesign name='minus' size={18} color={color.title} /></Pressable>
                                     <Column style={{ justifyContent: 'center', alignItems: 'center', paddingVertical: 10, paddingHorizontal: 14, }}>
                                         <Label style={{ fontFamily: font.bold, }} size={18}>{qtd}</Label>
@@ -170,7 +170,7 @@ export default function ShopSingleProductScreen({ navigation, route }) {
                                 </Button>
                             </Row>
                             <Column style={{ marginTop: 12, }}>
-                                <Button bg="#606060" radius={1} onPress={handleAddFinalize}>
+                                <Button bg={color.sc.sc1} pv={16} radius={1} onPress={handleAddFinalize}>
                                     <Label color='#fff' align='center'>Comprar já</Label>
                                 </Button>
                                 <Label style={{ marginTop: 12 }}>Parcelamos em até 10x sem juros.</Label>
@@ -179,7 +179,6 @@ export default function ShopSingleProductScreen({ navigation, route }) {
                         <Column mh={margin.h}>
                             <Label size={18} style={{ fontFamily: font.bold, marginTop: 20, marginBottom: 10, }}>Descrição</Label>
                             <Label style={{ fontFamily: font.book, marginBottom: 10, }}>{item?.desc}</Label>
-                    
                             <Label size={18} style={{ fontFamily: font.bold, marginTop: 20, marginBottom: 0, }}>Categorias</Label>
                         </Column>
                         {item?.categories && <ScrollView style={{ marginVertical: 10, }} horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ columnGap: 12, }}>

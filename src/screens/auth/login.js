@@ -109,7 +109,7 @@ export default function AuthLoginScreen({ navigation, }) {
                             setValue={setpassword}
                             onSubmitEditing={handleLogin}
                         />
-                        <Button pv={12} radius={8} ph={8} mv={8} onPress={() => { modalForget.current.expand() }}>
+                        <Button pv={12} radius={1} ph={8} mv={8} onPress={() => { modalForget.current.expand() }}>
                             <U><LabelBT color={color.title} style={{ fontSize: 16, }}>Recuperar senha</LabelBT></U>
                         </Button>
 
@@ -122,7 +122,7 @@ export default function AuthLoginScreen({ navigation, }) {
 
                         {success ? <Success msg={success} /> : error ? <Error msg={error} /> : null}
 
-                        <Button bg='#918C8B' disabled={loading} onPress={handleLogin} style={{ marginTop: 12, }}>
+                        <Button bg='#918C8B' radius={1} disabled={loading} onPress={handleLogin} style={{ marginTop: 12, }}>
                             <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                                 {loading ?
                                     <Loader color="#fff" /> :
@@ -130,7 +130,7 @@ export default function AuthLoginScreen({ navigation, }) {
                             </Row>
                         </Button>
 
-                        <Button radius={12} onPress={() => { navigation.navigate('AuthRegister') }} mv={12} bg={color.sc.sc3 + 20}>
+                        <Button radius={1} onPress={() => { navigation.navigate('AuthRegister') }} mv={12} bg={color.sc.sc3 + 20}>
                             <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
                                 <Label size={14} color={color.sc.sc3} align="center">Ainda não tem uma conta?</Label>
                                 <LabelBT size={14} color={color.sc.sc3} align="center" >Clique aqui para criar</LabelBT>

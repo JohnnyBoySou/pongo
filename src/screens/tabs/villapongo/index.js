@@ -11,7 +11,7 @@ export default function VillaPongoScreen({ navigation, }) {
             <Scroll>
                 <Column>
 
-                    <TopMenu />
+                    <TopMenu search={false} back={false} />
                     <Column mh={margin.h} mv={20}>
                         <Title size={26}>Serviços</Title>
                         <FlatList

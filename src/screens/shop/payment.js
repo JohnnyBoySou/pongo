@@ -35,17 +35,17 @@ export default function ShopPaymentScreen({ navigation, route }) {
                         stepCount={3}
                         customStyles={firstIndicatorStyles}
                         currentPosition={currentPage - 1}
+                        onPress={(position) => { if (currentPage > position) { setcurrentPage(position + 1) } }}
                         labels={['Entrega', 'Pagamento', 'Finalização']}
                         renderStepIndicator={({ position, stepStatus, }) =>
-                            <Column style={{ alignItems: 'center', }}>
-                                {stepStatus === 'finished' ? <Check size={18} color="#fff" /> : <Label style={{ lineHeight: 18, fontFamily: font.bold, color: stepStatus === 'current' ? "#fff" : color.sc.sc3, }} >{position + 1}</Label>}
+                            <Column style={{ alignItems: 'center', backgroundColor: stepStatus === 'finished' ? color.sc.sc1 : stepStatus == 'current' ? color.sc.sc3 : stepStatus === 'unfinished' ? '#cddff7' : null, width: 56, height: 56, justifyContent: 'center', alignItems: 'center', borderRadius: 100, }}>
+                                {stepStatus === 'finished' ? <Check size={18} color="#fff" /> : <Label style={{ lineHeight: 18, fontFamily: font.bold, color: stepStatus === 'current' ? "#fff" : color.sc.sc1, }} >{position + 1}</Label>}
                             </Column>
                         }
-                        renderLabel={({ position, stepStatus, label }) => <Label style={{ fontSize: 12, fontFamily: font.medium, color: stepStatus === 'current' ? color.sc.sc3 : stepStatus === 'finished' ? color.green : color.label, }}>{label}</Label>}
+                        renderLabel={({ position, stepStatus, label }) => <Label style={{ fontSize: 12, fontFamily: font.medium, color: stepStatus === 'current' ? color.sc.sc3 : stepStatus === 'finished' ? color.sc.sc1 : color.label, }}>{label}</Label>}
                     />
 
                     <Column style={{ height: 20 }} />
-
 
 
                     {currentPage === 1 && <Column>
@@ -53,7 +53,7 @@ export default function ShopPaymentScreen({ navigation, route }) {
                         {entrega === null &&
                             <Row mv={20}>
                                 <Column style={{ justifyContent: 'center', alignItems: 'center', flexGrow: 1, }}>
-                                    <Button onPress={() => { setentrega('Retirar') }} radius={12} pv={1} ph={1} style={{ backgroundColor: '#fff', marginBottom: 8, justifyContent: 'center', alignItems: 'center', width: 72, height: 72, }}>
+                                    <Button onPress={() => { setentrega('Retirar') }} radius={1} pv={1} ph={1} style={{ backgroundColor: '#fff', marginBottom: 8, justifyContent: 'center', alignItems: 'center', width: 72, height: 72, }}>
                                         <Column>
                                             <Store size={32} color="#CDD0CF" />
                                         </Column>
@@ -61,7 +61,7 @@ export default function ShopPaymentScreen({ navigation, route }) {
                                     <Label>Retirar em loja física</Label>
                                 </Column>
                                 <Column style={{ justifyContent: 'center', alignItems: 'center', flexGrow: 1, }}>
-                                    <Button onPress={() => { setentrega('Receber') }} radius={12} pv={1} ph={1} style={{ backgroundColor: '#fff', marginBottom: 8, justifyContent: 'center', alignItems: 'center', width: 72, height: 72, }}>
+                                    <Button onPress={() => { setentrega('Receber') }} radius={1} pv={1} ph={1} style={{ backgroundColor: '#fff', marginBottom: 8, justifyContent: 'center', alignItems: 'center', width: 72, height: 72, }}>
                                         <Column>
                                             <ShoppingBag size={32} color="#CDD0CF" />
                                         </Column>
@@ -73,7 +73,7 @@ export default function ShopPaymentScreen({ navigation, route }) {
                         {entrega === 'Retirar' &&
                             <Column mv={20} mh={margin.h}>
                                 {lojas?.map((loja, index) =>
-                                    <Button mv={12} key={index} style={{ backgroundColor: retirada?.id == loja?.id ? color.sc.sc3 : '#fff', }} onPress={() => { setretirada(loja) }} radius={8}>
+                                    <Button mv={12} key={index} style={{ backgroundColor: retirada?.id == loja?.id ? color.sc.sc3 : '#fff', }} onPress={() => { setretirada(loja) }} radius={1}>
                                         <Column mv={margin.v} style={{ rowGap: 8, }}>
                                             <Label style={{ lineHeight: 18, color: retirada?.id == loja?.id ? '#fff' : color.label }}>{loja?.loja}</Label>
                                             <Label style={{ lineHeight: 18, color: retirada?.id == loja?.id ? '#fff' : color.label }}>{loja?.endereco}</Label>
@@ -82,7 +82,7 @@ export default function ShopPaymentScreen({ navigation, route }) {
                                         </Column>
                                     </Button>
                                 )}
-                                <Button onPress={() => { setcurrentPage(2); }} style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: color.sc.sc3, marginVertical: 12, }}>
+                                <Button onPress={() => { setcurrentPage(2); }} radius={1} style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: color.sc.sc3, marginVertical: 12, }}>
                                     <LabelBT color='#fff'>Próximo</LabelBT>
                                 </Button>
                             </Column>
@@ -91,7 +91,7 @@ export default function ShopPaymentScreen({ navigation, route }) {
                         {entrega === 'Receber' &&
                             <Column mv={20} mh={margin.h}>
                                 <Endereco />
-                                <Button onPress={() => { setcurrentPage(2); }} style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: color.sc.sc3, marginVertical: 12, }}>
+                                <Button onPress={() => { setcurrentPage(2); setmetodo(null)}} radius={1} style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: color.sc.sc3, marginVertical: 12, }}>
                                     <LabelBT color='#fff'>Próximo</LabelBT>
                                 </Button>
                             </Column>
@@ -104,17 +104,17 @@ export default function ShopPaymentScreen({ navigation, route }) {
                         {metodo === null &&
                             <Row mv={20}>
                                 <Column style={{ justifyContent: 'center', alignItems: 'center', flexGrow: 1, }}>
-                                    <Button onPress={() => { setmetodo('Cartão') }} radius={12} pv={1} ph={1} style={{ backgroundColor: '#fff', marginBottom: 8, justifyContent: 'center', alignItems: 'center', width: 72, height: 72, }}>
+                                    <Button radius={1} onPress={() => { setmetodo('Cartão') }}  pv={1} ph={1} style={{ backgroundColor: '#fff', marginBottom: 8, justifyContent: 'center', alignItems: 'center', width: 72, height: 72, }}>
                                         <Column>
-                                            <MaterialIcons name="credit-card" size={24} color="#CDD0CF" />
+                                            <MaterialIcons name="credit-card" size={32} color="#CDD0CF" />
                                         </Column>
                                     </Button>
                                     <Label>Cartão de crédito</Label>
                                 </Column>
                                 <Column style={{ justifyContent: 'center', alignItems: 'center', flexGrow: 1, }}>
-                                    <Button onPress={() => { setmetodo('Pix') }} radius={12} pv={1} ph={1} style={{ backgroundColor: '#fff', marginBottom: 8, justifyContent: 'center', alignItems: 'center', width: 72, height: 72, }}>
+                                    <Button radius={1} onPress={() => { setmetodo('Pix') }}   pv={1} ph={1} style={{ backgroundColor: '#fff', marginBottom: 8, justifyContent: 'center', alignItems: 'center', width: 72, height: 72, }}>
                                         <Column>
-                                            <MaterialIcons name="pix" size={24} color="#CDD0CF" />
+                                            <MaterialIcons name="pix" size={32} color="#CDD0CF" />
                                         </Column>
                                     </Button>
                                     <Label>PIX</Label>
@@ -144,12 +144,13 @@ const Endereco = ({ }) => {
     const [cep, setcep] = useState('.....-...');
     const [complemento, setcomplemento] = useState('.....');
     const [rua, setrua] = useState('...');
-
+    const [estado, setestado] = useState('..');
 
     useEffect(() => {
         const fecthData = async () => {
             try {
                 const res = await listUser();
+                setestado(res.estado);
                 setrua(res.rua);
                 setcep(res.cep);
                 setbairro(res.bairro);
@@ -164,6 +165,13 @@ const Endereco = ({ }) => {
 
     return (
         <Column>
+            <Input
+                label="Estado *"
+                placeholder="Estado"
+                value={estado}
+                setValue={setestado}
+            />
+            <Column style={{ height: 16, }} />
             <Input
                 label="Cidade *"
                 placeholder="Cidade"
@@ -207,16 +215,6 @@ const Endereco = ({ }) => {
 
 const lojas = [
     {
-        id: 1,
-        local: "Shopping Cidade Jardim",
-        loja: "PONGO",
-        endereco: "Av. Magalhães de Castro, 12000 - 2 Piso - Cidade Jardim, São Paulo - SP, 05502-001",
-        horariosSemana: "Segunda a Sábado das 10h às 22:00h",
-        horariosFeriado: "Domingos e Feriados das 14:00h às 20:00h",
-        lat: "-23.5987553",
-        long: "-46.6974068,21z"
-    },
-    {
         id: 2,
         local: "Vila Nova Conceição",
         loja: "Villa PONGO",
@@ -228,18 +226,16 @@ const lojas = [
     },
 ];
 
+//MODIFICAR CORES VERDE DA PONGO, TEXTO MESMA COR PARA TODOS
+
 const firstIndicatorStyles = {
     stepIndicatorSize: 30,
     stepStrokeWidth: 0,
     currentStepIndicatorSize: 30,
     currentStepStrokeWidth: 0,
+
     separatorStrokeWidth: 3,
 
-    separatorFinishedColor: '#37CB84',
+    separatorFinishedColor: '#778428',
     separatorUnFinishedColor: '#c3cfe3',
-
-    stepIndicatorUnFinishedColor: '#dce5f2',
-    stepIndicatorFinishedColor: '#37CB84',
-    stepIndicatorCurrentColor: '#91A6C4',
-
 };

@@ -3,7 +3,7 @@ import { Main, Scroll, Column, Label, Title, Row, Button, useTheme, Image } from
 import { StatusBar } from 'expo-status-bar';
 import TopMenu from '@components/Header/topmenu';
 import { FlatList, Pressable } from 'react-native';
-import { Search, ShoppingBag, X } from 'lucide-react-native';
+import { Search, ShoppingBag, ShoppingCart, X } from 'lucide-react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 
@@ -60,23 +60,21 @@ export default function ShopScreen({ navigation }) {
 
     return (
         <Main style={{ backgroundColor: '#ECEBEB', paddingTop: 20 }}>
-            <StatusBar backgroundColor='#fff' />
+            <StatusBar backgroundColor='#ECEBEB' />
             <Scroll>
-                <Column bg="#fff" style={{ borderBottomLeftRadius: 32, paddingTop: 30, borderBottomRightRadius: 32, }}>
+                <Column  style={{  paddingTop: 16,}}>
                     <TopMenu search={false} back={false} />
-                    <Image source={require('@imgs/shop.png')} style={{ width: '100%', marginTop: 30, height: 230, objectFit: 'contain', }} />
                 </Column>
                 <Column style={{ backgroundColor: '#ECEBEB', paddingTop: 20, }}>
-                    <Row mh={margin.h}>
-
-                        <Button style={{ backgroundColor: '#fff', flexGrow: 1, }} radius={100} onPress={() => { navigation.navigate('Search') }} >
+                    <Row mh={margin.h} style={{ justifyContent: 'center', alignItems: 'center', marginTop: -6,  }}>
+                        <Button style={{ backgroundColor: '#fff', flexGrow: 1, }} radius={1} onPress={() => { navigation.navigate('Search') }} >
                             <Row style={{ columnGap: 12, alignItems: 'center', }}>
                                 <Image source={require('@imgs/icon.png')} style={{ width: 34, height: 34, borderRadius: 100, }} />
                                 <Label>Pesquisar</Label>
                             </Row>
                         </Button>
-                        <Button bg={color.sc.sc3} radius={6} style={{ marginLeft: 12, justifyContent: 'center', alignItems: 'center', }} onPress={() => { navigation.navigate('ShopCart') }} >
-                            <ShoppingBag color='#fff' />
+                        <Button bg={color.sc.sc3} radius={1} style={{ marginLeft: 12, width: 56, height: 56, justifyContent: 'center', alignItems: 'center', }} onPress={() => { navigation.navigate('ShopCart') }} >
+                            <ShoppingCart color='#fff' />
                         </Button>
 
                     </Row>
@@ -113,6 +111,7 @@ export default function ShopScreen({ navigation }) {
                     <Explore data={data} />
                 </Column>
 
+                <Column style={{height: 100 }} />
             </Scroll>
         </Main>
     )

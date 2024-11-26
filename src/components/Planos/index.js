@@ -23,9 +23,10 @@ export default function PlanosList({ destino }) {
 
 const CardPlano = ({ item, destino }) => {
     const { color, font, margin } = useTheme();
-    const { name, date, price, inclusos } = item
+    const { name, date, price, inclusos } = item;
+    const a = false;
     return (
-        <Column style={{ width: 260, backgroundColor: '#F7F7F7', borderRadius: 18, paddingHorizontal: 20, paddingVertical: 20 }}>
+        <Column style={{ width: 260, backgroundColor: '#F7F7F7', borderRadius: 1, paddingHorizontal: 20, paddingVertical: 20 }}>
             <Row style={{ justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 8, }}>
                 <Title size={17} width={120}>Plano {name}</Title>
                 <Label size={15}>{price}</Label>
@@ -35,9 +36,9 @@ const CardPlano = ({ item, destino }) => {
             <Title size={16}>Inclusos:</Title>
             <Column style={{ height: 6, }}></Column>
             {inclusos.map((item, index) => <Label key={index} size={14} style={{ lineHeight: 20, }}>{item}</Label>)}
-            <Button onPress={() => { destino(item) }} style={{ backgroundColor: color.sc.sc3 + 20, marginTop: 20, }} radius={12}>
+            {a && <Button onPress={() => { destino(item) }} style={{ backgroundColor: color.sc.sc3 + 20, marginTop: 20, }} radius={12}>
                 <Title size={18} align='center' color={color.sc.sc3} font={font.medium}>Escolher</Title>
-            </Button>
+            </Button>}
         </Column>
     )
 }

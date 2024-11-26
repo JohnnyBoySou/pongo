@@ -32,21 +32,21 @@ export default function ChatNewScreen({ navigation, }) {
                 <Back />
 
                 {loading ?
-                    <Column style={{ backgroundColor: '#fff', borderRadius: 24, marginTop: 20, justifyContent: 'center', alignItems: 'center', }} pv={20} ph={30}>
+                    <Column style={{ backgroundColor: '#fff', borderRadius: 1, marginTop: 20, justifyContent: 'center', alignItems: 'center', }} pv={20} ph={30}>
                         <Image source={require('@imgs/chatload.png')} style={{ width: 200, height: 200, objectFit: 'contain' }} />
                         <Label align='center' style={{ marginVertical: 20, }}>Por favor aguarde, você será {'\n'}direcionado para o atendente {'\n'}disponível em 5 segundos</Label>
                         <Loader size={32} color={color.pr.pr1} />
                     </Column> :
-                    <Column style={{ backgroundColor: '#fff', borderRadius: 24, marginTop: 20, justifyContent: 'center', alignItems: 'center', }} pv={20} ph={20}>
+                    <Column style={{ backgroundColor: '#fff', borderRadius: 1, marginTop: 20, justifyContent: 'center', alignItems: 'center', }} pv={20} ph={20}>
                         <Title>Qual é o motivo do contato?</Title>
                         <Row style={{ flexWrap: 'wrap', rowGap: 8, columnGap: 8, justifyContent: 'center', alignItems: 'center', marginTop: 20 }}>
                         {helps?.map((item, index) => (
-                            <Button key={index} onPress={() => {settitulo(item)}} style={{ backgroundColor: item == titulo ? color.sc.sc3 : color.sc.sc3+30, }} pv={8} ph={16}>
+                            <Button radius={1} key={index} onPress={() => {settitulo(item)}} style={{ backgroundColor: item == titulo ? color.sc.sc3 : color.sc.sc3+30, }} pv={8} ph={16}>
                                 <LabelBT style={{ color: item == titulo ? '#fff' : color.sc.sc3, fontSize: 16, }}>{item}</LabelBT>
                             </Button>
                         ))}
                         </Row>
-                        <Button onPress={fecthData} style={{ backgroundColor: color.sc.sc1, }} pv={10} ph={16} mtop={20} mbottom={20}>
+                        <Button radius={1} onPress={fecthData} style={{ backgroundColor: color.sc.sc1, width: '100%', justifyContent: 'center', alignItems: 'center',  }} pv={14} ph={16} mtop={20} >
                             <LabelBT color="#fff" style={{ fontSize: 16, }}>Prosseguir</LabelBT>
                         </Button>
                     </Column>

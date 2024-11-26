@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Main, Column, Label, Title, Row, Button, useTheme, SCREEN_HEIGHT, Image, Loader } from '@theme/global';
-import { KeyboardAvoidingView, Platform } from 'react-native';
+import { KeyboardAvoidingView, Platform, StatusBar } from 'react-native';
 //icons
 import { ArrowDown, ArrowLeft, Camera, Search, Send, X, } from 'lucide-react-native';
 
@@ -108,6 +108,7 @@ export default function ChatDetailsScreen({ navigation, route }) {
 
     return (
         <Main>
+            <StatusBar backgroundColor="#fff" />
             <TopSheet
                 bg="#fff"
                 valueMin={110}

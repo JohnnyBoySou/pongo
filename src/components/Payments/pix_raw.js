@@ -75,18 +75,18 @@ export default function PaymentPix({ item, }) {
         <Column style={{ justifyContent: 'center', paddingHorizontal: 28, }}>
             <Column style={{ borderRadius: 18, backgroundColor: "#f7f7f7", paddingVertical: 28, justifyContent: 'center', alignItems: 'center', marginVertical: 20, }}>
                 <MotiImage from={{ opacity: 0, scale: 0, }} animate={{ opacity: 1, scale: 1, }} delay={300} source={{ uri: data?.qrcode }} style={{ width: 250, marginBottom: 12, height: 250, borderRadius: 12, }} />
-                <Row style={{ justifyContent: 'center', paddingVertical: 8, alignItems: 'center', position: 'absolute', bottom: 0, paddingHorizontal: 12, backgroundColor: color.blue, borderTopLeftRadius: 10, borderTopRightRadius: 10, }}>
+                <Row style={{ justifyContent: 'center', paddingVertical: 8, alignItems: 'center', position: 'absolute', bottom: 0, paddingHorizontal: 12, backgroundColor: color.sc.sc1, borderTopLeftRadius: 10, borderTopRightRadius: 10, }}>
                     <Title style={{ fontSize: 16, lineHeight: 16, color: '#fff', marginLeft: 6, }}>{data?.Message.slice(0, -1)}</Title>
                 </Row>
             </Column>
-            <Title style={{ fontSize: 16, lineHeight: 16, marginBottom: 24, marginTop: 8, textAlign: 'center', fontFamily: 'Font_Medium', }}>Status: {status}</Title>
+            <Title style={{ fontSize: 20, lineHeight: 24, marginBottom: 24, marginTop: 8, textAlign: 'center',}}>Status: {status}</Title>
 
-            <Label style={{ marginBottom: 20, textAlign: 'center', }}>Ou copie o código para pagamento</Label>
+            <Label style={{ marginBottom: 20, textAlign: 'center', fontSize: 18, lineHeight: 22,}}>Ou copie o código para pagamento</Label>
             <Button onPress={handleClipboard} style={{ alignSelf: 'center', }} >
-                <Row style={{ borderWidth: 2, borderStyle: 'dashed', padding: 10, borderRadius: 12, justifyContent: 'center', alignItems: 'center', backgroundColor: clip ? color.green + 20 : 'transparent', borderColor: clip ? color.green : color.blue, }}>
+                <Row style={{ borderWidth: 2, borderStyle: 'dashed', padding: 10, borderRadius: 12, justifyContent: 'center', alignItems: 'center', backgroundColor: clip ? color.green + 20 : 'transparent', borderColor: clip ? color.green : color.sc.sc1, }}>
                     <Title style={{ marginBottom: -3, marginRight: 12, marginLeft: 6, color: clip ? color.green : color.secundary, fontSize: 16, lineHeight: 18, }}>{data?.qrcodetext.slice(0, 20)}...</Title>
-                    <Column style={{ width: 32, height: 32, backgroundColor: color.blue + 20, borderRadius: 6, justifyContent: 'center', alignItems: 'center', }}>
-                        <Clip size={22} color={color.blue} />
+                    <Column style={{ width: 32, height: 32, backgroundColor: color.sc.sc1 + 20, borderRadius: 6, justifyContent: 'center', alignItems: 'center', }}>
+                        <Clip size={22} color={color.sc.sc1} />
                     </Column>
                 </Row>
             </Button>
