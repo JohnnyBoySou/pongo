@@ -131,7 +131,7 @@ export default function AuthLoginScreen({ navigation, }) {
                         </Button>
 
                         <Button radius={1} onPress={() => { navigation.navigate('AuthRegister') }} mv={12} bg={color.sc.sc3 + 20}>
-                            <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
+                            <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 1, }}>
                                 <Label size={14} color={color.sc.sc3} align="center">Ainda não tem uma conta?</Label>
                                 <LabelBT size={14} color={color.sc.sc3} align="center" >Clique aqui para criar</LabelBT>
                             </Column>
@@ -140,14 +140,14 @@ export default function AuthLoginScreen({ navigation, }) {
                         <Label size={14} align='center' >Ao continuar, você concorda em receber chamadas e mensagens SMS ou pelo WhatsApp, inclusive automáticas, da Villa PONGO e de suas afiliadas, no número informado.</Label>
 
                         <Row mv={18} style={{ columnGap: 12, }}>
-                            <Button radius={12} onPress={() => { navigation.navigate('AuthLoginColaborador') }} bg={color.label + 20} style={{ flexGrow: 1, }}>
-                                <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
+                            <Button radius={1} onPress={() => { navigation.navigate('AuthLoginColaborador') }} bg={color.label + 20} style={{ flexGrow: 1, }}>
+                                <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 1, }}>
                                     <Label size={14} align="center">Entrar como</Label>
                                     <LabelBT size={14} align="center">Colaborador</LabelBT>
                                 </Column>
                             </Button>
-                            <Button onPress={() => { navigation.navigate('Tabs', { screen: 'Home' }) }} bg={color.label + 20} radius={12} style={{ flexGrow: 1, }}>
-                                <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, }}>
+                            <Button onPress={() => { navigation.navigate('Tabs', { screen: 'Home' }) }} bg={color.label + 20} radius={1} style={{ flexGrow: 1, }}>
+                                <Column style={{ justifyContent: 'center', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 1, }}>
                                     <Label size={14} align="center">Entrar como</Label>
                                     <LabelBT size={14} align="center">Visitante</LabelBT>
                                 </Column>
@@ -213,10 +213,7 @@ const ForgetPassword = ({ handleExit, }) => {
         seterror()
         setsuccess()
         setloading(true)
-        console.log('aq')
-        console.log(code.join(''))
         if (code.join('')?.length === 4) {
-            console.log('parou aq')
             try {
                 const res = await resetPasswordCode(email, code.join(''))
                 if (res?.codigo) {
@@ -276,12 +273,10 @@ const ForgetPassword = ({ handleExit, }) => {
 
     return (
         <Animated.View >
-            <Button onPress={() => handleExit('Entrar')} style={{ width: 42, backgroundColor: color.primary, alignSelf: 'flex-end', height: 42, borderRadius: 100, justifyContent: 'center', alignItems: 'center', }}>
+            <Button onPress={() => handleExit('Entrar')}  style={{ width: 42, backgroundColor: color.primary, alignSelf: 'flex-end', height: 42, justifyContent: 'center', alignItems: 'center', }}>
                 <X size={24} color="#fff" />
             </Button>
-
             {type === 'Redefinir' && <Column>
-
                 {step == 1 && <Column>
                     <Title style={{ marginBottom: 20, }} size={26}>Preencha seu e-mail</Title>
                     <Input
@@ -295,7 +290,7 @@ const ForgetPassword = ({ handleExit, }) => {
                     <Column style={{ height: 10, }} />
                     {success ? <Success msg={success} /> : error ? <Error msg={error} /> : null}
 
-                    <Button disabled={loading} onPress={handleSend} style={{ backgroundColor: color.primary, marginBottom: 20, marginTop: 10, }}>
+                    <Button disabled={loading} onPress={handleSend} radius={1} style={{ backgroundColor: color.primary, marginBottom: 20, marginTop: 10, }}>
                         <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                             {loading ? <Loader color="#fff" size={27} /> : <LabelBT color="#fff">Enviar código</LabelBT>}
                         </Row>

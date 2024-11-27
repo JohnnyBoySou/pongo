@@ -174,8 +174,7 @@ export default function AuthRegisterScreen({ navigation, route, }) {
                     </Button>
 
 
-
-                    <Button bg='#918C8B' onPress={handleRegister} disabled={loading}>
+                    <Button bg='#918C8B' onPress={handleRegister} disabled={loading} radius={1}>
                         <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                             {loading ?
                                 <Loader color="#fff" /> :
@@ -217,7 +216,6 @@ export const ConfirmEmail = ({ email, name, navigation, setconfirm }) => {
             try {
                 const res = await verifyEmail(email, code.join(''))
                 if (res) {
-                    console.log(res)
                     setsuccess('E-mail confirmado! Aguarde um momento...')
                     const saveUser = {
                         "avatar": res?.avatar,
@@ -275,7 +273,7 @@ export const ConfirmEmail = ({ email, name, navigation, setconfirm }) => {
                         ref={(input) => (inputs.current[index] = input)}
                     />
                 ))}</Row>
-            <Button disabled={loading} onPress={handleVerify} style={{ marginTop: 20, backgroundColor: color.primary, }} pv={16} ph={24}>
+            <Button disabled={loading} onPress={handleVerify} style={{ marginTop: 20, backgroundColor: color.primary, }} radius={1} pv={16} ph={24}>
                 <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                     {loading ? <Loader color="#fff" size={26} /> : <Title size={18} color="#fff">Verificar código</Title>}
                 </Row>

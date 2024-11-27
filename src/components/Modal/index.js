@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Column } from '@theme/global'
 
 const Modal = forwardRef(({ children, bg = '#fbfbfb', snapPoints = [0.1, 300], onClose, ...props }, ref) => {
     return (
@@ -12,9 +12,9 @@ const Modal = forwardRef(({ children, bg = '#fbfbfb', snapPoints = [0.1, 300], o
             backgroundStyle={{ backgroundColor: bg, }}
             handleIndicatorStyle={{ backgroundColor: '#30303030', width: 70, height: 8, }}
         >
-            <ScrollView>
+            <Column>
                 {children}
-            </ScrollView>
+            </Column>
         </BottomSheet>
     );
 });

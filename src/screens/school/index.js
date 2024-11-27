@@ -237,8 +237,8 @@ export default function SchoolPongoScreen() {
 function Carrossel() {
     const navigation = useNavigation();
     return (
-        <Swiper style={{ height: 220, overflow: 'hidden', borderRadius: 20 }} autoplay={true} loop={false}>
-            <Column style={{ marginHorizontal: 28, borderRadius: 20, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
+        <Swiper style={{ height: 220, overflow: 'hidden', borderRadius: 1 }} autoplay={true} loop={false}>
+            <Column style={{ marginHorizontal: 28, borderRadius: 1, overflow: 'hidden', justifyContent: 'center', alignItems: 'center', }}>
                 <Image
                     style={{ width: '100%', height: 220, objectFit: 'cover', }}
                     source={require('@imgs/pet5.jpeg')}

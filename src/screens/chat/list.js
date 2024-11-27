@@ -100,11 +100,13 @@ export default function ChatListScreen({ navigation }) {
                         }
                         ListEmptyComponent={() => <Label size={14} style={{ textAlign: 'center', marginVertical: 80, }}>Nenhum atendimento encontrado</Label>}
                         ItemSeparatorComponent={() => <Column style={{ height: 1, flexGrow: 1, backgroundColor: color.border, marginVertical: 4, borderRadius: 6, }} />}
+                        ListFooterComponent={<Column>
+                            <Button radius={1} bg={color.bg} onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor: '#918C8B', marginTop: 20, }} pv={16} ph={1} mh={margin.h} >
+                                <LabelBT color="#918C8B" style={{ textAlign: 'center', fontSize: 20 }}> <MessageCircleMore color={color.title} size={20} /> Iniciar conversa</LabelBT>
+                            </Button>
+                            <Column style={{ height: 140, width: 20, }}></Column>
+                        </Column>}
                     />
-                    <Button radius={1} bg={color.bg} onPress={() => { navigation.navigate('ChatNew') }} style={{ borderWidth: 2, borderColor: '#918C8B', position: 'absolute', bottom: 45, }} pv={16} ph={1} mh={margin.h} >
-                        <LabelBT color="#918C8B" style={{ textAlign: 'center', fontSize: 20 }}> <MessageCircleMore color={color.title} size={20} /> Iniciar conversa</LabelBT>
-                    </Button>
-                    <Column style={{ height: 100, width: 20, }}></Column>
                 </Column>
             }
             <TabBar />
@@ -115,7 +117,6 @@ export default function ChatListScreen({ navigation }) {
 const Chat = ({ item, }) => {
     const { alterado_em, unread, token_chat, criado_em, titulo, avatarcolaborador } = item
     const navigation = useNavigate()
-
 
     const img = avatarcolaborador ? { uri: avatarcolaborador } : require('@imgs/btn-onde-estamos.png')
     return (

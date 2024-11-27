@@ -78,7 +78,7 @@ export default function AuthLoginColaboradorScreen({ navigation, }) {
 
                     {success ? <Success msg={success} /> : error ? <Error msg={error} /> : null}
 
-                    <Button bg='#918C8B' disabled={loading} onPress={handleLogin} mtop={12}>
+                    <Button radius={1} bg='#918C8B' disabled={loading} onPress={handleLogin} mtop={12}>
                         <Row style={{ justifyContent: 'center', alignItems: 'center', }}>
                             {loading ?
                                 <Loader color="#fff" /> :

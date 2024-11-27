@@ -2,7 +2,7 @@
   "expo": {
     "name": "Pongo",
     "slug": "pongo",
-    "version": "8.0.0",
+    "version": "9.0.0",
     "scheme": "pongo",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,7 +16,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.engd.villapongo",
-      "buildNumber": "8.0.0",
+      "buildNumber": "9.0.0",
       "infoPlist": {
         "NSCameraUsageDescription": "This app uses the camera to scan barcodes on event tickets."
       }
@@ -27,7 +27,7 @@
         "backgroundColor": "#AEB0AF"
       },
       "package": "com.engd.villapongo",
-      "versionCode": 13,
+      "versionCode": 14,
       "permissions": [
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO",

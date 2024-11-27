@@ -10,7 +10,7 @@ import TopMenu from '@components/Header/topmenu';
 import { registerVisita } from '@api/request/institucional';
 import Success from '@components/Forms/success';
 import Error from '@components/Forms/error';
-import { ScrollView } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function InstitucionalVisitaScreen({ }) {
 
@@ -69,10 +69,10 @@ export default function InstitucionalVisitaScreen({ }) {
                     <Column style={{ marginTop: 30, }}>
                         <Title>Escolha qual deseja visitar:</Title>
                         <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginVertical: 16, }} >
-                            <Button bg={type === 'Hotel' ? '#918C8B' : '#ffffff' + 60} style={{ width: '48%' }} radius={1} onPress={() => { settype('Hotel') }} >
+                            <Button bg={type === 'Hotel' ? '#918C8B' : '#ffffff'} style={{ width: '48%' }} radius={1} onPress={() => { settype('Hotel') }} >
                                 <LabelBT align="center" size={15} color={type === 'Hotel' ? "#fff" : '#918C8B'}>PONGO</LabelBT>
                             </Button>
-                            <Button bg={type === 'Villa Pongo' ? '#918C8B' : '#ffffff' + 60} style={{ width: '48%' }} radius={1} onPress={() => { settype('Villa Pongo') }}  >
+                            <Button bg={type === 'Villa Pongo' ? '#918C8B' : '#ffffff'} style={{ width: '48%' }} radius={1} onPress={() => { settype('Villa Pongo') }}  >
                                 <LabelBT align="center" size={15} color={type === 'Villa Pongo' ? "#fff" : '#918C8B'}>VILLA PONGO</LabelBT>
                             </Button>
                         </Row>
@@ -105,10 +105,7 @@ export default function InstitucionalVisitaScreen({ }) {
             <TabBar />
 
             <Modal ref={timerRef} snapPoints={[0.1, 380]}>
-                <Column style={{ backgroundColor: 'green', }}>
-                    <Title>re</Title>
-                    <TimePicker sethora={sethora} setminutos={setminutos} minutos={minutos} hora={hora} timerRef={timerRef} />
-                </Column>
+                <TimePicker sethora={sethora} setminutos={setminutos} minutos={minutos} hora={hora} timerRef={timerRef} />
             </Modal>
         </Main>
     )
@@ -122,9 +119,9 @@ const TimePicker = ({ sethora, setminutos, minutos, hora, timerRef }) => {
 
     const { color } = useTheme()
     return (
-        <Row style={{ justifyContent: 'center', alignItems: 'center', width: SCREEN_WIDTH, backgroundColor: 'yellow', height: 200, }}>
-            <Column style={{ backgroundColor: 'pink', flexGrow: 1, }}>
-                <ScrollView style={{ height: 260, marginHorizontal: 30, }} showsVerticalScrollIndicator={false}>
+        <Row style={{ justifyContent: 'center', alignItems: 'center', width: SCREEN_WIDTH, height: 260, paddingHorizontal: 20, }}>
+            <Column style={{ flexGrow: 1, }}>
+                <ScrollView style={{  }} showsVerticalScrollIndicator={false}>
                     {horas?.map((h, index) => (
                         <Button ph={20} pv={10} radius={1} onPress={() => { sethora(h) }} bg={hora == h ? color.primary : 'transparent'} key={index}>
                             <Label size={42} color={hora == h ? "#fff" : color.title} style={{ textAlign: 'center', lineHeight: 50, }}>{h}</Label>
@@ -132,16 +129,16 @@ const TimePicker = ({ sethora, setminutos, minutos, hora, timerRef }) => {
                     ))}
                 </ScrollView>
             </Column>
-            <Column>
+            <Column mh={20}>
                 <Title style={{ justifyContent: 'center', alignItems: 'center', fontSize: 100, lineHeight: 100, }}>:</Title>
                 {minutos && <Button bg={color.primary} ph={8} pv={8} onPress={() => { timerRef.current.snapToIndex(0) }} >
                     <Check size={30} color="#fff" />
                 </Button>}
             </Column>
-            <Column>
-                <ScrollView style={{ height: 260, width: 120, backgroundColor: 'pink', }} showsVerticalScrollIndicator={false}>
+            <Column style={{  flexGrow: 1, }}>
+                <ScrollView style={{  }} showsVerticalScrollIndicator={false}>
                     {mins?.map((h, index) => (
-                        <Button style={{ width: 48, height: 48, backgroundColor: 'red', }} radius={1} onPress={() => setminutos(h)} bg={minutos == h ? color.primary : 'transparent'} key={index}>
+                        <Button  ph={20} pv={10} radius={1} onPress={() => setminutos(h)} bg={minutos == h ? color.primary : 'transparent'} key={index}>
                             <Label size={42} color={minutos == h ? "#fff" : color.title} style={{ textAlign: 'center', lineHeight: 50, }}>{h}</Label>
                         </Button>
                     ))}

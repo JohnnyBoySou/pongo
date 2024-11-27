@@ -244,7 +244,7 @@ function Tabs() {
       }} />
 
       <Tab.Screen name="VillaPongo" component={VillaPongoScreen} options={{
-        tabBarIcon: ({ color, size }) => (<TentTree size={routeName === 'Notify' ? size + 3 : size} color={color} />),
+        tabBarIcon: ({ color, size }) => (<TentTree size={routeName === 'VillaPongo' ? 28 + 3 : 28} color={color} />),
       }} />
       <Tab.Screen name="Account" component={AccountScreen} options={{
         backBehavior: 'none',

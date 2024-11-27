@@ -25,7 +25,7 @@ export default function WelcomeScreen({ navigation, route }) {
                     setstep(2)
                     setTimeout(() => {
                         navigation.replace('AuthLogin')
-                    }, 4000);
+                    }, 5000);
                 }
             } catch (error) {
                 console.log(error)
@@ -63,7 +63,7 @@ export default function WelcomeScreen({ navigation, route }) {
                                     <Label color="#fff" style={{ lineHeight: 20, marginTop: 20, fontFamily: 'Voyage_Medium' }}>é um prazer ter você conosco!</Label>
                                 </Animated.View>
                                 <Animated.View entering={FadeInLeft.delay(2200)}>
-                                    <Button bg="transparent" mv={32} pv={8} ph={20} style={{ marginTop: 26 }} >
+                                    <Button bg="transparent" radius={1} mv={32} pv={8} ph={20} style={{ marginTop: 26 }} >
                                         <Image source={require('@imgs/seta.png')} style={{ width: 72, height: 42, objectFit: 'contain' }} />
                                     </Button>
                                 </Animated.View>
